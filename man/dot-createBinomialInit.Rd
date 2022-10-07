@@ -9,8 +9,8 @@
   gammaB = c(shape = 1, scale = 10),
   seed = NULL,
   quantiles = NULL,
-  rng = c("base::Mersenne-Twister", "base::Wichmann-Hill",
-    "base::Marsaglia-Multicarry", "base::Super-Duper")
+  rng = c("base::Mersenne-Twister", "base::Wichmann-Hill", "base::Marsaglia-Multicarry",
+    "base::Super-Duper")
 )
 }
 \arguments{
