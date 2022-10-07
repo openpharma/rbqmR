@@ -1,0 +1,6 @@
+^README\.Rmd$
+^rbqmR.Rproj$
+^data-raw$
+^.*\.Rproj$
+^\.Rproj\.user$
+^examples$

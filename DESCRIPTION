@@ -1,0 +1,25 @@
+Package: rbqmR
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person("John", "Kirkpatrick", , "john.kirkpatrick@roche.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-7790-3708"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    dplyr,
+    lifecycle,
+    logger,
+    magrittr,
+    runjags,
+    stringr,
+    tibble
+Depends: 
+    R (>= 2.10)
+LazyData: true
