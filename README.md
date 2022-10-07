@@ -15,8 +15,11 @@ status](https://www.r-pkg.org/badges/version/rbqmR)](https://CRAN.R-project.org/
 The purpose of the `rbqmR` package is to provide a repository of r-based
 tools for the implementation of risk-based quality management.
 
-Tools currently exist for \* Dynamic Quality Tolerance Limits (QTLs)
-using Bayesian Hierachical Models \* Observed-Minus-Expected methodology
+Tools currently exist for
+
+-   Dynamic Quality Tolerance Limits (QTLs) using Bayesian Hierachical
+    Models
+-   Observed-Minus-Expected methodology
 
 This package is a work-in-progress.
 
