@@ -13,6 +13,7 @@ createObservedMinusExpectedTable(
   cumulativeVar = CumulativeEvents,
   observedMinusExpectedVar = ObservedMinusExpected,
   indexVar = SubjectIndex,
+  statusVar = Status,
   maxTrialSize = NA,
   upperActionLimit = UpperActionLimit,
   lowerActionLimit = LowerActionLimit,
@@ -48,6 +49,9 @@ Uses tidy evaluation.}
 \item{indexVar}{The name of the column in the output \code{data.frame} that
 contains the index of the participant's enrollment: an integer from \code{1} to \code{n}
 where \code{n} is number of participants enrolled. Uses tidy evaluation.}
+
+\item{statusVar}{The name of the column in the output \code{data.frame} that
+contains the status of the trial: either \code{OK}, \code{WARN} or \code{BREECH}}
 
 \item{maxTrialSize}{A scalar integer defining the maximum possible size of
 the trial.  Can be \code{NULL}.}
