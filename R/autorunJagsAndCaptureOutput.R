@@ -13,7 +13,7 @@
     data,
     modelString,
     monitor,
-    inits,
+    inits=NULL,
     returnClass="binomialModel",
     max.time=600, # 10 minutes,
     ...
@@ -29,7 +29,7 @@
         monitor = monitor,
         inits = inits,
         data = data,
-        n.chains = length(inits),
+        n.chains = 2, #length(inits),
         max.time = max.time
       )
     )

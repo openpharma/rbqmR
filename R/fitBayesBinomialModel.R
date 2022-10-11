@@ -88,15 +88,32 @@ fitBayesBinomialModel <- function(
   
   # JAGS description of the model to be fitted.
   modelString <- getModelString("binomial")
-  #Create init lists if required
+  # Create init lists if required
   if (is.null(inits)) {
     logger::log_debug("Generating random inits")
     # for loop rather than lapply as workaround to bug in logger
     inits <- list()
     for (i in 1:nChains) {
-      inits[[i]] <- .createBinomialInit()
+      # logger::log_trace(paste0("iteration: ", i))
+      force(inits[[i]] <- .createBinomialInit())
+      print(inits[[i]])
     }
   }
+  
+  # inits <- list(
+  #            list(
+  #              ".RNG.name"="base::Mersenne-Twister",
+  #              ".RNG.seed"=1,
+  #              "a"=9.9,
+  #              "b"=5.2
+  #            ),
+  #            list(
+  #              ".RNG.name"="base::Mersenne-Twister",
+  #              ".RNG.seed"=2,
+  #              "a"=2.2,
+  #              "b"=0.7
+  #            )
+  #          )
   nameOfParameter <- paste0("p[", tempData$k , "]")
   rv <- tempData %>%
           .autorunJagsAndCaptureOutput(

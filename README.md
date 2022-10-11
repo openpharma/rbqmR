@@ -8,6 +8,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rbqmR)](https://CRAN.R-project.org/package=rbqmR)
 <a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public." /></a>
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 <!-- badges: end -->
 
 ## Introduction
@@ -33,7 +34,9 @@ You can install the development version of rbqmR from
 devtools::install_github("openpharma/rbqmR")
 ```
 
-## Example of Dynamic QTLs
+## Examples
+
+### Dynamic QTLs
 
 We use the example described on pages xx to xx Berry et al \[@BERRY\],
 modifying the context so that rather than being a meta analysis of
@@ -208,10 +211,21 @@ We fit the Bayesian Hierarchical Model described by Berry et al.
 ``` r
 fitted <- berrySummary %>% 
             fitBayesBinomialModel(n=Subjects, r=Events)
+#> $.RNG.name
+#> [1] "base::Mersenne-Twister"
+#> 
+#> $.RNG.seed
+#> [1] 1693763466
+#> 
+#> $a
+#> [1] 50.41152
+#> 
+#> $b
+#> [1] 0.02727659
 #> Error in inits[[i]] <- .createBinomialInit(): attempt to select less than one element in integerOneIndex
 ```
 
-## Example of Observed - Expected Methodology
+### Observed - Expected Methodology
 
 We generate some random data similar to that used by Gilbert
 \[@GILBERT\], after setting a seed for reproducibility.
@@ -251,7 +265,7 @@ omeTable %>%
 
 <img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
-We can see that the trial breeched a warning limit. When did this first
+We can see that the trial breached a warning limit. When did this first
 happen?
 
 ``` r
