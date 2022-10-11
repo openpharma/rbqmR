@@ -8,7 +8,7 @@
   data,
   modelString,
   monitor,
-  inits,
+  inits = NULL,
   returnClass = "binomialModel",
   max.time = 600,
   ...
