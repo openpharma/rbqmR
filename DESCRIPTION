@@ -14,12 +14,15 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     dplyr,
+    ggplot2,
     lifecycle,
     logger,
     magrittr,
+    rlang,
     runjags,
     stringr,
-    tibble
+    tibble,
+    toOrdinal
 Depends: 
     R (>= 2.10)
 LazyData: true

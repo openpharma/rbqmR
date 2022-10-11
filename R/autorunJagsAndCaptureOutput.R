@@ -18,7 +18,7 @@
     max.time=600, # 10 minutes,
     ...
 ) {
-  logger::log_trace(".autorunJagsAndCaptureOutput: Entry")
+  logger::log_trace("Entry")
   ## always force summary, others set in zzz.R could be changed by user
   runjags::runjags.options(force.summary = TRUE)
   runjagsMessages <- utils::capture.output({
@@ -63,8 +63,10 @@
       }
       logger::log_info(paste0("Status of model fitting: ", rv$status))
     }
+    logger::log_debug("Exit")
     return(rv)
   } else {
+    logger::log_debug("Exit")
     return(results)
   }
 }

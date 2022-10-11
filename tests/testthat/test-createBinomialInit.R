@@ -21,19 +21,19 @@ test_that(".createBinomialInit handles illegal input correctly", {
 })
 
 test_that(".createBinomialInit returns correct RNG", {
-  expect_equal(.createBinomialInit()$RNG.name, "base::Mersenne-Twister")
-  expect_equal(.createBinomialInit(rng="base::Mersenne-Twister")$RNG.name, "base::Mersenne-Twister")
-  expect_equal(.createBinomialInit(rng="base::Wichmann-Hill")$RNG.name, "base::Wichmann-Hill")
-  expect_equal(.createBinomialInit(rng="base::Marsaglia-Multicarry")$RNG.name, "base::Marsaglia-Multicarry")
-  expect_equal(.createBinomialInit(rng="base::Super-Duper")$RNG.name, "base::Super-Duper")
+  expect_equal(.createBinomialInit()$.RNG.name, "base::Mersenne-Twister")
+  expect_equal(.createBinomialInit(rng="base::Mersenne-Twister")$.RNG.name, "base::Mersenne-Twister")
+  expect_equal(.createBinomialInit(rng="base::Wichmann-Hill")$.RNG.name, "base::Wichmann-Hill")
+  expect_equal(.createBinomialInit(rng="base::Marsaglia-Multicarry")$.RNG.name, "base::Marsaglia-Multicarry")
+  expect_equal(.createBinomialInit(rng="base::Super-Duper")$.RNG.name, "base::Super-Duper")
 })
 
 test_that(".createBinomialInit handles seed correctly", {
   # Manual seed
-  expect_equal(.createBinomialInit(seed=5)$RNG.seed, 5)
+  expect_equal(.createBinomialInit(seed=5)$.RNG.seed, 5)
   # Check that 1000 calls provide 1000 different seeds
   set.seed(1)
-  expect_equal(length(unique(sapply(1:1000, function(x) .createBinomialInit()$RNG.seed))), 1000)
+  expect_equal(length(unique(sapply(1:1000, function(x) .createBinomialInit()$.RNG.seed))), 1000)
 })
 
 test_that(".createBinomialInit returns random initial values for p", {
@@ -59,6 +59,6 @@ test_that(".createBinomialInit handles quantiles correctly", {
 })
 
 test_that(".createBinomialInits returns a list with correctly named elements", {
-  expect_true(setequal(names(.createBinomialInit()), c("p", "a", "b", "RNG.name", "RNG.seed")))
+  expect_true(setequal(names(.createBinomialInit()), c("p", "a", "b", ".RNG.name", ".RNG.seed")))
 })
 

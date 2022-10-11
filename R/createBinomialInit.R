@@ -52,10 +52,11 @@
     logger::log_trace(paste0("  seed: ", seed))
   }
   if (is.null(quantiles)) {
-    logger::log_trace("  quantuiles: NULL")
+    logger::log_trace("  quantiles: NULL")
   } else {
     logger::log_trace(paste0("  quantiles - a: ", quantiles["a"], "; b: ", quantiles[["b"]]))
   }
+  rng <- match.arg(rng)
   logger::log_trace(paste0("  rng: ", rng))
 
   # # Validate
@@ -86,10 +87,9 @@
     if (!setequal(names(quantiles), c("a", "b"))) stop("elements of quantiles are not named 'a' and 'b'.")
   }
   # Execute
-  rng <- match.arg(rng)
   init <- list(
-            "RNG.name"=rng, 
-            "RNG.seed"=ifelse(is.null(seed), stats::runif(1, max=.Machine$integer.max), seed),
+            ".RNG.name"=rng, 
+            ".RNG.seed"=ifelse(is.null(seed), stats::runif(1, max=.Machine$integer.max), seed),
             "p"=stats::runif(1, min=0.001, max=0.999)
   )
   if (is.null(quantiles)) {

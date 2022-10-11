@@ -1,5 +1,6 @@
 ---
 output: github_document
+always_allow_html: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -11,6 +12,12 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+library(magrittr)
+library(kableExtra)
+library(tidyverse)
+
+devtools::load_all()
 ```
 
 # rbqmR
@@ -25,8 +32,8 @@ The purpose of the `rbqmR` package is to provide a repository of r-based tools f
 
 Tools currently exist for
 
-* Dynamic Quality Tolerance Limits (QTLs) using Bayesian Hierachical Models
-* Observed-Minus-Expected methodology
+* Dynamic Quality Tolerance Limits (QTLs) using Bayesian Hierarchical Models (ongoing)
+* Observed-Minus-Expected methodology (ongoing)
 
 This package is a work-in-progress.
 
@@ -37,4 +44,72 @@ You can install the development version of rbqmR from [GitHub](https://github.co
 ```{r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("openpharma/rbqmR")
+```
+
+## Example of Dynamic QTLs
+
+We use the example described on pages xx to xx Berry et al [@BERRY], modifying the context so that rather than being a meta analysis of several different trials, we consider the data to represent the performance of different sites within a single trial.  The exact metric being measured is immaterial, though it remains a summary of a binomial outcome.
+
+```{r}
+data(berrySummary)
+
+berrySummary %>% kable(digits=c(0,0,0,2))
+```
+
+The central tenet of the QTL methodology implemented in `rbqmR` is not that a current trial should behave in a similar fashion to a "similar" historical or control trial, but rather that all sites within the current trial should behave in a similar way.  The justification for this assumption is that the trial's inclusion/exclusion criteria are designed to minimise heterogeneity amongst the study population (save for that induced by differences in treatment in comparative trials).
+
+We fit the Bayesian Hierarchical Model described by Berry et al.
+
+```{r, error=TRUE}
+fitted <- berrySummary %>% 
+            fitBayesBinomialModel(n=Subjects, r=Events)
+```
+
+
+## Example of Observed - Expected Methodology
+We generate some random data similar to that used by Gilbert [@GILBERT], after setting a seed for reproducibility.
+
+In order to illustrate what happens when a QTL is breached, we set the probability that a participant reports an event to 0.13, even though the QTL process will assume the event rate is 0.10...
+
+```{r}
+set.seed(011327)
+
+randomData <- tibble(
+  Subject=1:400,
+  Event=rbinom(400, 1, 0.13)
+)
+```
+
+... and create an observed-expected table ...
+
+```{r}
+omeTable <- randomData %>% 
+              createObservedMinusExpectedTable(
+                timeVar = Subject,
+                eventVar = Event,
+                eventArray = 1,
+                expectedRate = 0.1,
+                maxTrialSize=400
+              )
+```
+
+... and plot the corresponding graph.
+
+```{r}
+omeTable %>%
+  createObservedMinusExpectedPlot()
+```
+
+We can see that the trial breeched a warning limit.  When did this first happen?
+
+```{r}
+omeTable %>% 
+  filter(Status !=  "OK") %>% 
+  head(1) %>% 
+  select(-contains("Action"), -SubjectIndex) %>% 
+  kable(
+    col.names=c("Subject", "Event", "Cumulative Events", "O - E", "Status", "Lower", "Upper"),
+    caption="First breech of an action or warning limit"
+  ) %>% 
+  add_header_above(c(" "=5, "Warning Limits"=2))
 ```

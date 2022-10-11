@@ -77,7 +77,8 @@ fitBayesBinomialModel <- function(
                            ...
                          ) {
   logger::log_debug("Entry")
-  
+  logger::log_trace(ifelse(is.null(inits), "inits is NULL", "inits is not NULL"))
+  logger::log_trace(paste0("nChains: ", nChains))
   #Begin
   #Add additional, "posterior", observation to each input vector
   tempData <- list()
@@ -87,11 +88,14 @@ fitBayesBinomialModel <- function(
   
   # JAGS description of the model to be fitted.
   modelString <- getModelString("binomial")
-  
   #Create init lists if required
   if (is.null(inits)) {
     logger::log_debug("Generating random inits")
-    inits <- lapply(1:nChains, .createBinomialInit, ...)
+    # for loop rather than lapply as workaround to bug in logger
+    inits <- list()
+    for (i in 1:nChains) {
+      inits[[i]] <- .createBinomialInit()
+    }
   }
   nameOfParameter <- paste0("p[", tempData$k , "]")
   rv <- tempData %>%
