@@ -45,12 +45,6 @@
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -244,29 +238,149 @@ ObservedResponse
 </tbody>
 </table>
 <p>The central tenet of the QTL methodology implemented in <code>rbqmR</code> is not that a current trial should behave in a similar fashion to a “similar” historical or control trial, but rather that all sites within the current trial should behave in a similar way. The justification for this assumption is that the trial’s inclusion/exclusion criteria are designed to minimise heterogeneity amongst the study population (save for that induced by differences in treatment in comparative trials).</p>
-<p>We fit the Bayesian Hierarchical Model described by Berry et al.</p>
+<p>We fit the Bayesian Hierarchical Model described by Berry et al …</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitted</span> <span class="op">&lt;-</span> <span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>            <span class="fu"><a href="reference/fitBayesBinomialModel.html">fitBayesBinomialModel</a></span><span class="op">(</span>n<span class="op">=</span><span class="va">Subjects</span>, r<span class="op">=</span><span class="va">Events</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $.RNG.name</span></span>
-<span><span class="co">#&gt; [1] "base::Mersenne-Twister"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $.RNG.seed</span></span>
-<span><span class="co">#&gt; [1] 1693763466</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $a</span></span>
-<span><span class="co">#&gt; [1] 50.41152</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $b</span></span>
-<span><span class="co">#&gt; [1] 0.02727659</span></span>
-<span><span class="co">#&gt; Error in inits[[i]] &lt;- .createBinomialInit(): attempt to select less than one element in integerOneIndex</span></span></code></pre></div>
+<span><span class="co">#&gt; Loading required namespace: rjags</span></span></code></pre></div>
+<p>… and use the quantiles of the posterior distribution of the probability of an event to define the QTLs for this metric. This can be done in isolation (when the trial acts as its own control) or with reference to historical data obtained from similar previous studies.</p>
+<div class="section level4">
+<h4 id="without-historical-data">Without historical data<a class="anchor" aria-label="anchor" href="#without-historical-data"></a>
+</h4>
+<p>For the sake of argument, suppose we set the lower and upper QTLs to be the 5th and 95th centiles of the posterior respectively. Since we have nine sites, it’s not unreasonable to expect one site to be outside this range. So we define a breach of the QTL to have occurred when the observed event rates at two or more sites fall outside this range.</p>
+<p>The 5th and 95th centiles of the posterior are</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">quantiles</span> <span class="op">&lt;-</span> <span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>               <span class="fu">summarise</span><span class="op">(</span></span>
+<span>                 Q05<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">p</span>, probs<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span>,</span>
+<span>                 Q95<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">p</span>, probs<span class="op">=</span><span class="fl">0.95</span><span class="op">)</span></span>
+<span>               <span class="op">)</span></span>
+<span><span class="va">quantiles</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
+<span><span class="co">#&gt;     Q05   Q95</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 0.369 0.935</span></span></code></pre></div>
+<p>So, in this specific case, our QTLs translate to observed event rates of 36.85% and 93.45% respectively.</p>
+<p>Do any sites have observed event rates outside this range?</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">applyQtl</span><span class="op">(</span></span>
+<span>    var <span class="op">=</span> <span class="va">ObservedResponse</span>, </span>
+<span>    lower <span class="op">=</span><span class="va">quantiles</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Q05</span><span class="op">)</span>,</span>
+<span>    upper <span class="op">=</span> <span class="va">quantiles</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Q95</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">kable</span><span class="op">(</span></span>
+<span>    digits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>    caption<span class="op">=</span><span class="st">"Sites breaching the QTL"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Joining, by = c("Site", "Subjects", "Events", "ObservedResponse")</span></span></code></pre></div>
+<table class="table">
+<caption>
+Sites breaching the QTL
+</caption>
+<thead><tr>
+<th style="text-align:right;">
+Site
+</th>
+<th style="text-align:right;">
+Subjects
+</th>
+<th style="text-align:right;">
+Events
+</th>
+<th style="text-align:right;">
+ObservedResponse
+</th>
+<th style="text-align:right;">
+Lower
+</th>
+<th style="text-align:right;">
+Upper
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+1.000
+</td>
+<td style="text-align:right;">
+0.369
+</td>
+<td style="text-align:right;">
+0.935
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.357
+</td>
+<td style="text-align:right;">
+0.369
+</td>
+<td style="text-align:right;">
+0.935
+</td>
+</tr>
+</tbody>
+</table>
+<p>Yes. Two sites are outside this range. One above and one below. The QTL has been breached. The process can be summarised graphically.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">createQtlPlot</span><span class="op">(</span></span>
+<span>    qtl<span class="op">=</span><span class="va">quantiles</span>,</span>
+<span>    siteData<span class="op">=</span><span class="va">berrySummary</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
+</div>
+<div class="section level4">
+<h4 id="with-historical-data">With historical data<a class="anchor" aria-label="anchor" href="#with-historical-data"></a>
+</h4>
+<p>Suppose previous experience tells us that the event probabiity in this type of study should be between 0.50 and 0.75. We define the QTL such that we require the posterior event probability for a new participant to be in the range 0.5 to 0.75 inclusive to be at least 50%.</p>
+<blockquote>
+<p>When using a Bayesian Hierarchical Model, the probabilties associated with credible intervals are generally lower than those associated with similar frequentist models. This is because BHMs permit more sources of variation. Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study. The corresponding frequentist analysis assumes that all sites share common event rate, thus assuming there is no inter-site variation.</p>
+</blockquote>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>PosteriorProb<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span> <span class="op">&gt;=</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="va">p</span> <span class="op">&lt;=</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 1</span></span>
+<span><span class="co">#&gt;   PosteriorProb</span></span>
+<span><span class="co">#&gt;           &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1         0.466</span></span></code></pre></div>
+<p>Again, the QTL is breached, and the process can be summarised graphically.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">createQtlPlot</span><span class="op">(</span></span>
+<span>    targetRange<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span>,</span>
+<span>    observedMetric<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">summarise</span><span class="op">(</span>Mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Mean</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.6816473</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
+</div>
 </div>
 <div class="section level3">
 <h3 id="observed---expected-methodology">Observed - Expected Methodology<a class="anchor" aria-label="anchor" href="#observed---expected-methodology"></a>
 </h3>
 <p>We generate some random data similar to that used by Gilbert [@GILBERT], after setting a seed for reproducibility.</p>
 <p>In order to illustrate what happens when a QTL is breached, we set the probability that a participant reports an event to 0.13, even though the QTL process will assume the event rate is 0.10…</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">011327</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">randomData</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
@@ -274,7 +388,7 @@ ObservedResponse
 <span>  Event<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fl">400</span>, <span class="fl">1</span>, <span class="fl">0.13</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>… and create an observed-expected table …</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op">&lt;-</span> <span class="va">randomData</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>              <span class="fu"><a href="reference/createObservedMinusExpectedTable.html">createObservedMinusExpectedTable</a></span><span class="op">(</span></span>
 <span>                timeVar <span class="op">=</span> <span class="va">Subject</span>,</span>
@@ -284,12 +398,12 @@ ObservedResponse
 <span>                maxTrialSize<span class="op">=</span><span class="fl">400</span></span>
 <span>              <span class="op">)</span></span></code></pre></div>
 <p>… and plot the corresponding graph.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/createObservedMinusExpectedPlot.html">createObservedMinusExpectedPlot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="100%"></p>
 <p>We can see that the trial breached a warning limit. When did this first happen?</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Status</span> <span class="op">!=</span>  <span class="st">"OK"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
