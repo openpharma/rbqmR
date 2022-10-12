@@ -57,14 +57,74 @@ data(berrySummary)
 
 berrySummary %>% kable(digits=c(0,0,0,2))
 ```
+The central tenet of the QTL methodology implemented in `rbqmR` is not that a current trial should behave in a similar fashion to a "similar" historical or control trial, but rather that all sites within the current trial should behave in a similar way.  The justification for this assumption is that the trial's inclusion/exclusion criteria are designed to minimise heterogeneity amongst the study population (save for that induced by differences in treatment in comparative trials).  
 
-The central tenet of the QTL methodology implemented in `rbqmR` is not that a current trial should behave in a similar fashion to a "similar" historical or control trial, but rather that all sites within the current trial should behave in a similar way.  The justification for this assumption is that the trial's inclusion/exclusion criteria are designed to minimise heterogeneity amongst the study population (save for that induced by differences in treatment in comparative trials).
-
-We fit the Bayesian Hierarchical Model described by Berry et al.
+We fit the Bayesian Hierarchical Model described by Berry et al ...
 
 ```{r, error=TRUE}
 fitted <- berrySummary %>% 
             fitBayesBinomialModel(n=Subjects, r=Events)
+```
+
+
+... and use the quantiles of the posterior distribution of the probability of an event to define the QTLs for this metric.  This can be done in isolation (when the trial acts as its own control) or with reference to historical data obtained from similar previous studies.
+
+#### Without historical data
+For the sake of argument, suppose we set the lower and upper QTLs to be the 5th and 95th centiles of the posterior respectively.  Since we have nine sites, it's not unreasonable to expect one site to be outside this range.  So we define a breach of the QTL to have occurred when the observed event rates at two or more sites fall outside this range.
+
+The 5th and 95th centiles of the posterior are 
+```{r}
+quantiles <- fitted$tab %>% 
+               summarise(
+                 Q05=quantile(p, probs=0.05),
+                 Q95=quantile(p, probs=0.95)
+               )
+quantiles
+```
+So, in this specific case, our QTLs translate to observed event rates of `r sprintf("%5.2f%%", 100*quantiles$Q05)` and `r sprintf("%5.2f%%", 100*quantiles$Q95)` respectively.
+
+Do any sites have observed event rates outside this range?
+
+```{r}
+berrySummary %>% 
+  applyQtl(
+    var = ObservedResponse, 
+    lower =quantiles %>% pull(Q05),
+    upper = quantiles %>% pull(Q95)
+  ) %>% 
+  kable(
+    digits=c(0, 0, 0, 3, 3, 3),
+    caption="Sites breaching the QTL"
+  )
+```
+
+Yes.  Two sites are outside this range.  One above and one below.  The QTL has been breached.  The process can be summarised graphically.
+
+```{r}
+fitted$tab %>% 
+  createQtlPlot(
+    qtl=quantiles,
+    siteData=berrySummary
+  )
+```
+
+#### With historical data
+Suppose previous experience tells us that the event probabiity in this type of study should be between 0.50 and 0.75.  We define the QTL such that we require the posterior event probability for a new participant to be in the range 0.5 to 0.75 inclusive to be at least 50%.
+
+> When using a Bayesian Hierarchical Model, the probabilties associated with credible intervals are generally lower than those associated with similar frequentist models.  This is because BHMs permit  more sources of variation.  Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study.  The corresponding frequentist analysis assumes that all sites share  common event rate, thus assuming there is no inter-site variation.
+
+```{r}
+fitted$tab %>% 
+  summarise(PosteriorProb=mean(p >= 0.5 & p <= 0.75))
+```
+Again, the QTL is breached, and the process can be summarised graphically.
+
+```{r}
+fitted$tab %>%
+  createQtlPlot(
+    targetRange=c(0.5, 0.75),
+    observedMetric=fitted$tab %>% summarise(Mean=mean(p)) %>% pull(Mean)
+  )
 ```
 
 

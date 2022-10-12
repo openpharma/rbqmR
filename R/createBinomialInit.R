@@ -94,8 +94,10 @@
             # "p"=stats::runif(1, min=0.001, max=0.999)
   )
   if (is.null(quantiles)) {
-    init$a <- stats::rgamma(1, shape=gammaA["shape"], scale=gammaA["scale"])
-    init$b <- 1/stats::rgamma(1, shape=gammaB["shape"], scale=gammaB["scale"])
+    # init$a <- stats::rgamma(1, shape=gammaA["shape"], scale=gammaA["scale"])
+    # init$b <- 1/stats::rgamma(1, shape=gammaB["shape"], scale=gammaB["scale"])
+    init$a <- stats::runif(1, min=1, max=10)
+    init$b <- stats::runif(1, min=1, max=10)
   } else {
   #   init$a <- ifelse(
   #               is.na(quantiles["a"]), 
