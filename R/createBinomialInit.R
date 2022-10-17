@@ -89,9 +89,8 @@
   # Execute
   init <- list(
             ".RNG.name"=rng, 
-            ".RNG.seed"=ifelse(is.null(seed), stats::runif(1, max=.Machine$integer.max), seed)
-            # ,
-            # "p"=stats::runif(1, min=0.001, max=0.999)
+            ".RNG.seed"=ifelse(is.null(seed), stats::runif(1, max=.Machine$integer.max), seed),
+            "p"=stats::runif(1, min=0.001, max=0.999)
   )
   if (is.null(quantiles)) {
     # init$a <- stats::rgamma(1, shape=gammaA["shape"], scale=gammaA["scale"])
@@ -99,16 +98,16 @@
     init$a <- stats::runif(1, min=1, max=10)
     init$b <- stats::runif(1, min=1, max=10)
   } else {
-  #   init$a <- ifelse(
-  #               is.na(quantiles["a"]), 
-  #               1/stats::rgamma(1, shape=gammaA["shape"], scale=gammaA["scale"]),
-  #               1/stats::qgamma(quantiles["a"], shape=gammaA["shape"], scale=gammaA["scale"])
-  #             )
-  #   init$b <- ifelse(
-  #     is.na(quantiles["b"]), 
-  #     1/stats::rgamma(1, shape=gammaB["shape"], scale=gammaB["scale"]),
-  #     1/stats::qgamma(quantiles["b"], shape=gammaB["shape"], scale=gammaB["scale"])
-  #   )
+    init$a <- ifelse(
+                is.na(quantiles["a"]),
+                stats::rgamma(1, shape=gammaA["shape"], scale=gammaA["scale"]),
+                stats::qgamma(quantiles["a"], shape=gammaA["shape"], scale=gammaA["scale"])
+              )
+    init$b <- ifelse(
+      is.na(quantiles["b"]),
+      1/stats::rgamma(1, shape=gammaB["shape"], scale=gammaB["scale"]),
+      1/stats::qgamma(quantiles["b"], shape=gammaB["shape"], scale=gammaB["scale"])
+    )
   }
   logger::log_debug("Exit")
   return(init)

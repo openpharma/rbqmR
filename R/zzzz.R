@@ -8,3 +8,5 @@ UpperWarningLimit <- NULL
 USUBJID <- NULL    
 Status <- NULL
 p <- NULL
+x <- NULL
+y <- NULL

@@ -1,5 +1,20 @@
+#' Filter a Tibble to Obtain Values Outside a QTL
+#' 
+#' Given an input tibble and a column, filter the tibble to retain only those
+#' rows in which the value of the column lies outside the range given by 
+#' upper and lower limits, both of which are optional.
+#' @param data the input tibble
+#' @param var the name of the column on which to filter.  Uses NSE.
+#' @param lower The lower limit.  May be `NULL`.
+#' @param upper The upper limit.  May be `NULL`.
+#' @return the filtered tibble
 #' @export
-applyQtl <- function(data, var, lower=NULL, upper=NULL) {
+applyQtl <- function(
+              data, 
+              var, 
+              lower=NULL, 
+              upper=NULL
+            ) {
   qLower <- rlang::enquo(lower)
   qUpper <- rlang::enquo(upper)
   

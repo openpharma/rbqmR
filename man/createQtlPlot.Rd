@@ -6,11 +6,31 @@
 \usage{
 createQtlPlot(
   data,
-  qtl = NULL,
   siteData = NULL,
   targetRange = NULL,
+  actionLimits = NULL,
+  warningLimits = NULL,
   observedMetric = NULL
 )
+}
+\arguments{
+\item{data}{A tibble containing MCMC samples for which the density is
+required}
+
+\item{siteData}{A tibble containing the observed site specific data}
+
+\item{targetRange}{A tibble containing the lower and upper limits of the
+target range for the metric}
+
+\item{actionLimits}{a list or named vector defining the action limits that
+will appear on the graph. See \verb{[shadeRange]} for details.  May be \code{NA} or
+\code{NULL}.}
+
+\item{warningLimits}{a list or named vector defining the action limits that
+will appear on the graph. See \verb{[shadeRange]} for details.  May be \code{NA} or
+\code{NULL}.}
+
+\item{observedMetric}{the observed value of the metric}
 }
 \description{
 Summary Plot of Observed Event Rates/Proportions

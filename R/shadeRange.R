@@ -26,7 +26,7 @@
 #' If a list of vectors, each element of the  list should be a vector with 
 #' elements as defined above.
 #' 
-#' For example, the default value of `ranges` defines the ranges to be shaded as
+#' For example, the default value of `range` defines the ranges to be shaded as
 #' those that lie below the 10th centile or above the 90th centile of the
 #' density in goldenrod1 using an alpha of 0.3.
 #' @return The modified `ggplot2` object
@@ -35,15 +35,15 @@ shadeRange <- function(
                 plot,
                 range=list(
                   c("lower"=NA, "upper"=0.1, "alpha"=0.3, "colour"="goldenrod1"),
-                  c("lower"=0.9, "upper"=NA, "alpha"=0.3, "colour"="goldenrod1"),
+                  c("lower"=0.9, "upper"=NA, "alpha"=0.3, "colour"="goldenrod1")
                 ),
                 idx=2
               )
 {
   #Validate
   if (is.null(plot)) stop("plot cannot be null")
-  if (is.null(ranges)) stop("ranges cannot be null")
-  if (!is.list(ranges)) stop("ranges must be a list")
+  if (is.null(range)) stop("ranges cannot be null")
+  if (!is.list(range) & !is.vector(range)) stop("range must be a list or vector")
 
   d <- ggplot2::ggplot_build(plot)$data[[idx]] #2 (or 3) because the MCMC density is the second (or third) component of the ggplot created by createXXXXQtlPlot()
   d$Facet <- "Density" # so only adds to density facet
@@ -54,28 +54,33 @@ shadeRange <- function(
       plot <- shadeRange(plot, r, idx)
     }
   } else {
-  # extend limits and colours
-    if (is.na(range["lower"])) range["lower"] <- -Inf
-    limits <- c(-Inf, limits, Inf)
-    n <- length(limits)
-    rangeColours <- c(rangeColours, NA, rev(rangeColours))
-    for (i in seq(n - 1)){
-      if (is.na(rangeColours[i])) next
-      inRange <- with(d, x >= limits[i] & x <= limits[i + 1])
+    if (!is.null(range) & !is.na(range)) {
+      if (!is.vector(range)) stop("ranges must be a list or named vector")
+      if (length(setdiff(names(range), c("upper", "lower", "colour", "alpha"))) != 0)
+        stop("range is not named correctly")
+    }
+    if (!(is.null(range) & is.na(range()))) {
+      if (is.na(range["lower"])) range["lower"] <- -Inf
+      if (is.na(range["upper"])) range["upper"] <- Inf
+      inRange <- with(d, x >= range["lower"] & x <= range["upper"])
       ok <- any(inRange)
       if (ok) {
         plot <- plot +
-          gggplot2::geom_area(
-            data = d[inRange,],
-            ggplot2::aes_string(x = "x", y = "y"), 
-            alpha = rangeAlpha,
-            fill = rangeColours[i], 
-            inherit.aes = FALSE
-          )
+                  ggplot2::geom_area(
+                    data = d[inRange,],
+                    ggplot2::aes(x = x, y = y), 
+                    alpha = range["alpha"],
+                    fill = range["colour"], 
+                    inherit.aes = FALSE
+                  )
       } else {
-        warning("The MCMC density has no fitted points between ", limits[i],
-                " and ", limits[i + 1],
-                ". Increase nDensity, ensuring it remains a power of two")
+        logger::log_warn(
+           paste0(
+             "The MCMC density has no fitted points between ", range["lower"],
+                " and ", range["upper"],
+                ". One solution may be to increase nDensity, ensuring it remains a power of two"
+           )
+        )
       }
     }
   }

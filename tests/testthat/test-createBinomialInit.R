@@ -51,7 +51,7 @@ test_that(".createBinomialInit handles quantiles correctly", {
   q <- c("a"=0.05, "b"=0.95)
   rv <- .createBinomialInit(quantiles=q)
   expect_equal(rv$a, qgamma(q["a"], shape=1, scale=10))
-  expect_equal(rv$b, qgamma(q["b"], shape=1, scale=10))
+  expect_equal(rv$b, 1/qgamma(q["b"], shape=1, scale=10))
   # Check that 1000 calls provide 1000 different values
   set.seed(1)
   expect_equal(length(unique(sapply(1:1000, function(x) .createBinomialInit()$a))), 1000)
