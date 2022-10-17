@@ -45,12 +45,6 @@
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -270,7 +264,7 @@ ObservedResponse
 <p>Do any sites have observed event rates outside this range?</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">applyQtl</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="reference/applyQtl.html">applyQtl</a></span><span class="op">(</span></span>
 <span>    var <span class="op">=</span> <span class="va">ObservedResponse</span>, </span>
 <span>    lower <span class="op">=</span><span class="va">quantiles</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Q05</span><span class="op">)</span>,</span>
 <span>    upper <span class="op">=</span> <span class="va">quantiles</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Q95</span><span class="op">)</span></span>
@@ -350,7 +344,7 @@ Upper
 <p>Yes. Two sites are outside this range. One above and one below. The QTL has been breached. The process can be summarised graphically.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">createQtlPlot</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="reference/createQtlPlot.html">createQtlPlot</a></span><span class="op">(</span></span>
 <span>    qtl<span class="op">=</span><span class="va">quantiles</span>,</span>
 <span>    siteData<span class="op">=</span><span class="va">berrySummary</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
@@ -373,7 +367,7 @@ Upper
 <p>Again, the QTL is breached, and the process can be summarised graphically.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">createQtlPlot</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="reference/createQtlPlot.html">createQtlPlot</a></span><span class="op">(</span></span>
 <span>    targetRange<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span>,</span>
 <span>    observedMetric<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">summarise</span><span class="op">(</span>Mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Mean</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>

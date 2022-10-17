@@ -16,6 +16,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/applyQtl.html</loc>
+  </url>
+  <url>
     <loc>/reference/berrySubject.html</loc>
   </url>
   <url>
@@ -29,6 +32,9 @@
   </url>
   <url>
     <loc>/reference/createObservedMinusExpectedTable.html</loc>
+  </url>
+  <url>
+    <loc>/reference/createQtlPlot.html</loc>
   </url>
   <url>
     <loc>/reference/dot-autorunJagsAndCaptureOutput.html</loc>
@@ -47,6 +53,9 @@
   </url>
   <url>
     <loc>/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>/reference/shadeRange.html</loc>
   </url>
   <url>
     <loc>/reference/vaLung.html</loc>
