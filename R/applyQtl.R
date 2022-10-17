@@ -5,11 +5,14 @@ applyQtl <- function(data, var, lower=NULL, upper=NULL) {
   
   d <- data
   if (!rlang::quo_is_null(qLower)) {
-    d <- d %>% filter({{ var }} > !! qLower)
+    d <- d %>% dplyr::filter({{ var }} > !! qLower)
   }
   if (!rlang::quo_is_null(qUpper)) {
-    d <- d %>% filter({{ var }} < !! qUpper)
+    d <- d %>% dplyr::filter({{ var }} < !! qUpper)
   }
   
-  return(data %>% anti_join(d) %>% add_column(Lower=lower, Upper=upper))
+  return(
+    data %>% 
+      dplyr::anti_join(d) %>% 
+      tibble::add_column(Lower=lower, Upper=upper))
 }

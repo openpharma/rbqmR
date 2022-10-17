@@ -5,4 +5,6 @@ ObservedMinusExpected <- NULL
 SubjectIndex <- NULL
 UpperActionLimit <- NULL
 UpperWarningLimit <- NULL
-USUBJID <- NULL
+USUBJID <- NULL    
+Status <- NULL
+p <- NULL
