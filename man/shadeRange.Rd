@@ -6,8 +6,8 @@
 \usage{
 shadeRange(
   plot,
-  range = list(c(lower = NA, upper = 0.1, alpha = 0.3, colour = "goldenrod1"), c(lower
-    = 0.9, upper = NA, alpha = 0.3, colour = "goldenrod1")),
+  range = list(c(lower = NA, upper = 0.1, alpha = 0.3, colour = "goldenrod1"), c(lower =
+    0.9, upper = NA, alpha = 0.3, colour = "goldenrod1")),
   idx = 2
 )
 }
