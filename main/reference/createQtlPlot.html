@@ -28,12 +28,6 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -59,7 +53,9 @@
 <span>  targetRange <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  actionLimits <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  warningLimits <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  observedMetric <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  observedMetric <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  siteSize <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  siteMetric <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -93,6 +89,16 @@ will appear on the graph. See <code>[shadeRange]</code> for details.  May be <co
 
 <dt>observedMetric</dt>
 <dd><p>the observed value of the metric</p></dd>
+
+
+<dt>siteSize</dt>
+<dd><p>The column in <code>siteData</code> that defines the sample size at each
+site.  Uses tidyselect. Ignored if <code>siteData</code> is <code>NULL</code></p></dd>
+
+
+<dt>siteMetric</dt>
+<dd><p>The column in <code>siteData</code> that defines the KRI at the site.
+Uses tidyselect. Ignored if <code>siteData</code> is <code>NULL</code>.</p></dd>
 
 </dl></div>
 
