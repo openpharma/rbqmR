@@ -10,7 +10,9 @@ createQtlPlot(
   targetRange = NULL,
   actionLimits = NULL,
   warningLimits = NULL,
-  observedMetric = NULL
+  observedMetric = NULL,
+  siteSize = NULL,
+  siteMetric = NULL
 )
 }
 \arguments{
@@ -31,6 +33,12 @@ will appear on the graph. See \verb{[shadeRange]} for details.  May be \code{NA}
 \code{NULL}.}
 
 \item{observedMetric}{the observed value of the metric}
+
+\item{siteSize}{The column in \code{siteData} that defines the sample size at each
+site.  Uses tidyselect. Ignored if \code{siteData} is \code{NULL}}
+
+\item{siteMetric}{The column in \code{siteData} that defines the KRI at the site.
+Uses tidyselect. Ignored if \code{siteData} is \code{NULL}.}
 }
 \description{
 Summary Plot of Observed Event Rates/Proportions

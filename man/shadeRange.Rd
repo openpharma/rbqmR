@@ -6,8 +6,8 @@
 \usage{
 shadeRange(
   plot,
-  range = list(c(lower = NA, upper = 0.1, alpha = 0.3, colour = "goldenrod1"), c(lower
-    = 0.9, upper = NA, alpha = 0.3, colour = "goldenrod1")),
+  range = list(list(lower = NA, upper = 0.1, alpha = 0.3, colour = "goldenrod1"),
+    list(lower = 0.9, upper = NA, alpha = 0.3, colour = "goldenrod1")),
   idx = 2
 )
 }
@@ -31,7 +31,7 @@ curve.
 }
 \section{Usage Notes}{
 
-\code{range} should be a vector or a list of vectors.  If a vector, it should contain
+\code{range} should be a list or a list of vectors.  If a list, it should contain
 named elements \code{lower}, \code{upper}, \code{alpha} and \code{colour}, where \code{lower} and
 \code{upper} contain the lower and upper x axis values that define the extent of
 the shaded area, \code{colour} defines the colour of the shaded area and \code{alpha}
@@ -43,7 +43,7 @@ the density will be invisible if within the shaded area.
 To define shaded ranges that include the left- or right-most extents of the
 density, set \code{lower} or \code{upper} respectively to \code{NA}.
 
-If a list of vectors, each element of the  list should be a vector with
+If a list of lists, each element of the  list should be a list with
 elements as defined above.
 
 For example, the default value of \code{range} defines the ranges to be shaded as

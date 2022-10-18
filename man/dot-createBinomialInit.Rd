@@ -10,7 +10,8 @@
   seed = NULL,
   quantiles = NULL,
   rng = c("base::Mersenne-Twister", "base::Wichmann-Hill",
-    "base::Marsaglia-Multicarry", "base::Super-Duper")
+    "base::Marsaglia-Multicarry", "base::Super-Duper"),
+  n = 1
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ seed values is, but positive integers appear to be acceptable.}
 values supplied in \code{quantiles}. See Usage Notes below.}
 
 \item{rng}{the random number generator to be used for each init}
+
+\item{n}{the length of the initialisation vector for \code{p}}
 }
 \value{
 The init: a list with elements named \code{p}, \code{a}, \code{b}, \code{RNG.name} and

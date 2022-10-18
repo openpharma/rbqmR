@@ -12,6 +12,10 @@
 #' will appear on the graph. See `[shadeRange]` for details.  May be `NA` or 
 #' `NULL`.
 #' @param observedMetric the observed value of the metric
+#' @param siteSize The column in `siteData` that defines the sample size at each
+#'  site.  Uses tidyselect. Ignored if `siteData` is `NULL`
+#' @param siteMetric The column in `siteData` that defines the KRI at the site.
+#'    Uses tidyselect. Ignored if `siteData` is `NULL`.
 #' @export
 createQtlPlot <- function(
                    data,
@@ -19,7 +23,9 @@ createQtlPlot <- function(
                    targetRange=NULL,
                    actionLimits=NULL,
                    warningLimits=NULL,
-                   observedMetric=NULL
+                   observedMetric=NULL,
+                   siteSize=NULL,
+                   siteMetric=NULL
                  ) {
   plot <- data %>% 
             ggplot2::ggplot() +
@@ -50,7 +56,11 @@ createQtlPlot <- function(
   if (!is.null(targetRange)) {
     plot <- plot %>%  
               shadeRange(
-                range=c("lower"=targetRange$lower, "upper"=targetRange$upper, "alpha"=0.3, "colour"="steelblue2"), 
+                range=c(
+                  targetRange, 
+                  "alpha"=0.3, 
+                  "colour"="steelblue2"
+                ), 
                 idx=1
               )
     plot <- plot +
@@ -59,12 +69,21 @@ createQtlPlot <- function(
               )
   }
   if (!is.null(siteData)) {
-    # plot <- plot + 
-    #           ggplot2::geom_linerange(
-    #             data=siteData,
-    #             ggplot2::aes(x=ObservedResponse, ymin=0, ymax=Subjects/20),
-    #             colour="darkslategrey"
-    #           )
+    divisor <- 5 * 
+               ceiling(
+                 max(siteData %>% dplyr::pull( {{siteSize}} ), rm.na=TRUE) /
+                 max(ggplot2::ggplot_build(plot)$data[[1]]$density, rm.na=TRUE)/5
+               )
+    plot <- plot +
+              ggplot2::geom_linerange(
+                data=siteData,
+                ggplot2::aes(
+                  x={{ siteMetric }}, 
+                  ymin=0, 
+                  ymax={{ siteSize }}/divisor
+                ),
+                colour="darkslategrey"
+              )
   }
   return(plot)
 }

@@ -15,6 +15,7 @@
 #' `b` are chosen at random.  Otherwise, starting values are defined by the 
 #' values supplied in `quantiles`. See Usage Notes below.
 #' @param rng the random number generator to be used for each init
+#' @param n the length of the initialisation vector for `p`
 #' @section Usage Notes:
 #' The `quantiles` parameter provides a flexible way of defining starting values
 #' for the hyperparameters `a` and `b`.  If `NULL`, the default, starting values
@@ -41,7 +42,8 @@
             "base::Wichmann-Hill", 
             "base::Marsaglia-Multicarry", 
             "base::Super-Duper"
-          )
+          ),
+    n=1
     ) {
   logger::log_debug("Entry")
   logger::log_trace(paste0("  gammaA - shape: ", gammaA["shape"], ", scale: ", gammaA["scale"]))
@@ -90,7 +92,7 @@
   init <- list(
             ".RNG.name"=rng, 
             ".RNG.seed"=ifelse(is.null(seed), stats::runif(1, max=.Machine$integer.max), seed),
-            "p"=stats::runif(1, min=0.001, max=0.999)
+            "p"=stats::runif(n, min=0.001, max=0.999)
   )
   if (is.null(quantiles)) {
     # init$a <- stats::rgamma(1, shape=gammaA["shape"], scale=gammaA["scale"])

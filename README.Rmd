@@ -1,6 +1,7 @@
 ---
 output: github_document
 always_allow_html: true
+bibliography: README.bib
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -35,8 +36,9 @@ Tools currently exist for
 
 * Dynamic Quality Tolerance Limits (QTLs) using Bayesian Hierarchical Models (ongoing)
 * Observed-Minus-Expected methodology (ongoing)
+* Observed/Expected methodology (ongoing)
 
-This package is a work-in-progress.
+This package is a work-in-progress.  It's primary focus is dynamic QTLs. Other methodologies are included for completeness.
 
 ## Installation
 
@@ -50,7 +52,7 @@ devtools::install_github("openpharma/rbqmR")
 ## Examples
 ### Dynamic QTLs
 
-We use the example described on pages xx to xx Berry et al [@BERRY], modifying the context so that rather than being a meta analysis of several different trials, we consider the data to represent the performance of different sites within a single trial.  The exact metric being measured is immaterial, though it remains a summary of a binomial outcome.
+We use example 2.7 of Berry et al [@BERRY], described on pages 52 to 63, modifying the context so that rather than being a meta analysis of several different trials, we consider the data to represent the performance of different sites within a single trial.  The exact metric being measured is immaterial, though it remains a summary of a binomial outcome.
 
 ```{r}
 data(berrySummary)
@@ -76,8 +78,8 @@ The 5th and 95th centiles of the posterior are
 ```{r}
 quantiles <- fitted$tab %>% 
                summarise(
-                 Q05=quantile(p, probs=0.05),
-                 Q95=quantile(p, probs=0.95)
+                 Q05=quantile(p, probs=0.05, names=FALSE),
+                 Q95=quantile(p, probs=0.95, names=FALSE)
                )
 quantiles
 ```
@@ -103,13 +105,18 @@ Yes.  Two sites are outside this range.  One above and one below.  The QTL has b
 ```{r}
 fitted$tab %>% 
   createQtlPlot(
-    qtl=quantiles,
-    siteData=berrySummary
+    actionLimits=list(
+                   list("lower"=quantiles$Q95, "upper"=NA, "alpha"=0.3, "colour"="goldenrod1"),
+                   list("lower"=NA, "upper"=quantiles$Q05, "alpha"=0.3, "colour"="goldenrod1")
+                 ),
+    siteData=berrySummary,
+    siteSize=Subjects,
+    siteMetric=ObservedResponse
   )
 ```
 
 #### With historical data
-Suppose previous experience tells us that the event probabiity in this type of study should be between 0.50 and 0.75.  We define the QTL such that we require the posterior event probability for a new participant to be in the range 0.5 to 0.75 inclusive to be at least 50%.
+Suppose previous experience tells us that the event probability in this type of study should be between 0.50 and 0.75.  We define the QTL such that we require the posterior event probability for a new participant to be in the range 0.5 to 0.75 inclusive to be at least 50%.
 
 > When using a Bayesian Hierarchical Model, the probabilties associated with credible intervals are generally lower than those associated with similar frequentist models.  This is because BHMs permit  more sources of variation.  Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study.  The corresponding frequentist analysis assumes that all sites share  common event rate, thus assuming there is no inter-site variation.
 
@@ -122,11 +129,27 @@ Again, the QTL is breached, and the process can be summarised graphically.
 ```{r}
 fitted$tab %>%
   createQtlPlot(
-    targetRange=c(0.5, 0.75),
+    targetRange=list("lower"=0.5, "upper"=0.75),
     observedMetric=fitted$tab %>% summarise(Mean=mean(p)) %>% pull(Mean)
   )
 ```
 
+The site-level KRIs can be added to the plot to help focus attention where intervention is likely to have the largest effect.
+
+```{r}
+fitted$tab %>%
+  createQtlPlot(
+    targetRange=list("lower"=0.5, "upper"=0.75),
+    observedMetric=fitted$tab %>% summarise(Mean=mean(p)) %>% pull(Mean),
+    siteData=berrySummary,
+    siteSize=Subjects,
+    siteMetric=ObservedResponse,
+    actionLimits=list(
+                   list("lower"=quantiles$Q95, "upper"=NA, "alpha"=0.3, "colour"="goldenrod1"),
+                   list("lower"=NA, "upper"=quantiles$Q05, "alpha"=0.3, "colour"="goldenrod1")
+                 )
+  )
+```
 
 ### Observed - Expected Methodology
 We generate some random data similar to that used by Gilbert [@GILBERT], after setting a seed for reproducibility.
@@ -175,3 +198,42 @@ omeTable %>%
   ) %>% 
   add_header_above(c(" "=5, "Warning Limits"=2))
 ```
+
+### Observed / Expected methodology
+
+Katz et al [@KATZ] calculate the confidence interval for the ratio of two binomial random variables.  We use this to determine QTLs for the ratio of observed over expected proportions.  The variability associated with a ratio suggests that this methodology is likely to be useful only for large studies with low expected event rates.
+
+We require historical trial data to implement this methodology.
+
+Suppose we have data on 10,000 historical patients who have reported a given event at a rate of 1.4%.  We are planning a 1500 patient trial and have no reason to suppose the event rate in the trial will be any different from what has been seen in the past.
+
+```{r}
+createObservedOverExpectedTable(
+  nHistorical=10000,
+  historicalRate=0.014,
+  expectedRate=0.014,
+  nObservedRange=seq(50, 1500, 25)
+) %>% 
+createObservedOverExpectedPlot()
+```
+
+As the trial is executed, the observed data can be added to the table and the plot.
+
+```{r, error=TRUE}
+observedData <- tibble(
+                  NObserved=c(250, 500, 750, 1000), 
+                  ObservedRate=100*c(2, 9, 15, 16)/NObserved
+                )
+
+table <- createObservedOverExpectedTable(
+           nHistorical=10000,
+           historicalRate=0.014,
+           expectedRate=0.014,
+           nObservedRange=seq(50, 1500, 25),
+           observedData=observedData
+         )
+
+table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
+```
+
+## References

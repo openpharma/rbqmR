@@ -91,7 +91,7 @@ fitBayesBinomialModel <- function(
   # Create init lists if required
   if (is.null(inits)) {
     logger::log_debug("Generating random inits")
-    inits <- lapply(1:nChains, function(x) .createBinomialInit())
+    inits <- lapply(1:nChains, function(x) .createBinomialInit(n=tempData$k))
   }
   nameOfParameter <- paste0("p[", tempData$k , "]")
   # Fit the model

@@ -21,8 +21,10 @@ Tools currently exist for
 -   Dynamic Quality Tolerance Limits (QTLs) using Bayesian Hierarchical
     Models (ongoing)
 -   Observed-Minus-Expected methodology (ongoing)
+-   Observed/Expected methodology (ongoing)
 
-This package is a work-in-progress.
+This package is a work-in-progress. It’s primary focus is dynamic QTLs.
+Other methodologies are included for completeness.
 
 ## Installation
 
@@ -38,9 +40,9 @@ devtools::install_github("openpharma/rbqmR")
 
 ### Dynamic QTLs
 
-We use the example described on pages xx to xx Berry et al \[@BERRY\],
-modifying the context so that rather than being a meta analysis of
-several different trials, we consider the data to represent the
+We use example 2.7 of Berry et al (Berry SM 2011), described on pages 52
+to 63, modifying the context so that rather than being a meta analysis
+of several different trials, we consider the data to represent the
 performance of different sites within a single trial. The exact metric
 being measured is immaterial, though it remains a summary of a binomial
 outcome.
@@ -232,18 +234,18 @@ The 5th and 95th centiles of the posterior are
 ``` r
 quantiles <- fitted$tab %>% 
                summarise(
-                 Q05=quantile(p, probs=0.05),
-                 Q95=quantile(p, probs=0.95)
+                 Q05=quantile(p, probs=0.05, names=FALSE),
+                 Q95=quantile(p, probs=0.95, names=FALSE)
                )
 quantiles
 #> # A tibble: 1 × 2
 #>     Q05   Q95
 #>   <dbl> <dbl>
-#> 1 0.369 0.935
+#> 1 0.367 0.933
 ```
 
 So, in this specific case, our QTLs translate to observed event rates of
-36.85% and 93.45% respectively.
+36.73% and 93.34% respectively.
 
 Do any sites have observed event rates outside this range?
 
@@ -302,10 +304,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.369
+0.367
 </td>
 <td style="text-align:right;">
-0.935
+0.933
 </td>
 </tr>
 <tr>
@@ -322,10 +324,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.369
+0.367
 </td>
 <td style="text-align:right;">
-0.935
+0.933
 </td>
 </tr>
 </tbody>
@@ -337,8 +339,13 @@ has been breached. The process can be summarised graphically.
 ``` r
 fitted$tab %>% 
   createQtlPlot(
-    qtl=quantiles,
-    siteData=berrySummary
+    actionLimits=list(
+                   list("lower"=quantiles$Q95, "upper"=NA, "alpha"=0.3, "colour"="goldenrod1"),
+                   list("lower"=NA, "upper"=quantiles$Q05, "alpha"=0.3, "colour"="goldenrod1")
+                 ),
+    siteData=berrySummary,
+    siteSize=Subjects,
+    siteMetric=ObservedResponse
   )
 ```
 
@@ -346,7 +353,7 @@ fitted$tab %>%
 
 #### With historical data
 
-Suppose previous experience tells us that the event probabiity in this
+Suppose previous experience tells us that the event probability in this
 type of study should be between 0.50 and 0.75. We define the QTL such
 that we require the posterior event probability for a new participant to
 be in the range 0.5 to 0.75 inclusive to be at least 50%.
@@ -366,7 +373,7 @@ fitted$tab %>%
 #> # A tibble: 1 × 1
 #>   PosteriorProb
 #>           <dbl>
-#> 1         0.466
+#> 1         0.468
 ```
 
 Again, the QTL is breached, and the process can be summarised
@@ -375,18 +382,37 @@ graphically.
 ``` r
 fitted$tab %>%
   createQtlPlot(
-    targetRange=c(0.5, 0.75),
+    targetRange=list("lower"=0.5, "upper"=0.75),
     observedMetric=fitted$tab %>% summarise(Mean=mean(p)) %>% pull(Mean)
   )
-#> [1] 0.6816473
 ```
 
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
 
+The site-level KRIs can be added to the plot to help focus attention
+where intervention is likely to have the largest effect.
+
+``` r
+fitted$tab %>%
+  createQtlPlot(
+    targetRange=list("lower"=0.5, "upper"=0.75),
+    observedMetric=fitted$tab %>% summarise(Mean=mean(p)) %>% pull(Mean),
+    siteData=berrySummary,
+    siteSize=Subjects,
+    siteMetric=ObservedResponse,
+    actionLimits=list(
+                   list("lower"=quantiles$Q95, "upper"=NA, "alpha"=0.3, "colour"="goldenrod1"),
+                   list("lower"=NA, "upper"=quantiles$Q05, "alpha"=0.3, "colour"="goldenrod1")
+                 )
+  )
+```
+
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+
 ### Observed - Expected Methodology
 
-We generate some random data similar to that used by Gilbert
-\[@GILBERT\], after setting a seed for reproducibility.
+We generate some random data similar to that used by Gilbert (Gilbert
+2020), after setting a seed for reproducibility.
 
 In order to illustrate what happens when a QTL is breached, we set the
 probability that a participant reports an event to 0.13, even though the
@@ -421,7 +447,7 @@ omeTable %>%
   createObservedMinusExpectedPlot()
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
 
 We can see that the trial breached a warning limit. When did this first
 happen?
@@ -506,3 +532,80 @@ WARN
 </tr>
 </tbody>
 </table>
+
+### Observed / Expected methodology
+
+Katz et al (Katz D 1978) calculate the confidence interval for the ratio
+of two binomial random variables. We use this to determine QTLs for the
+ratio of observed over expected proportions. The variability associated
+with a ratio suggests that this methodology is likely to be useful only
+for large studies with low expected event rates.
+
+We require historical trial data to implement this methodology.
+
+Suppose we have data on 10,000 historical patients who have reported a
+given event at a rate of 1.4%. We are planning a 1500 patient trial and
+have no reason to suppose the event rate in the trial will be any
+different from what has been seen in the past.
+
+``` r
+createObservedOverExpectedTable(
+  nHistorical=10000,
+  historicalRate=0.014,
+  expectedRate=0.014,
+  nObservedRange=seq(50, 1500, 25)
+) %>% 
+createObservedOverExpectedPlot()
+```
+
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+
+As the trial is executed, the observed data can be added to the table
+and the plot.
+
+``` r
+observedData <- tibble(
+                  NObserved=c(250, 500, 750, 1000), 
+                  ObservedRate=100*c(2, 9, 15, 16)/NObserved
+                )
+
+table <- createObservedOverExpectedTable(
+           nHistorical=10000,
+           historicalRate=0.014,
+           expectedRate=0.014,
+           nObservedRange=seq(50, 1500, 25),
+           observedData=observedData
+         )
+
+table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
+```
+
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-BERRY" class="csl-entry">
+
+Berry SM, Lee JJ, Carlin BP. 2011. *Bayesian Adaptive Methods for
+Clinical Trials*. CRC Press.
+
+</div>
+
+<div id="ref-GILBERT" class="csl-entry">
+
+Gilbert, SA. 2020. “Implementing Quality Tolerance Limits at a Large
+Pharmaceutical Company.” *PharmaSUG*.
+
+</div>
+
+<div id="ref-KATZ" class="csl-entry">
+
+Katz D, Azen SP, Baptista J. 1978. “Obtaining Confidence Intervals for
+the Risk Ratio in Cohort Studies.” *Biometrics* 34 (3): 469–74.
+https://doi.org/<https://doi.org/10.2307/2530610>.
+
+</div>
+
+</div>
