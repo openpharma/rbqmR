@@ -12,7 +12,8 @@ getModelString(
     "dunif(0, 10)"), normal = c(`<priorMu0>` = "dnorm(0, 1e-06)", `<priorInvTau>` =
     "dgamma(1e-06, 1e-06)"), poisson = c(`<priorShape>` = "dgamma(1, 1)", `<priorScale>`
     = "dgamma(1, 1)"), tte = c(`<priorMu0>` = "dnorm(0, 1e-06)", `<priorInvTau>` =
-    "dgamma(1e-06, 1e-06)"))
+    "dgamma(1e-06, 1e-06)")),
+  prior = FALSE
 )
 }
 \arguments{
@@ -20,6 +21,9 @@ getModelString(
 
 \item{hyperParams}{a named list or named vector that defines how the
 placeholders in the model string are to be handled.  See Usage Notes below.}
+
+\item{prior}{Boolean.  Should the model for the prior be returned.  Default:
+\code{FALSE}.}
 }
 \value{
 a string defining the required model
