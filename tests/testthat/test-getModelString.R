@@ -28,6 +28,13 @@ test_that("test that getModelString works with hyperParameters as vector", {
   )
 })
 
+test_that("test that getModelString returns correct prior", {
+  expect_equal(
+    stringr::str_squish(getModelString("binomial", prior=TRUE)), 
+    "model { for (i in 1:k) { p[i] ~ dbeta(a, b) } a ~ dunif(0, 10) b ~ dunif(0, 10) }"
+  )
+})
+
 test_that("test that getModelString fails gracefully", {
   logger::log_threshold(logger::FATAL)
   suppressWarnings({

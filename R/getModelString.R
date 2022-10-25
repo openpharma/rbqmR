@@ -5,6 +5,8 @@
 #' @param hyperParams a named list or named vector that defines how the 
 #' placeholders in the model string are to be handled.  See Usage Notes below.
 #' @return a string defining the required model
+#' @param prior Boolean.  Should the model for the prior be returned.  Default:
+#' `FALSE`.
 #' @section Usage Notes:
 #' If `hyperParams` is a list, then the placeholder replacements are taken from
 #' `hyperParams[[label]]`, which should be a named vector.  Otherwise, the 
@@ -49,7 +51,8 @@ getModelString <- function(
                                     "<priorMu0>"="dnorm(0, 1e-06)",
                                     "<priorInvTau>"="dgamma(1e-06, 1e-06)"
                                   )
-                               )
+                               ),
+                    prior=FALSE
                   ) {
   logger::log_debug("Entry")
   label <- match.arg(label)
@@ -59,15 +62,19 @@ getModelString <- function(
                    for (j in 1:m) {
                      p[j] ~ dbeta(a, b)
                    }
+                   <notprior>
                    for (i in 1:k) {
                      r[i] ~ dbern(p[group[i]])
                    }
+                   </notprior>
                    a ~ <priorA>
                    b ~ <priorB>
                  }",
               binomial="model {
                       for (i in 1:k) {
+                         <notprior>
                          r[i] ~ dbin(p[i], n[i])
+                         </notprior>
                          p[i] ~ dbeta(a, b)
                       }
                       a ~ <priorA>
@@ -75,8 +82,10 @@ getModelString <- function(
                    }",
               poisson="model {
                  for (i in 1:k) {
+                   <notprior>
                    events[i] ~ dpois(mu[i])
                    mu[i] <- lambda[i]*exposure[i]
+                   </notprior>
                    lambda[i] ~ dgamma(shape, 1/scale)
                  }
                  scale ~ <priorScale>
@@ -84,9 +93,11 @@ getModelString <- function(
                }",
               tte="model {
                   #Likelihood
+                  <notprior>
                   for (i in 1:k) {
                      logMean[i] ~ dnorm(mu[i], n[i] / tau)
                   }
+                  </notprior>
                   #Prior
                   for (i in 1:k) {
                      mu[i] ~ dnorm(mu0, tau)
@@ -97,10 +108,12 @@ getModelString <- function(
                   tau <- 1/invTau  # Because inverse gamma isn't directly supported
                 }",
               normal="model {
+                  <notprior>
                   #Likelihood
                   for (i in 1:n) {
                      x[i] ~ dnorm(mu[g[i]], tau)
                   }
+                  </notprior>
                   #Prior
                   for (i in 1:k) {
                      mu[i] ~ dnorm(mu0, tau)
@@ -122,6 +135,12 @@ getModelString <- function(
   }
   if (!is.null(hyperParams)) {
     s <- stringr::str_replace_all(s, hyperParams)
+  }
+  if (prior) {
+    s <- s %>% stringr::str_replace_all("<notprior>(.|\\n)*<\\/notprior>", "")
+    #s <- s %>% stringr::str_replace_all("\\n\\s*\\n", "\\n")
+  } else {
+    s <- s %>% stringr::str_replace_all("<[\\/]*notprior>", "")
   }
   logger::log_debug("Exit")
   return (s)
