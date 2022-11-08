@@ -241,11 +241,11 @@ quantiles
 #> # A tibble: 1 × 2
 #>     Q05   Q95
 #>   <dbl> <dbl>
-#> 1 0.367 0.933
+#> 1 0.377 0.932
 ```
 
 So, in this specific case, our QTLs translate to observed event rates of
-36.73% and 93.34% respectively.
+37.70% and 93.22% respectively.
 
 Do any sites have observed event rates outside this range?
 
@@ -304,10 +304,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.367
+0.377
 </td>
 <td style="text-align:right;">
-0.933
+0.932
 </td>
 </tr>
 <tr>
@@ -324,10 +324,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.367
+0.377
 </td>
 <td style="text-align:right;">
-0.933
+0.932
 </td>
 </tr>
 </tbody>
@@ -373,7 +373,7 @@ fitted$tab %>%
 #> # A tibble: 1 × 1
 #>   PosteriorProb
 #>           <dbl>
-#> 1         0.468
+#> 1         0.471
 ```
 
 Again, the QTL is breached, and the process can be summarised

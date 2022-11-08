@@ -1,7 +1,7 @@
 ---
 output: github_document
 always_allow_html: true
-bibliography: README.bib
+bibliography: README.bib 
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
