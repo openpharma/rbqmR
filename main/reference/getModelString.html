@@ -31,12 +31,6 @@ data type"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -65,7 +59,8 @@ data type</p>
 <span>    <span class="st">"dunif(0, 10)"</span><span class="op">)</span>, normal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>`&lt;priorMu0&gt;` <span class="op">=</span> <span class="st">"dnorm(0, 1e-06)"</span>, `&lt;priorInvTau&gt;` <span class="op">=</span></span>
 <span>    <span class="st">"dgamma(1e-06, 1e-06)"</span><span class="op">)</span>, poisson <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>`&lt;priorShape&gt;` <span class="op">=</span> <span class="st">"dgamma(1, 1)"</span>, `&lt;priorScale&gt;`</span>
 <span>    <span class="op">=</span> <span class="st">"dgamma(1, 1)"</span><span class="op">)</span>, tte <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>`&lt;priorMu0&gt;` <span class="op">=</span> <span class="st">"dnorm(0, 1e-06)"</span>, `&lt;priorInvTau&gt;` <span class="op">=</span></span>
-<span>    <span class="st">"dgamma(1e-06, 1e-06)"</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="st">"dgamma(1e-06, 1e-06)"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  prior <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -78,6 +73,11 @@ data type</p>
 <dt>hyperParams</dt>
 <dd><p>a named list or named vector that defines how the
 placeholders in the model string are to be handled.  See Usage Notes below.</p></dd>
+
+
+<dt>prior</dt>
+<dd><p>Boolean.  Should the model for the prior be returned.  Default:
+<code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div id="value">

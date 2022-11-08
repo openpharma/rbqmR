@@ -45,12 +45,6 @@
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -266,8 +260,8 @@ ObservedResponse
 <span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
 <span><span class="co">#&gt;     Q05   Q95</span></span>
 <span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 0.367 0.933</span></span></code></pre></div>
-<p>So, in this specific case, our QTLs translate to observed event rates of 36.73% and 93.34% respectively.</p>
+<span><span class="co">#&gt; 1 0.377 0.932</span></span></code></pre></div>
+<p>So, in this specific case, our QTLs translate to observed event rates of 37.70% and 93.22% respectively.</p>
 <p>Do any sites have observed event rates outside this range?</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -320,10 +314,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.367
+0.377
 </td>
 <td style="text-align:right;">
-0.933
+0.932
 </td>
 </tr>
 <tr>
@@ -340,10 +334,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.367
+0.377
 </td>
 <td style="text-align:right;">
-0.933
+0.932
 </td>
 </tr>
 </tbody>
@@ -375,7 +369,7 @@ Upper
 <span><span class="co">#&gt; # A tibble: 1 × 1</span></span>
 <span><span class="co">#&gt;   PosteriorProb</span></span>
 <span><span class="co">#&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1         0.468</span></span></code></pre></div>
+<span><span class="co">#&gt; 1         0.471</span></span></code></pre></div>
 <p>Again, the QTL is breached, and the process can be summarised graphically.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
