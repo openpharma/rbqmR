@@ -19,6 +19,51 @@
     ),
     n=1
 ) {
+  logger::log_debug("Entry")
+  logger::log_trace(deparse(match.call()))
+  # logger::log_trace(paste0("  gammaShape - shape: ", gammaShape["shape"], ", scale: ", gammaShape["scale"]))
+  # logger::log_trace(paste0("  gammaScale - shape: ", gammaScale["shape"], ", scale: ", gammaScale["scale"]))
+  # if (is.null(seed)) {
+  #   logger::log_trace("  seed: NULL")
+  # } else {
+  #   logger::log_trace(paste0("  seed: ", seed))
+  # }
+  # if (is.null(quantiles)) {
+  #   logger::log_trace("  quantiles: NULL")
+  # } else {
+  #   logger::log_trace(paste0("  quantiles - shape: ", quantiles["shape"], "; b: ", quantiles[["scale"]]))
+  # }
+  # rng <- match.arg(rng)
+  # logger::log_trace(paste0("  rng: ", rng))
+  
+  # # Validate
+  if (!setequal(names(gammaShape), c("shape", "scale"))) stop("elements of gammaShape are not named 'shape' and 'scale'.")
+  if (!setequal(names(gammaScale), c("shape", "scale"))) stop("elements of gammaScale are not named 'shape' and 'scale'.")
+  if (!is.null(quantiles)) {
+    if (!setequal(names(quantiles), c("shape", "scale"))) stop("elements of quantiles are not named 'shape' and 'scale'.")
+    if (max(quantiles, na.rm=TRUE) >= 1) stop("not all elements of quantiles are less than 1.")
+    if (min(quantiles, na.rm=TRUE) <= 0) stop("not all elements of quantiles are greater than 0.")
+  }
+  if (min(gammaShape, na.rm=TRUE) <= 0) stop("not all elements of gammaShape are greater than 0.")
+  if (min(gammaScale, na.rm=TRUE) <= 0) stop("not all elements of gammaScale are greater than 0.")
+  
+  if (gammaShape["shape"] < 1 | gammaShape["scale"] < 1) {
+    logger::log_warn("At least one element of gammaShape is less than 1.  It is recommended that both elements are greater than 1 so that the hyperprior is not U-shaped.")
+    warning("At least one element of gammaA is less than 1.  It is recommended that both elements are greater than 1 so that the hyperprior is not U-shaped.")
+  }
+  if (gammaScale["shape"] < 1 | gammaScale["scale"] < 1) {
+    logger::log_warn("At least one element of gammaScale is less than 1.  It is recommended that both elements are greater than 1 so that the hyperprior is not U-shaped.")
+    warning("At least one element of gammaB is less than 1.  It is recommended that both elements are greater than 1 so that the hyperprior is not U-shaped.")
+  }
+  if (!is.null(seed)) {
+    if (seed < 0 | seed != as.integer(seed)) stop("Seed must be a positive integer")
+  }
+  if (!is.null(quantiles)) {
+    if (min(quantiles, na.rm=TRUE) <= 0) stop("not all elements of quantiles are greater than 0.")
+    if (max(quantiles, na.rm=TRUE) >= 1) stop("not all elements of quantiles are less than 1.")
+    if (!setequal(names(quantiles), c("shape", "scale"))) stop("elements of quantiles are not named 'shape' and 'scale'.")
+  }
+  
   # Execute
   init <- list(
     ".RNG.name"=rng, 
@@ -26,20 +71,18 @@
     "lambda"=stats::rgamma(n, shape=1, scale=1)
   )
   if (is.null(quantiles)) {
-    # init$a <- stats::rgamma(1, shape=gammaA["shape"], scale=gammaA["scale"])
-    # init$b <- 1/stats::rgamma(1, shape=gammaB["shape"], scale=gammaB["scale"])
     init$shape <- stats::rgamma(1, shape=gammaShape["shape"], scale=gammaShape["scale"])
     init$scale <- stats::rgamma(1, shape=gammaScale["shape"], scale=gammaScale["scale"])
   } else {
-    init$a <- ifelse(
+    init$shape <- ifelse(
       is.na(quantiles["shape"]),
       stats::rgamma(1, shape=gammaShape["shape"], scale=gammaShape["scale"]),
       stats::qgamma(quantiles["shape"], shape=gammaScale["shape"], scale=gammaScale["scale"])
     )
-    init$b <- ifelse(
+    init$scale <- ifelse(
       is.na(quantiles["scale"]),
-      1/stats::rgamma(1, shape=gammaScale["shape"], scale=gammaScale["scale"]),
-      1/stats::qgamma(quantiles["scale"], shape=gammaScale["shape"], scale=gammaScale["scale"])
+      stats::rgamma(1, shape=gammaScale["shape"], scale=gammaScale["scale"]),
+      stats::qgamma(quantiles["scale"], shape=gammaScale["shape"], scale=gammaScale["scale"])
     )
   }
   logger::log_debug("Exit")

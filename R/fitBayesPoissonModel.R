@@ -79,18 +79,7 @@ fitBayesPoissonModel <- function(
                           ...
                         ){
   logger::log_debug("Entry")
-  .logArgs(as.list(match.call())[[1]])
-  # logger::log_trace(paste0("  data: ", deparse(substitute(data))))
-  # logger::log_trace(paste0("  eventVar: ", deparse(substitute(eventVar))))
-  # logger::log_trace(paste0("  exposureVar: ", deparse(substitute(exposureVar))))
-  # logger::log_trace(paste0("  model: ", ifelse(is.null(model), "NULL", model)))
-  # if (is.null(inits)) {
-  #   logger::log_trace("  inits: NULL")
-  # } else {
-  #   logger::log_trace("  inits:")
-  #   lapply(inits, function(x) logger::log_trace(paste0("    ", x)))
-  # }
-  # logger::log_trace(paste0("  nChains: ", nChains))
+  logger::log_trace(deparse(match.call()))
   
   #Begin
   #Add additional, "posterior" observation to each input vector
@@ -101,7 +90,14 @@ fitBayesPoissonModel <- function(
   
   if(is.null(model)) {
     model <- getModelString("poisson", prior=is.null(data))
-    logger::log_trace(paste0("  Model is now:\n", stringr::str_replace_all(model, c("\\{"="\\{\\{", "\\}"="\\}\\}"))))
+    logger::log_trace(
+      paste0(
+        "  Model is now:\n", 
+        # Needed to allow logger to work: escape curly braces, which are control
+        # characters in glue
+        stringr::str_replace_all(model, c("\\{"="\\{\\{", "\\}"="\\}\\}"))
+      )
+    )
   }
   # Create init lists if required
   if (is.null(inits)) {

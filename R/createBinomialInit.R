@@ -46,20 +46,21 @@
     n=1
     ) {
   logger::log_debug("Entry")
-  logger::log_trace(paste0("  gammaA - shape: ", gammaA["shape"], ", scale: ", gammaA["scale"]))
-  logger::log_trace(paste0("  gammaB - shape: ", gammaB["shape"], ", scale: ", gammaB["scale"]))
-  if (is.null(seed)) {
-    logger::log_trace("  seed: NULL")
-  } else {
-    logger::log_trace(paste0("  seed: ", seed))
-  }
-  if (is.null(quantiles)) {
-    logger::log_trace("  quantiles: NULL")
-  } else {
-    logger::log_trace(paste0("  quantiles - a: ", quantiles["a"], "; b: ", quantiles[["b"]]))
-  }
-  rng <- match.arg(rng)
-  logger::log_trace(paste0("  rng: ", rng))
+  logger::log_trace(deparse(match.call()))
+  # logger::log_trace(paste0("  gammaA - shape: ", gammaA["shape"], ", scale: ", gammaA["scale"]))
+  # logger::log_trace(paste0("  gammaB - shape: ", gammaB["shape"], ", scale: ", gammaB["scale"]))
+  # if (is.null(seed)) {
+  #   logger::log_trace("  seed: NULL")
+  # } else {
+  #   logger::log_trace(paste0("  seed: ", seed))
+  # }
+  # if (is.null(quantiles)) {
+  #   logger::log_trace("  quantiles: NULL")
+  # } else {
+  #   logger::log_trace(paste0("  quantiles - a: ", quantiles["a"], "; b: ", quantiles[["b"]]))
+  # }
+  # rng <- match.arg(rng)
+  # logger::log_trace(paste0("  rng: ", rng))
 
   # # Validate
   if (!setequal(names(gammaA), c("shape", "scale"))) stop("elements of gammaA are not named 'shape' and 'scale'.")
