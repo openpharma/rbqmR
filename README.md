@@ -9,6 +9,7 @@
 status](https://www.r-pkg.org/badges/version/rbqmR)](https://CRAN.R-project.org/package=rbqmR)
 <a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public." /></a>
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![R-CMD-check](https://github.com/openpharma/rbqmR/workflows/R-CMD-check/badge.svg)](https://github.com/openpharma/rbqmR/actions)
 <!-- badges: end -->
 
 ## Introduction
@@ -241,11 +242,11 @@ quantiles
 #> # A tibble: 1 × 2
 #>     Q05   Q95
 #>   <dbl> <dbl>
-#> 1 0.377 0.932
+#> 1 0.368 0.929
 ```
 
 So, in this specific case, our QTLs translate to observed event rates of
-37.70% and 93.22% respectively.
+36.77% and 92.92% respectively.
 
 Do any sites have observed event rates outside this range?
 
@@ -304,10 +305,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.377
+0.368
 </td>
 <td style="text-align:right;">
-0.932
+0.929
 </td>
 </tr>
 <tr>
@@ -324,10 +325,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.377
+0.368
 </td>
 <td style="text-align:right;">
-0.932
+0.929
 </td>
 </tr>
 </tbody>
@@ -373,7 +374,7 @@ fitted$tab %>%
 #> # A tibble: 1 × 1
 #>   PosteriorProb
 #>           <dbl>
-#> 1         0.471
+#> 1         0.460
 ```
 
 Again, the QTL is breached, and the process can be summarised
