@@ -26,7 +26,7 @@ test_that("fitBayesBinomialModel fails gracefully with bad inputs", {
   expect_error(tibble(n=c(1, 1), r=c(0, 2)) %>% fitBayesBinomialModel(n, r))
 })
 
-test_that("fitBayesBinomialModel reproduces results from Beryy et al", {
+test_that("fitBayesBinomialModel reproduces results from Berry et al", {
   data("berrySummary")
   rv <- berrySummary %>% fitBayesBinomialModel(Subjects, Events)
   expect_equal(rv$status, "OK")

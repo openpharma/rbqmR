@@ -21,22 +21,10 @@
 ) {
   logger::log_debug("Entry")
   logger::log_trace(deparse(match.call()))
-  # logger::log_trace(paste0("  gammaShape - shape: ", gammaShape["shape"], ", scale: ", gammaShape["scale"]))
-  # logger::log_trace(paste0("  gammaScale - shape: ", gammaScale["shape"], ", scale: ", gammaScale["scale"]))
-  # if (is.null(seed)) {
-  #   logger::log_trace("  seed: NULL")
-  # } else {
-  #   logger::log_trace(paste0("  seed: ", seed))
-  # }
-  # if (is.null(quantiles)) {
-  #   logger::log_trace("  quantiles: NULL")
-  # } else {
-  #   logger::log_trace(paste0("  quantiles - shape: ", quantiles["shape"], "; b: ", quantiles[["scale"]]))
-  # }
-  # rng <- match.arg(rng)
-  # logger::log_trace(paste0("  rng: ", rng))
-  
-  # # Validate
+
+  rng <- match.arg(rng)
+
+  # Validate
   if (!setequal(names(gammaShape), c("shape", "scale"))) stop("elements of gammaShape are not named 'shape' and 'scale'.")
   if (!setequal(names(gammaScale), c("shape", "scale"))) stop("elements of gammaScale are not named 'shape' and 'scale'.")
   if (!is.null(quantiles)) {

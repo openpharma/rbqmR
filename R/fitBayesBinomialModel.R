@@ -64,6 +64,7 @@
 #' shape parameter of the Beta distribution for `p`.}
 #' \item{shape2}{Simulated values from the posterior distribution of the second
 #' shape parameter of the Beta distribution for `p`.}
+#' \item{q}{Percentile in which each p value falls.}
 #' @example examples/fitBayesBinomialModel.R
 #' @export
 fitBayesBinomialModel <- function(
@@ -145,16 +146,19 @@ fitBayesBinomialModel <- function(
     logger::log_debug("Generating random inits")
     inits <- lapply(1:nChains, function(x) .createBinomialInit(n=tempData$k))
   }
-  nameOfParameter <- paste0("p[", tempData$k , "]")
+  if (is.null(data)) {
+    toMonitor <- c("a", "b")
+  } else {
+    toMonitor <- c(paste0("p[", tempData$k , "]"), "a", "b")
+  }
   # Fit the model
   rv <- tempData %>%
           .autorunJagsAndCaptureOutput(
             model,
-            c(nameOfParameter, "a", "b"),
+            toMonitor,
             inits,
             ...
         )
   logger::log_debug("Exit")
   return(rv)
 }
-

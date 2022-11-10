@@ -42,9 +42,9 @@
 #' returned value.
 #'
 #' @param data the data frame containing the `eventVar` and `exposureVar` columns
-#' @param eventVar The number of events per site. If `NULL` the "posterior"
+#' @param events The number of events per site. If `NULL` the "posterior"
 #' distribution will be MCMC samples from the prior.
-#' @param exposureVar The exposure per site. If `NULL` the "posterior"
+#' @param exposure The exposure per site. If `NULL` the "posterior"
 #' distribution will be MCMC samples from the prior.
 #' @param model The character string containing the JAGS model to be fitted.  If
 #' `NULL`, obtained from `getModelString("binomial)`.
@@ -59,7 +59,7 @@
 #' \item{lambda}{Simulated values from the posterior distribution of the rates.}
 #' \item{shape}{Simulated values from the posterior distribution of the shape.}
 #' \item{scale}{Simulated values from the posterior distribution of the scale.}
-#' \item{q}{Percentile bin each lambda value belongs to.}
+#' \item{q}{Percentile in each which lambda value falls.}
 #' @examples
 #'
 #' # load example site rates
@@ -70,9 +70,9 @@
 #'
 #' @export
 fitBayesPoissonModel <- function(
-                          data,
-                          eventVar = NULL, # allow NULL to simulate prior of lambda
-                          exposureVar = NULL,
+                          data, # allow NULL to simulate prior of lambda
+                          events = NULL, 
+                          exposure = NULL,
                           model=NULL,
                           inits=NULL,
                           nChains=ifelse(is.null(inits), 2, length(inits)),
@@ -80,12 +80,29 @@ fitBayesPoissonModel <- function(
                         ){
   logger::log_debug("Entry")
   logger::log_trace(deparse(match.call()))
-  
+  # Validate
+  if (!is.null(data)) {
+    if (any(is.na(data %>% dplyr::pull({{events}})))) {
+      stop(paste0("Some entries in ", substitute(events), " are NA"))
+    }
+    if  (any(is.na(data %>% dplyr::pull({{exposure}})))) {
+      stop(paste0("Some entries in ", substitute(exposure), " are NA"))
+    }
+    if (!(min(data %>% dplyr::pull({{events}})) > 0)) {
+      stop(paste0("Not all entries in ", substitute(events), " are positive"))
+    }
+    if (!(min(data %>% dplyr::pull({{exposure}})) >= 0)) {
+      stop(paste0("Not all entries in ", substitute(exposure), " are non-negative"))
+    }
+  }
   #Begin
   #Add additional, "posterior" observation to each input vector
   tempData <- list()
-  tempData$events <- c(data %>% dplyr::pull({{eventVar}}), NA)
-  tempData$exposure <- c(data %>% dplyr::pull({{exposureVar}}),  1)
+  if (!is.null(data)) {
+    tempData$events <- c(data %>% dplyr::pull({{events}}), NA)
+    tempData$exposure <- c(data %>% dplyr::pull({{exposure}}),  1)
+    
+  }
   tempData$k <- length(tempData$events) # number of sites plus 1
   
   if(is.null(model)) {
@@ -99,21 +116,27 @@ fitBayesPoissonModel <- function(
       )
     )
   }
+  
   # Create init lists if required
   if (is.null(inits)) {
     logger::log_debug("Generating random inits")
     inits <- lapply(1:nChains, function(x) .createPoissonInit(n=tempData$k))
   }
+  
   # set runjags options
   ## always force summary, others set in zzz.R could be changed by user
-  runjags.options(force.summary = TRUE)
+  runjags::runjags.options(force.summary = TRUE)
   # runjags.options(silent.jags = FALSE)
   # use autorun jags to ensure convergence diagnostics are met
-  nameOfLambdaParameter <- paste0("lambda[", tempData$k , "]")
+  if (is.null(data)) {
+    toMonitor <- c("shape", "scale")
+  } else {
+    toMonitor <- c(paste0("lambda[", tempData$k , "]"), "shape", "scale")
+  }
   tempData %>%
     .autorunJagsAndCaptureOutput(
       model,
-      c(nameOfLambdaParameter, "shape", "scale"),
+      toMonitor,
       inits,
       "poissonModel"
     )
