@@ -2,6 +2,8 @@
 #' 
 #' @param data A tibble containing MCMC samples for which the density is 
 #' required
+#' @param metric The column in data that contains the sampled values of the metric
+#'  being evaluated
 #' @param siteData A tibble containing the observed site specific data
 #' @param targetRange A tibble containing the lower and upper limits of the 
 #' target range for the metric
@@ -19,6 +21,7 @@
 #' @export
 createQtlPlot <- function(
                    data,
+                   metric=p,
                    siteData=NULL,
                    targetRange=NULL,
                    actionLimits=NULL,
@@ -29,7 +32,7 @@ createQtlPlot <- function(
                  ) {
   plot <- data %>% 
             ggplot2::ggplot() +
-              ggplot2::geom_density(ggplot2::aes(p), colour="grey") + 
+              ggplot2::geom_density(ggplot2::aes({{metric}}), colour="grey") + 
               ggplot2::theme_light() +
               ggplot2::theme(
                 axis.ticks.y =  ggplot2::element_blank(),

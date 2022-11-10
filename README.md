@@ -242,11 +242,11 @@ quantiles
 #> # A tibble: 1 × 2
 #>     Q05   Q95
 #>   <dbl> <dbl>
-#> 1 0.368 0.929
+#> 1 0.371 0.932
 ```
 
 So, in this specific case, our QTLs translate to observed event rates of
-36.77% and 92.92% respectively.
+37.07% and 93.22% respectively.
 
 Do any sites have observed event rates outside this range?
 
@@ -305,10 +305,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.368
+0.371
 </td>
 <td style="text-align:right;">
-0.929
+0.932
 </td>
 </tr>
 <tr>
@@ -325,10 +325,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.368
+0.371
 </td>
 <td style="text-align:right;">
-0.929
+0.932
 </td>
 </tr>
 </tbody>
@@ -350,7 +350,7 @@ fitted$tab %>%
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="80%" />
 
 #### With historical data
 
@@ -374,7 +374,7 @@ fitted$tab %>%
 #> # A tibble: 1 × 1
 #>   PosteriorProb
 #>           <dbl>
-#> 1         0.460
+#> 1         0.470
 ```
 
 Again, the QTL is breached, and the process can be summarised
@@ -388,7 +388,7 @@ fitted$tab %>%
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="80%" />
 
 The site-level KRIs can be added to the plot to help focus attention
 where intervention is likely to have the largest effect.
@@ -408,7 +408,7 @@ fitted$tab %>%
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="80%" />
 
 ### Observed - Expected Methodology
 
@@ -448,7 +448,7 @@ omeTable %>%
   createObservedMinusExpectedPlot()
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="80%" />
 
 We can see that the trial breached a warning limit. When did this first
 happen?
@@ -559,7 +559,7 @@ createObservedOverExpectedTable(
 createObservedOverExpectedPlot()
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="80%" />
 
 As the trial is executed, the observed data can be added to the table
 and the plot.
@@ -581,7 +581,111 @@ table <- createObservedOverExpectedTable(
 table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="80%" />
+
+## Beyond Transcelerate
+
+At the time of writing (late 2022) The Transcelerate Quality Tolerance
+Limit Framework (Inc 2020) lists metrics that are exclusively binary in
+nature. There are many other potential metrics that are non-binary and
+which may provide insight into the conduct of the trial. For example,
+
+-   The number of episodes of rescue medication (as opposed to the
+    percentage or number of trial participants on rescue medication)
+-   Time to withdrawal of consent (as percentage or number of trial
+    participants with withdrawal of informed consent)
+
+As well as other metrics that can’t esily be dichotomised
+
+-   Drug plasma levels
+-   Number of (S)AEs reported per time unit of drug exposure
+
+The Bayesian QTL framework implemented in `rbqmR` can easily be extended
+to include these other data types.
+
+### Events per unit time
+
+Bortkiewicz’s data on the numbers of Prussian cavalry officers kicked to
+death by horses (Bortkiewicz 1898) can be used to illustrate the method.
+
+``` r
+data("cavalryDeaths")
+
+cavalryDeaths
+#> # A tibble: 280 × 3
+#>     Year Corps   Deaths
+#>    <int> <fct>    <int>
+#>  1  1875 Guards       0
+#>  2  1875 Corps 1      0
+#>  3  1875 Corps 2      0
+#>  4  1875 Corps 3      0
+#>  5  1875 Corps 4      0
+#>  6  1875 Corps 5      0
+#>  7  1875 Corps 6      0
+#>  8  1875 Corps 7      1
+#>  9  1875 Corps 8      1
+#> 10  1875 Corps 9      0
+#> # … with 270 more rows
+```
+
+Regard different cavalry Corps as “sites” and regard the number of years
+for which data were collected as “exposure”.
+
+``` r
+cavalrySummary <- cavalryDeaths %>% 
+                group_by(Corps) %>% 
+                summarise(
+                  Deaths=sum(Deaths), 
+                  TotalTime=n(), 
+                  .groups="drop"
+                ) %>% 
+                mutate(DeathRate=Deaths/TotalTime)
+                
+cavalrySummary
+#> # A tibble: 14 × 4
+#>    Corps    Deaths TotalTime DeathRate
+#>    <fct>     <int>     <int>     <dbl>
+#>  1 Guards       16        20      0.8 
+#>  2 Corps 1      16        20      0.8 
+#>  3 Corps 2      12        20      0.6 
+#>  4 Corps 3      12        20      0.6 
+#>  5 Corps 4       8        20      0.4 
+#>  6 Corps 5      11        20      0.55
+#>  7 Corps 6      17        20      0.85
+#>  8 Corps 7      12        20      0.6 
+#>  9 Corps 8       7        20      0.35
+#> 10 Corps 9      13        20      0.65
+#> 11 Corps 10     15        20      0.75
+#> 12 Corps 11     25        20      1.25
+#> 13 Corps 14     24        20      1.2 
+#> 14 Corps 15      8        20      0.4
+```
+
+Although not necessary here, because data for all Corps was recorded for
+the same amount of time, the Poisson model used by `rbqmR` adjusts risk
+by total exposure at the site.
+
+``` r
+getModelString("poisson")
+#> [1] "model {\n   for (i in 1:k) {\n     \n     events[i] ~ dpois(mu[i])\n     mu[i] <- lambda[i]*exposure[i]\n     \n     lambda[i] ~ dgamma(shape, 1/scale)\n   }\n   scale ~ dgamma(1, 1)\n   shape ~ dgamma(1, 1)\n }"
+```
+
+Fitting the model is straightforward.
+
+``` r
+poissonFit <- cavalrySummary%>% 
+                fitBayesPoissonModel(Deaths, TotalTime)
+poissonFit$tab %>% 
+  createQtlPlot(
+    metric=lambda,
+    siteData=cavalrySummary,
+    siteSize=TotalTime,
+    siteMetric=DeathRate    
+  ) +
+  labs(x="Deaths per year")
+```
+
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="80%" />
 
 ## References
 
@@ -594,10 +698,24 @@ Clinical Trials*. CRC Press.
 
 </div>
 
+<div id="ref-Bortkiewicz1898" class="csl-entry">
+
+Bortkiewicz, Ladislaus von. 1898. “Das Gesetz Der Kleinen Zahlen.”
+
+</div>
+
 <div id="ref-GILBERT" class="csl-entry">
 
 Gilbert, SA. 2020. “Implementing Quality Tolerance Limits at a Large
 Pharmaceutical Company.” *PharmaSUG*.
+
+</div>
+
+<div id="ref-Transcelerate2020" class="csl-entry">
+
+Inc, Transcelerate Biopharma. 2020. “Quality Tolerance Limits
+Framework.” Research report. Transcelerate Biopharma Inc. 2020.
+<https://www.transceleratebiopharmainc.com/wp-content/uploads/2020/10/TransCelerate_InterpretationsOfClinical-GuidancesAndRegulations_Quality-Tolerance-Limits-Framework_October-2020.pdf>.
 
 </div>
 

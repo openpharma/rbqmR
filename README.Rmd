@@ -11,7 +11,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "80%",
+  fig.height = 4,
+  fig.width = 6
 )
 
 library(magrittr)
@@ -235,6 +237,63 @@ table <- createObservedOverExpectedTable(
          )
 
 table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
+```
+
+## Beyond Transcelerate
+At the time of writing (late 2022) The Transcelerate Quality Tolerance Limit Framework [@Transcelerate2020] lists metrics that are exclusively binary in nature.  There are many other potential metrics that are non-binary and which may provide insight into the conduct of the trial.  For example,
+
+* The number of episodes of rescue medication (as opposed to the percentage or number of trial participants on rescue medication)
+* Time to withdrawal of consent (as percentage or number of trial participants with withdrawal of informed consent)
+
+As well as other metrics that can't esily be dichotomised
+
+* Drug plasma levels
+* Number of (S)AEs reported per time unit of drug exposure
+
+The Bayesian QTL framework implemented in `rbqmR` can easily be extended to include these other data types.
+
+### Events per unit time
+Bortkiewicz's data on the numbers of Prussian cavalry officers kicked to death by horses [@Bortkiewicz1898] can be used to illustrate the method.
+```{r}
+data("cavalryDeaths")
+
+cavalryDeaths
+```
+
+Regard different cavalry Corps as "sites" and regard the number of years for which data were collected as "exposure".
+
+```{r}
+
+cavalrySummary <- cavalryDeaths %>% 
+                group_by(Corps) %>% 
+                summarise(
+                  Deaths=sum(Deaths), 
+                  TotalTime=n(), 
+                  .groups="drop"
+                ) %>% 
+                mutate(DeathRate=Deaths/TotalTime)
+                
+cavalrySummary
+```
+
+Although not necessary here, because data for all Corps was recorded for the same amount of time, the Poisson model used by `rbqmR` adjusts risk by total exposure at the site.
+
+```{r, results="as-is"}
+getModelString("poisson")
+```
+Fitting the model is straightforward.
+
+```{r}
+poissonFit <- cavalrySummary%>% 
+                fitBayesPoissonModel(Deaths, TotalTime)
+poissonFit$tab %>% 
+  createQtlPlot(
+    metric=lambda,
+    siteData=cavalrySummary,
+    siteSize=TotalTime,
+    siteMetric=DeathRate    
+  ) +
+  labs(x="Deaths per year")
 ```
 
 ## References
