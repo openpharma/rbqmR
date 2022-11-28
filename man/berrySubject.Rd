@@ -3,7 +3,7 @@
 \docType{data}
 \name{berrySubject}
 \alias{berrySubject}
-\title{#' Data derived and adapted from Berry et al (2011) pp 52-63}
+\title{Data derived and adapted from Berry et al (2011) pp 52-63}
 \format{
 A tibble with 150 rows and 3 columns
 \describe{

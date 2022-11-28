@@ -6,6 +6,7 @@
 \usage{
 createQtlPlot(
   data,
+  metric = p,
   siteData = NULL,
   targetRange = NULL,
   actionLimits = NULL,
@@ -18,6 +19,9 @@ createQtlPlot(
 \arguments{
 \item{data}{A tibble containing MCMC samples for which the density is
 required}
+
+\item{metric}{The column in data that contains the sampled values of the metric
+being evaluated}
 
 \item{siteData}{A tibble containing the observed site specific data}
 

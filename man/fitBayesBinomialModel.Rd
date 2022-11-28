@@ -43,6 +43,7 @@ probabilities.}
 shape parameter of the Beta distribution for \code{p}.}
 \item{shape2}{Simulated values from the posterior distribution of the second
 shape parameter of the Beta distribution for \code{p}.}
+\item{q}{Percentile in which each p value falls.}
 }
 \description{
 Given a set of event counts and patient numbers for multiple sites,
