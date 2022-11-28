@@ -45,12 +45,6 @@
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -266,8 +260,8 @@ ObservedResponse
 <span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
 <span><span class="co">#&gt;     Q05   Q95</span></span>
 <span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 0.377 0.932</span></span></code></pre></div>
-<p>So, in this specific case, our QTLs translate to observed event rates of 37.70% and 93.22% respectively.</p>
+<span><span class="co">#&gt; 1 0.368 0.933</span></span></code></pre></div>
+<p>So, in this specific case, our QTLs translate to observed event rates of 36.81% and 93.32% respectively.</p>
 <p>Do any sites have observed event rates outside this range?</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -320,10 +314,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.377
+0.368
 </td>
 <td style="text-align:right;">
-0.932
+0.933
 </td>
 </tr>
 <tr>
@@ -340,10 +334,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.377
+0.368
 </td>
 <td style="text-align:right;">
-0.932
+0.933
 </td>
 </tr>
 </tbody>
@@ -360,7 +354,7 @@ Upper
 <span>    siteSize<span class="op">=</span><span class="va">Subjects</span>,</span>
 <span>    siteMetric<span class="op">=</span><span class="va">ObservedResponse</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="80%"></p>
 </div>
 <div class="section level4">
 <h4 id="with-historical-data">With historical data<a class="anchor" aria-label="anchor" href="#with-historical-data"></a>
@@ -375,7 +369,7 @@ Upper
 <span><span class="co">#&gt; # A tibble: 1 × 1</span></span>
 <span><span class="co">#&gt;   PosteriorProb</span></span>
 <span><span class="co">#&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1         0.471</span></span></code></pre></div>
+<span><span class="co">#&gt; 1         0.461</span></span></code></pre></div>
 <p>Again, the QTL is breached, and the process can be summarised graphically.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -383,7 +377,7 @@ Upper
 <span>    targetRange<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"lower"</span><span class="op">=</span><span class="fl">0.5</span>, <span class="st">"upper"</span><span class="op">=</span><span class="fl">0.75</span><span class="op">)</span>,</span>
 <span>    observedMetric<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">summarise</span><span class="op">(</span>Mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Mean</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="80%"></p>
 <p>The site-level KRIs can be added to the plot to help focus attention where intervention is likely to have the largest effect.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -398,7 +392,7 @@ Upper
 <span>                   <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"lower"</span><span class="op">=</span><span class="cn">NA</span>, <span class="st">"upper"</span><span class="op">=</span><span class="va">quantiles</span><span class="op">$</span><span class="va">Q05</span>, <span class="st">"alpha"</span><span class="op">=</span><span class="fl">0.3</span>, <span class="st">"colour"</span><span class="op">=</span><span class="st">"goldenrod1"</span><span class="op">)</span></span>
 <span>                 <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="80%"></p>
 </div>
 </div>
 <div class="section level3">
@@ -427,7 +421,7 @@ Upper
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/createObservedMinusExpectedPlot.html">createObservedMinusExpectedPlot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-13-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-13-1.png" width="80%"></p>
 <p>We can see that the trial breached a warning limit. When did this first happen?</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -516,7 +510,7 @@ WARN
 <span>  nObservedRange<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">1500</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span><span class="fu"><a href="reference/createObservedOverExpectedPlot.html">createObservedOverExpectedPlot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-15-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-15-1.png" width="80%"></p>
 <p>As the trial is executed, the observed data can be added to the table and the plot.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">observedData</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
@@ -533,7 +527,92 @@ WARN
 <span>         <span class="op">)</span></span>
 <span></span>
 <span><span class="va">table</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/createObservedOverExpectedPlot.html">createObservedOverExpectedPlot</a></span><span class="op">(</span>observedRate<span class="op">=</span><span class="va">ObservedRate</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-16-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-16-1.png" width="80%"></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="beyond-transcelerate">Beyond Transcelerate<a class="anchor" aria-label="anchor" href="#beyond-transcelerate"></a>
+</h2>
+<p>At the time of writing (late 2022) The Transcelerate Quality Tolerance Limit Framework (Transcelerate 2020) lists metrics that are exclusively binary in nature. There are many other potential metrics that are non-binary and which may provide insight into the conduct of the trial. For example,</p>
+<ul>
+<li>The number of episodes of rescue medication (as opposed to the percentage or number of trial participants on rescue medication)</li>
+<li>Time to withdrawal of consent (as opposed to the percentage or number of trial participants with withdrawal of informed consent)</li>
+</ul>
+<p>As well as other metrics that can’t easily be dichotomised</p>
+<ul>
+<li>Drug plasma levels</li>
+<li>Number of (S)AEs reported per time unit of drug exposure</li>
+<li>Time to respond to data queries</li>
+</ul>
+<p>The Bayesian QTL framework implemented in <code>rbqmR</code> can easily be extended to include these other data types.</p>
+<div class="section level3">
+<h3 id="events-per-unit-time">Events per unit time<a class="anchor" aria-label="anchor" href="#events-per-unit-time"></a>
+</h3>
+<p>We use data on the numbers of Prussian cavalry officers kicked to death by horses (Bortkiewicz 1898) to illustrate the method.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cavalryDeaths"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cavalryDeaths</span></span>
+<span><span class="co">#&gt; # A tibble: 280 × 3</span></span>
+<span><span class="co">#&gt;     Year Corps   Deaths</span></span>
+<span><span class="co">#&gt;    &lt;int&gt; &lt;fct&gt;    &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1  1875 Guards       0</span></span>
+<span><span class="co">#&gt;  2  1875 Corps 1      0</span></span>
+<span><span class="co">#&gt;  3  1875 Corps 2      0</span></span>
+<span><span class="co">#&gt;  4  1875 Corps 3      0</span></span>
+<span><span class="co">#&gt;  5  1875 Corps 4      0</span></span>
+<span><span class="co">#&gt;  6  1875 Corps 5      0</span></span>
+<span><span class="co">#&gt;  7  1875 Corps 6      0</span></span>
+<span><span class="co">#&gt;  8  1875 Corps 7      1</span></span>
+<span><span class="co">#&gt;  9  1875 Corps 8      1</span></span>
+<span><span class="co">#&gt; 10  1875 Corps 9      0</span></span>
+<span><span class="co">#&gt; # … with 270 more rows</span></span></code></pre></div>
+<p>Regard different cavalry Corps as “sites” and regard the number of years for which data were collected as “exposure”.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cavalrySummary</span> <span class="op">&lt;-</span> <span class="va">cavalryDeaths</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>                <span class="fu">group_by</span><span class="op">(</span><span class="va">Corps</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>                <span class="fu">summarise</span><span class="op">(</span></span>
+<span>                  Deaths<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Deaths</span><span class="op">)</span>, </span>
+<span>                  TotalTime<span class="op">=</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span>, </span>
+<span>                  .groups<span class="op">=</span><span class="st">"drop"</span></span>
+<span>                <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>                <span class="fu">mutate</span><span class="op">(</span>DeathRate<span class="op">=</span><span class="va">Deaths</span><span class="op">/</span><span class="va">TotalTime</span><span class="op">)</span></span>
+<span>                </span>
+<span><span class="va">cavalrySummary</span></span>
+<span><span class="co">#&gt; # A tibble: 14 × 4</span></span>
+<span><span class="co">#&gt;    Corps    Deaths TotalTime DeathRate</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;     &lt;int&gt;     &lt;int&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 Guards       16        20      0.8 </span></span>
+<span><span class="co">#&gt;  2 Corps 1      16        20      0.8 </span></span>
+<span><span class="co">#&gt;  3 Corps 2      12        20      0.6 </span></span>
+<span><span class="co">#&gt;  4 Corps 3      12        20      0.6 </span></span>
+<span><span class="co">#&gt;  5 Corps 4       8        20      0.4 </span></span>
+<span><span class="co">#&gt;  6 Corps 5      11        20      0.55</span></span>
+<span><span class="co">#&gt;  7 Corps 6      17        20      0.85</span></span>
+<span><span class="co">#&gt;  8 Corps 7      12        20      0.6 </span></span>
+<span><span class="co">#&gt;  9 Corps 8       7        20      0.35</span></span>
+<span><span class="co">#&gt; 10 Corps 9      13        20      0.65</span></span>
+<span><span class="co">#&gt; 11 Corps 10     15        20      0.75</span></span>
+<span><span class="co">#&gt; 12 Corps 11     25        20      1.25</span></span>
+<span><span class="co">#&gt; 13 Corps 14     24        20      1.2 </span></span>
+<span><span class="co">#&gt; 14 Corps 15      8        20      0.4</span></span></code></pre></div>
+<p>Although not necessary here, because data for all Corps was recorded for the same amount of time, the Poisson model used by <code>rbqmR</code> adjusts risk by total exposure at the site.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/getModelString.html">getModelString</a></span><span class="op">(</span><span class="st">"poisson"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "model {\n   for (i in 1:k) {\n     \n     events[i] ~ dpois(mu[i])\n     mu[i] &lt;- lambda[i]*exposure[i]\n     \n     lambda[i] ~ dgamma(shape, 1/scale)\n   }\n   scale ~ dgamma(1, 1)\n   shape ~ dgamma(1, 1)\n }"</span></span></code></pre></div>
+<p>Fitting the model is straightforward.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">poissonFit</span> <span class="op">&lt;-</span> <span class="va">cavalrySummary</span><span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>                <span class="fu">fitBayesPoissonModel</span><span class="op">(</span><span class="va">Deaths</span>, <span class="va">TotalTime</span><span class="op">)</span></span>
+<span><span class="va">poissonFit</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/createQtlPlot.html">createQtlPlot</a></span><span class="op">(</span></span>
+<span>    metric<span class="op">=</span><span class="va">lambda</span>,</span>
+<span>    siteData<span class="op">=</span><span class="va">cavalrySummary</span>,</span>
+<span>    siteSize<span class="op">=</span><span class="va">TotalTime</span>,</span>
+<span>    siteMetric<span class="op">=</span><span class="va">DeathRate</span>    </span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x<span class="op">=</span><span class="st">"Deaths per year"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-20-1.png" width="80%"></p>
 </div>
 </div>
 <div class="section level2">
@@ -543,11 +622,17 @@ WARN
 <div id="ref-BERRY" class="csl-entry">
 Berry SM, Lee JJ, Carlin BP. 2011. <em>Bayesian Adaptive Methods for Clinical Trials</em>. CRC Press.
 </div>
+<div id="ref-Bortkiewicz1898" class="csl-entry">
+Bortkiewicz, Ladislaus von. 1898. “Das Gesetz Der Kleinen Zahlen.”
+</div>
 <div id="ref-GILBERT" class="csl-entry">
 Gilbert, SA. 2020. “Implementing Quality Tolerance Limits at a Large Pharmaceutical Company.” <em>PharmaSUG</em>.
 </div>
 <div id="ref-KATZ" class="csl-entry">
 Katz D, Azen SP, Baptista J. 1978. “Obtaining Confidence Intervals for the Risk Ratio in Cohort Studies.” <em>Biometrics</em> 34 (3): 469–74. <a href="https://doi.org/" class="external-link uri">https://doi.org/</a><a href="https://doi.org/10.2307/2530610" class="external-link uri">https://doi.org/10.2307/2530610</a>.
+</div>
+<div id="ref-Transcelerate2020" class="csl-entry">
+Transcelerate. 2020. “Quality Tolerance Limits Framework.” Research report. Transcelerate Biopharma Inc. 2020. <a href="https://www.transceleratebiopharmainc.com/wp-content/uploads/2020/10/TransCelerate_InterpretationsOfClinical-GuidancesAndRegulations_Quality-Tolerance-Limits-Framework_October-2020.pdf" class="external-link uri">https://www.transceleratebiopharmainc.com/wp-content/uploads/2020/10/TransCelerate_InterpretationsOfClinical-GuidancesAndRegulations_Quality-Tolerance-Limits-Framework_October-2020.pdf</a>.
 </div>
 </div>
 </div>
@@ -585,6 +670,7 @@ Katz D, Azen SP, Baptista J. 1978. “Obtaining Confidence Intervals for the Ris
 <li><a href="https://CRAN.R-project.org/package=rbqmR" class="external-link"><img src="https://www.r-pkg.org/badges/version/rbqmR" alt="CRAN status"></a></li>
 <li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://opensource.org/licenses/Apache-2.0" class="external-link"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a></li>
+<li><a href="https://github.com/openpharma/rbqmR/actions" class="external-link"><img src="https://github.com/openpharma/rbqmR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
