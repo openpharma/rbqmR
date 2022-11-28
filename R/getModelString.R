@@ -58,71 +58,76 @@ getModelString <- function(
   label <- match.arg(label)
   s <- ""
   s <- switch(label,
-              binary="model {
-                   for (j in 1:m) {
-                     p[j] ~ dbeta(a, b)
-                   }
-                   <notprior>
-                   for (i in 1:k) {
-                     r[i] ~ dbern(p[group[i]])
-                   }
-                   </notprior>
-                   a ~ <priorA>
-                   b ~ <priorB>
-                 }",
-              binomial="model {
-                      for (i in 1:k) {
-                         <notprior>
-                         r[i] ~ dbin(p[i], n[i])
-                         </notprior>
-                         p[i] ~ dbeta(a, b)
-                      }
-                      a ~ <priorA>
-                      b ~ <priorB>
-                   }",
-              poisson="model {
-                 for (i in 1:k) {
-                   <notprior>
-                   events[i] ~ dpois(mu[i])
-                   mu[i] <- lambda[i]*exposure[i]
-                   </notprior>
-                   lambda[i] ~ dgamma(shape, 1/scale)
-                 }
-                 scale ~ <priorScale>
-                 shape ~ <priorShape>
-               }",
-              tte="model {
-                  #Likelihood
-                  <notprior>
-                  for (i in 1:k) {
-                     logMean[i] ~ dnorm(mu[i], n[i] / tau)
-                  }
-                  </notprior>
-                  #Prior
-                  for (i in 1:k) {
-                     mu[i] ~ dnorm(mu0, tau)
-                  }
-                  mu0 ~ <priorMu0>
-                  invTau ~ <priorInvTau>
-                  #Transform
-                  tau <- 1/invTau  # Because inverse gamma isn't directly supported
-                }",
-              normal="model {
-                  <notprior>
-                  #Likelihood
-                  for (i in 1:n) {
-                     x[i] ~ dnorm(mu[g[i]], tau)
-                  }
-                  </notprior>
-                  #Prior
-                  for (i in 1:k) {
-                     mu[i] ~ dnorm(mu0, tau)
-                  }
-                  mu0 ~ <priorMu0>
-                  invTau ~ <priorInvTau>
-                  #Transform
-                  tau <- 1/invTau  # Because inverse gamma isn't directly supported
-                }")
+              binary=
+"model {
+   for (j in 1:m) {
+     p[j] ~ dbeta(a, b)
+   }
+   <notprior>
+   for (i in 1:k) {
+     r[i] ~ dbern(p[group[i]])
+   }
+   </notprior>
+   a ~ <priorA>
+   b ~ <priorB>
+}",
+              binomial=
+"model {
+   for (i in 1:k) {
+    <notprior>
+    r[i] ~ dbin(p[i], n[i])
+    </notprior>
+    p[i] ~ dbeta(a, b)
+  }
+  a ~ <priorA>
+  b ~ <priorB>
+}",
+              poisson=
+"model {
+   for (i in 1:k) {
+     <notprior>
+     events[i] ~ dpois(mu[i])
+     mu[i] <- lambda[i]*exposure[i]
+     </notprior>
+     lambda[i] ~ dgamma(shape, 1/scale)
+   }
+   scale ~ <priorScale>
+   shape ~ <priorShape>
+ }",
+              tte=
+"model {
+   #Likelihood
+   <notprior>
+   for (i in 1:k) {
+     logMean[i] ~ dnorm(mu[i], n[i] / tau)
+   }
+   </notprior>
+   #Prior
+   for (i in 1:k) {
+     mu[i] ~ dnorm(mu0, tau)
+   }
+   mu0 ~ <priorMu0>
+   invTau ~ <priorInvTau>
+   #Transform
+   tau <- 1/invTau  # Because inverse gamma isn't directly supported
+}",
+              normal=
+"model {
+   <notprior>
+   #Likelihood
+   for (i in 1:n) {
+     x[i] ~ dnorm(mu[g[i]], tau)
+   }
+   </notprior>
+   #Prior
+   for (i in 1:k) {
+     mu[i] ~ dnorm(mu0, tau)
+   }
+   mu0 ~ <priorMu0>
+   invTau ~ <priorInvTau>
+   #Transform
+   tau <- 1/invTau  # Because inverse gamma isn't directly supported
+}")
   if (length(s) == 0) stop(paste0("Unsupported data type [", label, "]."))
   # Replace placeholders with requested strings
   if (is.list(hyperParams)) {

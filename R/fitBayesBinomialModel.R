@@ -64,6 +64,7 @@
 #' shape parameter of the Beta distribution for `p`.}
 #' \item{shape2}{Simulated values from the posterior distribution of the second
 #' shape parameter of the Beta distribution for `p`.}
+#' \item{q}{Percentile in which each p value falls.}
 #' @example examples/fitBayesBinomialModel.R
 #' @export
 fitBayesBinomialModel <- function(
@@ -76,8 +77,47 @@ fitBayesBinomialModel <- function(
                            ...
                          ) {
   logger::log_debug("Entry")
-  logger::log_trace(ifelse(is.null(inits), "inits is NULL", "inits is not NULL"))
-  logger::log_trace(paste0("nChains: ", nChains))
+  logger::log_trace(deparse(match.call()))
+  #Validate
+  if (!is.null(data)) {
+    n_ <- data %>% dplyr::pull({{ n }})
+    r_ <- data %>% dplyr::pull({{ r }})
+    if (any(is.na(n_))) {
+      stop(paste0("Some entries in ", substitute(n), " are NA"))
+    }
+    if  (any(is.na(r_))) {
+      stop(paste0("Some entries in ", substitute(r), " are NA"))
+    }
+    if (!(min(n_) > 0)) {
+      stop(paste0("Not all entries in ", substitute(n), " are positive"))
+    }
+    if (!(min(r_) >= 0)) {
+      stop(paste0("Not all entries in ", substitute(r), " are non-negative"))
+    }
+    if (any(floor(n_) != n_)) {
+      stop(paste0("Not all entries in ", substitute(n), " are integers"))
+    }
+    if (any(floor(r_) != r_)) {
+      stop(paste0("Not all entries in ", substitute(r), " are integers"))
+    }
+    if (any(r_ > n_)) {
+      stop(
+        paste0(
+          "Not all entries in ", 
+          substitute(r), 
+          " are less than or equal to the corresponding entry in ", 
+          substitute(n)
+        )
+      )
+    }
+    if (!is.null(inits)) {
+      for (i in 1:length(inits)) {
+        if (length(setdiff(names(inits[[i]]), c("p", "a", "b", ".RNG.name", ".RNG.seed"))) != 0) {
+          stop(paste0("The names of the ", i, "th element of inits are not valid"))
+        }
+      }
+    }
+  }
   #Begin
   #Add additional, "posterior", observation to each input vector
   tempData <- list()
@@ -92,22 +132,33 @@ fitBayesBinomialModel <- function(
   # JAGS description of the model to be fitted.
   if (is.null(model)) {
     model <- getModelString("binomial", prior=is.null(data))
+    logger::log_trace(
+      paste0(
+        "  Model is now:\n", 
+        # Needed to allow logger to work: escape curly braces, which are control
+        # characters in glue
+        stringr::str_replace_all(model, c("\\{"="\\{\\{", "\\}"="\\}\\}"))
+      )
+    )
   }
   # Create init lists if required
   if (is.null(inits)) {
     logger::log_debug("Generating random inits")
     inits <- lapply(1:nChains, function(x) .createBinomialInit(n=tempData$k))
   }
-  nameOfParameter <- paste0("p[", tempData$k , "]")
+  if (is.null(data)) {
+    toMonitor <- c("a", "b")
+  } else {
+    toMonitor <- c(paste0("p[", tempData$k , "]"), "a", "b")
+  }
   # Fit the model
   rv <- tempData %>%
           .autorunJagsAndCaptureOutput(
             model,
-            c(nameOfParameter, "a", "b"),
+            toMonitor,
             inits,
             ...
         )
   logger::log_debug("Exit")
   return(rv)
 }
-

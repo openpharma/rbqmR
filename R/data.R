@@ -43,9 +43,9 @@
 "berrySummary"
 
 #' 
-#' #' Data derived and adapted from Berry et al (2011) pp 52-63
+#' Data derived and adapted from Berry et al (2011) pp 52-63
 #'
-#'A dataset of subject and event flags
+#' A dataset of subject and event flags
 #'
 #' @format A tibble with 150 rows and 3 columns
 #' \describe{
@@ -54,3 +54,17 @@
 #'   \item{Event}{Whether or not the subject experienced an event}
 #' }
 "berrySubject"
+
+#' 
+#' A dataset of event rates
+#'
+#' @format A tibble with 47 rows and 6 columns
+#' \describe{
+#'   \item{Site}{The site ID}
+#'   \item{Country}{The subject ID}
+#'   \item{Patients}{The number of patients at the site}
+#'   \item{Exposure}{The total exposure at the site, in months}
+#'   \item{Events}{The total number of events at the site}
+#'   \item{Rate}{The site's event rate (events per month)}
+#' }
+"siteRates"

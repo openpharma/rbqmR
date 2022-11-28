@@ -3,7 +3,7 @@ test_that("Issue #3 has been resolved", {
 })
 
 test_that("Issue #4 has been resolved", {
-  inits <- lapply(1:3, function(x) rbqmR:::.createBinomialInit())
+  inits <- lapply(1:2, function(x) rbqmR:::.createBinomialInit())
   explicitPrior <- fitBayesBinomialModel(
     data=NULL, 
     prior=getModelString("binomial", prior=TRUE), 
@@ -16,3 +16,25 @@ test_that("Issue #4 has been resolved", {
   expect_identical(implicitPrior$tab, explicitPrior$tab)
 })
 
+test_that("fitBayesBinomialModel fails gracefully with bad inputs", {
+  expect_error(tibble(n=c(1, NA), r=c(0, 0)) %>% fitBayesBinomialModel(n, r))
+  expect_error(tibble(n=c(1, 1), r=c(0, NA)) %>% fitBayesBinomialModel(n, r))
+  expect_error(tibble(n=c(1, 0), r=c(0, 0)) %>% fitBayesBinomialModel(n, r))
+  expect_error(tibble(n=c(1, 1), r=c(0, -1)) %>% fitBayesBinomialModel(n, r))
+  expect_error(tibble(n=c(1, 1.5), r=c(0, 0)) %>% fitBayesBinomialModel(n, r))
+  expect_error(tibble(n=c(1, 1.5), r=c(0, 0.5)) %>% fitBayesBinomialModel(n, r))
+  expect_error(tibble(n=c(1, 1), r=c(0, 2)) %>% fitBayesBinomialModel(n, r))
+})
+
+test_that("fitBayesBinomialModel reproduces results from Berry et al", {
+  data("berrySummary")
+  rv <- berrySummary %>% fitBayesBinomialModel(Subjects, Events)
+  expect_equal(rv$status, "OK")
+  # Table 2.2 page 63
+  expect_equal(
+    rv$tab %>% dplyr::summarise(mean=round(mean(p), 2)), 
+    tibble::tibble(mean=0.68)
+  )
+  # Number of MCMC samples
+  expect_equal(20000, rv$tab %>% nrow())
+})
