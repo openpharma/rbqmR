@@ -242,11 +242,11 @@ quantiles
 #> # A tibble: 1 × 2
 #>     Q05   Q95
 #>   <dbl> <dbl>
-#> 1 0.371 0.932
+#> 1 0.368 0.933
 ```
 
 So, in this specific case, our QTLs translate to observed event rates of
-37.07% and 93.22% respectively.
+36.81% and 93.32% respectively.
 
 Do any sites have observed event rates outside this range?
 
@@ -305,10 +305,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.371
+0.368
 </td>
 <td style="text-align:right;">
-0.932
+0.933
 </td>
 </tr>
 <tr>
@@ -325,10 +325,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.371
+0.368
 </td>
 <td style="text-align:right;">
-0.932
+0.933
 </td>
 </tr>
 </tbody>
@@ -374,7 +374,7 @@ fitted$tab %>%
 #> # A tibble: 1 × 1
 #>   PosteriorProb
 #>           <dbl>
-#> 1         0.470
+#> 1         0.461
 ```
 
 Again, the QTL is breached, and the process can be summarised
@@ -586,27 +586,29 @@ table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
 ## Beyond Transcelerate
 
 At the time of writing (late 2022) The Transcelerate Quality Tolerance
-Limit Framework (Inc 2020) lists metrics that are exclusively binary in
-nature. There are many other potential metrics that are non-binary and
-which may provide insight into the conduct of the trial. For example,
+Limit Framework (Transcelerate 2020) lists metrics that are exclusively
+binary in nature. There are many other potential metrics that are
+non-binary and which may provide insight into the conduct of the trial.
+For example,
 
 -   The number of episodes of rescue medication (as opposed to the
     percentage or number of trial participants on rescue medication)
--   Time to withdrawal of consent (as percentage or number of trial
-    participants with withdrawal of informed consent)
+-   Time to withdrawal of consent (as opposed to the percentage or
+    number of trial participants with withdrawal of informed consent)
 
-As well as other metrics that can’t esily be dichotomised
+As well as other metrics that can’t easily be dichotomised
 
 -   Drug plasma levels
 -   Number of (S)AEs reported per time unit of drug exposure
+-   Time to respond to data queries
 
 The Bayesian QTL framework implemented in `rbqmR` can easily be extended
 to include these other data types.
 
 ### Events per unit time
 
-Bortkiewicz’s data on the numbers of Prussian cavalry officers kicked to
-death by horses (Bortkiewicz 1898) can be used to illustrate the method.
+We use data on the numbers of Prussian cavalry officers kicked to death
+by horses (Bortkiewicz 1898) to illustrate the method.
 
 ``` r
 data("cavalryDeaths")
@@ -711,19 +713,19 @@ Pharmaceutical Company.” *PharmaSUG*.
 
 </div>
 
-<div id="ref-Transcelerate2020" class="csl-entry">
-
-Inc, Transcelerate Biopharma. 2020. “Quality Tolerance Limits
-Framework.” Research report. Transcelerate Biopharma Inc. 2020.
-<https://www.transceleratebiopharmainc.com/wp-content/uploads/2020/10/TransCelerate_InterpretationsOfClinical-GuidancesAndRegulations_Quality-Tolerance-Limits-Framework_October-2020.pdf>.
-
-</div>
-
 <div id="ref-KATZ" class="csl-entry">
 
 Katz D, Azen SP, Baptista J. 1978. “Obtaining Confidence Intervals for
 the Risk Ratio in Cohort Studies.” *Biometrics* 34 (3): 469–74.
 https://doi.org/<https://doi.org/10.2307/2530610>.
+
+</div>
+
+<div id="ref-Transcelerate2020" class="csl-entry">
+
+Transcelerate. 2020. “Quality Tolerance Limits Framework.” Research
+report. Transcelerate Biopharma Inc. 2020.
+<https://www.transceleratebiopharmainc.com/wp-content/uploads/2020/10/TransCelerate_InterpretationsOfClinical-GuidancesAndRegulations_Quality-Tolerance-Limits-Framework_October-2020.pdf>.
 
 </div>
 
