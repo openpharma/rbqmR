@@ -30,6 +30,39 @@ createQtlPlot <- function(
                    siteSize=NULL,
                    siteMetric=NULL
                  ) {
+  # Validate
+  if (is.null(data)) stop("data cannot be NULL")
+  if (!(data %>% .columnExists({{ metric }}))) {
+    stop(
+      paste0(
+        rlang::as_label(rlang::enquo(metric)),
+        " is not a column in ",
+        rlang::as_label(rlang::enquo(data))
+      )
+    )
+  }
+  if (!is.null(siteData)) {
+    if (!is.data.frame(siteData)) stop("siteData is not a data.frame")
+    if (!(siteData %>% .columnExists({{ siteMetric }}))) {
+      stop(
+        paste0(
+          rlang::as_label(rlang::enquo(siteMetric)),
+          " is not a column in ",
+          rlang::as_label(rlang::enquo(siteData))
+        )
+      )
+    }
+    if (!(siteData %>% .columnExists({{ siteSize }}))) {
+      stop(
+        paste0(
+          rlang::as_label(rlang::enquo(siteSize)),
+          " is not a column in ",
+          rlang::as_label(rlang::enquo(siteData))
+        )
+      )
+    }
+  }
+  # Execute
   plot <- data %>% 
             ggplot2::ggplot() +
               ggplot2::geom_density(ggplot2::aes({{metric}}), colour="grey") + 
@@ -39,20 +72,18 @@ createQtlPlot <- function(
                 axis.title.y =  ggplot2::element_blank(),
                 axis.text.y =  ggplot2::element_blank()
               ) +
-    ggplot2::labs(
-      x="Event rate"
-    )
+              ggplot2::labs(x="Event rate")
   if (!is.null(actionLimits)) {
-    plot <- plot %>% 
+    plot <- plot %>%
       shadeRange(
-        range=actionLimits, 
+        range=actionLimits,
         idx=1
       )
   }
   if (!is.null(warningLimits)) {
     plot <- plot %>% 
       shadeRange(
-        range=actionLimits, 
+        range=warningLimits, 
         idx=1
       )
   }

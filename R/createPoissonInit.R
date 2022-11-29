@@ -3,6 +3,11 @@
 #' @param quantiles Default `NULL`. If `NULL`, starting values of `a` and
 #' `b` are chosen at random.  Otherwise, starting values are defined by the 
 #' values supplied in `quantiles`. See Usage Notes below.
+#' @param gammaShape a named vector defining the shape and scale parameters of
+#' the gamma hyperprior for the shape parameter 
+#' @param gammaScale a named vector defining the shape and scale parameters of
+#' the gamma hyperprior for the scale parameter 
+#' @param seed the seed to use when generating random seeds for the MCMC processes
 #' @param rng the random number generator to be used for each init
 #' @param n the length of the initialisation vector for `p`
 #'@export

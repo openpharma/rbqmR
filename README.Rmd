@@ -154,6 +154,95 @@ fitted$tab %>%
   )
 ```
 
+#### Built-in functions to assist in the evaluation of QTLs
+For illustration, in this section we continue to use the example provided by Berry et al. 
+
+##### By comparing the derived metric to a constant value
+The `evaluatePointEstimateQTL` allows the comparison of an arbitrary scalar summary statistic derived from the estimate of the posterior distribution (which defaults to the mean), with an arbitrary number of lower and upper limits.
+
+For example, the code below defines a QTL based on the mean of the posterior distribution of the probability of an event.  Call this probability $\hat{p}$.  The warning limits are 0.1 and 0.7.  The action limits are 0.2 and 0.9.
+```{r}
+berrySummary %>% 
+  evaluatePointEstimateQTL(
+    posterior=fitted$tab, 
+    metric = p, 
+    observedMetric=ObservedResponse,
+    lower=c("warn"=0.1, "action"=0.2),
+    upper=c("warn"=0.7, "action"=0.9)
+  )
+```
+As with all `evaluateXXXXQTL` functions, the return value of `evaluatePointEstimateQTL` is a list.  The `status` element indicates whether or not the QTL's limits have been breached.  The `qtl` element gives the calculated value of the QTL metric and the `data` element returns a copy of the `data.frame` containing the site level KRIs augmented with a column indicating which, if any, of the various limits were breached by that site.
+
+Both the `lower` and `upper` parameters are optional (though at least one must be given) and the number of limits, and their labels, are arbitrary.
+
+```
+berrySummary %>% 
+  evaluatePointEstimateQTL(
+    posterior=fitted$tab, 
+    metric = p, 
+    observedMetric=ObservedResponse,
+    upper=c("mild"=0.6, "moderate"=0.8, "severe"=0.9)
+  )
+```
+
+If only one limit is defined, this can be provided as a scalar, in which case it is labelled `action`.
+
+The function on which the QTL is based is specified by the `stat` parameter of `evaluatePointEstimateQTL` and can be a user-defined function.  For example, the following code fragments define QTLs based on the median
+
+```{r}
+berrySummary %>% 
+  evaluatePointEstimateQTL(
+    posterior=fitted$tab, 
+    metric = p, 
+    stat=median,
+    observedMetric=ObservedResponse,
+    upper=c("warn"=0.7, "action"=0.9)
+  )
+```
+
+and 10th centile of the posterior distribution of $\hat{p}$.
+
+```{r}
+berrySummary %>% 
+  evaluatePointEstimateQTL(
+    posterior=fitted$tab, 
+    metric = p, 
+    stat = function(x) quantile(x, probs = 0.1),
+    observedMetric=ObservedResponse,
+    upper=c("warn"=0.3, "action"=0.8)
+  )
+```
+
+##### By calculating the probability that the derived metric is in a given range
+
+> TO DO
+
+##### By using an arbitrary criterion
+
+`evaluatePointEstimateQTL`, `evaluateXXXXQTL` and `evaluateXXXXQTL` are wrappers around `evaluateCustomQTL`, which can be used to evaluate an arbitrary, user-defined QTL rule. `evaluateCustomQTL` takews the following parameters:
+
+* `data`: a tibble containing site-level observed metrics
+* `posterior`: a tibble containing the posterior distribution of the metric, usually obtained from a fit Bayes model function.
+* `f`: a function whose first two parameters are `data` and `posterior`, in that ordered and with those names
+* `statusCol=Status`:
+* `...`: additional parameters passed to `f`.
+
+Essentially, all that `evaluateCustomQTL` does is to perform some basic checks on its parameter values and then return the value returned by `data %>% f(posterior, ...)`.  So, for example, a simplified version of `evaluatePointEstimateQTL` that compares $\hat{p}$ to 0.6 might be
+
+```{r, error=TRUE}
+berrySummary %>% 
+  evaluateCustomQTL(
+    posterior=fitted$tab, 
+    f=function(data, posterior) {
+      rv <- list()
+      rv$qtl <- posterior %>% summarise(qtl=mean(p)) %>% pull(qtl)
+      rv$status <- ifelse(rv$qtl < 0.6, "OK", "Breach")
+      rv$data <- data %>% mutate(Status=ifelse(ObservedResponse < 0.6, "OK", "Breach"))
+      rv
+    }
+  )
+```
+
 ### Observed - Expected Methodology
 We generate some random data similar to that used by Gilbert [@GILBERT], after setting a seed for reproducibility.
 
