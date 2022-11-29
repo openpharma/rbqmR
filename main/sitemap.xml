@@ -46,10 +46,25 @@
     <loc>/reference/dot-autorunJagsAndCaptureOutput.html</loc>
   </url>
   <url>
+    <loc>/reference/dot-columnExists.html</loc>
+  </url>
+  <url>
     <loc>/reference/dot-createBinomialInit.html</loc>
   </url>
   <url>
+    <loc>/reference/dot-createPoissonInit.html</loc>
+  </url>
+  <url>
+    <loc>/reference/evaluateCustomQTL.html</loc>
+  </url>
+  <url>
+    <loc>/reference/evaluatePointEstimateQTL.html</loc>
+  </url>
+  <url>
     <loc>/reference/fitBayesBinomialModel.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fitBayesPoissonModel.html</loc>
   </url>
   <url>
     <loc>/reference/getModelString.html</loc>
@@ -62,6 +77,9 @@
   </url>
   <url>
     <loc>/reference/shadeRange.html</loc>
+  </url>
+  <url>
+    <loc>/reference/siteRates.html</loc>
   </url>
   <url>
     <loc>/reference/vaLung.html</loc>
