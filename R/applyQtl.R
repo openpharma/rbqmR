@@ -15,6 +15,9 @@ applyQtl <- function(
               lower=NULL, 
               upper=NULL
             ) {
+  # Validate
+  
+  # Execute
   qLower <- rlang::enquo(lower)
   qUpper <- rlang::enquo(upper)
   

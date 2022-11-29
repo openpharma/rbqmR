@@ -88,8 +88,8 @@ fitBayesPoissonModel <- function(
     if  (any(is.na(data %>% dplyr::pull({{exposure}})))) {
       stop(paste0("Some entries in ", substitute(exposure), " are NA"))
     }
-    if (!(min(data %>% dplyr::pull({{events}})) > 0)) {
-      stop(paste0("Not all entries in ", substitute(events), " are positive"))
+    if (!(min(data %>% dplyr::pull({{events}})) >= 0)) {
+      stop(paste0("Not all entries in ", substitute(events), " are non-negative"))
     }
     if (!(min(data %>% dplyr::pull({{exposure}})) >= 0)) {
       stop(paste0("Not all entries in ", substitute(exposure), " are non-negative"))

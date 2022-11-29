@@ -25,3 +25,4 @@ LogSD <- NULL
 LowerLog <- NULL
 UpperLog <- NULL
 Upper <- NULL
+qtl <- NULL

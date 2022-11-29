@@ -9,12 +9,22 @@
   gammaScale = c(shape = 1, scale = 10),
   seed = NULL,
   quantiles = NULL,
-  rng = c("base::Mersenne-Twister", "base::Wichmann-Hill", "base::Marsaglia-Multicarry",
-    "base::Super-Duper"),
+  rng = c("base::Mersenne-Twister", "base::Wichmann-Hill",
+    "base::Marsaglia-Multicarry", "base::Super-Duper"),
   n = 1
 )
 }
 \arguments{
+
+\item{gammaShape}{a named vector defining the shape and scale parameters of
+the gamma hyperprior for the shape parameter}
+
+\item{gammaScale}{a named vector defining the shape and scale parameters of
+the gamma hyperprior for the scale parameter}
+
+\item{seed}{the seed to use when generating random seeds for the MCMC processes}
+
+
 \item{quantiles}{Default \code{NULL}. If \code{NULL}, starting values of \code{a} and
 \code{b} are chosen at random.  Otherwise, starting values are defined by the
 values supplied in \code{quantiles}. See Usage Notes below.}
