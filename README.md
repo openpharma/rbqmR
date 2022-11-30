@@ -242,11 +242,11 @@ quantiles
 #> # A tibble: 1 × 2
 #>     Q05   Q95
 #>   <dbl> <dbl>
-#> 1 0.365 0.933
+#> 1 0.370 0.931
 ```
 
 So, in this specific case, our QTLs translate to observed event rates of
-36.48% and 93.33% respectively.
+36.98% and 93.09% respectively.
 
 Do any sites have observed event rates outside this range?
 
@@ -261,7 +261,6 @@ berrySummary %>%
     digits=c(0, 0, 0, 3, 3, 3),
     caption="Sites breaching the QTL"
   )
-#> Joining, by = c("Site", "Subjects", "Events", "ObservedResponse")
 ```
 
 <table>
@@ -305,10 +304,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.365
+0.37
 </td>
 <td style="text-align:right;">
-0.933
+0.931
 </td>
 </tr>
 <tr>
@@ -325,10 +324,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.365
+0.37
 </td>
 <td style="text-align:right;">
-0.933
+0.931
 </td>
 </tr>
 </tbody>
@@ -374,7 +373,7 @@ fitted$tab %>%
 #> # A tibble: 1 × 1
 #>   PosteriorProb
 #>           <dbl>
-#> 1         0.459
+#> 1         0.466
 ```
 
 Again, the QTL is breached, and the process can be summarised
@@ -455,7 +454,7 @@ berrySummary %>%
 #> 9     9        6      4            0.667 OK    
 #> 
 #> $qtl
-#> [1] 0.6812837
+#> [1] 0.6809388
 ```
 
 As with all `evaluateXXXXQTL` functions, the return value of
@@ -470,13 +469,15 @@ Both the `lower` and `upper` parameters are optional (though at least
 one must be given) and the number of limits, and their labels, are
 arbitrary.
 
-    berrySummary %>% 
-      evaluatePointEstimateQTL(
-        posterior=fitted$tab, 
-        metric = p, 
-        observedMetric=ObservedResponse,
-        upper=c("mild"=0.6, "moderate"=0.8, "severe"=0.9)
-      )
+``` r
+berrySummary %>% 
+  evaluatePointEstimateQTL(
+    posterior=fitted$tab, 
+    metric = p, 
+    observedMetric=ObservedResponse,
+    upper=c("mild"=0.6, "moderate"=0.8, "severe"=0.9)
+  )
+```
 
 If only one limit is defined, this can be provided as a scalar, in which
 case it is labelled `action`.
@@ -513,7 +514,7 @@ berrySummary %>%
 #> 9     9        6      4            0.667 OK    
 #> 
 #> $qtl
-#> [1] 0.6995187
+#> [1] 0.6985318
 ```
 
 and 10th centile of the posterior distribution of
@@ -547,7 +548,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4447045
+#> 0.4507998
 ```
 
 ##### By calculating the probability that the derived metric is in a given range
@@ -558,7 +559,7 @@ berrySummary %>%
 
 `evaluatePointEstimateQTL`, `evaluateXXXXQTL` and `evaluateXXXXQTL` are
 wrappers around `evaluateCustomQTL`, which can be used to evaluate an
-arbitrary, user-defined QTL rule. `evaluateCustomQTL` takews the
+arbitrary, user-defined QTL rule. `evaluateCustomQTL` takes the
 following parameters:
 
 -   `data`: a tibble containing site-level observed metrics
@@ -589,7 +590,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6812837
+#> [1] 0.6809388
 #> 
 #> $status
 #> [1] "Breach"
@@ -647,7 +648,7 @@ omeTable %>%
   createObservedMinusExpectedPlot()
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-18-1.png" width="80%" />
 
 We can see that the trial breached a warning limit. When did this first
 happen?
@@ -659,14 +660,14 @@ omeTable %>%
   select(-contains("Action"), -SubjectIndex) %>% 
   kable(
     col.names=c("Subject", "Event", "Cumulative Events", "O - E", "Status", "Lower", "Upper"),
-    caption="First breech of an action or warning limit"
+    caption="First breach of an action or warning limit"
   ) %>% 
   add_header_above(c(" "=5, "Warning Limits"=2))
 ```
 
 <table>
 <caption>
-First breech of an action or warning limit
+First breach of an action or warning limit
 </caption>
 <thead>
 <tr>
@@ -758,7 +759,7 @@ createObservedOverExpectedTable(
 createObservedOverExpectedPlot()
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="80%" />
 
 As the trial is executed, the observed data can be added to the table
 and the plot.
@@ -780,7 +781,7 @@ table <- createObservedOverExpectedTable(
 table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
 ```
 
-<img src="man/figures/README-unnamed-chunk-20-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-21-1.png" width="80%" />
 
 ## Beyond Transcelerate
 
@@ -886,7 +887,7 @@ poissonFit$tab %>%
   labs(x="Deaths per year")
 ```
 
-<img src="man/figures/README-unnamed-chunk-24-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-25-1.png" width="80%" />
 
 ## References
 

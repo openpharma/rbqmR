@@ -103,7 +103,8 @@ evaluatePointEstimateQTL <- function(
   logger::log_debug("Entry")
   logger::log_trace(match.call())
   # Validate
-  if (is.null(lower) & is.null(upper)) stop("Both lowerThresholds and upperThresholds cannot be NULL")
+  if (is.null(lower) & is.null(upper)) stop("Both lower and upper cannot be NULL")
+  if (!is.data.frame(data)) stop("data is not a data.frame")
   if (!(data %>% .columnExists({{ observedMetric }}))) {
     stop(
       paste0(

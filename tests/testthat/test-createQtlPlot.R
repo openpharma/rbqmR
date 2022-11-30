@@ -3,6 +3,7 @@ test_that("createQtlPlot fails gracefully with bad input", {
   expect_error(createQtlPlot(tibble::tibble(good=1), bad))
   expect_error(createQtlPlot(tibble::tibble(good=1), good, siteData=tibble(good=1), siteMetric=bad))
   expect_error(createQtlPlot(tibble::tibble(good=1), good, siteData=tibble(good=1), siteSize=bad))
+  expect_error(createQtlPlot(Sys.Date()))
 })
 
 test_that("createQtlPlot creates a valid ggplot object", {

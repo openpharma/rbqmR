@@ -78,7 +78,7 @@ fitted <- berrySummary %>%
 For the sake of argument, suppose we set the lower and upper QTLs to be the 5th and 95th centiles of the posterior respectively.  Since we have nine sites, it's not unreasonable to expect one site to be outside this range.  So we define a breach of the QTL to have occurred when the observed event rates at two or more sites fall outside this range.
 
 The 5th and 95th centiles of the posterior are 
-```{r}
+```{r, error=TRUE}
 quantiles <- fitted$tab %>% 
                summarise(
                  Q05=quantile(p, probs=0.05, names=FALSE),
@@ -175,7 +175,7 @@ As with all `evaluateXXXXQTL` functions, the return value of `evaluatePointEstim
 
 Both the `lower` and `upper` parameters are optional (though at least one must be given) and the number of limits, and their labels, are arbitrary.
 
-```
+```{r, eval=FALSE}
 berrySummary %>% 
   evaluatePointEstimateQTL(
     posterior=fitted$tab, 
@@ -219,7 +219,7 @@ berrySummary %>%
 
 ##### By using an arbitrary criterion
 
-`evaluatePointEstimateQTL`, `evaluateXXXXQTL` and `evaluateXXXXQTL` are wrappers around `evaluateCustomQTL`, which can be used to evaluate an arbitrary, user-defined QTL rule. `evaluateCustomQTL` takews the following parameters:
+`evaluatePointEstimateQTL`, `evaluateXXXXQTL` and `evaluateXXXXQTL` are wrappers around `evaluateCustomQTL`, which can be used to evaluate an arbitrary, user-defined QTL rule. `evaluateCustomQTL` takes the following parameters:
 
 * `data`: a tibble containing site-level observed metrics
 * `posterior`: a tibble containing the posterior distribution of the metric, usually obtained from a fit Bayes model function.
@@ -286,7 +286,7 @@ omeTable %>%
   select(-contains("Action"), -SubjectIndex) %>% 
   kable(
     col.names=c("Subject", "Event", "Cumulative Events", "O - E", "Status", "Lower", "Upper"),
-    caption="First breech of an action or warning limit"
+    caption="First breach of an action or warning limit"
   ) %>% 
   add_header_above(c(" "=5, "Warning Limits"=2))
 ```

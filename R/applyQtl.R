@@ -16,7 +16,17 @@ applyQtl <- function(
               upper=NULL
             ) {
   # Validate
-  
+  if (!is.data.frame(data)) stop("data is not a data.frame")
+  if (!(data %>% .columnExists({{ var }}))) {
+    stop(
+      paste0(
+        rlang::as_label(rlang::enquo(var)),
+        " is not a column in ",
+        rlang::as_label(rlang::enquo(data))
+      )
+    )
+  }
+  if (is.null(lower) & is.null(upper)) stop("Both lower and upper cannot be NULL")
   # Execute
   qLower <- rlang::enquo(lower)
   qUpper <- rlang::enquo(upper)
@@ -31,6 +41,6 @@ applyQtl <- function(
   
   return(
     data %>% 
-      dplyr::anti_join(d) %>% 
+      dplyr::anti_join(d, by=rlang::as_label(rlang::enquo(var))) %>% 
       tibble::add_column(Lower=lower, Upper=upper))
 }

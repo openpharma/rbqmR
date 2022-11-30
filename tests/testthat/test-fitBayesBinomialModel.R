@@ -24,6 +24,7 @@ test_that("fitBayesBinomialModel fails gracefully with bad inputs", {
   expect_error(tibble(n=c(1, 1.5), r=c(0, 0)) %>% fitBayesBinomialModel(n, r))
   expect_error(tibble(n=c(1, 1.5), r=c(0, 0.5)) %>% fitBayesBinomialModel(n, r))
   expect_error(tibble(n=c(1, 1), r=c(0, 2)) %>% fitBayesBinomialModel(n, r))
+  expect_error(tibble(n=c(1, 1), r=c(0, 0)) %>% fitBayesBinomialModel(n, r, inits=list(list("bad"=1))))
 })
 
 test_that("fitBayesBinomialModel reproduces results from Berry et al", {
