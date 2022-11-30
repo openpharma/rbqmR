@@ -19,6 +19,10 @@
     ...
 ) {
   logger::log_trace("Entry")
+  # Validate
+  if (!is.list(data)) stop("data is not a data.frame")
+  if (is.null(inits)) stop("inits cannot be NULL")
+  # Execute
   ## always force summary, others set in zzz.R could be changed by user
   runjags::runjags.options(force.summary = TRUE)
   runjagsMessages <- utils::capture.output({
@@ -29,8 +33,9 @@
         monitor = monitor,
         inits = inits,
         data = data,
-        n.chains = 2, #length(inits),
-        max.time = max.time
+        n.chains = length(inits),
+        max.time = max.time,
+        ...
       )
     )
   })

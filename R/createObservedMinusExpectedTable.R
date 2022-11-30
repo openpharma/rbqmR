@@ -60,6 +60,29 @@ createObservedMinusExpectedTable <- function(
                            warningQuantiles=c("lower"=0.01, "upper"=0.99),
                            permittedRates=c("lower"=0.05, "upper"=0.15)
                          ) {
+  logger::log_debug("Entry")
+  logger::log_trace(match.call())
+  # Validate
+  if (!is.data.frame(data)) stop("data is not a data.frame")
+  if (!(data %>% .columnExists({{ timeVar }}))) {
+    stop(
+      paste0(
+        rlang::as_label(rlang::enquo(timeVar)),
+        " is not a column in ",
+        rlang::as_label(rlang::enquo(data))
+      )
+    )
+  }
+  if (!(data %>% .columnExists({{ eventVar }}))) {
+    stop(
+      paste0(
+        rlang::as_label(rlang::enquo(eventVar)),
+        " is not a column in ",
+        rlang::as_label(rlang::enquo(data))
+      )
+    )
+  }
+  # Execute
   if (!is.vector(eventArray)) eventArray <- as.vector(eventArray)
   rv <- data %>% 
           dplyr::arrange( {{ timeVar }}) %>% 
@@ -103,5 +126,6 @@ createObservedMinusExpectedTable <- function(
         )
     }
   }
+  logger::log_debug("Exit")
   return(rv)
 }

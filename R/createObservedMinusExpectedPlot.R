@@ -35,6 +35,20 @@ createObservedMinusExpectedPlot <- function(
     warningQuantiles=c("lower"=0.01, "upper"=0.99),
     permittedRates=c("lower"=0.05, "upper"=0.15)
 ) {
+  logger::log_debug("Entry")
+  logger::log_trace(match.call())
+  # Validate
+  if (!is.data.frame(data)) stop("data is not a data.frame")
+  if (!(data %>% .columnExists({{ indexVar }}))) {
+    stop(
+      paste0(
+        rlang::as_label(rlang::enquo(indexVar)),
+        " is not a column in ",
+        rlang::as_label(rlang::enquo(data))
+      )
+    )
+  }
+  # Execute
   plot <- data %>% 
     ggplot2::ggplot() +
     ggplot2::geom_line(ggplot2::aes(y=ObservedMinusExpected, x={{ indexVar }}), colour="grey") +
@@ -87,5 +101,6 @@ createObservedMinusExpectedPlot <- function(
     plot <- plot +
       ggplot2::geom_line(ggplot2::aes(y=!! qUpperWarningLimit, x={{ indexVar }}), colour="gold")
   }
+  logger::log_debug("Exit")
   return(plot)
 }

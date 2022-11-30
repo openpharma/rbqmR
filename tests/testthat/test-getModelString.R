@@ -43,5 +43,6 @@ test_that("test that getModelString fails gracefully", {
       stringr::str_squish(rv),
       "model { for (i in 1:k) { r[i] ~ dbin(p[i], n[i]) p[i] ~ dbeta(a, b) } a ~ <priorA> b ~ <priorB> }"
     )
+    expect_error(getModelString("badDataType"))
   })
 })
