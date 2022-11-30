@@ -8,20 +8,20 @@
 #' ratio of two binomial proportions.  The Type 1 error rate can be specified,
 #' and the limits can be one- or two-sided.
 #' @param observedData a tibble containing the observed data that will be
-#' compared to the claculated limit(s).  May be `NULL`.
+#' compared to the calculated limit(s).  May be `NULL`.
 #' @param observedRate  The column in `observedData` that contains the observed
 #' rates.  Ignored if `observedData` is NULL.  Uses tidy evaluation.
 #' @param n The column in both `observedData` (if not `NULL`) and the output
 #' tibble that defines the sample size to which the corresponding limit(s)
 #' relate(s).
-#' @param nHistorical the number of pobservations on which the historical rate
+#' @param nHistorical the number of observations on which the historical rate
 #' is based
 #' @param nObservedRange a sequence of values for which limits should be 
 #' calculated
 #' @param expectedRate the event rate expected in the current study.  Usually
 #' the same as `historicalRate`, but need not be so.
 #' @param historicalRate the event rate observed in the historical data
-#' @param alpha The Type 1 error rate associated with the calculatd limits.
+#' @param alpha The Type 1 error rate associated with the calculated limits.
 #' Default 0.05
 #' @param sides the sidedness of `alpha`.  Either `two`, `upper` or `lower`.
 #' Default `two`.
@@ -39,6 +39,29 @@ createObservedOverExpectedTable <- function(
                                      sides=c("two", "lower", "upper")
                                    ) {
   logger::log_debug("Entry")
+  # Validate
+  if (!is.null(observedData)) {
+    if (!is.data.frame(observedData)) stop("observedData is not a data.frame")
+    if (!(observedData %>% .columnExists({{ observedRate }}))) {
+      stop(
+        paste0(
+          rlang::as_label(rlang::enquo(observedRate)),
+          " is not a column in ",
+          rlang::as_label(rlang::enquo(observedData))
+        )
+      )
+    }
+    if (!(observedData %>% .columnExists({{ n }}))) {
+      stop(
+        paste0(
+          rlang::as_label(rlang::enquo(n)),
+          " is not a column in ",
+          rlang::as_label(rlang::enquo(observedData))
+        )
+      )
+    }
+  }
+  # Execute
   sides <- match.arg(sides)
   useAlpha <- ifelse(sides == "two", alpha / 2, alpha)
 
@@ -72,7 +95,7 @@ createObservedOverExpectedTable <- function(
     #     dplyr::mutate(
     #       Status=dplyr::case_when(
     #         # is.na({{ n }}) ~ NA,
-    #         {{ observedRate }} < Lower ~ "BREECH",
+    #         {{ observedRate }} < Lower ~ "BREACH",
     #         TRUE ~ "OK"
     #       )
     #     )

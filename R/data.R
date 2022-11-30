@@ -4,7 +4,7 @@
 #'  \describe{
 #'    \item{Treatment}{Treatment group}
 #'    \item{CellType}{cell type}
-#'    \item{SurvivalTime}{Survival time sice randomisation}
+#'    \item{SurvivalTime}{Survival time since randomisation}
 #'    \item{Status}{1=Event, 0=Censored}
 #'    \item{KPS}{Karnofsky Performance Status}
 #'    \item{Age}{Age in years at randomisation}

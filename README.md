@@ -242,11 +242,11 @@ quantiles
 #> # A tibble: 1 × 2
 #>     Q05   Q95
 #>   <dbl> <dbl>
-#> 1 0.371 0.931
+#> 1 0.366 0.934
 ```
 
 So, in this specific case, our QTLs translate to observed event rates of
-37.07% and 93.15% respectively.
+36.64% and 93.37% respectively.
 
 Do any sites have observed event rates outside this range?
 
@@ -304,10 +304,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.371
+0.366
 </td>
 <td style="text-align:right;">
-0.931
+0.934
 </td>
 </tr>
 <tr>
@@ -324,10 +324,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.371
+0.366
 </td>
 <td style="text-align:right;">
-0.931
+0.934
 </td>
 </tr>
 </tbody>
@@ -358,7 +358,7 @@ type of study should be between 0.50 and 0.75. We define the QTL such
 that we require the posterior event probability for a new participant to
 be in the range 0.5 to 0.75 inclusive to be at least 50%.
 
-> When using a Bayesian Hierarchical Model, the probabilties associated
+> When using a Bayesian Hierarchical Model, the probabilities associated
 > with credible intervals are generally lower than those associated with
 > similar frequentist models. This is because BHMs permit more sources
 > of variation. Here, the BHM permits variation between the response
@@ -373,7 +373,7 @@ fitted$tab %>%
 #> # A tibble: 1 × 1
 #>   PosteriorProb
 #>           <dbl>
-#> 1         0.466
+#> 1         0.467
 ```
 
 Again, the QTL is breached, and the process can be summarised
@@ -454,7 +454,7 @@ berrySummary %>%
 #> 9     9        6      4            0.667 OK    
 #> 
 #> $qtl
-#> [1] 0.6813646
+#> [1] 0.6824472
 ```
 
 As with all `evaluateXXXXQTL` functions, the return value of
@@ -514,7 +514,7 @@ berrySummary %>%
 #> 9     9        6      4            0.667 OK    
 #> 
 #> $qtl
-#> [1] 0.6993631
+#> [1] 0.6998252
 ```
 
 and 10th centile of the posterior distribution of
@@ -548,7 +548,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4465293
+#> 0.4491981
 ```
 
 ##### By calculating the probability that the derived metric is in a given range
@@ -590,7 +590,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6813646
+#> [1] 0.6824472
 #> 
 #> $status
 #> [1] "Breach"
@@ -777,15 +777,15 @@ table <- createObservedOverExpectedTable(
            nObservedRange=seq(50, 1500, 25),
            observedData=observedData
          )
+#> Error in createObservedOverExpectedTable(nHistorical = 10000, historicalRate = 0.014, : NULL is not a column in <tibble[,2]>
 
 table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
+#> Error in createObservedOverExpectedPlot(., observedRate = ObservedRate): data is not a data.frame
 ```
 
-<img src="man/figures/README-unnamed-chunk-21-1.png" width="80%" />
+## Beyond TransCelerate
 
-## Beyond Transcelerate
-
-At the time of writing (late 2022) The Transcelerate Quality Tolerance
+At the time of writing (late 2022) The TransCelerate Quality Tolerance
 Limit Framework (Transcelerate 2020) lists metrics that are exclusively
 binary in nature. There are many other potential metrics that are
 non-binary and which may provide insight into the conduct of the trial.

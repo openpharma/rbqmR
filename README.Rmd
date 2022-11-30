@@ -121,7 +121,7 @@ fitted$tab %>%
 #### With historical data
 Suppose previous experience tells us that the event probability in this type of study should be between 0.50 and 0.75.  We define the QTL such that we require the posterior event probability for a new participant to be in the range 0.5 to 0.75 inclusive to be at least 50%.
 
-> When using a Bayesian Hierarchical Model, the probabilties associated with credible intervals are generally lower than those associated with similar frequentist models.  This is because BHMs permit  more sources of variation.  Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study.  The corresponding frequentist analysis assumes that all sites share  common event rate, thus assuming there is no inter-site variation.
+> When using a Bayesian Hierarchical Model, the probabilities associated with credible intervals are generally lower than those associated with similar frequentist models.  This is because BHMs permit  more sources of variation.  Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study.  The corresponding frequentist analysis assumes that all sites share  common event rate, thus assuming there is no inter-site variation.
 
 ```{r}
 fitted$tab %>% 
@@ -328,8 +328,8 @@ table <- createObservedOverExpectedTable(
 table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
 ```
 
-## Beyond Transcelerate
-At the time of writing (late 2022) The Transcelerate Quality Tolerance Limit Framework [@Transcelerate2020] lists metrics that are exclusively binary in nature.  There are many other potential metrics that are non-binary and which may provide insight into the conduct of the trial.  For example,
+## Beyond TransCelerate
+At the time of writing (late 2022) The TransCelerate Quality Tolerance Limit Framework [@Transcelerate2020] lists metrics that are exclusively binary in nature.  There are many other potential metrics that are non-binary and which may provide insight into the conduct of the trial.  For example,
 
 * The number of episodes of rescue medication (as opposed to the percentage or number of trial participants on rescue medication)
 * Time to withdrawal of consent (as opposed to the percentage or number of trial participants with withdrawal of informed consent)
