@@ -21,7 +21,7 @@ corresponding limit(s) relate(s)}
 \item{observedRate}{The column in \code{data} that defines the observed rate.
 May be \code{NULL}.}
 
-\item{alpha}{The Tyope 1 error rate associated with the calculatd limits.
+\item{alpha}{The Type 1 error rate associated with the calculated limits.
 Default 0.05}
 
 \item{sides}{the sidedness of \code{alpha}.  Either \code{two}, \code{upper} or \code{lower}.

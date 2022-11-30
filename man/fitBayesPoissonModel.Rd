@@ -78,7 +78,7 @@ The exact posterior distribution cannot be computed directly, hence a Markov
 Chain Monte Carlo (MCMC) method is used to simulate values of
 \eqn{\lambda_i}{lambda_i}, scale and shape from the posterior distribution.
 Two Markov chains are used, with a minimum of 10,000 values simulated after
-4000 burnin iterations and 1000 adaptive iterations. The chains are checked
+4000 burn-in iterations and 1000 adaptive iterations. The chains are checked
 for convergence and the simulation is extended if required to meet
 convergence diagnositics. The samples from both chains are combined in the
 returned value.
