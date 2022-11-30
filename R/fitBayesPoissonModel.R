@@ -101,7 +101,6 @@ fitBayesPoissonModel <- function(
   if (!is.null(data)) {
     tempData$events <- c(data %>% dplyr::pull({{events}}), NA)
     tempData$exposure <- c(data %>% dplyr::pull({{exposure}}),  1)
-    
   }
   tempData$k <- length(tempData$events) # number of sites plus 1
   
@@ -133,6 +132,7 @@ fitBayesPoissonModel <- function(
   } else {
     toMonitor <- c(paste0("lambda[", tempData$k , "]"), "shape", "scale")
   }
+  print(inits)
   tempData %>%
     .autorunJagsAndCaptureOutput(
       model,

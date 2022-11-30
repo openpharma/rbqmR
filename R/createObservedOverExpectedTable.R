@@ -51,15 +51,6 @@ createObservedOverExpectedTable <- function(
         )
       )
     }
-    if (!(observedData %>% .columnExists({{ n }}))) {
-      stop(
-        paste0(
-          rlang::as_label(rlang::enquo(n)),
-          " is not a column in ",
-          rlang::as_label(rlang::enquo(observedData))
-        )
-      )
-    }
   }
   # Execute
   sides <- match.arg(sides)

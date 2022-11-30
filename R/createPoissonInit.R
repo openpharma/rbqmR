@@ -9,7 +9,7 @@
 #' the gamma hyperprior for the scale parameter 
 #' @param seed the seed to use when generating random seeds for the MCMC processes
 #' @param rng the random number generator to be used for each init
-#' @param n the length of the initialisation vector for `p`
+#' @param n the length of the initialisation vector for `lambda`
 #'@export
 .createPoissonInit <- function(
     gammaShape=c(shape=1, scale=10),

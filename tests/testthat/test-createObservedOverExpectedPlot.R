@@ -5,12 +5,6 @@ test_that("createObservedOverExpectedPlot fails gracefully with bad inputs", {
 })
 
 test_that("createObservedOverExpectedPlot returns an object of the correct type", {
-  plotData <-createObservedOverExpectedTable(
-    nHistorical=10000,
-    historicalRate=0.014,
-    expectedRate=0.014,
-    nObservedRange=seq(50, 1500, 25)
-  ) 
   observedData <- tibble::tibble(
     NObserved=c(250, 500, 750, 1000), 
     ObservedRate=100*c(2, 9, 15, 16)/NObserved
@@ -21,9 +15,12 @@ test_that("createObservedOverExpectedPlot returns an object of the correct type"
     historicalRate=0.014,
     expectedRate=0.014,
     nObservedRange=seq(50, 1500, 25),
-    observedData=observedData
+    observedData=observedData,
+    observedRate=ObservedRate,
+    n=NObserved
   )
   
-  plot <- table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
+  plot <- table %>% 
+            createObservedOverExpectedPlot(observedRate=ObservedRate)
   expect_equal(class(plot), c("gg", "ggplot"))
 })

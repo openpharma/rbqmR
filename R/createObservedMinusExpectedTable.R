@@ -61,7 +61,7 @@ createObservedMinusExpectedTable <- function(
                            permittedRates=c("lower"=0.05, "upper"=0.15)
                          ) {
   logger::log_debug("Entry")
-  logger::log_trace(match.call())
+  logger::log_trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
   if (!(data %>% .columnExists({{ timeVar }}))) {

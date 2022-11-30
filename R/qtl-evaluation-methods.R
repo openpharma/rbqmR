@@ -101,7 +101,7 @@ evaluatePointEstimateQTL <- function(
                               upper=NULL
                             ) {
   logger::log_debug("Entry")
-  logger::log_trace(match.call())
+  logger::log_trace(deparse(match.call()))
   # Validate
   if (is.null(lower) & is.null(upper)) stop("Both lower and upper cannot be NULL")
   if (!is.data.frame(data)) stop("data is not a data.frame")
