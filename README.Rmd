@@ -60,15 +60,15 @@ We use example 2.7 of Berry et al [@BERRY], described on pages 52 to 63, modifyi
 ```{r}
 data(berrySummary)
 
-berrySummary %>% kable(digits=c(0,0,0,2))
+berrySummary %>% kable(digits = c(0, 0, 0, 2))
 ```
 The central tenet of the QTL methodology implemented in `rbqmR` is not that a current trial should behave in a similar fashion to a "similar" historical or control trial, but rather that all sites within the current trial should behave in a similar way.  The justification for this assumption is that the trial's inclusion/exclusion criteria are designed to minimise heterogeneity amongst the study population (save for that induced by differences in treatment in comparative trials).  
 
 We fit the Bayesian Hierarchical Model described by Berry et al ...
 
 ```{r, error=TRUE}
-fitted <- berrySummary %>% 
-            fitBayesBinomialModel(n=Subjects, r=Events)
+fitted <- berrySummary %>%
+  fitBayesBinomialModel(n = Subjects, r = Events)
 ```
 
 
@@ -79,11 +79,11 @@ For the sake of argument, suppose we set the lower and upper QTLs to be the 5th 
 
 The 5th and 95th centiles of the posterior are 
 ```{r, error=TRUE}
-quantiles <- fitted$tab %>% 
-               summarise(
-                 Q05=quantile(p, probs=0.05, names=FALSE),
-                 Q95=quantile(p, probs=0.95, names=FALSE)
-               )
+quantiles <- fitted$tab %>%
+  summarise(
+    Q05 = quantile(p, probs = 0.05, names = FALSE),
+    Q95 = quantile(p, probs = 0.95, names = FALSE)
+  )
 quantiles
 ```
 So, in this specific case, our QTLs translate to observed event rates of `r sprintf("%5.2f%%", 100*quantiles$Q05)` and `r sprintf("%5.2f%%", 100*quantiles$Q95)` respectively.
@@ -91,30 +91,30 @@ So, in this specific case, our QTLs translate to observed event rates of `r spri
 Do any sites have observed event rates outside this range?
 
 ```{r}
-berrySummary %>% 
+berrySummary %>%
   applyQtl(
-    var = ObservedResponse, 
-    lower =quantiles %>% pull(Q05),
+    var = ObservedResponse,
+    lower = quantiles %>% pull(Q05),
     upper = quantiles %>% pull(Q95)
-  ) %>% 
+  ) %>%
   kable(
-    digits=c(0, 0, 0, 3, 3, 3),
-    caption="Sites breaching the QTL"
+    digits = c(0, 0, 0, 3, 3, 3),
+    caption = "Sites breaching the QTL"
   )
 ```
 
 Yes.  Two sites are outside this range.  One above and one below.  The QTL has been breached.  The process can be summarised graphically.
 
 ```{r}
-fitted$tab %>% 
+fitted$tab %>%
   createQtlPlot(
-    actionLimits=list(
-                   list("lower"=quantiles$Q95, "upper"=NA, "alpha"=0.3, "colour"="goldenrod1"),
-                   list("lower"=NA, "upper"=quantiles$Q05, "alpha"=0.3, "colour"="goldenrod1")
-                 ),
-    siteData=berrySummary,
-    siteSize=Subjects,
-    siteMetric=ObservedResponse
+    actionLimits = list(
+      list("lower" = quantiles$Q95, "upper" = NA, "alpha" = 0.3, "colour" = "goldenrod1"),
+      list("lower" = NA, "upper" = quantiles$Q05, "alpha" = 0.3, "colour" = "goldenrod1")
+    ),
+    siteData = berrySummary,
+    siteSize = Subjects,
+    siteMetric = ObservedResponse
   )
 ```
 
@@ -124,16 +124,16 @@ Suppose previous experience tells us that the event probability in this type of 
 > When using a Bayesian Hierarchical Model, the probabilities associated with credible intervals are generally lower than those associated with similar frequentist models.  This is because BHMs permit  more sources of variation.  Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study.  The corresponding frequentist analysis assumes that all sites share  common event rate, thus assuming there is no inter-site variation.
 
 ```{r}
-fitted$tab %>% 
-  summarise(PosteriorProb=mean(p >= 0.5 & p <= 0.75))
+fitted$tab %>%
+  summarise(PosteriorProb = mean(p >= 0.5 & p <= 0.75))
 ```
 Again, the QTL is breached, and the process can be summarised graphically.
 
 ```{r}
 fitted$tab %>%
   createQtlPlot(
-    targetRange=list("lower"=0.5, "upper"=0.75),
-    observedMetric=fitted$tab %>% summarise(Mean=mean(p)) %>% pull(Mean)
+    targetRange = list("lower" = 0.5, "upper" = 0.75),
+    observedMetric = fitted$tab %>% summarise(Mean = mean(p)) %>% pull(Mean)
   )
 ```
 
@@ -142,15 +142,15 @@ The site-level KRIs can be added to the plot to help focus attention where inter
 ```{r}
 fitted$tab %>%
   createQtlPlot(
-    targetRange=list("lower"=0.5, "upper"=0.75),
-    observedMetric=fitted$tab %>% summarise(Mean=mean(p)) %>% pull(Mean),
-    siteData=berrySummary,
-    siteSize=Subjects,
-    siteMetric=ObservedResponse,
-    actionLimits=list(
-                   list("lower"=quantiles$Q95, "upper"=NA, "alpha"=0.3, "colour"="goldenrod1"),
-                   list("lower"=NA, "upper"=quantiles$Q05, "alpha"=0.3, "colour"="goldenrod1")
-                 )
+    targetRange = list("lower" = 0.5, "upper" = 0.75),
+    observedMetric = fitted$tab %>% summarise(Mean = mean(p)) %>% pull(Mean),
+    siteData = berrySummary,
+    siteSize = Subjects,
+    siteMetric = ObservedResponse,
+    actionLimits = list(
+      list("lower" = quantiles$Q95, "upper" = NA, "alpha" = 0.3, "colour" = "goldenrod1"),
+      list("lower" = NA, "upper" = quantiles$Q05, "alpha" = 0.3, "colour" = "goldenrod1")
+    )
   )
 ```
 
@@ -162,13 +162,13 @@ The `evaluatePointEstimateQTL` allows the comparison of an arbitrary scalar summ
 
 For example, the code below defines a QTL based on the mean of the posterior distribution of the probability of an event.  Call this probability $\hat{p}$.  The warning limits are 0.1 and 0.7.  The action limits are 0.2 and 0.9.
 ```{r}
-berrySummary %>% 
+berrySummary %>%
   evaluatePointEstimateQTL(
-    posterior=fitted$tab, 
-    metric = p, 
-    observedMetric=ObservedResponse,
-    lower=c("warn"=0.1, "action"=0.2),
-    upper=c("warn"=0.7, "action"=0.9)
+    posterior = fitted$tab,
+    metric = p,
+    observedMetric = ObservedResponse,
+    lower = c("warn" = 0.1, "action" = 0.2),
+    upper = c("warn" = 0.7, "action" = 0.9)
   )
 ```
 As with all `evaluateXXXXQTL` functions, the return value of `evaluatePointEstimateQTL` is a list.  The `status` element indicates whether or not the QTL's limits have been breached.  The `qtl` element gives the calculated value of the QTL metric and the `data` element returns a copy of the `data.frame` containing the site level KRIs augmented with a column indicating which, if any, of the various limits were breached by that site.
@@ -176,12 +176,12 @@ As with all `evaluateXXXXQTL` functions, the return value of `evaluatePointEstim
 Both the `lower` and `upper` parameters are optional (though at least one must be given) and the number of limits, and their labels, are arbitrary.
 
 ```{r, eval=FALSE}
-berrySummary %>% 
+berrySummary %>%
   evaluatePointEstimateQTL(
-    posterior=fitted$tab, 
-    metric = p, 
-    observedMetric=ObservedResponse,
-    upper=c("mild"=0.6, "moderate"=0.8, "severe"=0.9)
+    posterior = fitted$tab,
+    metric = p,
+    observedMetric = ObservedResponse,
+    upper = c("mild" = 0.6, "moderate" = 0.8, "severe" = 0.9)
   )
 ```
 
@@ -190,26 +190,26 @@ If only one limit is defined, this can be provided as a scalar, in which case it
 The function on which the QTL is based is specified by the `stat` parameter of `evaluatePointEstimateQTL` and can be a user-defined function.  For example, the following code fragments define QTLs based on the median
 
 ```{r}
-berrySummary %>% 
+berrySummary %>%
   evaluatePointEstimateQTL(
-    posterior=fitted$tab, 
-    metric = p, 
-    stat=median,
-    observedMetric=ObservedResponse,
-    upper=c("warn"=0.7, "action"=0.9)
+    posterior = fitted$tab,
+    metric = p,
+    stat = median,
+    observedMetric = ObservedResponse,
+    upper = c("warn" = 0.7, "action" = 0.9)
   )
 ```
 
 and 10th centile of the posterior distribution of $\hat{p}$.
 
 ```{r}
-berrySummary %>% 
+berrySummary %>%
   evaluatePointEstimateQTL(
-    posterior=fitted$tab, 
-    metric = p, 
+    posterior = fitted$tab,
+    metric = p,
     stat = function(x) quantile(x, probs = 0.1),
-    observedMetric=ObservedResponse,
-    upper=c("warn"=0.3, "action"=0.8)
+    observedMetric = ObservedResponse,
+    upper = c("warn" = 0.3, "action" = 0.8)
   )
 ```
 
@@ -230,14 +230,16 @@ berrySummary %>%
 Essentially, all that `evaluateCustomQTL` does is to perform some basic checks on its parameter values and then return the value returned by `data %>% f(posterior, ...)`.  So, for example, a simplified version of `evaluatePointEstimateQTL` that compares $\hat{p}$ to 0.6 might be
 
 ```{r, error=TRUE}
-berrySummary %>% 
+berrySummary %>%
   evaluateCustomQTL(
-    posterior=fitted$tab, 
-    f=function(data, posterior) {
+    posterior = fitted$tab,
+    f = function(data, posterior) {
       rv <- list()
-      rv$qtl <- posterior %>% summarise(qtl=mean(p)) %>% pull(qtl)
+      rv$qtl <- posterior %>%
+        summarise(qtl = mean(p)) %>%
+        pull(qtl)
       rv$status <- ifelse(rv$qtl < 0.6, "OK", "Breach")
-      rv$data <- data %>% mutate(Status=ifelse(ObservedResponse < 0.6, "OK", "Breach"))
+      rv$data <- data %>% mutate(Status = ifelse(ObservedResponse < 0.6, "OK", "Breach"))
       rv
     }
   )
@@ -252,22 +254,22 @@ In order to illustrate what happens when a QTL is breached, we set the probabili
 set.seed(011327)
 
 randomData <- tibble(
-  Subject=1:400,
-  Event=rbinom(400, 1, 0.13)
+  Subject = 1:400,
+  Event = rbinom(400, 1, 0.13)
 )
 ```
 
 ... and create an observed-expected table ...
 
 ```{r}
-omeTable <- randomData %>% 
-              createObservedMinusExpectedTable(
-                timeVar = Subject,
-                eventVar = Event,
-                eventArray = 1,
-                expectedRate = 0.1,
-                maxTrialSize=400
-              )
+omeTable <- randomData %>%
+  createObservedMinusExpectedTable(
+    timeVar = Subject,
+    eventVar = Event,
+    eventArray = 1,
+    expectedRate = 0.1,
+    maxTrialSize = 400
+  )
 ```
 
 ... and plot the corresponding graph. 
@@ -280,15 +282,15 @@ omeTable %>%
 We can see that the trial breached a warning limit.  When did this first happen?
 
 ```{r}
-omeTable %>% 
-  filter(Status !=  "OK") %>% 
-  head(1) %>% 
-  select(-contains("Action"), -SubjectIndex) %>% 
+omeTable %>%
+  filter(Status != "OK") %>%
+  head(1) %>%
+  select(-contains("Action"), -SubjectIndex) %>%
   kable(
-    col.names=c("Subject", "Event", "Cumulative Events", "O - E", "Status", "Lower", "Upper"),
-    caption="First breach of an action or warning limit"
-  ) %>% 
-  add_header_above(c(" "=5, "Warning Limits"=2))
+    col.names = c("Subject", "Event", "Cumulative Events", "O - E", "Status", "Lower", "Upper"),
+    caption = "First breach of an action or warning limit"
+  ) %>%
+  add_header_above(c(" " = 5, "Warning Limits" = 2))
 ```
 
 ### Observed / Expected methodology
@@ -301,31 +303,31 @@ Suppose we have data on 10,000 historical patients who have reported a given eve
 
 ```{r}
 createObservedOverExpectedTable(
-  nHistorical=10000,
-  historicalRate=0.014,
-  expectedRate=0.014,
-  nObservedRange=seq(50, 1500, 25)
-) %>% 
-createObservedOverExpectedPlot()
+  nHistorical = 10000,
+  historicalRate = 0.014,
+  expectedRate = 0.014,
+  nObservedRange = seq(50, 1500, 25)
+) %>%
+  createObservedOverExpectedPlot()
 ```
 
 As the trial is executed, the observed data can be added to the table and the plot.
 
 ```{r, error=TRUE}
 observedData <- tibble(
-                  NObserved=c(250, 500, 750, 1000), 
-                  ObservedRate=100*c(2, 9, 15, 16)/NObserved
-                )
+  NObserved = c(250, 500, 750, 1000),
+  ObservedRate = 100 * c(2, 9, 15, 16) / NObserved
+)
 
 table <- createObservedOverExpectedTable(
-           nHistorical=10000,
-           historicalRate=0.014,
-           expectedRate=0.014,
-           nObservedRange=seq(50, 1500, 25),
-           observedData=observedData
-         )
+  nHistorical = 10000,
+  historicalRate = 0.014,
+  expectedRate = 0.014,
+  nObservedRange = seq(50, 1500, 25),
+  observedData = observedData
+)
 
-table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
+table %>% createObservedOverExpectedPlot(observedRate = ObservedRate)
 ```
 
 ## Beyond TransCelerate
@@ -354,15 +356,15 @@ Regard different cavalry Corps as "sites" and regard the number of years for whi
 
 ```{r}
 
-cavalrySummary <- cavalryDeaths %>% 
-                group_by(Corps) %>% 
-                summarise(
-                  Deaths=sum(Deaths), 
-                  TotalTime=n(), 
-                  .groups="drop"
-                ) %>% 
-                mutate(DeathRate=Deaths/TotalTime)
-                
+cavalrySummary <- cavalryDeaths %>%
+  group_by(Corps) %>%
+  summarise(
+    Deaths = sum(Deaths),
+    TotalTime = n(),
+    .groups = "drop"
+  ) %>%
+  mutate(DeathRate = Deaths / TotalTime)
+
 cavalrySummary
 ```
 
@@ -374,16 +376,16 @@ getModelString("poisson")
 Fitting the model is straightforward.
 
 ```{r}
-poissonFit <- cavalrySummary%>% 
-                fitBayesPoissonModel(Deaths, TotalTime)
-poissonFit$tab %>% 
+poissonFit <- cavalrySummary %>%
+  fitBayesPoissonModel(Deaths, TotalTime)
+poissonFit$tab %>%
   createQtlPlot(
-    metric=lambda,
-    siteData=cavalrySummary,
-    siteSize=TotalTime,
-    siteMetric=DeathRate    
+    metric = lambda,
+    siteData = cavalrySummary,
+    siteSize = TotalTime,
+    siteMetric = DeathRate
   ) +
-  labs(x="Deaths per year")
+  labs(x = "Deaths per year")
 ```
 
 ## References
