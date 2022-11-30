@@ -45,12 +45,6 @@
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -266,8 +260,8 @@ ObservedResponse
 <span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
 <span><span class="co">#&gt;     Q05   Q95</span></span>
 <span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 0.365 0.933</span></span></code></pre></div>
-<p>So, in this specific case, our QTLs translate to observed event rates of 36.48% and 93.33% respectively.</p>
+<span><span class="co">#&gt; 1 0.370 0.931</span></span></code></pre></div>
+<p>So, in this specific case, our QTLs translate to observed event rates of 36.98% and 93.09% respectively.</p>
 <p>Do any sites have observed event rates outside this range?</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -279,8 +273,7 @@ ObservedResponse
 <span>  <span class="fu">kable</span><span class="op">(</span></span>
 <span>    digits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>    caption<span class="op">=</span><span class="st">"Sites breaching the QTL"</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Joining, by = c("Site", "Subjects", "Events", "ObservedResponse")</span></span></code></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div>
 <table class="table">
 <caption>
 Sites breaching the QTL
@@ -320,10 +313,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.365
+0.37
 </td>
 <td style="text-align:right;">
-0.933
+0.931
 </td>
 </tr>
 <tr>
@@ -340,10 +333,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.365
+0.37
 </td>
 <td style="text-align:right;">
-0.933
+0.931
 </td>
 </tr>
 </tbody>
@@ -375,7 +368,7 @@ Upper
 <span><span class="co">#&gt; # A tibble: 1 × 1</span></span>
 <span><span class="co">#&gt;   PosteriorProb</span></span>
 <span><span class="co">#&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1         0.459</span></span></code></pre></div>
+<span><span class="co">#&gt; 1         0.466</span></span></code></pre></div>
 <p>Again, the QTL is breached, and the process can be summarised graphically.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -436,16 +429,17 @@ Upper
 <span><span class="co">#&gt; 9     9        6      4            0.667 OK    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6812837</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.6809388</span></span></code></pre></div>
 <p>As with all <code>evaluateXXXXQTL</code> functions, the return value of <code>evaluatePointEstimateQTL</code> is a list. The <code>status</code> element indicates whether or not the QTL’s limits have been breached. The <code>qtl</code> element gives the calculated value of the QTL metric and the <code>data</code> element returns a copy of the <code>data.frame</code> containing the site level KRIs augmented with a column indicating which, if any, of the various limits were breached by that site.</p>
 <p>Both the <code>lower</code> and <code>upper</code> parameters are optional (though at least one must be given) and the number of limits, and their labels, are arbitrary.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>berrySummary <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">evaluatePointEstimateQTL</span>(</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">posterior=</span>fitted<span class="sc">$</span>tab, </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">metric =</span> p, </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">observedMetric=</span>ObservedResponse,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper=</span><span class="fu">c</span>(<span class="st">"mild"</span><span class="ot">=</span><span class="fl">0.6</span>, <span class="st">"moderate"</span><span class="ot">=</span><span class="fl">0.8</span>, <span class="st">"severe"</span><span class="ot">=</span><span class="fl">0.9</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/evaluatePointEstimateQTL.html">evaluatePointEstimateQTL</a></span><span class="op">(</span></span>
+<span>    posterior<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>, </span>
+<span>    metric <span class="op">=</span> <span class="va">p</span>, </span>
+<span>    observedMetric<span class="op">=</span><span class="va">ObservedResponse</span>,</span>
+<span>    upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mild"</span><span class="op">=</span><span class="fl">0.6</span>, <span class="st">"moderate"</span><span class="op">=</span><span class="fl">0.8</span>, <span class="st">"severe"</span><span class="op">=</span><span class="fl">0.9</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p>If only one limit is defined, this can be provided as a scalar, in which case it is labelled <code>action</code>.</p>
 <p>The function on which the QTL is based is specified by the <code>stat</code> parameter of <code>evaluatePointEstimateQTL</code> and can be a user-defined function. For example, the following code fragments define QTLs based on the median</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -475,7 +469,7 @@ Upper
 <span><span class="co">#&gt; 9     9        6      4            0.667 OK    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6995187</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.6985318</span></span></code></pre></div>
 <p>and 10th centile of the posterior distribution of <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Chat%7Bp%7D" title="\hat{p}" alt="\hat{p}">.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -505,7 +499,7 @@ Upper
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
 <span><span class="co">#&gt;       10% </span></span>
-<span><span class="co">#&gt; 0.4447045</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.4507998</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="by-calculating-the-probability-that-the-derived-metric-is-in-a-given-range">By calculating the probability that the derived metric is in a given range<a class="anchor" aria-label="anchor" href="#by-calculating-the-probability-that-the-derived-metric-is-in-a-given-range"></a>
@@ -517,7 +511,7 @@ Upper
 <div class="section level5">
 <h5 id="by-using-an-arbitrary-criterion">By using an arbitrary criterion<a class="anchor" aria-label="anchor" href="#by-using-an-arbitrary-criterion"></a>
 </h5>
-<p><code>evaluatePointEstimateQTL</code>, <code>evaluateXXXXQTL</code> and <code>evaluateXXXXQTL</code> are wrappers around <code>evaluateCustomQTL</code>, which can be used to evaluate an arbitrary, user-defined QTL rule. <code>evaluateCustomQTL</code> takews the following parameters:</p>
+<p><code>evaluatePointEstimateQTL</code>, <code>evaluateXXXXQTL</code> and <code>evaluateXXXXQTL</code> are wrappers around <code>evaluateCustomQTL</code>, which can be used to evaluate an arbitrary, user-defined QTL rule. <code>evaluateCustomQTL</code> takes the following parameters:</p>
 <ul>
 <li>
 <code>data</code>: a tibble containing site-level observed metrics</li>
@@ -544,7 +538,7 @@ Upper
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6812837</span></span>
+<span><span class="co">#&gt; [1] 0.6809388</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $status</span></span>
 <span><span class="co">#&gt; [1] "Breach"</span></span>
@@ -591,7 +585,7 @@ Upper
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/createObservedMinusExpectedPlot.html">createObservedMinusExpectedPlot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-17-1.png" width="80%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-18-1.png" width="80%"></p>
 <p>We can see that the trial breached a warning limit. When did this first happen?</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -600,12 +594,12 @@ Upper
 <span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="fu">contains</span><span class="op">(</span><span class="st">"Action"</span><span class="op">)</span>, <span class="op">-</span><span class="va">SubjectIndex</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">kable</span><span class="op">(</span></span>
 <span>    col.names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Subject"</span>, <span class="st">"Event"</span>, <span class="st">"Cumulative Events"</span>, <span class="st">"O - E"</span>, <span class="st">"Status"</span>, <span class="st">"Lower"</span>, <span class="st">"Upper"</span><span class="op">)</span>,</span>
-<span>    caption<span class="op">=</span><span class="st">"First breech of an action or warning limit"</span></span>
+<span>    caption<span class="op">=</span><span class="st">"First breach of an action or warning limit"</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">add_header_above</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">" "</span><span class="op">=</span><span class="fl">5</span>, <span class="st">"Warning Limits"</span><span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <caption>
-First breech of an action or warning limit
+First breach of an action or warning limit
 </caption>
 <thead>
 <tr>
@@ -680,7 +674,7 @@ WARN
 <span>  nObservedRange<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">1500</span>, <span class="fl">25</span><span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
 <span><span class="fu"><a href="reference/createObservedOverExpectedPlot.html">createObservedOverExpectedPlot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-19-1.png" width="80%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-20-1.png" width="80%"></p>
 <p>As the trial is executed, the observed data can be added to the table and the plot.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">observedData</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
@@ -697,7 +691,7 @@ WARN
 <span>         <span class="op">)</span></span>
 <span></span>
 <span><span class="va">table</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/createObservedOverExpectedPlot.html">createObservedOverExpectedPlot</a></span><span class="op">(</span>observedRate<span class="op">=</span><span class="va">ObservedRate</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-20-1.png" width="80%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-21-1.png" width="80%"></p>
 </div>
 </div>
 <div class="section level2">
@@ -782,7 +776,7 @@ WARN
 <span>    siteMetric<span class="op">=</span><span class="va">DeathRate</span>    </span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>x<span class="op">=</span><span class="st">"Deaths per year"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-24-1.png" width="80%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-25-1.png" width="80%"></p>
 </div>
 </div>
 <div class="section level2">
