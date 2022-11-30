@@ -5,7 +5,7 @@ test_that("createObservedMinusExpectedTable fails gracefully with bad inputs", {
   expect_error(createObservedMinusExpectedTable(tibble::tibble(x=1), timeVar=x, eventVar=z))
 })
 
-test_that("createObservedMinusExpectedPlot returns an object of the correct type", {
+test_that("createObservedMinusExpectedTable returns an object of the correct type", {
   rv <- tibble::tibble(
     Subject=1:400,
     Event=rbinom(400, 1, 0.13)
