@@ -270,7 +270,7 @@ omeTable <- randomData %>%
               )
 ```
 
-... and plot the corresponding graph.
+... and plot the corresponding graph. 
 
 ```{r}
 omeTable %>%

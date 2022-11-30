@@ -6,6 +6,7 @@ test_that("Issue #3 has been resolved", {
 
 test_that("Issue #4 has been resolved", {
   inits <- lapply(1:2, function(x) rbqmR:::.createPoissonInit())
+  inits
   explicitPrior <- fitBayesPoissonModel(
     data=NULL, 
     prior=getModelString("poisson", prior=TRUE), 
