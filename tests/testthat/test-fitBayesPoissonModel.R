@@ -1,9 +1,12 @@
+logger::log_threshold(logger::FATAL)
+
 test_that("Issue #3 has been resolved", {
   expect_error(fitBayesPoissonModel(data=NULL), NA)
 })
 
 test_that("Issue #4 has been resolved", {
   inits <- lapply(1:2, function(x) rbqmR:::.createPoissonInit())
+  inits
   explicitPrior <- fitBayesPoissonModel(
     data=NULL, 
     prior=getModelString("poisson", prior=TRUE), 

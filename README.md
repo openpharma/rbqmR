@@ -242,11 +242,11 @@ quantiles
 #> # A tibble: 1 × 2
 #>     Q05   Q95
 #>   <dbl> <dbl>
-#> 1 0.370 0.931
+#> 1 0.371 0.931
 ```
 
 So, in this specific case, our QTLs translate to observed event rates of
-36.98% and 93.09% respectively.
+37.07% and 93.15% respectively.
 
 Do any sites have observed event rates outside this range?
 
@@ -304,7 +304,7 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.37
+0.371
 </td>
 <td style="text-align:right;">
 0.931
@@ -324,7 +324,7 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.37
+0.371
 </td>
 <td style="text-align:right;">
 0.931
@@ -454,7 +454,7 @@ berrySummary %>%
 #> 9     9        6      4            0.667 OK    
 #> 
 #> $qtl
-#> [1] 0.6809388
+#> [1] 0.6813646
 ```
 
 As with all `evaluateXXXXQTL` functions, the return value of
@@ -514,7 +514,7 @@ berrySummary %>%
 #> 9     9        6      4            0.667 OK    
 #> 
 #> $qtl
-#> [1] 0.6985318
+#> [1] 0.6993631
 ```
 
 and 10th centile of the posterior distribution of
@@ -548,7 +548,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4507998
+#> 0.4465293
 ```
 
 ##### By calculating the probability that the derived metric is in a given range
@@ -590,7 +590,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6809388
+#> [1] 0.6813646
 #> 
 #> $status
 #> [1] "Breach"

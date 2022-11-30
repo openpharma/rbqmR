@@ -1,3 +1,5 @@
+logger::log_threshold(logger::FATAL)
+
 test_that("Issue #3 has been resolved", {
   expect_error(fitBayesBinomialModel(data=NULL), NA)
 })
@@ -6,7 +8,7 @@ test_that("Issue #4 has been resolved", {
   inits <- lapply(1:2, function(x) rbqmR:::.createBinomialInit())
   explicitPrior <- fitBayesBinomialModel(
     data=NULL, 
-    prior=getModelString("binomial", prior=TRUE), 
+    model=getModelString("binomial", prior=TRUE), 
     inits=inits
   )  
   implicitPrior <- fitBayesBinomialModel(
@@ -36,6 +38,4 @@ test_that("fitBayesBinomialModel reproduces results from Berry et al", {
     rv$tab %>% dplyr::summarise(mean=round(mean(p), 2)), 
     tibble::tibble(mean=0.68)
   )
-  # Number of MCMC samples
-  expect_equal(20000, rv$tab %>% nrow())
 })
