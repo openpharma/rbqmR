@@ -1,3 +1,5 @@
+logger::log_threshold(logger::FATAL)
+
 test_that("Issue #3 has been resolved", {
   expect_error(fitBayesPoissonModel(data=NULL), NA)
 })
