@@ -45,12 +45,6 @@
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -266,8 +260,8 @@ ObservedResponse
 <span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
 <span><span class="co">#&gt;     Q05   Q95</span></span>
 <span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 0.370 0.931</span></span></code></pre></div>
-<p>So, in this specific case, our QTLs translate to observed event rates of 36.98% and 93.09% respectively.</p>
+<span><span class="co">#&gt; 1 0.371 0.931</span></span></code></pre></div>
+<p>So, in this specific case, our QTLs translate to observed event rates of 37.07% and 93.15% respectively.</p>
 <p>Do any sites have observed event rates outside this range?</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -319,7 +313,7 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.37
+0.371
 </td>
 <td style="text-align:right;">
 0.931
@@ -339,7 +333,7 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.37
+0.371
 </td>
 <td style="text-align:right;">
 0.931
@@ -435,7 +429,7 @@ Upper
 <span><span class="co">#&gt; 9     9        6      4            0.667 OK    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6809388</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.6813646</span></span></code></pre></div>
 <p>As with all <code>evaluateXXXXQTL</code> functions, the return value of <code>evaluatePointEstimateQTL</code> is a list. The <code>status</code> element indicates whether or not the QTL’s limits have been breached. The <code>qtl</code> element gives the calculated value of the QTL metric and the <code>data</code> element returns a copy of the <code>data.frame</code> containing the site level KRIs augmented with a column indicating which, if any, of the various limits were breached by that site.</p>
 <p>Both the <code>lower</code> and <code>upper</code> parameters are optional (though at least one must be given) and the number of limits, and their labels, are arbitrary.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -475,7 +469,7 @@ Upper
 <span><span class="co">#&gt; 9     9        6      4            0.667 OK    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6985318</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.6993631</span></span></code></pre></div>
 <p>and 10th centile of the posterior distribution of <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Chat%7Bp%7D" title="\hat{p}" alt="\hat{p}">.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -505,7 +499,7 @@ Upper
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
 <span><span class="co">#&gt;       10% </span></span>
-<span><span class="co">#&gt; 0.4507998</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.4465293</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="by-calculating-the-probability-that-the-derived-metric-is-in-a-given-range">By calculating the probability that the derived metric is in a given range<a class="anchor" aria-label="anchor" href="#by-calculating-the-probability-that-the-derived-metric-is-in-a-given-range"></a>
@@ -544,7 +538,7 @@ Upper
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6809388</span></span>
+<span><span class="co">#&gt; [1] 0.6813646</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $status</span></span>
 <span><span class="co">#&gt; [1] "Breach"</span></span>
