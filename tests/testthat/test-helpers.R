@@ -7,3 +7,8 @@ test_that(".columnExists works", {
   expect_true(mtcars %>%  .columnExists(mpg))
   expect_false(mtcars %>%  .columnExists(bad))
 })
+
+test_that(".assertColumnExists works", {
+  expect_error(mtcars %>%  .assertColumnExists(mpg), NA)
+  expect_error(mtcars %>%  .assertColumnExists(bad))
+})

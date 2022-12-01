@@ -64,24 +64,8 @@ createObservedMinusExpectedTable <- function(
   logger::log_trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
-  if (!(data %>% .columnExists({{ timeVar }}))) {
-    stop(
-      paste0(
-        rlang::as_label(rlang::enquo(timeVar)),
-        " is not a column in ",
-        rlang::as_label(rlang::enquo(data))
-      )
-    )
-  }
-  if (!(data %>% .columnExists({{ eventVar }}))) {
-    stop(
-      paste0(
-        rlang::as_label(rlang::enquo(eventVar)),
-        " is not a column in ",
-        rlang::as_label(rlang::enquo(data))
-      )
-    )
-  }
+  data %>% .assertColumnExists({{ timeVar }})
+  data %>% .assertColumnExists({{ eventVar }})
   # Execute
   if (!is.vector(eventArray)) eventArray <- as.vector(eventArray)
   rv <- data %>% 

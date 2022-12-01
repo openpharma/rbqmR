@@ -10,7 +10,8 @@ status](https://www.r-pkg.org/badges/version/rbqmR)](https://CRAN.R-project.org/
 <a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public." /></a>
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![R-CMD-check](https://github.com/openpharma/rbqmR/workflows/R-CMD-check/badge.svg)](https://github.com/openpharma/rbqmR/actions)
-<!-- badges: end -->
+[![Test
+Coverage](https://raw.githubusercontent.com/openpharma/rbqmR/_xml_coverage_reports/data/main/badge.svg)](https://github.com/openpharma/mtdesign/blob/_xml_coverage_reports/data/main/coverage.xml)<!-- badges: end -->
 
 ## Introduction
 
@@ -51,7 +52,7 @@ outcome.
 ``` r
 data(berrySummary)
 
-berrySummary %>% kable(digits=c(0,0,0,2))
+berrySummary %>% kable(digits = c(0, 0, 0, 2))
 ```
 
 <table>
@@ -212,8 +213,8 @@ induced by differences in treatment in comparative trials).
 We fit the Bayesian Hierarchical Model described by Berry et al …
 
 ``` r
-fitted <- berrySummary %>% 
-            fitBayesBinomialModel(n=Subjects, r=Events)
+fitted <- berrySummary %>%
+  fitBayesBinomialModel(n = Subjects, r = Events)
 #> Loading required namespace: rjags
 ```
 
@@ -233,33 +234,33 @@ observed event rates at two or more sites fall outside this range.
 The 5th and 95th centiles of the posterior are
 
 ``` r
-quantiles <- fitted$tab %>% 
-               summarise(
-                 Q05=quantile(p, probs=0.05, names=FALSE),
-                 Q95=quantile(p, probs=0.95, names=FALSE)
-               )
+quantiles <- fitted$tab %>%
+  summarise(
+    Q05 = quantile(p, probs = 0.05, names = FALSE),
+    Q95 = quantile(p, probs = 0.95, names = FALSE)
+  )
 quantiles
 #> # A tibble: 1 × 2
 #>     Q05   Q95
 #>   <dbl> <dbl>
-#> 1 0.366 0.934
+#> 1 0.365 0.931
 ```
 
 So, in this specific case, our QTLs translate to observed event rates of
-36.64% and 93.37% respectively.
+36.51% and 93.15% respectively.
 
 Do any sites have observed event rates outside this range?
 
 ``` r
-berrySummary %>% 
+berrySummary %>%
   applyQtl(
-    var = ObservedResponse, 
-    lower =quantiles %>% pull(Q05),
+    var = ObservedResponse,
+    lower = quantiles %>% pull(Q05),
     upper = quantiles %>% pull(Q95)
-  ) %>% 
+  ) %>%
   kable(
-    digits=c(0, 0, 0, 3, 3, 3),
-    caption="Sites breaching the QTL"
+    digits = c(0, 0, 0, 3, 3, 3),
+    caption = "Sites breaching the QTL"
   )
 ```
 
@@ -304,10 +305,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.366
+0.365
 </td>
 <td style="text-align:right;">
-0.934
+0.931
 </td>
 </tr>
 <tr>
@@ -324,10 +325,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.366
+0.365
 </td>
 <td style="text-align:right;">
-0.934
+0.931
 </td>
 </tr>
 </tbody>
@@ -337,15 +338,15 @@ Yes. Two sites are outside this range. One above and one below. The QTL
 has been breached. The process can be summarised graphically.
 
 ``` r
-fitted$tab %>% 
+fitted$tab %>%
   createQtlPlot(
-    actionLimits=list(
-                   list("lower"=quantiles$Q95, "upper"=NA, "alpha"=0.3, "colour"="goldenrod1"),
-                   list("lower"=NA, "upper"=quantiles$Q05, "alpha"=0.3, "colour"="goldenrod1")
-                 ),
-    siteData=berrySummary,
-    siteSize=Subjects,
-    siteMetric=ObservedResponse
+    actionLimits = list(
+      list("lower" = quantiles$Q95, "upper" = NA, "alpha" = 0.3, "colour" = "goldenrod1"),
+      list("lower" = NA, "upper" = quantiles$Q05, "alpha" = 0.3, "colour" = "goldenrod1")
+    ),
+    siteData = berrySummary,
+    siteSize = Subjects,
+    siteMetric = ObservedResponse
   )
 ```
 
@@ -368,12 +369,12 @@ be in the range 0.5 to 0.75 inclusive to be at least 50%.
 > variation.
 
 ``` r
-fitted$tab %>% 
-  summarise(PosteriorProb=mean(p >= 0.5 & p <= 0.75))
+fitted$tab %>%
+  summarise(PosteriorProb = mean(p >= 0.5 & p <= 0.75))
 #> # A tibble: 1 × 1
 #>   PosteriorProb
 #>           <dbl>
-#> 1         0.467
+#> 1         0.464
 ```
 
 Again, the QTL is breached, and the process can be summarised
@@ -382,8 +383,8 @@ graphically.
 ``` r
 fitted$tab %>%
   createQtlPlot(
-    targetRange=list("lower"=0.5, "upper"=0.75),
-    observedMetric=fitted$tab %>% summarise(Mean=mean(p)) %>% pull(Mean)
+    targetRange = list("lower" = 0.5, "upper" = 0.75),
+    observedMetric = fitted$tab %>% summarise(Mean = mean(p)) %>% pull(Mean)
   )
 ```
 
@@ -395,15 +396,15 @@ where intervention is likely to have the largest effect.
 ``` r
 fitted$tab %>%
   createQtlPlot(
-    targetRange=list("lower"=0.5, "upper"=0.75),
-    observedMetric=fitted$tab %>% summarise(Mean=mean(p)) %>% pull(Mean),
-    siteData=berrySummary,
-    siteSize=Subjects,
-    siteMetric=ObservedResponse,
-    actionLimits=list(
-                   list("lower"=quantiles$Q95, "upper"=NA, "alpha"=0.3, "colour"="goldenrod1"),
-                   list("lower"=NA, "upper"=quantiles$Q05, "alpha"=0.3, "colour"="goldenrod1")
-                 )
+    targetRange = list("lower" = 0.5, "upper" = 0.75),
+    observedMetric = fitted$tab %>% summarise(Mean = mean(p)) %>% pull(Mean),
+    siteData = berrySummary,
+    siteSize = Subjects,
+    siteMetric = ObservedResponse,
+    actionLimits = list(
+      list("lower" = quantiles$Q95, "upper" = NA, "alpha" = 0.3, "colour" = "goldenrod1"),
+      list("lower" = NA, "upper" = quantiles$Q05, "alpha" = 0.3, "colour" = "goldenrod1")
+    )
   )
 ```
 
@@ -428,13 +429,13 @@ probability
 The warning limits are 0.1 and 0.7. The action limits are 0.2 and 0.9.
 
 ``` r
-berrySummary %>% 
+berrySummary %>%
   evaluatePointEstimateQTL(
-    posterior=fitted$tab, 
-    metric = p, 
-    observedMetric=ObservedResponse,
-    lower=c("warn"=0.1, "action"=0.2),
-    upper=c("warn"=0.7, "action"=0.9)
+    posterior = fitted$tab,
+    metric = p,
+    observedMetric = ObservedResponse,
+    lower = c("warn" = 0.1, "action" = 0.2),
+    upper = c("warn" = 0.7, "action" = 0.9)
   )
 #> $status
 #> [1] "OK"
@@ -454,7 +455,7 @@ berrySummary %>%
 #> 9     9        6      4            0.667 OK    
 #> 
 #> $qtl
-#> [1] 0.6824472
+#> [1] 0.6784632
 ```
 
 As with all `evaluateXXXXQTL` functions, the return value of
@@ -470,12 +471,12 @@ one must be given) and the number of limits, and their labels, are
 arbitrary.
 
 ``` r
-berrySummary %>% 
+berrySummary %>%
   evaluatePointEstimateQTL(
-    posterior=fitted$tab, 
-    metric = p, 
-    observedMetric=ObservedResponse,
-    upper=c("mild"=0.6, "moderate"=0.8, "severe"=0.9)
+    posterior = fitted$tab,
+    metric = p,
+    observedMetric = ObservedResponse,
+    upper = c("mild" = 0.6, "moderate" = 0.8, "severe" = 0.9)
   )
 ```
 
@@ -488,13 +489,13 @@ function. For example, the following code fragments define QTLs based on
 the median
 
 ``` r
-berrySummary %>% 
+berrySummary %>%
   evaluatePointEstimateQTL(
-    posterior=fitted$tab, 
-    metric = p, 
-    stat=median,
-    observedMetric=ObservedResponse,
-    upper=c("warn"=0.7, "action"=0.9)
+    posterior = fitted$tab,
+    metric = p,
+    stat = median,
+    observedMetric = ObservedResponse,
+    upper = c("warn" = 0.7, "action" = 0.9)
   )
 #> $status
 #> [1] "OK"
@@ -514,20 +515,20 @@ berrySummary %>%
 #> 9     9        6      4            0.667 OK    
 #> 
 #> $qtl
-#> [1] 0.6998252
+#> [1] 0.6959131
 ```
 
 and 10th centile of the posterior distribution of
 ![\\hat{p}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Chat%7Bp%7D "\hat{p}").
 
 ``` r
-berrySummary %>% 
+berrySummary %>%
   evaluatePointEstimateQTL(
-    posterior=fitted$tab, 
-    metric = p, 
+    posterior = fitted$tab,
+    metric = p,
     stat = function(x) quantile(x, probs = 0.1),
-    observedMetric=ObservedResponse,
-    upper=c("warn"=0.3, "action"=0.8)
+    observedMetric = ObservedResponse,
+    upper = c("warn" = 0.3, "action" = 0.8)
   )
 #> $status
 #> [1] "warn"
@@ -548,7 +549,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4491981
+#> 0.4419041
 ```
 
 ##### By calculating the probability that the derived metric is in a given range
@@ -578,19 +579,21 @@ checks on its parameter values and then return the value returned by
 to 0.6 might be
 
 ``` r
-berrySummary %>% 
+berrySummary %>%
   evaluateCustomQTL(
-    posterior=fitted$tab, 
-    f=function(data, posterior) {
+    posterior = fitted$tab,
+    f = function(data, posterior) {
       rv <- list()
-      rv$qtl <- posterior %>% summarise(qtl=mean(p)) %>% pull(qtl)
+      rv$qtl <- posterior %>%
+        summarise(qtl = mean(p)) %>%
+        pull(qtl)
       rv$status <- ifelse(rv$qtl < 0.6, "OK", "Breach")
-      rv$data <- data %>% mutate(Status=ifelse(ObservedResponse < 0.6, "OK", "Breach"))
+      rv$data <- data %>% mutate(Status = ifelse(ObservedResponse < 0.6, "OK", "Breach"))
       rv
     }
   )
 #> $qtl
-#> [1] 0.6824472
+#> [1] 0.6784632
 #> 
 #> $status
 #> [1] "Breach"
@@ -623,22 +626,22 @@ QTL process will assume the event rate is 0.10…
 set.seed(011327)
 
 randomData <- tibble(
-  Subject=1:400,
-  Event=rbinom(400, 1, 0.13)
+  Subject = 1:400,
+  Event = rbinom(400, 1, 0.13)
 )
 ```
 
 … and create an observed-expected table …
 
 ``` r
-omeTable <- randomData %>% 
-              createObservedMinusExpectedTable(
-                timeVar = Subject,
-                eventVar = Event,
-                eventArray = 1,
-                expectedRate = 0.1,
-                maxTrialSize=400
-              )
+omeTable <- randomData %>%
+  createObservedMinusExpectedTable(
+    timeVar = Subject,
+    eventVar = Event,
+    eventArray = 1,
+    expectedRate = 0.1,
+    maxTrialSize = 400
+  )
 ```
 
 … and plot the corresponding graph.
@@ -654,15 +657,15 @@ We can see that the trial breached a warning limit. When did this first
 happen?
 
 ``` r
-omeTable %>% 
-  filter(Status !=  "OK") %>% 
-  head(1) %>% 
-  select(-contains("Action"), -SubjectIndex) %>% 
+omeTable %>%
+  filter(Status != "OK") %>%
+  head(1) %>%
+  select(-contains("Action"), -SubjectIndex) %>%
   kable(
-    col.names=c("Subject", "Event", "Cumulative Events", "O - E", "Status", "Lower", "Upper"),
-    caption="First breach of an action or warning limit"
-  ) %>% 
-  add_header_above(c(" "=5, "Warning Limits"=2))
+    col.names = c("Subject", "Event", "Cumulative Events", "O - E", "Status", "Lower", "Upper"),
+    caption = "First breach of an action or warning limit"
+  ) %>%
+  add_header_above(c(" " = 5, "Warning Limits" = 2))
 ```
 
 <table>
@@ -751,12 +754,12 @@ different from what has been seen in the past.
 
 ``` r
 createObservedOverExpectedTable(
-  nHistorical=10000,
-  historicalRate=0.014,
-  expectedRate=0.014,
-  nObservedRange=seq(50, 1500, 25)
-) %>% 
-createObservedOverExpectedPlot()
+  nHistorical = 10000,
+  historicalRate = 0.014,
+  expectedRate = 0.014,
+  nObservedRange = seq(50, 1500, 25)
+) %>%
+  createObservedOverExpectedPlot()
 ```
 
 <img src="man/figures/README-unnamed-chunk-20-1.png" width="80%" />
@@ -766,20 +769,20 @@ and the plot.
 
 ``` r
 observedData <- tibble(
-                  NObserved=c(250, 500, 750, 1000), 
-                  ObservedRate=100*c(2, 9, 15, 16)/NObserved
-                )
+  NObserved = c(250, 500, 750, 1000),
+  ObservedRate = 100 * c(2, 9, 15, 16) / NObserved
+)
 
 table <- createObservedOverExpectedTable(
-           nHistorical=10000,
-           historicalRate=0.014,
-           expectedRate=0.014,
-           nObservedRange=seq(50, 1500, 25),
-           observedData=observedData
-         )
+  nHistorical = 10000,
+  historicalRate = 0.014,
+  expectedRate = 0.014,
+  nObservedRange = seq(50, 1500, 25),
+  observedData = observedData
+)
 #> Error in createObservedOverExpectedTable(nHistorical = 10000, historicalRate = 0.014, : NULL is not a column in <tibble[,2]>
 
-table %>% createObservedOverExpectedPlot(observedRate=ObservedRate)
+table %>% createObservedOverExpectedPlot(observedRate = ObservedRate)
 #> Error in createObservedOverExpectedPlot(., observedRate = ObservedRate): data is not a data.frame
 ```
 
@@ -834,15 +837,15 @@ Regard different cavalry Corps as “sites” and regard the number of years
 for which data were collected as “exposure”.
 
 ``` r
-cavalrySummary <- cavalryDeaths %>% 
-                group_by(Corps) %>% 
-                summarise(
-                  Deaths=sum(Deaths), 
-                  TotalTime=n(), 
-                  .groups="drop"
-                ) %>% 
-                mutate(DeathRate=Deaths/TotalTime)
-                
+cavalrySummary <- cavalryDeaths %>%
+  group_by(Corps) %>%
+  summarise(
+    Deaths = sum(Deaths),
+    TotalTime = n(),
+    .groups = "drop"
+  ) %>%
+  mutate(DeathRate = Deaths / TotalTime)
+
 cavalrySummary
 #> # A tibble: 14 × 4
 #>    Corps    Deaths TotalTime DeathRate
@@ -875,16 +878,52 @@ getModelString("poisson")
 Fitting the model is straightforward.
 
 ``` r
-poissonFit <- cavalrySummary%>% 
-                fitBayesPoissonModel(Deaths, TotalTime)
-poissonFit$tab %>% 
+poissonFit <- cavalrySummary %>%
+  fitBayesPoissonModel(Deaths, TotalTime)
+#> [[1]]
+#> [[1]]$.RNG.name
+#> [1] "base::Mersenne-Twister"
+#> 
+#> [[1]]$.RNG.seed
+#> [1] 2111393538
+#> 
+#> [[1]]$lambda
+#>  [1] 0.06602477 0.21555481 1.76582996 1.54033213 1.56320162 0.67496122
+#>  [7] 0.80286726 1.90053657 0.96873827 1.13620730 1.60602326 0.20700234
+#> [13] 0.50264506 0.20989224 0.16453996
+#> 
+#> [[1]]$shape
+#> [1] 0.05964483
+#> 
+#> [[1]]$scale
+#> [1] 7.47398
+#> 
+#> 
+#> [[2]]
+#> [[2]]$.RNG.name
+#> [1] "base::Mersenne-Twister"
+#> 
+#> [[2]]$.RNG.seed
+#> [1] 1485093739
+#> 
+#> [[2]]$lambda
+#>  [1] 0.29244458 0.52194200 0.86308415 2.56368361 0.63816685 2.96916945
+#>  [7] 1.36071577 1.08666969 0.70170733 2.21821016 0.01696328 3.46028461
+#> [13] 1.00903754 0.10146709 0.03369489
+#> 
+#> [[2]]$shape
+#> [1] 16.31142
+#> 
+#> [[2]]$scale
+#> [1] 30.56183
+poissonFit$tab %>%
   createQtlPlot(
-    metric=lambda,
-    siteData=cavalrySummary,
-    siteSize=TotalTime,
-    siteMetric=DeathRate    
+    metric = lambda,
+    siteData = cavalrySummary,
+    siteSize = TotalTime,
+    siteMetric = DeathRate
   ) +
-  labs(x="Deaths per year")
+  labs(x = "Deaths per year")
 ```
 
 <img src="man/figures/README-unnamed-chunk-25-1.png" width="80%" />

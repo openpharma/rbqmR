@@ -132,7 +132,6 @@ fitBayesPoissonModel <- function(
   } else {
     toMonitor <- c(paste0("lambda[", tempData$k , "]"), "shape", "scale")
   }
-  print(inits)
   tempData %>%
     .autorunJagsAndCaptureOutput(
       model,
