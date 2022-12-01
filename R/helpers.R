@@ -4,8 +4,8 @@
 #' @param col the name of the column to be searched
 #' @return `TRUE` if the column exists, `FALSE` otherwise
 #' @examples 
-#' tibble::tibble(good=1) %>% .columnExists(good) # TRUE
-#' tibble::tibble(good=1) %>% .columnExists(bad) # FALSE
+#' # tibble::tibble(good=1) %>% .columnExists(good) # TRUE
+#' # tibble::tibble(good=1) %>% .columnExists(bad) # FALSE
 .columnExists <- function(data, col) {
   # Validate
   if (is.null(data)) stop("data cannot be NULL")
@@ -19,6 +19,9 @@
 #' @param data the data.frame to be searched
 #' @param col the name of the column to be searched
 #' @return `NULL`
+#' @examples 
+#' # tibble::tibble(good=1) %>% .assertColumnExists(good) # No exception
+#' # tibble::tibble(good=1) %>% .assertColumnExists(bad) # Exception
 .assertColumnExists <- function(data, col) {
   if (!(data %>% .columnExists({{ col }}))) {
     stop(

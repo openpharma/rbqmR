@@ -17,7 +17,3 @@
 \description{
 Throw an exception of the given column does not exist in the given data.frame
 }
-\examples{
-tibble::tibble(good=1) \%>\% .assertColumnExists(good) # No exception
-tibble::tibble(good=1) \%>\% .assertColumnExists(bad) # Exception
-}

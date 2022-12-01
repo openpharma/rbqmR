@@ -18,6 +18,6 @@
 Determine if a column, passed using NSE, exists in a data.frame
 }
 \examples{
-tibble::tibble(good=1) \%>\% .columnExists(good) # TRUE
-tibble::tibble(good=1) \%>\% .columnExists(bad) # FALSE
+# tibble::tibble(good=1) \%>\% .columnExists(good) # TRUE
+# tibble::tibble(good=1) \%>\% .columnExists(bad) # FALSE
 }

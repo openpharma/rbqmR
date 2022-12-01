@@ -27,3 +27,77 @@ test_that("evaluatePointEstimateQTL fails gracefully with bad input", {
   expect_error(evaluatePointEstimateQTL(tibble::tibble(), tibble::tibble(good=1), good, median))
   expect_error(evaluatePointEstimateQTL(tibble::tibble(), tibble::tibble(good=1), good, median, NULL, NULL))
 })
+
+test_that("evaluatePointEstimateQTL works", {
+  # Named vector limits
+  rv <- berrySummary %>%
+    evaluatePointEstimateQTL(
+      posterior = tibble::tibble(p=0.6807154),
+      metric = p,
+      observedMetric = ObservedResponse,
+      lower = c("warn" = 0.5, "action" = 0.4),
+      upper = c("warn" = 0.8, "action" = 0.9)
+    )
+  expect_equal(rv$status, "OK")
+  expect_equal(rv$qtl, 0.6807154)
+  expect_equal(
+    rv$data, 
+    berrySummary %>% 
+      tibble::add_column(
+        Status=c("action", "warn", "OK", "OK", "action", "OK", "warn", "OK", "OK")
+      )
+  )
+  # Unnamed vector limits, size 2
+  rv <- berrySummary %>%
+    evaluatePointEstimateQTL(
+      posterior = tibble::tibble(p=0.6807154),
+      metric = p,
+      observedMetric = ObservedResponse,
+      lower = c("warn" = 0.5, "action" = 0.4),
+      upper = c("warn" = 0.8, "action" = 0.9)
+    )
+  expect_equal(rv$status, "OK")
+  expect_equal(rv$qtl, 0.6807154)
+  expect_equal(
+    rv$data, 
+    berrySummary %>% 
+      tibble::add_column(
+        Status=c("action", "warn", "OK", "OK", "action", "OK", "warn", "OK", "OK")
+      )
+  )
+  # Unnamed vector limits, size 3
+  rv <- berrySummary %>%
+    evaluatePointEstimateQTL(
+      posterior = tibble::tibble(p=0.6807154),
+      metric = p,
+      observedMetric = ObservedResponse,
+      lower = c(0.6, 0.5, 0.4)
+    )
+  expect_equal(rv$status, "OK")
+  expect_equal(rv$qtl, 0.6807154)
+  expect_equal(
+    rv$data, 
+    berrySummary %>% 
+      tibble::add_column(
+        Status=c("OK", "2", "OK", "1", "3", "OK", "OK", "OK", "OK")
+      )
+  )
+  # Scalar limits
+  rv <- berrySummary %>%
+    evaluatePointEstimateQTL(
+      posterior = tibble::tibble(p=0.6807154),
+      metric = p,
+      observedMetric = ObservedResponse,
+      lower = 0.39,
+      upper = 0.89
+    )
+  expect_equal(rv$status, "OK")
+  expect_equal(rv$qtl, 0.6807154)
+  expect_equal(
+    rv$data, 
+    berrySummary %>% 
+      tibble::add_column(
+        Status=c("action", "OK", "OK", "OK", "action", "OK", "action", "OK", "OK")
+      )
+  )
+})

@@ -160,15 +160,15 @@ For illustration, in this section we continue to use the example provided by Ber
 ##### By comparing the derived metric to a constant value
 The `evaluatePointEstimateQTL` allows the comparison of an arbitrary scalar summary statistic derived from the estimate of the posterior distribution (which defaults to the mean), with an arbitrary number of lower and upper limits.
 
-For example, the code below defines a QTL based on the mean of the posterior distribution of the probability of an event.  Call this probability $\hat{p}$.  The warning limits are 0.1 and 0.7.  The action limits are 0.2 and 0.9.
+For example, the code below defines a QTL based on the mean of the posterior distribution of the probability of an event.  Call this probability $\hat{p}$.  The warning limits are 0.5 and 0.8.  The action limits are 0.4 and 0.9.
 ```{r}
 berrySummary %>%
   evaluatePointEstimateQTL(
     posterior = fitted$tab,
     metric = p,
     observedMetric = ObservedResponse,
-    lower = c("warn" = 0.1, "action" = 0.2),
-    upper = c("warn" = 0.7, "action" = 0.9)
+    lower = c("warn" = 0.5, "action" = 0.4),
+    upper = c("warn" = 0.8, "action" = 0.9)
   )
 ```
 As with all `evaluateXXXXQTL` functions, the return value of `evaluatePointEstimateQTL` is a list.  The `status` element indicates whether or not the QTL's limits have been breached.  The `qtl` element gives the calculated value of the QTL metric and the `data` element returns a copy of the `data.frame` containing the site level KRIs augmented with a column indicating which, if any, of the various limits were breached by that site.

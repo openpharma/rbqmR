@@ -105,29 +105,12 @@ evaluatePointEstimateQTL <- function(
   # Validate
   if (is.null(lower) & is.null(upper)) stop("Both lower and upper cannot be NULL")
   if (!is.data.frame(data)) stop("data is not a data.frame")
-  if (!(data %>% .columnExists({{ observedMetric }}))) {
-    stop(
-      paste0(
-        rlang::as_label(rlang::enquo(observedMetric)),
-        " is not a column in ",
-        rlang::as_label(rlang::enquo(data))
-      )
-    )
-  }
-  if (!(posterior %>% .columnExists({{ metric }}))) {
-    stop(
-      paste0(
-        rlang::as_label(rlang::enquo(metric)),
-        " is not a column in ",
-        rlang::as_label(rlang::enquo(posterior))
-      )
-    )
-  }
+  data %>% .assertColumnExists({{ observedMetric }})
+  posterior %>% .assertColumnExists({{ metric }})
   if (is.null(stat)) stop("stat cannot be NULL")
   if (!is.function(stat)) stop("stat is not a function")
   # Prepare
   if (!is.null(upper)) {
-    # upper <- as.list(upper)
     if (is.null(names(upper))) {
       if (length(upper) == 1) names(upper) <- "action"
       else if (length(upper) == 2) {
@@ -138,7 +121,6 @@ evaluatePointEstimateQTL <- function(
     }
   }
   if (!is.null(lower)) {
-    # lower <- as.list(lower)
     if (is.null(names(lower))) {
       if (length(lower) == 1) names(lower) <- "action"
       else if (length(lower) == 2) {
@@ -189,4 +171,3 @@ evaluatePointEstimateQTL <- function(
   logger::log_debug("Exit")
   rv
 }
-

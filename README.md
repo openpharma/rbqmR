@@ -243,11 +243,11 @@ quantiles
 #> # A tibble: 1 × 2
 #>     Q05   Q95
 #>   <dbl> <dbl>
-#> 1 0.365 0.931
+#> 1 0.372 0.930
 ```
 
 So, in this specific case, our QTLs translate to observed event rates of
-36.51% and 93.15% respectively.
+37.15% and 93.00% respectively.
 
 Do any sites have observed event rates outside this range?
 
@@ -305,10 +305,10 @@ Upper
 1.000
 </td>
 <td style="text-align:right;">
-0.365
+0.372
 </td>
 <td style="text-align:right;">
-0.931
+0.93
 </td>
 </tr>
 <tr>
@@ -325,10 +325,10 @@ Upper
 0.357
 </td>
 <td style="text-align:right;">
-0.365
+0.372
 </td>
 <td style="text-align:right;">
-0.931
+0.93
 </td>
 </tr>
 </tbody>
@@ -374,7 +374,7 @@ fitted$tab %>%
 #> # A tibble: 1 × 1
 #>   PosteriorProb
 #>           <dbl>
-#> 1         0.464
+#> 1         0.471
 ```
 
 Again, the QTL is breached, and the process can be summarised
@@ -426,7 +426,7 @@ For example, the code below defines a QTL based on the mean of the
 posterior distribution of the probability of an event. Call this
 probability
 ![\\hat{p}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Chat%7Bp%7D "\hat{p}").
-The warning limits are 0.1 and 0.7. The action limits are 0.2 and 0.9.
+The warning limits are 0.5 and 0.8. The action limits are 0.4 and 0.9.
 
 ``` r
 berrySummary %>%
@@ -434,8 +434,8 @@ berrySummary %>%
     posterior = fitted$tab,
     metric = p,
     observedMetric = ObservedResponse,
-    lower = c("warn" = 0.1, "action" = 0.2),
-    upper = c("warn" = 0.7, "action" = 0.9)
+    lower = c("warn" = 0.5, "action" = 0.4),
+    upper = c("warn" = 0.8, "action" = 0.9)
   )
 #> $status
 #> [1] "OK"
@@ -445,17 +445,17 @@ berrySummary %>%
 #>    Site Subjects Events ObservedResponse Status
 #>   <int>    <dbl>  <dbl>            <dbl> <chr> 
 #> 1     1       20     20            1     action
-#> 2     2       10      4            0.4   OK    
+#> 2     2       10      4            0.4   warn  
 #> 3     3       16     11            0.688 OK    
 #> 4     4       19     10            0.526 OK    
-#> 5     5       14      5            0.357 OK    
-#> 6     6       46     36            0.783 warn  
+#> 5     5       14      5            0.357 action
+#> 6     6       46     36            0.783 OK    
 #> 7     7       10      9            0.9   warn  
-#> 8     8        9      7            0.778 warn  
+#> 8     8        9      7            0.778 OK    
 #> 9     9        6      4            0.667 OK    
 #> 
 #> $qtl
-#> [1] 0.6784632
+#> [1] 0.6807154
 ```
 
 As with all `evaluateXXXXQTL` functions, the return value of
@@ -515,7 +515,7 @@ berrySummary %>%
 #> 9     9        6      4            0.667 OK    
 #> 
 #> $qtl
-#> [1] 0.6959131
+#> [1] 0.6978385
 ```
 
 and 10th centile of the posterior distribution of
@@ -549,7 +549,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4419041
+#> 0.4512664
 ```
 
 ##### By calculating the probability that the derived metric is in a given range
@@ -593,7 +593,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6784632
+#> [1] 0.6807154
 #> 
 #> $status
 #> [1] "Breach"
@@ -880,42 +880,6 @@ Fitting the model is straightforward.
 ``` r
 poissonFit <- cavalrySummary %>%
   fitBayesPoissonModel(Deaths, TotalTime)
-#> [[1]]
-#> [[1]]$.RNG.name
-#> [1] "base::Mersenne-Twister"
-#> 
-#> [[1]]$.RNG.seed
-#> [1] 2111393538
-#> 
-#> [[1]]$lambda
-#>  [1] 0.06602477 0.21555481 1.76582996 1.54033213 1.56320162 0.67496122
-#>  [7] 0.80286726 1.90053657 0.96873827 1.13620730 1.60602326 0.20700234
-#> [13] 0.50264506 0.20989224 0.16453996
-#> 
-#> [[1]]$shape
-#> [1] 0.05964483
-#> 
-#> [[1]]$scale
-#> [1] 7.47398
-#> 
-#> 
-#> [[2]]
-#> [[2]]$.RNG.name
-#> [1] "base::Mersenne-Twister"
-#> 
-#> [[2]]$.RNG.seed
-#> [1] 1485093739
-#> 
-#> [[2]]$lambda
-#>  [1] 0.29244458 0.52194200 0.86308415 2.56368361 0.63816685 2.96916945
-#>  [7] 1.36071577 1.08666969 0.70170733 2.21821016 0.01696328 3.46028461
-#> [13] 1.00903754 0.10146709 0.03369489
-#> 
-#> [[2]]$shape
-#> [1] 16.31142
-#> 
-#> [[2]]$scale
-#> [1] 30.56183
 poissonFit$tab %>%
   createQtlPlot(
     metric = lambda,
