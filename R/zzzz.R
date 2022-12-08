@@ -26,3 +26,4 @@ LowerLog <- NULL
 UpperLog <- NULL
 Upper <- NULL
 qtl <- NULL
+QTL <- NULL

@@ -18,7 +18,8 @@
     max.time=600, # 10 minutes,
     ...
 ) {
-  logger::log_trace("Entry")
+  logger::log_debug("Entry")
+  # logger::log_trace(deparse(match.call()))
   # Validate
   if (!is.list(data)) stop("data is not a data.frame")
   if (is.null(inits)) stop("inits cannot be NULL")

@@ -29,7 +29,7 @@ values supplied in \code{quantiles}. See Usage Notes below.}
 
 \item{rng}{the random number generator to be used for each init}
 
-\item{n}{the length of the initialisation vector for \code{p}}
+\item{n}{the length of the initialisation vector for \code{lambda}}
 }
 \description{
 Create a JAGS inits suitable for use with run.jags and autorun.jags

@@ -7,7 +7,7 @@
 #' the range(s) to be shaded.  See Usage Notes below.
 #' @param idx An integer defining the index within the list returned by 
 #' `ggplot2::ggpot_build` that identifies the layer containing the density to be
-#' shaded.  Typicall, this corresponds to the order in which the various `geom`s
+#' shaded.  Typically, this corresponds to the order in which the various `geom`s
 #' are added to the `ggplot2` object.  For example, in `d %>% ggplot2() %>% 
 #' geom_point(...) %>% geom_density(...)`, `idx should be `2`.
 #' @section Usage Notes:
