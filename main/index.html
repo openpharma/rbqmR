@@ -5,14 +5,16 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What the Package Does (One Line, Title Case) • rbqmR</title>
+<title>Risk-Based Quality Management in R • rbqmR</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="What the Package Does (One Line, Title Case)">
-<meta property="og:description" content="What the package does (one paragraph).">
+<script src="pkgdown.js"></script><meta property="og:title" content="Risk-Based Quality Management in R">
+<meta property="og:description" content="rbqmR is an open-source project intended to provide utilities to 
+    support risk-based quality management (RBQM) activities in clinical trials, 
+    as required by ICH E6 (R2).">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -45,12 +47,6 @@
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -64,6 +60,7 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
+
 <div class="section level1">
 <div class="page-header"><h1 id="rbqmr">rbqmR<a class="anchor" aria-label="anchor" href="#rbqmr"></a>
 </h1></div>
@@ -90,16 +87,13 @@
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"openpharma/rbqmR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+<h2 id="dynamic-qtls">Dynamic QTLs<a class="anchor" aria-label="anchor" href="#dynamic-qtls"></a>
 </h2>
-<div class="section level3">
-<h3 id="dynamic-qtls">Dynamic QTLs<a class="anchor" aria-label="anchor" href="#dynamic-qtls"></a>
-</h3>
 <p>We use example 2.7 of Berry et al (Berry SM 2011), described on pages 52 to 63, modifying the context so that rather than being a meta analysis of several different trials, we consider the data to represent the performance of different sites within a single trial. The exact metric being measured is immaterial, though it remains a summary of a binomial outcome.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">berrySummary</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">kable</span><span class="op">(</span>digits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">kable</span><span class="op">(</span>digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:right;">
@@ -247,218 +241,111 @@ ObservedResponse
 <p>The central tenet of the QTL methodology implemented in <code>rbqmR</code> is not that a current trial should behave in a similar fashion to a “similar” historical or control trial, but rather that all sites within the current trial should behave in a similar way. The justification for this assumption is that the trial’s inclusion/exclusion criteria are designed to minimise heterogeneity amongst the study population (save for that induced by differences in treatment in comparative trials).</p>
 <p>We fit the Bayesian Hierarchical Model described by Berry et al …</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fitted</span> <span class="op">&lt;-</span> <span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>            <span class="fu"><a href="reference/fitBayesBinomialModel.html">fitBayesBinomialModel</a></span><span class="op">(</span>n<span class="op">=</span><span class="va">Subjects</span>, r<span class="op">=</span><span class="va">Events</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required namespace: rjags</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">fitted</span> <span class="op">&lt;-</span> <span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/fitBayesBinomialModel.html">fitBayesBinomialModel</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">Subjects</span>, r <span class="op">=</span> <span class="va">Events</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required namespace: rjags</span></span>
+<span><span class="va">fitted</span></span>
+<span><span class="co">#&gt; $tab</span></span>
+<span><span class="co">#&gt; # A tibble: 20,000 × 4</span></span>
+<span><span class="co">#&gt;        p     a     b     q</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 0.896 1.40  0.776    91</span></span>
+<span><span class="co">#&gt;  2 0.811 1.08  0.706    76</span></span>
+<span><span class="co">#&gt;  3 0.718 0.754 0.621    55</span></span>
+<span><span class="co">#&gt;  4 0.867 1.43  0.964    87</span></span>
+<span><span class="co">#&gt;  5 0.817 3.88  1.51     77</span></span>
+<span><span class="co">#&gt;  6 0.693 5.96  1.70     50</span></span>
+<span><span class="co">#&gt;  7 0.965 5.14  1.39     99</span></span>
+<span><span class="co">#&gt;  8 0.783 5.45  2.22     70</span></span>
+<span><span class="co">#&gt;  9 0.699 6.45  2.10     51</span></span>
+<span><span class="co">#&gt; 10 0.322 1.98  1.74      4</span></span>
+<span><span class="co">#&gt; # … with 19,990 more rows</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $results</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):</span></span>
+<span><span class="co">#&gt;                                                                           </span></span>
+<span><span class="co">#&gt;       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff</span></span>
+<span><span class="co">#&gt; p[10] 0.36358 0.69548 0.99035 0.67934 0.17054   -- 0.0013721     0.8 15448</span></span>
+<span><span class="co">#&gt; a      2.2516  5.9802  9.9999  5.9636  2.2845   --  0.055816     2.4  1675</span></span>
+<span><span class="co">#&gt; b     0.65341  2.6691  5.3062  2.8221  1.2775   --  0.032877     2.6  1510</span></span>
+<span><span class="co">#&gt;                        </span></span>
+<span><span class="co">#&gt;           AC.10    psrf</span></span>
+<span><span class="co">#&gt; p[10] 0.0049052  1.0001</span></span>
+<span><span class="co">#&gt; a       0.21372  1.0003</span></span>
+<span><span class="co">#&gt; b       0.23235 0.99999</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Total time taken: 3.8 seconds</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $status</span></span>
+<span><span class="co">#&gt; [1] "OK"</span></span></code></pre></div>
 <p>… and use the quantiles of the posterior distribution of the probability of an event to define the QTLs for this metric. This can be done in isolation (when the trial acts as its own control) or with reference to historical data obtained from similar previous studies.</p>
-<div class="section level4">
-<h4 id="without-historical-data">Without historical data<a class="anchor" aria-label="anchor" href="#without-historical-data"></a>
-</h4>
-<p>For the sake of argument, suppose we set the lower and upper QTLs to be the 5th and 95th centiles of the posterior respectively. Since we have nine sites, it’s not unreasonable to expect one site to be outside this range. So we define a breach of the QTL to have occurred when the observed event rates at two or more sites fall outside this range.</p>
-<p>The 5th and 95th centiles of the posterior are</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">quantiles</span> <span class="op">&lt;-</span> <span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>               <span class="fu">summarise</span><span class="op">(</span></span>
-<span>                 Q05<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">p</span>, probs<span class="op">=</span><span class="fl">0.05</span>, names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>,</span>
-<span>                 Q95<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">p</span>, probs<span class="op">=</span><span class="fl">0.95</span>, names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span>               <span class="op">)</span></span>
-<span><span class="va">quantiles</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
-<span><span class="co">#&gt;     Q05   Q95</span></span>
-<span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 0.371 0.931</span></span></code></pre></div>
-<p>So, in this specific case, our QTLs translate to observed event rates of 37.07% and 93.15% respectively.</p>
-<p>Do any sites have observed event rates outside this range?</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="reference/applyQtl.html">applyQtl</a></span><span class="op">(</span></span>
-<span>    var <span class="op">=</span> <span class="va">ObservedResponse</span>, </span>
-<span>    lower <span class="op">=</span><span class="va">quantiles</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Q05</span><span class="op">)</span>,</span>
-<span>    upper <span class="op">=</span> <span class="va">quantiles</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Q95</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">kable</span><span class="op">(</span></span>
-<span>    digits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>    caption<span class="op">=</span><span class="st">"Sites breaching the QTL"</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<table class="table">
-<caption>
-Sites breaching the QTL
-</caption>
-<thead><tr>
-<th style="text-align:right;">
-Site
-</th>
-<th style="text-align:right;">
-Subjects
-</th>
-<th style="text-align:right;">
-Events
-</th>
-<th style="text-align:right;">
-ObservedResponse
-</th>
-<th style="text-align:right;">
-Lower
-</th>
-<th style="text-align:right;">
-Upper
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-1.000
-</td>
-<td style="text-align:right;">
-0.371
-</td>
-<td style="text-align:right;">
-0.931
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-0.357
-</td>
-<td style="text-align:right;">
-0.371
-</td>
-<td style="text-align:right;">
-0.931
-</td>
-</tr>
-</tbody>
-</table>
-<p>Yes. Two sites are outside this range. One above and one below. The QTL has been breached. The process can be summarised graphically.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="reference/createQtlPlot.html">createQtlPlot</a></span><span class="op">(</span></span>
-<span>    actionLimits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"lower"</span><span class="op">=</span><span class="va">quantiles</span><span class="op">$</span><span class="va">Q95</span>, <span class="st">"upper"</span><span class="op">=</span><span class="cn">NA</span>, <span class="st">"alpha"</span><span class="op">=</span><span class="fl">0.3</span>, <span class="st">"colour"</span><span class="op">=</span><span class="st">"goldenrod1"</span><span class="op">)</span>,</span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"lower"</span><span class="op">=</span><span class="cn">NA</span>, <span class="st">"upper"</span><span class="op">=</span><span class="va">quantiles</span><span class="op">$</span><span class="va">Q05</span>, <span class="st">"alpha"</span><span class="op">=</span><span class="fl">0.3</span>, <span class="st">"colour"</span><span class="op">=</span><span class="st">"goldenrod1"</span><span class="op">)</span></span>
-<span>                 <span class="op">)</span>,</span>
-<span>    siteData<span class="op">=</span><span class="va">berrySummary</span>,</span>
-<span>    siteSize<span class="op">=</span><span class="va">Subjects</span>,</span>
-<span>    siteMetric<span class="op">=</span><span class="va">ObservedResponse</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="80%"></p>
-</div>
-<div class="section level4">
-<h4 id="with-historical-data">With historical data<a class="anchor" aria-label="anchor" href="#with-historical-data"></a>
-</h4>
-<p>Suppose previous experience tells us that the event probability in this type of study should be between 0.50 and 0.75. We define the QTL such that we require the posterior event probability for a new participant to be in the range 0.5 to 0.75 inclusive to be at least 50%.</p>
+<div class="section level3">
+<h3 id="examples-of-qtl-evaluation-rules">Examples of QTL evaluation rules<a class="anchor" aria-label="anchor" href="#examples-of-qtl-evaluation-rules"></a>
+</h3>
 <blockquote>
-<p>When using a Bayesian Hierarchical Model, the probabilties associated with credible intervals are generally lower than those associated with similar frequentist models. This is because BHMs permit more sources of variation. Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study. The corresponding frequentist analysis assumes that all sites share common event rate, thus assuming there is no inter-site variation.</p>
+<p>When using a Bayesian Hierarchical Model, the probabilities associated with credible intervals are generally lower than those associated with similar frequentist models. This is because BHMs permit more sources of variation. Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study. The corresponding frequentist analysis assumes that all sites share common event rate, thus assuming there is no inter-site variation.</p>
 </blockquote>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">summarise</span><span class="op">(</span>PosteriorProb<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span> <span class="op">&gt;=</span> <span class="fl">0.5</span> <span class="op">&amp;</span> <span class="va">p</span> <span class="op">&lt;=</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 1</span></span>
-<span><span class="co">#&gt;   PosteriorProb</span></span>
-<span><span class="co">#&gt;           &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1         0.466</span></span></code></pre></div>
-<p>Again, the QTL is breached, and the process can be summarised graphically.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/createQtlPlot.html">createQtlPlot</a></span><span class="op">(</span></span>
-<span>    targetRange<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"lower"</span><span class="op">=</span><span class="fl">0.5</span>, <span class="st">"upper"</span><span class="op">=</span><span class="fl">0.75</span><span class="op">)</span>,</span>
-<span>    observedMetric<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">summarise</span><span class="op">(</span>Mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Mean</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="80%"></p>
-<p>The site-level KRIs can be added to the plot to help focus attention where intervention is likely to have the largest effect.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/createQtlPlot.html">createQtlPlot</a></span><span class="op">(</span></span>
-<span>    targetRange<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"lower"</span><span class="op">=</span><span class="fl">0.5</span>, <span class="st">"upper"</span><span class="op">=</span><span class="fl">0.75</span><span class="op">)</span>,</span>
-<span>    observedMetric<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">summarise</span><span class="op">(</span>Mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Mean</span><span class="op">)</span>,</span>
-<span>    siteData<span class="op">=</span><span class="va">berrySummary</span>,</span>
-<span>    siteSize<span class="op">=</span><span class="va">Subjects</span>,</span>
-<span>    siteMetric<span class="op">=</span><span class="va">ObservedResponse</span>,</span>
-<span>    actionLimits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"lower"</span><span class="op">=</span><span class="va">quantiles</span><span class="op">$</span><span class="va">Q95</span>, <span class="st">"upper"</span><span class="op">=</span><span class="cn">NA</span>, <span class="st">"alpha"</span><span class="op">=</span><span class="fl">0.3</span>, <span class="st">"colour"</span><span class="op">=</span><span class="st">"goldenrod1"</span><span class="op">)</span>,</span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"lower"</span><span class="op">=</span><span class="cn">NA</span>, <span class="st">"upper"</span><span class="op">=</span><span class="va">quantiles</span><span class="op">$</span><span class="va">Q05</span>, <span class="st">"alpha"</span><span class="op">=</span><span class="fl">0.3</span>, <span class="st">"colour"</span><span class="op">=</span><span class="st">"goldenrod1"</span><span class="op">)</span></span>
-<span>                 <span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="80%"></p>
-</div>
 <div class="section level4">
-<h4 id="built-in-functions-to-assist-in-the-evaluation-of-qtls">Built-in functions to assist in the evaluation of QTLs<a class="anchor" aria-label="anchor" href="#built-in-functions-to-assist-in-the-evaluation-of-qtls"></a>
+<h4 id="comparison-to-constant-values">Comparison to constant value(s)<a class="anchor" aria-label="anchor" href="#comparison-to-constant-values"></a>
 </h4>
-<p>For illustration, in this section we continue to use the example provided by Berry et al. </p>
-<div class="section level5">
-<h5 id="by-comparing-the-derived-metric-to-a-constant-value">By comparing the derived metric to a constant value<a class="anchor" aria-label="anchor" href="#by-comparing-the-derived-metric-to-a-constant-value"></a>
-</h5>
-<p>The <code>evaluatePointEstimateQTL</code> allows the comparison of an arbitrary scalar summary statistic derived from the estimate of the posterior distribution (which defaults to the mean), with an arbitrary number of lower and upper limits.</p>
-<p>For example, the code below defines a QTL based on the mean of the posterior distribution of the probability of an event. Call this probability <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Chat%7Bp%7D" title="\hat{p}" alt="\hat{p}">. The warning limits are 0.1 and 0.7. The action limits are 0.2 and 0.9.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<p>The <code>evaluatePointEstimateQTL</code> allows the comparison of an arbitrary scalar summary statistic (which defaults to the mean) derived from the estimate of the posterior distribution, with an arbitrary number of lower and upper limits.</p>
+<p>For example, the code below defines a QTL based on the mean of the posterior distribution of the probability of an event. Call this probability <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Chat%7Bp%7D" title="\hat{p}" alt="\hat{p}">. The warning limits are 0.5 and 0.8. The action limits are 0.4 and 0.9.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/evaluatePointEstimateQTL.html">evaluatePointEstimateQTL</a></span><span class="op">(</span></span>
-<span>    posterior<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>, </span>
-<span>    metric <span class="op">=</span> <span class="va">p</span>, </span>
-<span>    observedMetric<span class="op">=</span><span class="va">ObservedResponse</span>,</span>
-<span>    lower<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"warn"</span><span class="op">=</span><span class="fl">0.1</span>, <span class="st">"action"</span><span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>    upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"warn"</span><span class="op">=</span><span class="fl">0.7</span>, <span class="st">"action"</span><span class="op">=</span><span class="fl">0.9</span><span class="op">)</span></span>
+<span>    posterior <span class="op">=</span> <span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>,</span>
+<span>    metric <span class="op">=</span> <span class="va">p</span>,</span>
+<span>    observedMetric <span class="op">=</span> <span class="va">ObservedResponse</span>,</span>
+<span>    lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.5</span>, <span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>,</span>
+<span>    upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.8</span>, <span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; $status</span></span>
 <span><span class="co">#&gt; [1] "OK"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $qtl</span></span>
+<span><span class="co">#&gt; [1] 0.6793431</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
 <span><span class="co">#&gt;    Site Subjects Events ObservedResponse Status</span></span>
 <span><span class="co">#&gt;   &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt; </span></span>
 <span><span class="co">#&gt; 1     1       20     20            1     action</span></span>
-<span><span class="co">#&gt; 2     2       10      4            0.4   OK    </span></span>
+<span><span class="co">#&gt; 2     2       10      4            0.4   warn  </span></span>
 <span><span class="co">#&gt; 3     3       16     11            0.688 OK    </span></span>
 <span><span class="co">#&gt; 4     4       19     10            0.526 OK    </span></span>
-<span><span class="co">#&gt; 5     5       14      5            0.357 OK    </span></span>
-<span><span class="co">#&gt; 6     6       46     36            0.783 warn  </span></span>
+<span><span class="co">#&gt; 5     5       14      5            0.357 warn  </span></span>
+<span><span class="co">#&gt; 6     6       46     36            0.783 OK    </span></span>
 <span><span class="co">#&gt; 7     7       10      9            0.9   warn  </span></span>
-<span><span class="co">#&gt; 8     8        9      7            0.778 warn  </span></span>
-<span><span class="co">#&gt; 9     9        6      4            0.667 OK    </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6813646</span></span></code></pre></div>
+<span><span class="co">#&gt; 8     8        9      7            0.778 OK    </span></span>
+<span><span class="co">#&gt; 9     9        6      4            0.667 OK</span></span></code></pre></div>
 <p>As with all <code>evaluateXXXXQTL</code> functions, the return value of <code>evaluatePointEstimateQTL</code> is a list. The <code>status</code> element indicates whether or not the QTL’s limits have been breached. The <code>qtl</code> element gives the calculated value of the QTL metric and the <code>data</code> element returns a copy of the <code>data.frame</code> containing the site level KRIs augmented with a column indicating which, if any, of the various limits were breached by that site.</p>
 <p>Both the <code>lower</code> and <code>upper</code> parameters are optional (though at least one must be given) and the number of limits, and their labels, are arbitrary.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/evaluatePointEstimateQTL.html">evaluatePointEstimateQTL</a></span><span class="op">(</span></span>
-<span>    posterior<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>, </span>
-<span>    metric <span class="op">=</span> <span class="va">p</span>, </span>
-<span>    observedMetric<span class="op">=</span><span class="va">ObservedResponse</span>,</span>
-<span>    upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mild"</span><span class="op">=</span><span class="fl">0.6</span>, <span class="st">"moderate"</span><span class="op">=</span><span class="fl">0.8</span>, <span class="st">"severe"</span><span class="op">=</span><span class="fl">0.9</span><span class="op">)</span></span>
+<span>    posterior <span class="op">=</span> <span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>,</span>
+<span>    metric <span class="op">=</span> <span class="va">p</span>,</span>
+<span>    observedMetric <span class="op">=</span> <span class="va">ObservedResponse</span>,</span>
+<span>    upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mild"</span> <span class="op">=</span> <span class="fl">0.6</span>, <span class="st">"moderate"</span> <span class="op">=</span> <span class="fl">0.8</span>, <span class="st">"severe"</span> <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p>If only one limit is defined, this can be provided as a scalar, in which case it is labelled <code>action</code>.</p>
 <p>The function on which the QTL is based is specified by the <code>stat</code> parameter of <code>evaluatePointEstimateQTL</code> and can be a user-defined function. For example, the following code fragments define QTLs based on the median</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/evaluatePointEstimateQTL.html">evaluatePointEstimateQTL</a></span><span class="op">(</span></span>
-<span>    posterior<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>, </span>
-<span>    metric <span class="op">=</span> <span class="va">p</span>, </span>
-<span>    stat<span class="op">=</span><span class="va">median</span>,</span>
-<span>    observedMetric<span class="op">=</span><span class="va">ObservedResponse</span>,</span>
-<span>    upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"warn"</span><span class="op">=</span><span class="fl">0.7</span>, <span class="st">"action"</span><span class="op">=</span><span class="fl">0.9</span><span class="op">)</span></span>
+<span>    posterior <span class="op">=</span> <span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>,</span>
+<span>    metric <span class="op">=</span> <span class="va">p</span>,</span>
+<span>    stat <span class="op">=</span> <span class="va">median</span>,</span>
+<span>    observedMetric <span class="op">=</span> <span class="va">ObservedResponse</span>,</span>
+<span>    upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.7</span>, <span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; $status</span></span>
 <span><span class="co">#&gt; [1] "OK"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $qtl</span></span>
+<span><span class="co">#&gt; [1] 0.6954819</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -472,22 +359,23 @@ Upper
 <span><span class="co">#&gt; 6     6       46     36            0.783 warn  </span></span>
 <span><span class="co">#&gt; 7     7       10      9            0.9   warn  </span></span>
 <span><span class="co">#&gt; 8     8        9      7            0.778 warn  </span></span>
-<span><span class="co">#&gt; 9     9        6      4            0.667 OK    </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6993631</span></span></code></pre></div>
+<span><span class="co">#&gt; 9     9        6      4            0.667 OK</span></span></code></pre></div>
 <p>and 10th centile of the posterior distribution of <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Chat%7Bp%7D" title="\hat{p}" alt="\hat{p}">.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/evaluatePointEstimateQTL.html">evaluatePointEstimateQTL</a></span><span class="op">(</span></span>
-<span>    posterior<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>, </span>
-<span>    metric <span class="op">=</span> <span class="va">p</span>, </span>
+<span>    posterior <span class="op">=</span> <span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>,</span>
+<span>    metric <span class="op">=</span> <span class="va">p</span>,</span>
 <span>    stat <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, probs <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span>
-<span>    observedMetric<span class="op">=</span><span class="va">ObservedResponse</span>,</span>
-<span>    upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"warn"</span><span class="op">=</span><span class="fl">0.3</span>, <span class="st">"action"</span><span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span>    observedMetric <span class="op">=</span> <span class="va">ObservedResponse</span>,</span>
+<span>    upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.3</span>, <span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; $status</span></span>
 <span><span class="co">#&gt; [1] "warn"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $qtl</span></span>
+<span><span class="co">#&gt;       10% </span></span>
+<span><span class="co">#&gt; 0.4499657 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -501,23 +389,49 @@ Upper
 <span><span class="co">#&gt; 6     6       46     36            0.783 warn  </span></span>
 <span><span class="co">#&gt; 7     7       10      9            0.9   action</span></span>
 <span><span class="co">#&gt; 8     8        9      7            0.778 warn  </span></span>
-<span><span class="co">#&gt; 9     9        6      4            0.667 warn  </span></span>
+<span><span class="co">#&gt; 9     9        6      4            0.667 warn</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="based-on-the-probability-that-the-derived-metric-is-in-a-given-range">Based on the probability that the derived metric is in a given range<a class="anchor" aria-label="anchor" href="#based-on-the-probability-that-the-derived-metric-is-in-a-given-range"></a>
+</h4>
+<p>Suppose previous experience tells us that the event probability in this type of study should be between 0.50 and 0.75. We define the QTL such that we require the posterior event probability for a new participant to be in the range 0.5 to 0.75 inclusive to be at least 60%, with a warning limit of 80%. Individual sites are flagged if their response rate is either below 40% or above 85%.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">qtlProbInRange</span> <span class="op">&lt;-</span> <span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>                    <span class="fu"><a href="reference/evaluateProbabilityInRangeQTL.html">evaluateProbabilityInRangeQTL</a></span><span class="op">(</span></span>
+<span>                      posterior <span class="op">=</span> <span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>,</span>
+<span>                      metric <span class="op">=</span> <span class="va">p</span>,</span>
+<span>                      observedMetric <span class="op">=</span> <span class="va">ObservedResponse</span>,</span>
+<span>                      range<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span>,</span>
+<span>                      probs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"warn"</span><span class="op">=</span> <span class="fl">0.8</span>, <span class="st">"action"</span><span class="op">=</span><span class="fl">0.6</span><span class="op">)</span>,</span>
+<span>                      lower<span class="op">=</span><span class="fl">0.4</span>,</span>
+<span>                      upper<span class="op">=</span><span class="fl">0.85</span></span>
+<span>                    <span class="op">)</span></span>
+<span><span class="va">qtlProbInRange</span></span>
+<span><span class="co">#&gt; $status</span></span>
+<span><span class="co">#&gt; [1] "action"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt;       10% </span></span>
-<span><span class="co">#&gt; 0.4465293</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.47425</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $data</span></span>
+<span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
+<span><span class="co">#&gt;    Site Subjects Events ObservedResponse Status</span></span>
+<span><span class="co">#&gt;   &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt; </span></span>
+<span><span class="co">#&gt; 1     1       20     20            1     action</span></span>
+<span><span class="co">#&gt; 2     2       10      4            0.4   OK    </span></span>
+<span><span class="co">#&gt; 3     3       16     11            0.688 OK    </span></span>
+<span><span class="co">#&gt; 4     4       19     10            0.526 OK    </span></span>
+<span><span class="co">#&gt; 5     5       14      5            0.357 action</span></span>
+<span><span class="co">#&gt; 6     6       46     36            0.783 OK    </span></span>
+<span><span class="co">#&gt; 7     7       10      9            0.9   action</span></span>
+<span><span class="co">#&gt; 8     8        9      7            0.778 OK    </span></span>
+<span><span class="co">#&gt; 9     9        6      4            0.667 OK</span></span></code></pre></div>
+<p>Again, the QTL is breached, since the probability that the study-level event rate is in the range [0.5, 0.75] is only 0.47.</p>
 </div>
-<div class="section level5">
-<h5 id="by-calculating-the-probability-that-the-derived-metric-is-in-a-given-range">By calculating the probability that the derived metric is in a given range<a class="anchor" aria-label="anchor" href="#by-calculating-the-probability-that-the-derived-metric-is-in-a-given-range"></a>
-</h5>
-<blockquote>
-<p>TO DO</p>
-</blockquote>
-</div>
-<div class="section level5">
-<h5 id="by-using-an-arbitrary-criterion">By using an arbitrary criterion<a class="anchor" aria-label="anchor" href="#by-using-an-arbitrary-criterion"></a>
-</h5>
-<p><code>evaluatePointEstimateQTL</code>, <code>evaluateXXXXQTL</code> and <code>evaluateXXXXQTL</code> are wrappers around <code>evaluateCustomQTL</code>, which can be used to evaluate an arbitrary, user-defined QTL rule. <code>evaluateCustomQTL</code> takes the following parameters:</p>
+<div class="section level4">
+<h4 id="using-an-arbitrary-criterion">Using an arbitrary criterion<a class="anchor" aria-label="anchor" href="#using-an-arbitrary-criterion"></a>
+</h4>
+<p><code>evaluatePointEstimateQTL</code>, <code>evaluateProbabilityInRangeQTL</code> (and <code>evaluateSiteMetricQTL</code> discussed below) are wrappers around <code>evaluateCustomQTL</code>, which can be used to evaluate an arbitrary, user-defined QTL rule. <code>evaluateCustomQTL</code> takes the following parameters:</p>
 <ul>
 <li>
 <code>data</code>: a tibble containing site-level observed metrics</li>
@@ -531,20 +445,22 @@ Upper
 <code>...</code>: additional parameters passed to <code>f</code>.</li>
 </ul>
 <p>Essentially, all that <code>evaluateCustomQTL</code> does is to perform some basic checks on its parameter values and then return the value returned by <code>data %&gt;% f(posterior, ...)</code>. So, for example, a simplified version of <code>evaluatePointEstimateQTL</code> that compares <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Chat%7Bp%7D" title="\hat{p}" alt="\hat{p}"> to 0.6 might be</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/evaluateCustomQTL.html">evaluateCustomQTL</a></span><span class="op">(</span></span>
-<span>    posterior<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>, </span>
-<span>    f<span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">posterior</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    posterior <span class="op">=</span> <span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>,</span>
+<span>    f <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">posterior</span><span class="op">)</span> <span class="op">{</span></span>
 <span>      <span class="va">rv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>      <span class="va">rv</span><span class="op">$</span><span class="va">qtl</span> <span class="op">&lt;-</span> <span class="va">posterior</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">summarise</span><span class="op">(</span>qtl<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">qtl</span><span class="op">)</span></span>
+<span>      <span class="va">rv</span><span class="op">$</span><span class="va">qtl</span> <span class="op">&lt;-</span> <span class="va">posterior</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="fu">summarise</span><span class="op">(</span>qtl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>        <span class="fu">pull</span><span class="op">(</span><span class="va">qtl</span><span class="op">)</span></span>
 <span>      <span class="va">rv</span><span class="op">$</span><span class="va">status</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">rv</span><span class="op">$</span><span class="va">qtl</span> <span class="op">&lt;</span> <span class="fl">0.6</span>, <span class="st">"OK"</span>, <span class="st">"Breach"</span><span class="op">)</span></span>
-<span>      <span class="va">rv</span><span class="op">$</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>Status<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">ObservedResponse</span> <span class="op">&lt;</span> <span class="fl">0.6</span>, <span class="st">"OK"</span>, <span class="st">"Breach"</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="va">rv</span><span class="op">$</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>Status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">ObservedResponse</span> <span class="op">&lt;</span> <span class="fl">0.6</span>, <span class="st">"OK"</span>, <span class="st">"Breach"</span><span class="op">)</span><span class="op">)</span></span>
 <span>      <span class="va">rv</span></span>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6813646</span></span>
+<span><span class="co">#&gt; [1] 0.6793431</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $status</span></span>
 <span><span class="co">#&gt; [1] "Breach"</span></span>
@@ -564,45 +480,154 @@ Upper
 <span><span class="co">#&gt; 9     9        6      4            0.667 Breach</span></span></code></pre></div>
 </div>
 </div>
-</div>
 <div class="section level3">
-<h3 id="observed---expected-methodology">Observed - Expected Methodology<a class="anchor" aria-label="anchor" href="#observed---expected-methodology"></a>
+<h3 id="without-historical-data">Without historical data<a class="anchor" aria-label="anchor" href="#without-historical-data"></a>
 </h3>
+<p>Especially early in development of a new compound, project teams often say they have no idea about what values of various metrics that could be used to define QTLs might be. For conventionally defined QTLs this can be a problem: an inappropriately chosen QTL might lead to a breach when, in reality, there is no issue. Basing the QTL on the centiles of the posterior distribution of the metric obtained from the QTL model just fitted, and recalling that the purpose of inclusion/exclusion criteria are to minimise heterogeneity, we can avoid this problem.</p>
+<p>The <code>evaluateSiteMetricQTL</code> function calculates thresholds (for example warning and action limits) by translating quantiles of the posterior distribution of the metric to the real-life scale on which the metric is measured. Again, we use the Berry data as an example.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rvSiteMetrics</span> <span class="op">&lt;-</span> <span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>                   <span class="fu"><a href="reference/evaluateSiteMetricQTL.html">evaluateSiteMetricQTL</a></span><span class="op">(</span></span>
+<span>                   posterior<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>,</span>
+<span>                   metric<span class="op">=</span><span class="va">p</span>,</span>
+<span>                   observedMetric<span class="op">=</span><span class="va">ObservedResponse</span>,</span>
+<span>                   lower<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"action"</span><span class="op">=</span><span class="fl">0.05</span>, <span class="st">"warn"</span><span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>,</span>
+<span>                   upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"action"</span><span class="op">=</span><span class="fl">0.95</span>, <span class="st">"warn"</span><span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span>                 <span class="op">)</span></span></code></pre></div>
+<p>The <code>quantiles</code> element of the return value contains the mappings from quantile of the posterior to observed values of the metric. For example, the first row of <code>rvSiteMetrics$quantiles</code> shows that the lower action limit is the 5th centile of the posterior, which corresponds to an event probability of 0.372.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">quantiles</span></span>
+<span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
+<span><span class="co">#&gt;   Threshold Status Quantile     p</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Lower     action     0.05 0.372</span></span>
+<span><span class="co">#&gt; 2 Lower     warn       0.2  0.538</span></span>
+<span><span class="co">#&gt; 3 Upper     warn       0.8  0.832</span></span>
+<span><span class="co">#&gt; 4 Upper     action     0.95 0.929</span></span></code></pre></div>
+<p>As before, the <code>data</code> element of the list contains a copy of the site metric dataset, augmented by a column (named <code>Status</code> by default) that allocates the observed site-level metrics (KRIs) to a band defined by the thresholds in <code>lower</code> and <code>upper</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
+<span><span class="co">#&gt;    Site Subjects Events ObservedResponse Status</span></span>
+<span><span class="co">#&gt;   &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt; </span></span>
+<span><span class="co">#&gt; 1     1       20     20            1     warn  </span></span>
+<span><span class="co">#&gt; 2     2       10      4            0.4   warn  </span></span>
+<span><span class="co">#&gt; 3     3       16     11            0.688 OK    </span></span>
+<span><span class="co">#&gt; 4     4       19     10            0.526 warn  </span></span>
+<span><span class="co">#&gt; 5     5       14      5            0.357 action</span></span>
+<span><span class="co">#&gt; 6     6       46     36            0.783 OK    </span></span>
+<span><span class="co">#&gt; 7     7       10      9            0.9   warn  </span></span>
+<span><span class="co">#&gt; 8     8        9      7            0.778 OK    </span></span>
+<span><span class="co">#&gt; 9     9        6      4            0.667 OK</span></span></code></pre></div>
+<blockquote>
+<p>NB <code>rvSiteMetrics$data</code> contains incorrect values in the <code>Status</code> column. See <a href="https://github.com/openpharma/rbqmR/issues/12" class="external-link">issue #12</a>.</p>
+</blockquote>
+<p>The <code>qtl</code> element of the return value contains counts of sites by threshold name.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">qtl</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span><span class="co">#&gt;   Status     N</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;  &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 action     1</span></span>
+<span><span class="co">#&gt; 2 OK         4</span></span>
+<span><span class="co">#&gt; 3 warn       4</span></span></code></pre></div>
+<p>Finally, the <code>status</code> of the returned QTL is <code>"OK"</code> by default.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">status</span></span>
+<span><span class="co">#&gt; [1] "OK"</span></span></code></pre></div>
+<p>However, <code>evaluateSiteMetricQTL</code> can be passed a function that can apply an arbitrary rule to determine whether or not a breach has occurred. The function’s only argument is the <code>qtl</code> element of <code>evaluateSiteMetricQTL</code>’s return value. For example, given that we have nine sites in our fictitious example and we have calculated a 90% posterior credible interval, it’s reasonable to expect one site to lie outside this range. So we might say that a QTL breach has occurred if two or more sites lie outside the credible interval:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="fu"><a href="reference/evaluateSiteMetricQTL.html">evaluateSiteMetricQTL</a></span><span class="op">(</span></span>
+<span>  posterior<span class="op">=</span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span>,</span>
+<span>  metric<span class="op">=</span><span class="va">p</span>,</span>
+<span>  observedMetric<span class="op">=</span><span class="va">ObservedResponse</span>,</span>
+<span>  lower<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"action"</span><span class="op">=</span><span class="fl">0.5</span>, <span class="st">"warn"</span><span class="op">=</span><span class="fl">0.6</span><span class="op">)</span>,</span>
+<span>  upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"action"</span><span class="op">=</span><span class="fl">0.9</span>, <span class="st">"warn"</span><span class="op">=</span><span class="fl">0.8</span><span class="op">)</span>,</span>
+<span>  statusFunc<span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span></span>
+<span>                           <span class="va">d</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>                             <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Status</span> <span class="op">==</span> <span class="st">"action"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>                             <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">2</span>, <span class="st">"action"</span>, <span class="st">"OK"</span></span>
+<span>                         <span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">status</span></span>
+<span><span class="co">#&gt; [1] "action"</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="representing-the-evaluation-of-a-qtl-graphically">Representing the evaluation of a QTL graphically<a class="anchor" aria-label="anchor" href="#representing-the-evaluation-of-a-qtl-graphically"></a>
+</h2>
+<p>Take, as an example, a QTL that requires a study level metric to lie within a given range, as illustrated above.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/createQtlPlot.html">createQtlPlot</a></span><span class="op">(</span></span>
+<span>    targetRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"lower"</span> <span class="op">=</span> <span class="fl">0.5</span>, <span class="st">"upper"</span> <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span>,</span>
+<span>    observedMetric <span class="op">=</span> <span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">summarise</span><span class="op">(</span>Mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Mean</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-13-1.png" width="80%"></p>
+<p>The site-level KRIs can be added to the plot to help focus attention where intervention is likely to have the largest effect.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/createQtlPlot.html">createQtlPlot</a></span><span class="op">(</span></span>
+<span>    targetRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"lower"</span> <span class="op">=</span> <span class="fl">0.5</span>, <span class="st">"upper"</span> <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span>,</span>
+<span>    observedMetric <span class="op">=</span> <span class="va">fitted</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">summarise</span><span class="op">(</span>Mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">Mean</span><span class="op">)</span>,</span>
+<span>    actionLimits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>        <span class="st">"lower"</span> <span class="op">=</span> <span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">quantiles</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Threshold</span> <span class="op">==</span> <span class="st">"Upper"</span>, <span class="va">Status</span> <span class="op">==</span> <span class="st">"action"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">p</span><span class="op">)</span>, </span>
+<span>        <span class="st">"upper"</span> <span class="op">=</span> <span class="cn">NA</span>, </span>
+<span>        <span class="st">"alpha"</span> <span class="op">=</span> <span class="fl">0.3</span>, </span>
+<span>        <span class="st">"colour"</span> <span class="op">=</span> <span class="st">"goldenrod1"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>        <span class="st">"lower"</span> <span class="op">=</span> <span class="cn">NA</span>, </span>
+<span>        <span class="st">"upper"</span> <span class="op">=</span> <span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">quantiles</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Threshold</span> <span class="op">==</span> <span class="st">"Lower"</span>, <span class="va">Status</span> <span class="op">==</span> <span class="st">"action"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">pull</span><span class="op">(</span><span class="va">p</span><span class="op">)</span>, </span>
+<span>        <span class="st">"alpha"</span> <span class="op">=</span> <span class="fl">0.3</span>, </span>
+<span>        <span class="st">"colour"</span> <span class="op">=</span> <span class="st">"goldenrod1"</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    siteData <span class="op">=</span> <span class="va">berrySummary</span>,</span>
+<span>    siteSize <span class="op">=</span> <span class="va">Subjects</span>,</span>
+<span>    siteMetric <span class="op">=</span> <span class="va">ObservedResponse</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-createQtlPlot-1.png" width="80%"></p>
+</div>
+<div class="section level2">
+<h2 id="observed---expected-methodology">Observed - Expected Methodology<a class="anchor" aria-label="anchor" href="#observed---expected-methodology"></a>
+</h2>
 <p>We generate some random data similar to that used by Gilbert (Gilbert 2020), after setting a seed for reproducibility.</p>
 <p>In order to illustrate what happens when a QTL is breached, we set the probability that a participant reports an event to 0.13, even though the QTL process will assume the event rate is 0.10…</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">011327</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">randomData</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
-<span>  Subject<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">400</span>,</span>
-<span>  Event<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fl">400</span>, <span class="fl">1</span>, <span class="fl">0.13</span><span class="op">)</span></span>
+<span>  Subject <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">400</span>,</span>
+<span>  Event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fl">400</span>, <span class="fl">1</span>, <span class="fl">0.13</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>… and create an observed-expected table …</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op">&lt;-</span> <span class="va">randomData</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>              <span class="fu"><a href="reference/createObservedMinusExpectedTable.html">createObservedMinusExpectedTable</a></span><span class="op">(</span></span>
-<span>                timeVar <span class="op">=</span> <span class="va">Subject</span>,</span>
-<span>                eventVar <span class="op">=</span> <span class="va">Event</span>,</span>
-<span>                eventArray <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                expectedRate <span class="op">=</span> <span class="fl">0.1</span>,</span>
-<span>                maxTrialSize<span class="op">=</span><span class="fl">400</span></span>
-<span>              <span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op">&lt;-</span> <span class="va">randomData</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/createObservedMinusExpectedTable.html">createObservedMinusExpectedTable</a></span><span class="op">(</span></span>
+<span>    timeVar <span class="op">=</span> <span class="va">Subject</span>,</span>
+<span>    eventVar <span class="op">=</span> <span class="va">Event</span>,</span>
+<span>    eventArray <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    expectedRate <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>    maxTrialSize <span class="op">=</span> <span class="fl">400</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p>… and plot the corresponding graph.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/createObservedMinusExpectedPlot.html">createObservedMinusExpectedPlot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-18-1.png" width="80%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-16-1.png" width="80%"></p>
 <p>We can see that the trial breached a warning limit. When did this first happen?</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Status</span> <span class="op">!=</span>  <span class="st">"OK"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="fu">contains</span><span class="op">(</span><span class="st">"Action"</span><span class="op">)</span>, <span class="op">-</span><span class="va">SubjectIndex</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">omeTable</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Status</span> <span class="op">!=</span> <span class="st">"OK"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="fu">contains</span><span class="op">(</span><span class="st">"Action"</span><span class="op">)</span>, <span class="op">-</span><span class="va">SubjectIndex</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">kable</span><span class="op">(</span></span>
-<span>    col.names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Subject"</span>, <span class="st">"Event"</span>, <span class="st">"Cumulative Events"</span>, <span class="st">"O - E"</span>, <span class="st">"Status"</span>, <span class="st">"Lower"</span>, <span class="st">"Upper"</span><span class="op">)</span>,</span>
-<span>    caption<span class="op">=</span><span class="st">"First breach of an action or warning limit"</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">add_header_above</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">" "</span><span class="op">=</span><span class="fl">5</span>, <span class="st">"Warning Limits"</span><span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>    col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Subject"</span>, <span class="st">"Event"</span>, <span class="st">"Cumulative Events"</span>, <span class="st">"O - E"</span>, <span class="st">"Status"</span>, <span class="st">"Lower"</span>, <span class="st">"Upper"</span><span class="op">)</span>,</span>
+<span>    caption <span class="op">=</span> <span class="st">"First breach of an action or warning limit"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">add_header_above</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">" "</span> <span class="op">=</span> <span class="fl">5</span>, <span class="st">"Warning Limits"</span> <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <caption>
 First breach of an action or warning limit
@@ -666,44 +691,45 @@ WARN
 </tr></tbody>
 </table>
 </div>
-<div class="section level3">
-<h3 id="observed--expected-methodology">Observed / Expected methodology<a class="anchor" aria-label="anchor" href="#observed--expected-methodology"></a>
-</h3>
+<div class="section level2">
+<h2 id="observed--expected-methodology">Observed / Expected methodology<a class="anchor" aria-label="anchor" href="#observed--expected-methodology"></a>
+</h2>
 <p>Katz et al (Katz D 1978) calculate the confidence interval for the ratio of two binomial random variables. We use this to determine QTLs for the ratio of observed over expected proportions. The variability associated with a ratio suggests that this methodology is likely to be useful only for large studies with low expected event rates.</p>
 <p>We require historical trial data to implement this methodology.</p>
 <p>Suppose we have data on 10,000 historical patients who have reported a given event at a rate of 1.4%. We are planning a 1500 patient trial and have no reason to suppose the event rate in the trial will be any different from what has been seen in the past.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/createObservedOverExpectedTable.html">createObservedOverExpectedTable</a></span><span class="op">(</span></span>
-<span>  nHistorical<span class="op">=</span><span class="fl">10000</span>,</span>
-<span>  historicalRate<span class="op">=</span><span class="fl">0.014</span>,</span>
-<span>  expectedRate<span class="op">=</span><span class="fl">0.014</span>,</span>
-<span>  nObservedRange<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">1500</span>, <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span><span class="fu"><a href="reference/createObservedOverExpectedPlot.html">createObservedOverExpectedPlot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-20-1.png" width="80%"></p>
+<span>  nHistorical <span class="op">=</span> <span class="fl">10000</span>,</span>
+<span>  historicalRate <span class="op">=</span> <span class="fl">0.014</span>,</span>
+<span>  expectedRate <span class="op">=</span> <span class="fl">0.014</span>,</span>
+<span>  nObservedRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">1500</span>, <span class="fl">25</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/createObservedOverExpectedPlot.html">createObservedOverExpectedPlot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-18-1.png" width="80%"></p>
 <p>As the trial is executed, the observed data can be added to the table and the plot.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">observedData</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
-<span>                  NObserved<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">500</span>, <span class="fl">750</span>, <span class="fl">1000</span><span class="op">)</span>, </span>
-<span>                  ObservedRate<span class="op">=</span><span class="fl">100</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">9</span>, <span class="fl">15</span>, <span class="fl">16</span><span class="op">)</span><span class="op">/</span><span class="va">NObserved</span></span>
-<span>                <span class="op">)</span></span>
+<span>  NObserved <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">500</span>, <span class="fl">750</span>, <span class="fl">1000</span><span class="op">)</span>,</span>
+<span>  ObservedRate <span class="op">=</span> <span class="fl">100</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">9</span>, <span class="fl">15</span>, <span class="fl">16</span><span class="op">)</span> <span class="op">/</span> <span class="va">NObserved</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/createObservedOverExpectedTable.html">createObservedOverExpectedTable</a></span><span class="op">(</span></span>
-<span>           nHistorical<span class="op">=</span><span class="fl">10000</span>,</span>
-<span>           historicalRate<span class="op">=</span><span class="fl">0.014</span>,</span>
-<span>           expectedRate<span class="op">=</span><span class="fl">0.014</span>,</span>
-<span>           nObservedRange<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">1500</span>, <span class="fl">25</span><span class="op">)</span>,</span>
-<span>           observedData<span class="op">=</span><span class="va">observedData</span></span>
-<span>         <span class="op">)</span></span>
-<span></span>
-<span><span class="va">table</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/createObservedOverExpectedPlot.html">createObservedOverExpectedPlot</a></span><span class="op">(</span>observedRate<span class="op">=</span><span class="va">ObservedRate</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-21-1.png" width="80%"></p>
+<span>  nHistorical <span class="op">=</span> <span class="fl">10000</span>,</span>
+<span>  historicalRate <span class="op">=</span> <span class="fl">0.014</span>,</span>
+<span>  expectedRate <span class="op">=</span> <span class="fl">0.014</span>,</span>
+<span>  nObservedRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">1500</span>, <span class="fl">25</span><span class="op">)</span>,</span>
+<span>  observedData <span class="op">=</span> <span class="va">observedData</span>,</span>
+<span>  observedRate <span class="op">=</span> <span class="va">ObservedRate</span></span>
+<span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/createObservedOverExpectedPlot.html">createObservedOverExpectedPlot</a></span><span class="op">(</span>observedRate <span class="op">=</span> <span class="va">ObservedRate</span><span class="op">)</span></span></code></pre></div>
+<blockquote>
+<p>TODO Need to check interpretation of parameters</p>
+</blockquote>
 </div>
 </div>
-<div class="section level2">
-<h2 id="beyond-transcelerate">Beyond Transcelerate<a class="anchor" aria-label="anchor" href="#beyond-transcelerate"></a>
-</h2>
-<p>At the time of writing (late 2022) The Transcelerate Quality Tolerance Limit Framework (Transcelerate 2020) lists metrics that are exclusively binary in nature. There are many other potential metrics that are non-binary and which may provide insight into the conduct of the trial. For example,</p>
+<div class="section level1">
+<h1 id="beyond-transcelerate">Beyond TransCelerate<a class="anchor" aria-label="anchor" href="#beyond-transcelerate"></a>
+</h1>
+<p>At the time of writing (late 2022) The TransCelerate Quality Tolerance Limit Framework (Transcelerate 2020) lists metrics that are exclusively binary in nature. There are many other potential metrics that are non-binary and which may provide insight into the conduct of the trial. For example,</p>
 <ul>
 <li>The number of episodes of rescue medication (as opposed to the percentage or number of trial participants on rescue medication)</li>
 <li>Time to withdrawal of consent (as opposed to the percentage or number of trial participants with withdrawal of informed consent)</li>
@@ -715,11 +741,11 @@ WARN
 <li>Time to respond to data queries</li>
 </ul>
 <p>The Bayesian QTL framework implemented in <code>rbqmR</code> can easily be extended to include these other data types.</p>
-<div class="section level3">
-<h3 id="events-per-unit-time">Events per unit time<a class="anchor" aria-label="anchor" href="#events-per-unit-time"></a>
-</h3>
+<div class="section level2">
+<h2 id="events-per-unit-time">Events per unit time<a class="anchor" aria-label="anchor" href="#events-per-unit-time"></a>
+</h2>
 <p>We use data on the numbers of Prussian cavalry officers kicked to death by horses (Bortkiewicz 1898) to illustrate the method.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"cavalryDeaths"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">cavalryDeaths</span></span>
@@ -738,16 +764,16 @@ WARN
 <span><span class="co">#&gt; 10  1875 Corps 9      0</span></span>
 <span><span class="co">#&gt; # … with 270 more rows</span></span></code></pre></div>
 <p>Regard different cavalry Corps as “sites” and regard the number of years for which data were collected as “exposure”.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cavalrySummary</span> <span class="op">&lt;-</span> <span class="va">cavalryDeaths</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>                <span class="fu">group_by</span><span class="op">(</span><span class="va">Corps</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>                <span class="fu">summarise</span><span class="op">(</span></span>
-<span>                  Deaths<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Deaths</span><span class="op">)</span>, </span>
-<span>                  TotalTime<span class="op">=</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span>, </span>
-<span>                  .groups<span class="op">=</span><span class="st">"drop"</span></span>
-<span>                <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>                <span class="fu">mutate</span><span class="op">(</span>DeathRate<span class="op">=</span><span class="va">Deaths</span><span class="op">/</span><span class="va">TotalTime</span><span class="op">)</span></span>
-<span>                </span>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cavalrySummary</span> <span class="op">&lt;-</span> <span class="va">cavalryDeaths</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Corps</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    Deaths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Deaths</span><span class="op">)</span>,</span>
+<span>    TotalTime <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>DeathRate <span class="op">=</span> <span class="va">Deaths</span> <span class="op">/</span> <span class="va">TotalTime</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">cavalrySummary</span></span>
 <span><span class="co">#&gt; # A tibble: 14 × 4</span></span>
 <span><span class="co">#&gt;    Corps    Deaths TotalTime DeathRate</span></span>
@@ -767,27 +793,26 @@ WARN
 <span><span class="co">#&gt; 13 Corps 14     24        20      1.2 </span></span>
 <span><span class="co">#&gt; 14 Corps 15      8        20      0.4</span></span></code></pre></div>
 <p>Although not necessary here, because data for all Corps was recorded for the same amount of time, the Poisson model used by <code>rbqmR</code> adjusts risk by total exposure at the site.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/getModelString.html">getModelString</a></span><span class="op">(</span><span class="st">"poisson"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "model {\n   for (i in 1:k) {\n     \n     events[i] ~ dpois(mu[i])\n     mu[i] &lt;- lambda[i]*exposure[i]\n     \n     lambda[i] ~ dgamma(shape, 1/scale)\n   }\n   scale ~ dgamma(1, 1)\n   shape ~ dgamma(1, 1)\n }"</span></span></code></pre></div>
-<p>Fitting the model is straightforward.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">poissonFit</span> <span class="op">&lt;-</span> <span class="va">cavalrySummary</span><span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>                <span class="fu"><a href="reference/fitBayesPoissonModel.html">fitBayesPoissonModel</a></span><span class="op">(</span><span class="va">Deaths</span>, <span class="va">TotalTime</span><span class="op">)</span></span>
-<span><span class="va">poissonFit</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/getModelString.html">getModelString</a></span><span class="op">(</span><span class="st">"poisson"</span><span class="op">)</span></span></code></pre></div>
+<p>[1] “model {for (i in 1:k) {events[i] ~ dpois(mu[i])mu[i] &lt;- lambda[i]*exposure[i]lambda[i] ~ dgamma(shape, 1/scale)}scale ~ dgamma(1, 1)shape ~ dgamma(1, 1)}” Fitting the model is straightforward.</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">poissonFit</span> <span class="op">&lt;-</span> <span class="va">cavalrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/fitBayesPoissonModel.html">fitBayesPoissonModel</a></span><span class="op">(</span><span class="va">Deaths</span>, <span class="va">TotalTime</span><span class="op">)</span></span>
+<span><span class="va">poissonFit</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/createQtlPlot.html">createQtlPlot</a></span><span class="op">(</span></span>
-<span>    metric<span class="op">=</span><span class="va">lambda</span>,</span>
-<span>    siteData<span class="op">=</span><span class="va">cavalrySummary</span>,</span>
-<span>    siteSize<span class="op">=</span><span class="va">TotalTime</span>,</span>
-<span>    siteMetric<span class="op">=</span><span class="va">DeathRate</span>    </span>
+<span>    metric <span class="op">=</span> <span class="va">lambda</span>,</span>
+<span>    siteData <span class="op">=</span> <span class="va">cavalrySummary</span>,</span>
+<span>    siteSize <span class="op">=</span> <span class="va">TotalTime</span>,</span>
+<span>    siteMetric <span class="op">=</span> <span class="va">DeathRate</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">labs</span><span class="op">(</span>x<span class="op">=</span><span class="st">"Deaths per year"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-25-1.png" width="80%"></p>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Deaths per year"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-23-1.png" width="80%"></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
+<div class="section level1">
+<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-BERRY" class="csl-entry">
 Berry SM, Lee JJ, Carlin BP. 2011. <em>Bayesian Adaptive Methods for Clinical Trials</em>. CRC Press.
@@ -806,7 +831,7 @@ Transcelerate. 2020. “Quality Tolerance Limits Framework.” Research report. 
 </div>
 </div>
 </div>
-</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -841,6 +866,7 @@ Transcelerate. 2020. “Quality Tolerance Limits Framework.” Research report. 
 <li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
 <li><a href="https://opensource.org/licenses/Apache-2.0" class="external-link"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a></li>
 <li><a href="https://github.com/openpharma/rbqmR/actions" class="external-link"><img src="https://github.com/openpharma/rbqmR/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/openpharma/mtdesign/blob/_xml_coverage_reports/data/main/coverage.xml" class="external-link"><img src="https://raw.githubusercontent.com/openpharma/rbqmR/_xml_coverage_reports/data/main/badge.svg" alt="Test Coverage"></a></li>
 </ul>
 </div>
 

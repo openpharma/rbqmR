@@ -29,12 +29,6 @@ Poisson model to the site-specific event rates."><!-- mathjax --><script src="ht
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -150,9 +144,9 @@ influenced by the prior and more influenced by the data.</p>
 Chain Monte Carlo (MCMC) method is used to simulate values of
 \(\lambda_i\), scale and shape from the posterior distribution.
 Two Markov chains are used, with a minimum of 10,000 values simulated after
-4000 burnin iterations and 1000 adaptive iterations. The chains are checked
+4000 burn-in iterations and 1000 adaptive iterations. The chains are checked
 for convergence and the simulation is extended if required to meet
-convergence diagnositics. The samples from both chains are combined in the
+convergence diagnostics. The samples from both chains are combined in the
 returned value.</p>
     </div>
 

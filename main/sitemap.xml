@@ -43,6 +43,12 @@
     <loc>/reference/createQtlPlot.html</loc>
   </url>
   <url>
+    <loc>/reference/dot-assertColumnDoesNotExist.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dot-assertColumnExists.html</loc>
+  </url>
+  <url>
     <loc>/reference/dot-autorunJagsAndCaptureOutput.html</loc>
   </url>
   <url>
@@ -55,10 +61,19 @@
     <loc>/reference/dot-createPoissonInit.html</loc>
   </url>
   <url>
+    <loc>/reference/dot-ensureLimitsAreNamed.html</loc>
+  </url>
+  <url>
     <loc>/reference/evaluateCustomQTL.html</loc>
   </url>
   <url>
     <loc>/reference/evaluatePointEstimateQTL.html</loc>
+  </url>
+  <url>
+    <loc>/reference/evaluateProbabilityInRangeQTL.html</loc>
+  </url>
+  <url>
+    <loc>/reference/evaluateSiteMetricQTL.html</loc>
   </url>
   <url>
     <loc>/reference/fitBayesBinomialModel.html</loc>
