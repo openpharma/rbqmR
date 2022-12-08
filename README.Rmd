@@ -359,7 +359,7 @@ observedData <- tibble(
   ObservedRate = 100 * c(2, 9, 15, 16) / NObserved
 )
 
-table <- createObservedOverExpectedTable(
+createObservedOverExpectedTable(
   nHistorical = 10000,
   historicalRate = 0.014,
   expectedRate = 0.014,
