@@ -139,15 +139,15 @@ Suppose previous experience tells us that the event probability in this type of 
 
 ```{r}
 qtlProbInRange <- berrySummary %>%
-                    evaluateProbabilityInRangeQTL(
-                      posterior = fitted$tab,
-                      metric = p,
-                      observedMetric = ObservedResponse,
-                      range=c(0.5, 0.75),
-                      probs=c("warn"= 0.8, "action"=0.6),
-                      lower=0.4,
-                      upper=0.85
-                    )
+  evaluateProbabilityInRangeQTL(
+    posterior = fitted$tab,
+    metric = p,
+    observedMetric = ObservedResponse,
+    range = c(0.5, 0.75),
+    probs = c("warn" = 0.8, "action" = 0.6),
+    lower = 0.4,
+    upper = 0.85
+  )
 qtlProbInRange
 ```
 
@@ -189,13 +189,13 @@ The `evaluateSiteMetricQTL` function calculates thresholds (for example warning 
 
 ```{r siteMetric1}
 rvSiteMetrics <- berrySummary %>%
-                   evaluateSiteMetricQTL(
-                   posterior=fitted$tab,
-                   metric=p,
-                   observedMetric=ObservedResponse,
-                   lower=c("action"=0.05, "warn"=0.2),
-                   upper=c("action"=0.95, "warn"=0.8)
-                 )
+  evaluateSiteMetricQTL(
+    posterior = fitted$tab,
+    metric = p,
+    observedMetric = ObservedResponse,
+    lower = c("action" = 0.05, "warn" = 0.2),
+    upper = c("action" = 0.95, "warn" = 0.8)
+  )
 ```
 
 The `quantiles` element of the return value contains the mappings from quantile of the posterior to observed values of the metric.  For example, the first row of `rvSiteMetrics$quantiles` shows that the lower `r rvSiteMetrics$quantiles$Status[1]` limit is the `r 100*rvSiteMetrics$quantiles$Quantile[1]`th centile of the posterior, which corresponds to an event probability of `r sprintf("%4.3f", rvSiteMetrics$quantiles$p[1])`.
@@ -228,18 +228,20 @@ However, `evaluateSiteMetricQTL` can be passed a function that can apply an arbi
 
 ```{r}
 (berrySummary %>%
-evaluateSiteMetricQTL(
-  posterior=fitted$tab,
-  metric=p,
-  observedMetric=ObservedResponse,
-  lower=c("action"=0.5, "warn"=0.6),
-  upper=c("action"=0.9, "warn"=0.8),
-  statusFunc=function(d) ifelse(
-                           d %>%
-                             dplyr::filter(Status == "action") %>%
-                             dplyr::pull(N) >= 2, "action", "OK"
-                         )
-))$status
+  evaluateSiteMetricQTL(
+    posterior = fitted$tab,
+    metric = p,
+    observedMetric = ObservedResponse,
+    lower = c("action" = 0.5, "warn" = 0.6),
+    upper = c("action" = 0.9, "warn" = 0.8),
+    statusFunc = function(d) {
+      ifelse(
+        d %>%
+          dplyr::filter(Status == "action") %>%
+          dplyr::pull(N) >= 2, "action", "OK"
+      )
+    }
+  ))$status
 ```
 
 ## Representing the evaluation of a QTL graphically
@@ -264,15 +266,15 @@ fitted$tab %>%
     observedMetric = fitted$tab %>% summarise(Mean = mean(p)) %>% pull(Mean),
     actionLimits = list(
       list(
-        "lower" = rvSiteMetrics$quantiles %>% filter(Threshold == "Upper", Status == "action") %>% pull(p), 
-        "upper" = NA, 
-        "alpha" = 0.3, 
+        "lower" = rvSiteMetrics$quantiles %>% filter(Threshold == "Upper", Status == "action") %>% pull(p),
+        "upper" = NA,
+        "alpha" = 0.3,
         "colour" = "goldenrod1"
       ),
       list(
-        "lower" = NA, 
-        "upper" = rvSiteMetrics$quantiles %>% filter(Threshold == "Lower", Status == "action") %>% pull(p), 
-        "alpha" = 0.3, 
+        "lower" = NA,
+        "upper" = rvSiteMetrics$quantiles %>% filter(Threshold == "Lower", Status == "action") %>% pull(p),
+        "alpha" = 0.3,
         "colour" = "goldenrod1"
       )
     ),
