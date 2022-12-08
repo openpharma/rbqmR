@@ -42,15 +42,7 @@ createObservedOverExpectedTable <- function(
   # Validate
   if (!is.null(observedData)) {
     if (!is.data.frame(observedData)) stop("observedData is not a data.frame")
-    if (!(observedData %>% .columnExists({{ observedRate }}))) {
-      stop(
-        paste0(
-          rlang::as_label(rlang::enquo(observedRate)),
-          " is not a column in ",
-          rlang::as_label(rlang::enquo(observedData))
-        )
-      )
-    }
+    observedData %>% .assertColumnExists({{ observedRate }})
   }
   # Execute
   sides <- match.arg(sides)

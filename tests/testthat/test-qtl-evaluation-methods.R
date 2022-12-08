@@ -124,3 +124,81 @@ test_that("evaluatePointEstimateQTL works with arbitrary summary functions", {
       )
   )
 })
+
+
+test_that("evaluateProbabilityInRangeQTL fails gracefully with bad input", {
+  testBadValuesToCommonParams(evaluateProbabilityInRangeQTL)
+  expect_error(evaluateProbabilityInRangeQTL(tibble::tibble(), tibble::tibble(good=1), bad))
+  # statusCol must not already exist
+  expect_error(evaluateProbabilityInRangeQTL(tibble::tibble(), tibble::tibble(good1=1, good2=2), good1, statusCol=good2))
+  expect_error(evaluateProbabilityInRangeQTL(tibble::tibble(), tibble::tibble(good=1), good, lower=NULL, upper=NULL))
+  expect_error(evaluateProbabilityInRangeQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), good2, good1, probs=c(0.5, NA)))
+  expect_error(evaluateProbabilityInRangeQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), good2, good1, probs=c(0.5, -1)))
+  expect_error(evaluateProbabilityInRangeQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), good2, good1, probs=c(0.5, 2)))
+  expect_error(evaluateProbabilityInRangeQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), good2, good1, probs=c(0.5, 0.7), range=c(5, NA)))
+})
+
+test_that("evaluateProbabilityInRangeQTL works", {
+  rv <- tibble::tibble(
+          Site=1:6,
+          Metric=seq(0.1, 0.6, 0.1)
+        ) %>% 
+        evaluateProbabilityInRangeQTL(
+          posterior=tibble::tibble(Metric=seq(0.01, 1.0, 0.01)),
+          metric=Metric,
+          observedMetric=Metric,
+          range=c(0.4, 0.7),
+          probs=0.5,
+          lower=0.25,
+          upper=0.55
+        )
+  expect_equal(rv$status, "action")
+  expect_equal(rv$qtl, 0.3)
+  expect_equal(
+    rv$data %>% dplyr::pull(Status),
+    c("action", "action", "OK", "OK", "OK", "action")
+  )
+})
+
+test_that("evaluateSiteMetricQTL fails gracefully with bad input", {
+  testBadValuesToCommonParams(evaluateSiteMetricQTL)
+  expect_error(evaluateSiteMetricQTL(tibble::tibble(), tibble::tibble(good=1), bad))
+  # statusCol must not already exist
+  expect_error(evaluateSiteMetricQTL(tibble::tibble(), tibble::tibble(good1=1, good2=2), good1, statusCol=good2))
+  expect_error(evaluateSiteMetricQTL(tibble::tibble(), tibble::tibble(good=1), good, lower=NULL, upper=NULL))
+  expect_error(evaluateSiteMetricQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), good2, good1))
+  expect_error(evaluateSiteMetricQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), good2, good1, statusFunc=NULL))
+  expect_error(evaluateSiteMetricQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), good2, good1, statusFunc=4.3))
+})
+
+test_that("evaluateSiteMetricQTL works", {
+  fitted <- berrySummary %>%
+              fitBayesBinomialModel(n = Subjects, r = Events)
+  rv <- berrySummary %>%
+          evaluateSiteMetricQTL(
+          posterior=fitted$tab,
+          metric=p,
+          observedMetric=ObservedResponse,
+          lower=c("action"=0.5, "warn"=0.6),
+          upper=c("action"=0.9, "warn"=0.8),
+          statusFunc=function(d) ifelse(
+            d %>%
+              dplyr::filter(Status == "action") %>%
+              dplyr::pull(N) > 1, "action", "OK"
+          )
+        )
+  expect_equal(rv$status, "action")
+  expect_equal(rv$qtl, tibble::tibble(Status=c("OK", "action", "warn"), N=c(5, 2, 2)))
+  expect_equal(
+    rv$data %>% dplyr::pull(Status),
+    c("action", "warn", "OK", "warn", "action", "OK", "warn", "OK", "OK")
+  )
+  expect_equal(
+    rv$quantiles %>% dplyr::mutate(p=round(p, 2)),
+    tibble::tibble(
+      Status=c("action", "warn", "warn", "action"),
+      p=c(0.70, 0.74, 0.83, 0.89)
+    )
+  )
+})
+  

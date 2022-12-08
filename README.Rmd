@@ -183,51 +183,63 @@ berrySummary %>%
 
 ### Without historical data
 
-> TO DO: Revise to use built-in `rbqmR` functions.
+Especially early in development of a new compound, project teams often say they have no idea about what values of various metrics that could be used to define QTLs might be. For conventionally defined QTLs this can be a problem: an inappropriately chosen QTL might lead to a breach when, in reality, there is no issue.  Basing the QTL on the centiles of the posterior distribution of the metric obtained from the QTL model just fitted, and recalling that the purpose of inclusion/exclusion criteria are to minimise heterogeneity, we can avoid this problem.  
 
-Especially early in development of a new compound, project teams often say they have no idea about what values of various metrics that could be used to define QTLs might be. For conventionally defined QTLs this can be a problem: an inappropriately chosen QTL might lead to a breach when, in reality, there is no issue.  Basing the QTL on the centiles of the posterior distribution of the metric obtained from the QTL model just fitted, and recalling that the purpose of inclusion/exclusion criteria are yo minimise heterogeneity, we can avoid this problem.
+The `evaluateSiteMetricQTL` function calculates thresholds (for example warning and action limits) by translating quantiles of the posterior distribution of the metric to the real-life scale on which the metric is measured.  Again, we use the Berry data as an example.
 
-For the sake of argument, suppose we set the lower and upper QTLs to be the 5th and 95th centiles of the posterior respectively.  Since we have nine sites, it's not unreasonable to expect one site to be outside this range.  So we define a breach of the QTL to have occurred when the observed event rates at two or more sites fall outside this range.
-
-The 5th and 95th centiles of the posterior are 
-```{r, manualQuantiles}
-quantiles <- fitted$tab %>%
-  summarise(
-    Q05 = quantile(p, probs = 0.05, names = FALSE),
-    Q95 = quantile(p, probs = 0.95, names = FALSE)
-  )
-quantiles
-```
-So, in this specific case, our QTLs translate to observed event rates of `r sprintf("%5.2f%%", 100*quantiles$Q05)` and `r sprintf("%5.2f%%", 100*quantiles$Q95)` respectively.
-
-Do any sites have observed event rates outside this range?
-
-```{r manualThresholds}
-berrySummary %>%
-  applyQtl(
-    var = ObservedResponse,
-    lower = quantiles %>% pull(Q05),
-    upper = quantiles %>% pull(Q95)
-  ) %>%
-  kable(
-    digits = c(0, 0, 0, 3, 3, 3),
-    caption = "Sites breaching the QTL"
-  )
+```{r siteMetric1}
+rvSiteMetrics <- berrySummary %>%
+                   evaluateSiteMetricQTL(
+                   posterior=fitted$tab,
+                   metric=p,
+                   observedMetric=ObservedResponse,
+                   lower=c("action"=0.05, "warn"=0.2),
+                   upper=c("action"=0.95, "warn"=0.8)
+                 )
 ```
 
-Yes.  Two sites are outside this range.  One above and one below.  The QTL has been breached.  
+The `quantiles` element of the return value contains the mappings from quantile of the posterior to observed values of the metric.  For example, the first row of `rvSiteMetrics$quantiles` shows that the lower `r rvSiteMetrics$quantiles$Status[1]` limit is the `r 100*rvSiteMetrics$quantiles$Quantile[1]`th centile of the posterior, which corresponds to an event probability of `r sprintf("%4.3f", rvSiteMetrics$quantiles$p[1])`.
 
-Standard QTLs, including this one, can be evaluated automatically using functions in the `rbqmR` package.
+```{r}
+rvSiteMetrics$quantiles
+```
 
-```{r evaluatePointEstimateQTL, error=TRUE}
-berrySummary %>% 
-  evaluatePointEstimateQTL(
-    posterior = fitted$tab,
-    metric = p,
-    observedMetric = ObservedResponse,
-    lower=quantiles%>% pull(Q05),
-    upper=quantiles %>% pull(Q95)
-  )
+As before, the `data` element of the list contains a copy of the site metric dataset, augmented by a column (named `Status` by default) that allocates the observed site-level metrics (KRIs) to a band defined by the thresholds in `lower` and `upper`.
+
+```{r}
+rvSiteMetrics$data
+```
+
+> NB `rvSiteMetrics$data` contains incorrect values in the `Status` column.  See [issue #12](https://github.com/openpharma/rbqmR/issues/12).
+
+The `qtl` element of the return value contains counts of sites by threshold name.
+
+```{r}
+rvSiteMetrics$qtl
+```
+
+Finally, the `status` of the returned QTL is `"OK"` by default.
+
+```{r}
+rvSiteMetrics$status
+```
+
+However, `evaluateSiteMetricQTL` can be passed a function that can apply an arbitrary rule to determine whether or not a breach has occurred.  The function's only argument is the `qtl` element of `evaluateSiteMetricQTL`'s return value.  For example, given that we have nine sites in our fictitious example and we have calculated a 90% posterior credible interval, it's reasonable to expect one site to lie outside this range.  So we might say that a QTL breach has occurred if two or more sites lie outside the credible interval:
+
+```{r}
+(berrySummary %>%
+evaluateSiteMetricQTL(
+  posterior=fitted$tab,
+  metric=p,
+  observedMetric=ObservedResponse,
+  lower=c("action"=0.5, "warn"=0.6),
+  upper=c("action"=0.9, "warn"=0.8),
+  statusFunc=function(d) ifelse(
+                           d %>%
+                             dplyr::filter(Status == "action") %>%
+                             dplyr::pull(N) >= 2, "action", "OK"
+                         )
+))$status
 ```
 
 ## Representing the evaluation of a QTL graphically
@@ -248,9 +260,21 @@ The site-level KRIs can be added to the plot to help focus attention where inter
 ```{r createQtlPlot}
 fitted$tab %>%
   createQtlPlot(
+    targetRange = list("lower" = 0.5, "upper" = 0.75),
+    observedMetric = fitted$tab %>% summarise(Mean = mean(p)) %>% pull(Mean),
     actionLimits = list(
-      list("lower" = quantiles$Q95, "upper" = NA, "alpha" = 0.3, "colour" = "goldenrod1"),
-      list("lower" = NA, "upper" = quantiles$Q05, "alpha" = 0.3, "colour" = "goldenrod1")
+      list(
+        "lower" = rvSiteMetrics$quantiles %>% filter(Threshold == "Upper", Status == "action") %>% pull(p), 
+        "upper" = NA, 
+        "alpha" = 0.3, 
+        "colour" = "goldenrod1"
+      ),
+      list(
+        "lower" = NA, 
+        "upper" = rvSiteMetrics$quantiles %>% filter(Threshold == "Lower", Status == "action") %>% pull(p), 
+        "alpha" = 0.3, 
+        "colour" = "goldenrod1"
+      )
     ),
     siteData = berrySummary,
     siteSize = Subjects,
@@ -338,11 +362,12 @@ table <- createObservedOverExpectedTable(
   historicalRate = 0.014,
   expectedRate = 0.014,
   nObservedRange = seq(50, 1500, 25),
-  observedData = observedData
-)
-
-table %>% createObservedOverExpectedPlot(observedRate = ObservedRate)
+  observedData = observedData,
+  observedRate = ObservedRate
+) %>% createObservedOverExpectedPlot(observedRate = ObservedRate)
 ```
+
+> TODO Need to check interpretation of parameters
 
 # Beyond TransCelerate
 At the time of writing (late 2022) The TransCelerate Quality Tolerance Limit Framework [@Transcelerate2020] lists metrics that are exclusively binary in nature.  There are many other potential metrics that are non-binary and which may provide insight into the conduct of the trial.  For example,
@@ -384,7 +409,7 @@ cavalrySummary
 
 Although not necessary here, because data for all Corps was recorded for the same amount of time, the Poisson model used by `rbqmR` adjusts risk by total exposure at the site.
 
-```{r, results="as-is"}
+```{r, results="asis"}
 getModelString("poisson")
 ```
 Fitting the model is straightforward.
