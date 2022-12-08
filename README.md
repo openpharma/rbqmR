@@ -216,36 +216,36 @@ fitted <- berrySummary %>%
 #> Loading required namespace: rjags
 fitted
 #> $tab
-#> # A tibble: 20,000 × 4
+#> # A tibble: 25,524 × 4
 #>        p     a     b     q
 #>    <dbl> <dbl> <dbl> <int>
-#>  1 0.896 1.40  0.776    91
-#>  2 0.811 1.08  0.706    76
-#>  3 0.718 0.754 0.621    55
-#>  4 0.867 1.43  0.964    87
-#>  5 0.817 3.88  1.51     77
-#>  6 0.693 5.96  1.70     50
-#>  7 0.965 5.14  1.39     99
-#>  8 0.783 5.45  2.22     70
-#>  9 0.699 6.45  2.10     51
-#> 10 0.322 1.98  1.74      4
-#> # … with 19,990 more rows
+#>  1 0.583 10.0   3.69    28
+#>  2 0.858  9.14  3.42    85
+#>  3 0.799  8.30  3.22    73
+#>  4 0.626  7.88  3.61    36
+#>  5 0.815  6.11  3.55    77
+#>  6 0.831  8.17  3.82    80
+#>  7 0.727  9.59  3.80    58
+#>  8 0.944  9.81  2.57    97
+#>  9 0.764  8.05  3.11    66
+#> 10 0.520  5.42  3.17    18
+#> # … with 25,514 more rows
 #> 
 #> $results
 #> 
-#> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
+#> JAGS model summary statistics from 25524 samples (chains = 2; adapt+burnin = 5000):
 #>                                                                           
 #>       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
-#> p[10] 0.36358 0.69548 0.99035 0.67934 0.17054   -- 0.0013721     0.8 15448
-#> a      2.2516  5.9802  9.9999  5.9636  2.2845   --  0.055816     2.4  1675
-#> b     0.65341  2.6691  5.3062  2.8221  1.2775   --  0.032877     2.6  1510
-#>                        
-#>           AC.10    psrf
-#> p[10] 0.0049052  1.0001
-#> a       0.21372  1.0003
-#> b       0.23235 0.99999
+#> p[10] 0.36902 0.69378       1 0.67862 0.17184   -- 0.0013466     0.8 16285
+#> a       2.194  5.8877  9.9978  5.8919  2.3051   --  0.057923     2.5  1584
+#> b     0.58445   2.634  5.1387  2.7711  1.2406   --    0.0314     2.5  1561
+#>                       
+#>           AC.10   psrf
+#> p[10] 0.0031015 1.0001
+#> a       0.22143 1.0025
+#> b       0.22927 1.0028
 #> 
-#> Total time taken: 3.8 seconds
+#> Total time taken: 4.1 seconds
 #> 
 #> 
 #> $status
@@ -294,7 +294,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6793431
+#> [1] 0.6784934
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -354,7 +354,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6954819
+#> [1] 0.6944913
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -388,7 +388,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4499657 
+#> 0.4433563 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -416,21 +416,21 @@ either below 40% or above 85%.
 
 ``` r
 qtlProbInRange <- berrySummary %>%
-                    evaluateProbabilityInRangeQTL(
-                      posterior = fitted$tab,
-                      metric = p,
-                      observedMetric = ObservedResponse,
-                      range=c(0.5, 0.75),
-                      probs=c("warn"= 0.8, "action"=0.6),
-                      lower=0.4,
-                      upper=0.85
-                    )
+  evaluateProbabilityInRangeQTL(
+    posterior = fitted$tab,
+    metric = p,
+    observedMetric = ObservedResponse,
+    range = c(0.5, 0.75),
+    probs = c("warn" = 0.8, "action" = 0.6),
+    lower = 0.4,
+    upper = 0.85
+  )
 qtlProbInRange
 #> $status
 #> [1] "action"
 #> 
 #> $qtl
-#> [1] 0.47425
+#> [1] 0.4677167
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -488,7 +488,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6793431
+#> [1] 0.6784934
 #> 
 #> $status
 #> [1] "Breach"
@@ -526,30 +526,30 @@ measured. Again, we use the Berry data as an example.
 
 ``` r
 rvSiteMetrics <- berrySummary %>%
-                   evaluateSiteMetricQTL(
-                   posterior=fitted$tab,
-                   metric=p,
-                   observedMetric=ObservedResponse,
-                   lower=c("action"=0.05, "warn"=0.2),
-                   upper=c("action"=0.95, "warn"=0.8)
-                 )
+  evaluateSiteMetricQTL(
+    posterior = fitted$tab,
+    metric = p,
+    observedMetric = ObservedResponse,
+    lower = c("action" = 0.05, "warn" = 0.2),
+    upper = c("action" = 0.95, "warn" = 0.8)
+  )
 ```
 
 The `quantiles` element of the return value contains the mappings from
 quantile of the posterior to observed values of the metric. For example,
 the first row of `rvSiteMetrics$quantiles` shows that the lower action
 limit is the 5th centile of the posterior, which corresponds to an event
-probability of 0.372.
+probability of 0.365.
 
 ``` r
 rvSiteMetrics$quantiles
 #> # A tibble: 4 × 4
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
-#> 1 Lower     action     0.05 0.372
-#> 2 Lower     warn       0.2  0.538
-#> 3 Upper     warn       0.8  0.832
-#> 4 Upper     action     0.95 0.929
+#> 1 Lower     action     0.05 0.365
+#> 2 Lower     warn       0.2  0.535
+#> 3 Upper     warn       0.8  0.833
+#> 4 Upper     action     0.95 0.931
 ```
 
 As before, the `data` element of the list contains a copy of the site
@@ -608,18 +608,20 @@ two or more sites lie outside the credible interval:
 
 ``` r
 (berrySummary %>%
-evaluateSiteMetricQTL(
-  posterior=fitted$tab,
-  metric=p,
-  observedMetric=ObservedResponse,
-  lower=c("action"=0.5, "warn"=0.6),
-  upper=c("action"=0.9, "warn"=0.8),
-  statusFunc=function(d) ifelse(
-                           d %>%
-                             dplyr::filter(Status == "action") %>%
-                             dplyr::pull(N) >= 2, "action", "OK"
-                         )
-))$status
+  evaluateSiteMetricQTL(
+    posterior = fitted$tab,
+    metric = p,
+    observedMetric = ObservedResponse,
+    lower = c("action" = 0.5, "warn" = 0.6),
+    upper = c("action" = 0.9, "warn" = 0.8),
+    statusFunc = function(d) {
+      ifelse(
+        d %>%
+          dplyr::filter(Status == "action") %>%
+          dplyr::pull(N) >= 2, "action", "OK"
+      )
+    }
+  ))$status
 #> [1] "action"
 ```
 
@@ -648,15 +650,15 @@ fitted$tab %>%
     observedMetric = fitted$tab %>% summarise(Mean = mean(p)) %>% pull(Mean),
     actionLimits = list(
       list(
-        "lower" = rvSiteMetrics$quantiles %>% filter(Threshold == "Upper", Status == "action") %>% pull(p), 
-        "upper" = NA, 
-        "alpha" = 0.3, 
+        "lower" = rvSiteMetrics$quantiles %>% filter(Threshold == "Upper", Status == "action") %>% pull(p),
+        "upper" = NA,
+        "alpha" = 0.3,
         "colour" = "goldenrod1"
       ),
       list(
-        "lower" = NA, 
-        "upper" = rvSiteMetrics$quantiles %>% filter(Threshold == "Lower", Status == "action") %>% pull(p), 
-        "alpha" = 0.3, 
+        "lower" = NA,
+        "upper" = rvSiteMetrics$quantiles %>% filter(Threshold == "Lower", Status == "action") %>% pull(p),
+        "alpha" = 0.3,
         "colour" = "goldenrod1"
       )
     ),
@@ -828,7 +830,7 @@ observedData <- tibble(
   ObservedRate = 100 * c(2, 9, 15, 16) / NObserved
 )
 
-table <- createObservedOverExpectedTable(
+createObservedOverExpectedTable(
   nHistorical = 10000,
   historicalRate = 0.014,
   expectedRate = 0.014,
@@ -837,6 +839,8 @@ table <- createObservedOverExpectedTable(
   observedRate = ObservedRate
 ) %>% createObservedOverExpectedPlot(observedRate = ObservedRate)
 ```
+
+<img src="man/figures/README-unnamed-chunk-19-1.png" width="80%" />
 
 > TODO Need to check interpretation of parameters
 

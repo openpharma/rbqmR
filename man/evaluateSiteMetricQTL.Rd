@@ -38,12 +38,6 @@ below.}
 
 \item{upper}{a scalar or vector of upper limits, or NULL.  See Usage Notes
 below.}
-
-\item{range}{the range of values of \code{metric} to be used when calculating
-\code{qtl} = Prob(\code{metric} in \code{range}).}
-
-\item{probs}{the thresholds for Prob(\code{metric} in \code{range}) that define the
-action and warning limits for the QTL}
 }
 \value{
 a list of three elements named \code{status}, \code{data} and \code{qtl}.  If
@@ -78,18 +72,3 @@ If \code{statusFunc} is \code{NULL}, then the \code{status} element of the retur
 set to \code{"OK"} by default.
 }
 
-\examples{
-berrySummary \%>\%
-evaluateSiteMetricQTL(
-  posterior=fitted$tab,
-  metric=p,
-  observedMetric=ObservedResponse,
-  lower=c("action"=0.5, "warn"=0.6),
-  upper=c("action"=0.9, "warn"=0.8),
-  statusFunc=function(d) ifelse(
-                           d \%>\% 
-                             dplyr::filter(Status == "action") \%>\% 
-                             dplyr::pull(N) > 1, "action", "OK"
-                         )
-)
-}

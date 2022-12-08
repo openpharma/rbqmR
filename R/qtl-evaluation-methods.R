@@ -276,10 +276,6 @@ evaluateProbabilityInRangeQTL <- function(
 #' @param statusCol the name of the column to be added to `data` that will
 #' contain the site-level flags comparing the corresponding KRI to the QTL
 #' thresholds defined by `lower` and `upper`
-#' @param range the range of values of `metric` to be used when calculating
-#' `qtl` = Prob(`metric` in `range`).
-#' @param probs the thresholds for Prob(`metric` in `range`) that define the 
-#' action and warning limits for the QTL
 #' @param lower a scalar or vector of lower limits, or NULL.  See Usage Notes 
 #' below.
 #' @param upper a scalar or vector of upper limits, or NULL.  See Usage Notes 
@@ -306,20 +302,6 @@ evaluateProbabilityInRangeQTL <- function(
 #' 
 #' If `statusFunc` is `NULL`, then the `status` element of the return value is
 #' set to `"OK"` by default.
-#' @examples 
-#' berrySummary %>%
-#' evaluateSiteMetricQTL(
-#'   posterior=fitted$tab,
-#'   metric=p,
-#'   observedMetric=ObservedResponse,
-#'   lower=c("action"=0.5, "warn"=0.6),
-#'   upper=c("action"=0.9, "warn"=0.8),
-#'   statusFunc=function(d) ifelse(
-#'                            d %>% 
-#'                              dplyr::filter(Status == "action") %>% 
-#'                              dplyr::pull(N) > 1, "action", "OK"
-#'                          )
-#' )
 #' @export
 evaluateSiteMetricQTL <- function(
                            data,
@@ -357,7 +339,7 @@ evaluateSiteMetricQTL <- function(
   func <- function(data, posterior) {
     rv <- list(status="OK", quantiles=tibble::tibble())
     if (!is.null(lower)) {
-      qLower <- quantile(posterior %>% dplyr::pull({{ metric }}), probs=lower)
+      qLower <- stats::quantile(posterior %>% dplyr::pull({{ metric }}), probs=lower)
       names(qLower) <- names(lower)
       x <- tibble:: tibble(Threshold="Lower", {{statusCol }} := names(lower), Quantile=lower, {{ metric }} := qLower)
       rv$quantiles <- rv$quantiles %>% dplyr::bind_rows(x)
@@ -365,7 +347,7 @@ evaluateSiteMetricQTL <- function(
       qLower <- NULL
     }
     if (!is.null(upper)) {
-      qUpper <- quantile(posterior %>% dplyr::pull({{ metric }}), probs=upper)
+      qUpper <- stats::quantile(posterior %>% dplyr::pull({{ metric }}), probs=upper)
       names(qUpper) <- names(upper)
       x <- tibble:: tibble(Threshold="Upper", {{statusCol }} := names(upper), Quantile=upper, {{ metric }} := qUpper)
       rv$quantiles <- rv$quantiles %>% dplyr::bind_rows(x)

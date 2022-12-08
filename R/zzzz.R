@@ -27,3 +27,4 @@ UpperLog <- NULL
 Upper <- NULL
 qtl <- NULL
 QTL <- NULL
+Quantile <- NULL

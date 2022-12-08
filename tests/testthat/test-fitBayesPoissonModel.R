@@ -3,8 +3,6 @@ logger::log_threshold(logger::FATAL)
 test_that("Issue #3 has been resolved", {
   rv <- fitBayesPoissonModel(data=NULL)
   expect_true(rv$status == "OK")
-  print(runjags::failed.jags('inits'))
-  print(rv)
 })
 
 test_that("Issue #4 has been resolved", {
