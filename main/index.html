@@ -47,12 +47,6 @@
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -252,36 +246,36 @@ ObservedResponse
 <span><span class="co">#&gt; Loading required namespace: rjags</span></span>
 <span><span class="va">fitted</span></span>
 <span><span class="co">#&gt; $tab</span></span>
-<span><span class="co">#&gt; # A tibble: 25,524 × 4</span></span>
+<span><span class="co">#&gt; # A tibble: 24,168 × 4</span></span>
 <span><span class="co">#&gt;        p     a     b     q</span></span>
 <span><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;</span></span>
-<span><span class="co">#&gt;  1 0.583 10.0   3.69    28</span></span>
-<span><span class="co">#&gt;  2 0.858  9.14  3.42    85</span></span>
-<span><span class="co">#&gt;  3 0.799  8.30  3.22    73</span></span>
-<span><span class="co">#&gt;  4 0.626  7.88  3.61    36</span></span>
-<span><span class="co">#&gt;  5 0.815  6.11  3.55    77</span></span>
-<span><span class="co">#&gt;  6 0.831  8.17  3.82    80</span></span>
-<span><span class="co">#&gt;  7 0.727  9.59  3.80    58</span></span>
-<span><span class="co">#&gt;  8 0.944  9.81  2.57    97</span></span>
-<span><span class="co">#&gt;  9 0.764  8.05  3.11    66</span></span>
-<span><span class="co">#&gt; 10 0.520  5.42  3.17    18</span></span>
-<span><span class="co">#&gt; # … with 25,514 more rows</span></span>
+<span><span class="co">#&gt;  1 0.939  8.22  2.91    96</span></span>
+<span><span class="co">#&gt;  2 0.762  9.34  3.45    65</span></span>
+<span><span class="co">#&gt;  3 0.988  9.33  2.45   100</span></span>
+<span><span class="co">#&gt;  4 0.866  9.19  3.01    86</span></span>
+<span><span class="co">#&gt;  5 0.861  8.68  2.38    86</span></span>
+<span><span class="co">#&gt;  6 0.851  8.81  2.73    84</span></span>
+<span><span class="co">#&gt;  7 0.574  9.29  4.59    26</span></span>
+<span><span class="co">#&gt;  8 0.643  8.74  4.39    39</span></span>
+<span><span class="co">#&gt;  9 0.489  8.42  3.98    14</span></span>
+<span><span class="co">#&gt; 10 0.411  9.48  4.21     8</span></span>
+<span><span class="co">#&gt; # … with 24,158 more rows</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $results</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; JAGS model summary statistics from 25524 samples (chains = 2; adapt+burnin = 5000):</span></span>
+<span><span class="co">#&gt; JAGS model summary statistics from 24168 samples (chains = 2; adapt+burnin = 5000):</span></span>
 <span><span class="co">#&gt;                                                                           </span></span>
 <span><span class="co">#&gt;       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff</span></span>
-<span><span class="co">#&gt; p[10] 0.36902 0.69378       1 0.67862 0.17184   -- 0.0013466     0.8 16285</span></span>
-<span><span class="co">#&gt; a       2.194  5.8877  9.9978  5.8919  2.3051   --  0.057923     2.5  1584</span></span>
-<span><span class="co">#&gt; b     0.58445   2.634  5.1387  2.7711  1.2406   --    0.0314     2.5  1561</span></span>
-<span><span class="co">#&gt;                       </span></span>
-<span><span class="co">#&gt;           AC.10   psrf</span></span>
-<span><span class="co">#&gt; p[10] 0.0031015 1.0001</span></span>
-<span><span class="co">#&gt; a       0.22143 1.0025</span></span>
-<span><span class="co">#&gt; b       0.22927 1.0028</span></span>
+<span><span class="co">#&gt; p[10] 0.37141 0.69488 0.99998 0.67937 0.17112   -- 0.0013142     0.8 16954</span></span>
+<span><span class="co">#&gt; a      2.2058  6.0317  9.9945  5.9753  2.3061   --  0.060407     2.6  1457</span></span>
+<span><span class="co">#&gt; b     0.60676  2.6685  5.2509  2.8158  1.2814   --  0.032986     2.6  1509</span></span>
+<span><span class="co">#&gt;                        </span></span>
+<span><span class="co">#&gt;            AC.10   psrf</span></span>
+<span><span class="co">#&gt; p[10] -0.0074243 1.0002</span></span>
+<span><span class="co">#&gt; a        0.21739 1.0001</span></span>
+<span><span class="co">#&gt; b        0.22306 1.0005</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Total time taken: 4.1 seconds</span></span>
+<span><span class="co">#&gt; Total time taken: 3.9 seconds</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $status</span></span>
@@ -311,7 +305,7 @@ ObservedResponse
 <span><span class="co">#&gt; [1] "OK"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6784934</span></span>
+<span><span class="co">#&gt; [1] 0.6793485</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -351,7 +345,7 @@ ObservedResponse
 <span><span class="co">#&gt; [1] "OK"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6944913</span></span>
+<span><span class="co">#&gt; [1] 0.6947496</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -381,7 +375,7 @@ ObservedResponse
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
 <span><span class="co">#&gt;       10% </span></span>
-<span><span class="co">#&gt; 0.4433563 </span></span>
+<span><span class="co">#&gt; 0.4476907 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -417,7 +411,7 @@ ObservedResponse
 <span><span class="co">#&gt; [1] "action"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.4677167</span></span>
+<span><span class="co">#&gt; [1] 0.4693396</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -466,7 +460,7 @@ ObservedResponse
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6784934</span></span>
+<span><span class="co">#&gt; [1] 0.6793485</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $status</span></span>
 <span><span class="co">#&gt; [1] "Breach"</span></span>
@@ -500,16 +494,16 @@ ObservedResponse
 <span>    lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.05</span>, <span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>,</span>
 <span>    upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.95</span>, <span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p>The <code>quantiles</code> element of the return value contains the mappings from quantile of the posterior to observed values of the metric. For example, the first row of <code>rvSiteMetrics$quantiles</code> shows that the lower action limit is the 5th centile of the posterior, which corresponds to an event probability of 0.365.</p>
+<p>The <code>quantiles</code> element of the return value contains the mappings from quantile of the posterior to observed values of the metric. For example, the first row of <code>rvSiteMetrics$quantiles</code> shows that the lower action limit is the 5th centile of the posterior, which corresponds to an event probability of 0.371.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">quantiles</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
 <span><span class="co">#&gt;   Threshold Status Quantile     p</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Lower     action     0.05 0.365</span></span>
-<span><span class="co">#&gt; 2 Lower     warn       0.2  0.535</span></span>
-<span><span class="co">#&gt; 3 Upper     warn       0.8  0.833</span></span>
-<span><span class="co">#&gt; 4 Upper     action     0.95 0.931</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Lower     action     0.05 0.371</span></span>
+<span><span class="co">#&gt; 2 Lower     warn       0.2  0.538</span></span>
+<span><span class="co">#&gt; 3 Upper     warn       0.8  0.832</span></span>
+<span><span class="co">#&gt; 4 Upper     action     0.95 0.930</span></span></code></pre></div>
 <p>As before, the <code>data</code> element of the list contains a copy of the site metric dataset, augmented by a column (named <code>Status</code> by default) that allocates the observed site-level metrics (KRIs) to a band defined by the thresholds in <code>lower</code> and <code>upper</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">data</span></span>
