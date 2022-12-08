@@ -11,7 +11,7 @@ status](https://www.r-pkg.org/badges/version/rbqmR)](https://CRAN.R-project.org/
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![R-CMD-check](https://github.com/openpharma/rbqmR/workflows/R-CMD-check/badge.svg)](https://github.com/openpharma/rbqmR/actions)
 [![Test
-Coverage](https://raw.githubusercontent.com/openpharma/rbqmR/_xml_coverage_reports/data/main/badge.svg)](https://github.com/openpharma/mtdesign/blob/_xml_coverage_reports/data/main/coverage.xml)<!-- badges: end -->
+Coverage](https://raw.githubusercontent.com/openpharma/rbqmR/_xml_coverage_reports/data/main/badge.svg)](https://github.com/openpharma/rbqmR/blob/_xml_coverage_reports/data/main/coverage.xml)<!-- badges: end -->
 
 ## Introduction
 
@@ -216,36 +216,36 @@ fitted <- berrySummary %>%
 #> Loading required namespace: rjags
 fitted
 #> $tab
-#> # A tibble: 24,168 × 4
+#> # A tibble: 20,000 × 4
 #>        p     a     b     q
 #>    <dbl> <dbl> <dbl> <int>
-#>  1 0.939  8.22  2.91    96
-#>  2 0.762  9.34  3.45    65
-#>  3 0.988  9.33  2.45   100
-#>  4 0.866  9.19  3.01    86
-#>  5 0.861  8.68  2.38    86
-#>  6 0.851  8.81  2.73    84
-#>  7 0.574  9.29  4.59    26
-#>  8 0.643  8.74  4.39    39
-#>  9 0.489  8.42  3.98    14
-#> 10 0.411  9.48  4.21     8
-#> # … with 24,158 more rows
+#>  1 0.379  4.73  2.71     6
+#>  2 0.759  5.26  2.84    65
+#>  3 0.892  5.40  1.97    91
+#>  4 0.382  6.43  2.42     7
+#>  5 0.628  7.53  2.33    37
+#>  6 0.836  8.06  2.35    82
+#>  7 0.931  8.15  2.41    96
+#>  8 0.830  7.54  3.23    81
+#>  9 0.767  8.23  2.92    67
+#> 10 0.702  6.73  2.73    53
+#> # … with 19,990 more rows
 #> 
 #> $results
 #> 
-#> JAGS model summary statistics from 24168 samples (chains = 2; adapt+burnin = 5000):
-#>                                                                           
-#>       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
-#> p[10] 0.37141 0.69488 0.99998 0.67937 0.17112   -- 0.0013142     0.8 16954
-#> a      2.2058  6.0317  9.9945  5.9753  2.3061   --  0.060407     2.6  1457
-#> b     0.60676  2.6685  5.2509  2.8158  1.2814   --  0.032986     2.6  1509
-#>                        
-#>            AC.10   psrf
-#> p[10] -0.0074243 1.0002
-#> a        0.21739 1.0001
-#> b        0.22306 1.0005
+#> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
+#>                                                                         
+#>       Lower95 Median Upper95   Mean      SD Mode     MCerr MC%ofSD SSeff
+#> p[10] 0.35768 0.6934 0.99162 0.6752 0.17317   -- 0.0013198     0.8 17216
+#> a      2.2465 5.9101  9.9972 5.9191   2.272   --  0.054779     2.4  1720
+#> b     0.67248 2.6332  5.2003 2.7849  1.2399   --  0.030437     2.5  1660
+#>                      
+#>          AC.10   psrf
+#> p[10] 0.011195 1.0002
+#> a      0.20733 1.0008
+#> b      0.21395 1.0006
 #> 
-#> Total time taken: 3.9 seconds
+#> Total time taken: 3.3 seconds
 #> 
 #> 
 #> $status
@@ -294,7 +294,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6793485
+#> [1] 0.6751967
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -354,7 +354,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6947496
+#> [1] 0.6933979
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -388,7 +388,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4476907 
+#> 0.4402933 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -430,7 +430,7 @@ qtlProbInRange
 #> [1] "action"
 #> 
 #> $qtl
-#> [1] 0.4693396
+#> [1] 0.46665
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -488,7 +488,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6793485
+#> [1] 0.6751967
 #> 
 #> $status
 #> [1] "Breach"
@@ -539,17 +539,17 @@ The `quantiles` element of the return value contains the mappings from
 quantile of the posterior to observed values of the metric. For example,
 the first row of `rvSiteMetrics$quantiles` shows that the lower action
 limit is the 5th centile of the posterior, which corresponds to an event
-probability of 0.371.
+probability of 0.363.
 
 ``` r
 rvSiteMetrics$quantiles
 #> # A tibble: 4 × 4
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
-#> 1 Lower     action     0.05 0.371
-#> 2 Lower     warn       0.2  0.538
-#> 3 Upper     warn       0.8  0.832
-#> 4 Upper     action     0.95 0.930
+#> 1 Lower     action     0.05 0.363
+#> 2 Lower     warn       0.2  0.531
+#> 3 Upper     warn       0.8  0.830
+#> 4 Upper     action     0.95 0.927
 ```
 
 As before, the `data` element of the list contains a copy of the site
