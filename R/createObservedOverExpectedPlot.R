@@ -8,7 +8,7 @@
 #' corresponding limit(s) relate(s)
 #' @param observedRate  The column in `data` that defines the observed rate.  
 #' May be `NULL`.
-#' @param alpha The Tyope 1 error rate associated with the calculatd limits.
+#' @param alpha The Type 1 error rate associated with the calculated limits.
 #'  Default 0.05
 #' @param sides the sidedness of `alpha`.  Either `two`, `upper` or `lower`.
 #'  Default `two`.
@@ -22,6 +22,19 @@ createObservedOverExpectedPlot <- function(
                                     sides=c("two", "lower", "upper")
                                   ) {
   logger::log_debug("Entry")
+  # Validate
+  if (!is.data.frame(data)) stop("data is not a data.frame")
+  if (!(data %>% .columnExists({{ n }}))) {
+    stop(
+      paste0(
+        rlang::as_label(rlang::enquo(n)),
+        " is not a column in ",
+        rlang::as_label(rlang::enquo(data))
+      )
+    )
+  }
+  if (alpha <= 0 | alpha >= 1) stop("alpha must be strictly greater than zero and strictly less than one")
+  # Execute
   sides <- match.arg(sides)
   
   plot <- data %>%

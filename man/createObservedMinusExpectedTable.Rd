@@ -47,7 +47,7 @@ contains the calculated observed - expected statistic for each participant.
 Uses tidy evaluation.}
 
 \item{indexVar}{The name of the column in the output \code{data.frame} that
-contains the index of the participant's enrollment: an integer from \code{1} to \code{n}
+contains the index of the participant's enrolment: an integer from \code{1} to \code{n}
 where \code{n} is number of participants enrolled. Uses tidy evaluation.}
 
 \item{statusVar}{The name of the column in the output \code{data.frame} that

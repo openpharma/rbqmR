@@ -22,7 +22,7 @@ createObservedOverExpectedTable(
 }
 \arguments{
 \item{observedData}{a tibble containing the observed data that will be
-compared to the claculated limit(s).  May be \code{NULL}.}
+compared to the calculated limit(s).  May be \code{NULL}.}
 
 \item{observedRate}{The column in \code{observedData} that contains the observed
 rates.  Ignored if \code{observedData} is NULL.  Uses tidy evaluation.}
@@ -31,7 +31,7 @@ rates.  Ignored if \code{observedData} is NULL.  Uses tidy evaluation.}
 tibble that defines the sample size to which the corresponding limit(s)
 relate(s).}
 
-\item{nHistorical}{the number of pobservations on which the historical rate
+\item{nHistorical}{the number of observations on which the historical rate
 is based}
 
 \item{nObservedRange}{a sequence of values for which limits should be
@@ -42,7 +42,7 @@ the same as \code{historicalRate}, but need not be so.}
 
 \item{historicalRate}{the event rate observed in the historical data}
 
-\item{alpha}{The Type 1 error rate associated with the calculatd limits.
+\item{alpha}{The Type 1 error rate associated with the calculated limits.
 Default 0.05}
 
 \item{sides}{the sidedness of \code{alpha}.  Either \code{two}, \code{upper} or \code{lower}.

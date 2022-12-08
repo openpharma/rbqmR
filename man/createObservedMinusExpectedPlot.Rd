@@ -19,7 +19,7 @@ createObservedMinusExpectedPlot(
 \item{data}{The input \code{data.frame}}
 
 \item{indexVar}{The column in \code{data} that defines the sequence in which
-participants enrolled.  Should be an intger vector with values from \code{1} to \code{n},
+participants enrolled.  Should be an integer vector with values from \code{1} to \code{n},
 where \code{n} is the number of participants enrolled.}
 
 \item{upperActionLimit}{The column in \code{data} that defines the upper action limit.
@@ -36,12 +36,12 @@ If \code{NULL}, the lower warning limit is omitted from the plot.}
 
 \item{warningQuantiles}{A named numeric vector with elements \code{upper} and \code{lower}
 containing the quantiles of the binomial distribution that define the warning limits.
-Used only for labeling.  If \code{NULL}, the corresponding footer is omitted
+Used only for labelling.  If \code{NULL}, the corresponding footer is omitted
 from the plot.  Individual elements may be \code{NA}.}
 
 \item{permittedRates}{A named numeric vector with elements \code{upper} and \code{lower}
 containing the observed event rates that define the action limits.
-Used only for labeling.  If \code{NULL}, the corresponding footer is omitted
+Used only for labelling.  If \code{NULL}, the corresponding footer is omitted
 from the plot.  Individual elements may be \code{NA}.}
 }
 \description{

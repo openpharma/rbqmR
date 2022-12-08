@@ -1,14 +1,21 @@
 Package: rbqmR
-Title: What the Package Does (One Line, Title Case)
+Title: Risk-Based Quality Management in R
 Version: 0.0.0.9000
-Authors@R: 
-    person("John", "Kirkpatrick", , "john.kirkpatrick@roche.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0001-7790-3708"))
-Description: What the package does (one paragraph).
+Authors@R: person(
+             given = "John",
+             family = "Kirkpatrick",
+             email = "john.kirkpatrick@roche.com",
+             role = c("aut", "cre"),
+             comment = c(ORCID = "0000-0001-7790-3708")
+           )
+Description: rbqmR is an open-source project intended to provide utilities to 
+    support risk-based quality management (RBQM) activities in clinical trials, 
+    as required by ICH E6 (R2).
+Language: en-GB
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.1.2
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

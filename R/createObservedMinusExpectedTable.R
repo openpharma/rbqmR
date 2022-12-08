@@ -16,7 +16,7 @@
 #' contains the calculated observed - expected statistic for each participant.
 #' Uses tidy evaluation.
 #' @param indexVar The name of the column in the output `data.frame` that
-#' contains the index of the participant's enrollment: an integer from `1` to `n`
+#' contains the index of the participant's enrolment: an integer from `1` to `n`
 #' where `n` is number of participants enrolled. Uses tidy evaluation.
 #' @param statusVar The name of the column in the output `data.frame` that
 #' contains the status of the trial: either `OK`, `WARN` or `BREECH`
@@ -61,27 +61,11 @@ createObservedMinusExpectedTable <- function(
                            permittedRates=c("lower"=0.05, "upper"=0.15)
                          ) {
   logger::log_debug("Entry")
-  logger::log_trace(match.call())
+  logger::log_trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
-  if (!(data %>% .columnExists({{ timeVar }}))) {
-    stop(
-      paste0(
-        rlang::as_label(rlang::enquo(timeVar)),
-        " is not a column in ",
-        rlang::as_label(rlang::enquo(data))
-      )
-    )
-  }
-  if (!(data %>% .columnExists({{ eventVar }}))) {
-    stop(
-      paste0(
-        rlang::as_label(rlang::enquo(eventVar)),
-        " is not a column in ",
-        rlang::as_label(rlang::enquo(data))
-      )
-    )
-  }
+  data %>% .assertColumnExists({{ timeVar }})
+  data %>% .assertColumnExists({{ eventVar }})
   # Execute
   if (!is.vector(eventArray)) eventArray <- as.vector(eventArray)
   rv <- data %>% 

@@ -19,7 +19,7 @@ the range(s) to be shaded.  See Usage Notes below.}
 
 \item{idx}{An integer defining the index within the list returned by
 \code{ggplot2::ggpot_build} that identifies the layer containing the density to be
-shaded.  Typicall, this corresponds to the order in which the various \code{geom}s
+shaded.  Typically, this corresponds to the order in which the various \code{geom}s
 are added to the \code{ggplot2} object.  For example, in \code{d \%>\% ggplot2() \%>\%  geom_point(...) \%>\% geom_density(...)}, \verb{idx should be }2`.}
 }
 \value{
