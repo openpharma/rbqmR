@@ -6,7 +6,7 @@
 #' 
 #' @param data The input `data.frame`
 #' @param indexVar The column in `data` that defines the sequence in which 
-#' participants enrolled.  Should be an intger vector with values from `1` to `n`,
+#' participants enrolled.  Should be an integer vector with values from `1` to `n`,
 #' where `n` is the number of participants enrolled.
 #' @param upperActionLimit The column in `data` that defines the upper action limit.
 #' If `NULL`, the upper action limit is omitted from the plot.
@@ -18,11 +18,11 @@
 #' If `NULL`, the lower warning limit is omitted from the plot.
 #' @param warningQuantiles A named numeric vector with elements `upper` and `lower`
 #' containing the quantiles of the binomial distribution that define the warning limits.  
-#' Used only for labeling.  If `NULL`, the corresponding footer is omitted
+#' Used only for labelling.  If `NULL`, the corresponding footer is omitted
 #' from the plot.  Individual elements may be `NA`.
 #' @param permittedRates A named numeric vector with elements `upper` and `lower`
 #' containing the observed event rates that define the action limits.  
-#' Used only for labeling.  If `NULL`, the corresponding footer is omitted
+#' Used only for labelling.  If `NULL`, the corresponding footer is omitted
 #' from the plot.  Individual elements may be `NA`.
 #' @export
 createObservedMinusExpectedPlot <- function(

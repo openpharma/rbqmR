@@ -20,7 +20,7 @@
 #' string, it is replaced by `dunif(0, 10)`.  Similarly, all occurrences of
 #' `<priorB>` will be replaced by `dunif(0, 20)`.
 #' 
-#' The default value of `hyperParams` provides the default hyperparemeter values
+#' The default value of `hyperParams` provides the default hyperparameter values
 #' used by `rbqmR`'s Bayes model fitting functions.
 #' @examples
 #' #To fit a binary model

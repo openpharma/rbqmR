@@ -26,7 +26,7 @@
 ) {
   logger::log_debug("Entry")
   logger::log_trace(deparse(match.call()))
-
+  
   rng <- match.arg(rng)
 
   # Validate
@@ -60,7 +60,7 @@
   # Execute
   init <- list(
     ".RNG.name"=rng, 
-    ".RNG.seed"=ifelse(is.null(seed), stats::runif(1, max=.Machine$integer.max), seed),
+    ".RNG.seed"=ifelse(is.null(seed), floor(stats::runif(1, max=.Machine$integer.max)), seed),
     "lambda"=stats::rgamma(n, shape=1, scale=1)
   )
   if (is.null(quantiles)) {

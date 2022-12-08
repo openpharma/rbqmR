@@ -1,10 +1,10 @@
 logger::log_threshold(logger::FATAL)
 
 test_that("Issue #3 has been resolved", {
-  # logger::layout_glue_generator(format = '{namespace} {time} {level} {fn}: {msg}')
-  # logger::log_threshold(logger::TRACE)
-  expect_true(fitBayesPoissonModel(data=NULL)$status == "OK")
-  # logger::log_threshold(logger::FATAL)
+  rv <- fitBayesPoissonModel(data=NULL)
+  expect_true(rv$status == "OK")
+  print(runjags::failed.jags('inits'))
+  print(rv)
 })
 
 test_that("Issue #4 has been resolved", {

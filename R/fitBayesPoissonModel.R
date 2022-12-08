@@ -38,7 +38,7 @@
 #' Two Markov chains are used, with a minimum of 10,000 values simulated after
 #' 4000 burn-in iterations and 1000 adaptive iterations. The chains are checked
 #' for convergence and the simulation is extended if required to meet
-#' convergence diagnositics. The samples from both chains are combined in the
+#' convergence diagnostics. The samples from both chains are combined in the
 #' returned value.
 #'
 #' @param data the data frame containing the `eventVar` and `exposureVar` columns
@@ -102,7 +102,7 @@ fitBayesPoissonModel <- function(
     tempData$events <- c(data %>% dplyr::pull({{events}}), NA)
     tempData$exposure <- c(data %>% dplyr::pull({{exposure}}),  1)
   }
-  tempData$k <- length(tempData$events) # number of sites plus 1
+  tempData$k <- max(length(tempData$events), 1) # number of sites plus 1
   
   if(is.null(model)) {
     model <- getModelString("poisson", prior=is.null(data))

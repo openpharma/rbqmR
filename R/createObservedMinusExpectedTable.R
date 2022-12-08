@@ -16,7 +16,7 @@
 #' contains the calculated observed - expected statistic for each participant.
 #' Uses tidy evaluation.
 #' @param indexVar The name of the column in the output `data.frame` that
-#' contains the index of the participant's enrollment: an integer from `1` to `n`
+#' contains the index of the participant's enrolment: an integer from `1` to `n`
 #' where `n` is number of participants enrolled. Uses tidy evaluation.
 #' @param statusVar The name of the column in the output `data.frame` that
 #' contains the status of the trial: either `OK`, `WARN` or `BREECH`
