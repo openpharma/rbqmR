@@ -33,7 +33,7 @@ devtools::load_all()
 [![Test Coverage](https://raw.githubusercontent.com/openpharma/rbqmR/_xml_coverage_reports/data/main/badge.svg)](https://github.com/openpharma/rbqmR/blob/_xml_coverage_reports/data/main/coverage.xml)<!-- badges: end -->
 
 ## Introduction
-The purpose of the `rbqmR` package is to provide a repository of r-based tools for the implementation of risk-based quality management. 
+The purpose of the `rbqmR` package is to provide a repository of r-based tools for the implementation of risk-based quality management.
 
 Tools currently exist for
 
