@@ -47,12 +47,6 @@
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -79,7 +73,7 @@
 <p>Tools currently exist for</p>
 <ul>
 <li>Dynamic Quality Tolerance Limits (QTLs) using Bayesian Hierarchical Models (ongoing)</li>
-<li>Observed-Minus-Expected methodology (ongoing)</li>
+<li>Observed-Minus-Expected methodology</li>
 <li>Observed/Expected methodology (ongoing)</li>
 </ul>
 <p>This package is a work-in-progress. It’s primary focus is dynamic QTLs. Other methodologies are included for completeness.</p>
@@ -87,7 +81,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of rbqmR from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the development version of rbqmR from <a href="https://github.com/openpharma/rbqmR" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"openpharma/rbqmR"</span><span class="op">)</span></span></code></pre></div>
@@ -255,31 +249,31 @@ ObservedResponse
 <span><span class="co">#&gt; # A tibble: 20,000 × 4</span></span>
 <span><span class="co">#&gt;        p     a     b     q</span></span>
 <span><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;</span></span>
-<span><span class="co">#&gt;  1 0.379  4.73  2.71     6</span></span>
-<span><span class="co">#&gt;  2 0.759  5.26  2.84    65</span></span>
-<span><span class="co">#&gt;  3 0.892  5.40  1.97    91</span></span>
-<span><span class="co">#&gt;  4 0.382  6.43  2.42     7</span></span>
-<span><span class="co">#&gt;  5 0.628  7.53  2.33    37</span></span>
-<span><span class="co">#&gt;  6 0.836  8.06  2.35    82</span></span>
-<span><span class="co">#&gt;  7 0.931  8.15  2.41    96</span></span>
-<span><span class="co">#&gt;  8 0.830  7.54  3.23    81</span></span>
-<span><span class="co">#&gt;  9 0.767  8.23  2.92    67</span></span>
-<span><span class="co">#&gt; 10 0.702  6.73  2.73    53</span></span>
+<span><span class="co">#&gt;  1 0.957  6.58  2.89    98</span></span>
+<span><span class="co">#&gt;  2 0.825  7.55  3.00    79</span></span>
+<span><span class="co">#&gt;  3 0.556  6.48  2.45    23</span></span>
+<span><span class="co">#&gt;  4 0.886  6.05  1.96    90</span></span>
+<span><span class="co">#&gt;  5 0.747  7.67  3.38    62</span></span>
+<span><span class="co">#&gt;  6 0.686  9.06  3.56    48</span></span>
+<span><span class="co">#&gt;  7 0.689  6.61  3.24    49</span></span>
+<span><span class="co">#&gt;  8 0.522  6.73  3.43    18</span></span>
+<span><span class="co">#&gt;  9 0.596  6.36  3.86    30</span></span>
+<span><span class="co">#&gt; 10 0.701  7.17  3.10    52</span></span>
 <span><span class="co">#&gt; # … with 19,990 more rows</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $results</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):</span></span>
-<span><span class="co">#&gt;                                                                         </span></span>
-<span><span class="co">#&gt;       Lower95 Median Upper95   Mean      SD Mode     MCerr MC%ofSD SSeff</span></span>
-<span><span class="co">#&gt; p[10] 0.35768 0.6934 0.99162 0.6752 0.17317   -- 0.0013198     0.8 17216</span></span>
-<span><span class="co">#&gt; a      2.2465 5.9101  9.9972 5.9191   2.272   --  0.054779     2.4  1720</span></span>
-<span><span class="co">#&gt; b     0.67248 2.6332  5.2003 2.7849  1.2399   --  0.030437     2.5  1660</span></span>
-<span><span class="co">#&gt;                      </span></span>
-<span><span class="co">#&gt;          AC.10   psrf</span></span>
-<span><span class="co">#&gt; p[10] 0.011195 1.0002</span></span>
-<span><span class="co">#&gt; a      0.20733 1.0008</span></span>
-<span><span class="co">#&gt; b      0.21395 1.0006</span></span>
+<span><span class="co">#&gt;                                                                           </span></span>
+<span><span class="co">#&gt;       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff</span></span>
+<span><span class="co">#&gt; p[10] 0.36511 0.69686 0.99238 0.67978 0.16999   -- 0.0013547     0.8 15746</span></span>
+<span><span class="co">#&gt; a       2.258  6.0665   9.974  6.0156  2.3002   --  0.058922     2.6  1524</span></span>
+<span><span class="co">#&gt; b     0.65735   2.698  5.2671  2.8445  1.2772   --  0.034558     2.7  1366</span></span>
+<span><span class="co">#&gt;                        </span></span>
+<span><span class="co">#&gt;            AC.10   psrf</span></span>
+<span><span class="co">#&gt; p[10] -0.0029928 1.0003</span></span>
+<span><span class="co">#&gt; a        0.23967 1.0013</span></span>
+<span><span class="co">#&gt; b        0.26633 1.0013</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Total time taken: 3.3 seconds</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -311,7 +305,7 @@ ObservedResponse
 <span><span class="co">#&gt; [1] "OK"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6751967</span></span>
+<span><span class="co">#&gt; [1] 0.6797793</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -351,7 +345,7 @@ ObservedResponse
 <span><span class="co">#&gt; [1] "OK"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6933979</span></span>
+<span><span class="co">#&gt; [1] 0.6968642</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -381,7 +375,7 @@ ObservedResponse
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
 <span><span class="co">#&gt;       10% </span></span>
-<span><span class="co">#&gt; 0.4402933 </span></span>
+<span><span class="co">#&gt; 0.4507215 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -417,7 +411,7 @@ ObservedResponse
 <span><span class="co">#&gt; [1] "action"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.46665</span></span>
+<span><span class="co">#&gt; [1] 0.4731</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -466,7 +460,7 @@ ObservedResponse
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6751967</span></span>
+<span><span class="co">#&gt; [1] 0.6797793</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $status</span></span>
 <span><span class="co">#&gt; [1] "Breach"</span></span>
@@ -500,15 +494,15 @@ ObservedResponse
 <span>    lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.05</span>, <span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>,</span>
 <span>    upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.95</span>, <span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p>The <code>quantiles</code> element of the return value contains the mappings from quantile of the posterior to observed values of the metric. For example, the first row of <code>rvSiteMetrics$quantiles</code> shows that the lower action limit is the 5th centile of the posterior, which corresponds to an event probability of 0.363.</p>
+<p>The <code>quantiles</code> element of the return value contains the mappings from quantile of the posterior to observed values of the metric. For example, the first row of <code>rvSiteMetrics$quantiles</code> shows that the lower action limit is the 5th centile of the posterior, which corresponds to an event probability of 0.372.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">quantiles</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
 <span><span class="co">#&gt;   Threshold Status Quantile     p</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Lower     action     0.05 0.363</span></span>
-<span><span class="co">#&gt; 2 Lower     warn       0.2  0.531</span></span>
-<span><span class="co">#&gt; 3 Upper     warn       0.8  0.830</span></span>
+<span><span class="co">#&gt; 1 Lower     action     0.05 0.372</span></span>
+<span><span class="co">#&gt; 2 Lower     warn       0.2  0.538</span></span>
+<span><span class="co">#&gt; 3 Upper     warn       0.8  0.833</span></span>
 <span><span class="co">#&gt; 4 Upper     action     0.95 0.927</span></span></code></pre></div>
 <p>As before, the <code>data</code> element of the list contains a copy of the site metric dataset, augmented by a column (named <code>Status</code> by default) that allocates the observed site-level metrics (KRIs) to a band defined by the thresholds in <code>lower</code> and <code>upper</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
