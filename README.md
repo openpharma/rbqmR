@@ -22,7 +22,7 @@ Tools currently exist for
 
 -   Dynamic Quality Tolerance Limits (QTLs) using Bayesian Hierarchical
     Models (ongoing)
--   Observed-Minus-Expected methodology (ongoing)
+-   Observed-Minus-Expected methodology
 -   Observed/Expected methodology (ongoing)
 
 This package is a work-in-progress. It’s primary focus is dynamic QTLs.
@@ -31,7 +31,7 @@ Other methodologies are included for completeness.
 ## Installation
 
 You can install the development version of rbqmR from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/openpharma/rbqmR) with:
 
 ``` r
 # install.packages("devtools")
@@ -219,31 +219,31 @@ fitted
 #> # A tibble: 20,000 × 4
 #>        p     a     b     q
 #>    <dbl> <dbl> <dbl> <int>
-#>  1 0.379  4.73  2.71     6
-#>  2 0.759  5.26  2.84    65
-#>  3 0.892  5.40  1.97    91
-#>  4 0.382  6.43  2.42     7
-#>  5 0.628  7.53  2.33    37
-#>  6 0.836  8.06  2.35    82
-#>  7 0.931  8.15  2.41    96
-#>  8 0.830  7.54  3.23    81
-#>  9 0.767  8.23  2.92    67
-#> 10 0.702  6.73  2.73    53
+#>  1 0.957  6.58  2.89    98
+#>  2 0.825  7.55  3.00    79
+#>  3 0.556  6.48  2.45    23
+#>  4 0.886  6.05  1.96    90
+#>  5 0.747  7.67  3.38    62
+#>  6 0.686  9.06  3.56    48
+#>  7 0.689  6.61  3.24    49
+#>  8 0.522  6.73  3.43    18
+#>  9 0.596  6.36  3.86    30
+#> 10 0.701  7.17  3.10    52
 #> # … with 19,990 more rows
 #> 
 #> $results
 #> 
 #> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
-#>                                                                         
-#>       Lower95 Median Upper95   Mean      SD Mode     MCerr MC%ofSD SSeff
-#> p[10] 0.35768 0.6934 0.99162 0.6752 0.17317   -- 0.0013198     0.8 17216
-#> a      2.2465 5.9101  9.9972 5.9191   2.272   --  0.054779     2.4  1720
-#> b     0.67248 2.6332  5.2003 2.7849  1.2399   --  0.030437     2.5  1660
-#>                      
-#>          AC.10   psrf
-#> p[10] 0.011195 1.0002
-#> a      0.20733 1.0008
-#> b      0.21395 1.0006
+#>                                                                           
+#>       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
+#> p[10] 0.36511 0.69686 0.99238 0.67978 0.16999   -- 0.0013547     0.8 15746
+#> a       2.258  6.0665   9.974  6.0156  2.3002   --  0.058922     2.6  1524
+#> b     0.65735   2.698  5.2671  2.8445  1.2772   --  0.034558     2.7  1366
+#>                        
+#>            AC.10   psrf
+#> p[10] -0.0029928 1.0003
+#> a        0.23967 1.0013
+#> b        0.26633 1.0013
 #> 
 #> Total time taken: 3.3 seconds
 #> 
@@ -294,7 +294,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6751967
+#> [1] 0.6797793
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -354,7 +354,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6933979
+#> [1] 0.6968642
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -388,7 +388,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4402933 
+#> 0.4507215 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -430,7 +430,7 @@ qtlProbInRange
 #> [1] "action"
 #> 
 #> $qtl
-#> [1] 0.46665
+#> [1] 0.4731
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -488,7 +488,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6751967
+#> [1] 0.6797793
 #> 
 #> $status
 #> [1] "Breach"
@@ -539,16 +539,16 @@ The `quantiles` element of the return value contains the mappings from
 quantile of the posterior to observed values of the metric. For example,
 the first row of `rvSiteMetrics$quantiles` shows that the lower action
 limit is the 5th centile of the posterior, which corresponds to an event
-probability of 0.363.
+probability of 0.372.
 
 ``` r
 rvSiteMetrics$quantiles
 #> # A tibble: 4 × 4
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
-#> 1 Lower     action     0.05 0.363
-#> 2 Lower     warn       0.2  0.531
-#> 3 Upper     warn       0.8  0.830
+#> 1 Lower     action     0.05 0.372
+#> 2 Lower     warn       0.2  0.538
+#> 3 Upper     warn       0.8  0.833
 #> 4 Upper     action     0.95 0.927
 ```
 
