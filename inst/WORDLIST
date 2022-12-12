@@ -1,3 +1,4 @@
+'s
 AEs
 autorun
 autorunJagsAndCaptureOutput
@@ -13,6 +14,8 @@ com
 createBinomialInits
 Das
 doi
+dgamma
+dpois
 dunif
 eg
 Gesetz

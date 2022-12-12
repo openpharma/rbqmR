@@ -38,14 +38,14 @@ The purpose of the `rbqmR` package is to provide a repository of r-based tools f
 Tools currently exist for
 
 * Dynamic Quality Tolerance Limits (QTLs) using Bayesian Hierarchical Models (ongoing)
-* Observed-Minus-Expected methodology (ongoing)
+* Observed-Minus-Expected methodology
 * Observed/Expected methodology (ongoing)
 
 This package is a work-in-progress.  It's primary focus is dynamic QTLs. Other methodologies are included for completeness.
 
 ## Installation
 
-You can install the development version of rbqmR from [GitHub](https://github.com/) with:
+You can install the development version of rbqmR from [GitHub](https://github.com/openpharma/rbqmR) with:
 
 ```{r, eval=FALSE}
 # install.packages("devtools")
