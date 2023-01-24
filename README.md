@@ -49,7 +49,6 @@ outcome.
 
 ``` r
 data(berrySummary)
-
 berrySummary %>% kable(digits = c(0, 0, 0, 2))
 ```
 
@@ -219,16 +218,16 @@ fitted
 #> # A tibble: 20,000 × 4
 #>        p     a     b     q
 #>    <dbl> <dbl> <dbl> <int>
-#>  1 0.957  6.58  2.89    98
-#>  2 0.825  7.55  3.00    79
-#>  3 0.556  6.48  2.45    23
-#>  4 0.886  6.05  1.96    90
-#>  5 0.747  7.67  3.38    62
-#>  6 0.686  9.06  3.56    48
-#>  7 0.689  6.61  3.24    49
-#>  8 0.522  6.73  3.43    18
-#>  9 0.596  6.36  3.86    30
-#> 10 0.701  7.17  3.10    52
+#>  1 0.273 3.27  1.26      2
+#>  2 0.322 3.02  1.68      4
+#>  3 0.923 4.58  1.67     95
+#>  4 0.803 2.56  1.46     74
+#>  5 0.480 2.91  1.14     13
+#>  6 0.876 3.06  0.486    88
+#>  7 0.929 1.67  0.748    95
+#>  8 0.987 0.944 0.857   100
+#>  9 0.623 2.52  1.53     35
+#> 10 0.724 3.06  1.75     56
 #> # … with 19,990 more rows
 #> 
 #> $results
@@ -236,16 +235,16 @@ fitted
 #> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
 #>                                                                           
 #>       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
-#> p[10] 0.36511 0.69686 0.99238 0.67978 0.16999   -- 0.0013547     0.8 15746
-#> a       2.258  6.0665   9.974  6.0156  2.3002   --  0.058922     2.6  1524
-#> b     0.65735   2.698  5.2671  2.8445  1.2772   --  0.034558     2.7  1366
+#> p[10] 0.37204 0.70069 0.99945 0.68175 0.17116   -- 0.0013148     0.8 16947
+#> a      2.1901  5.9252  9.9896  5.9117  2.2816   --  0.056463     2.5  1633
+#> b     0.61747  2.6179  5.1603  2.7773  1.2636   --  0.032209     2.5  1539
 #>                        
 #>            AC.10   psrf
-#> p[10] -0.0029928 1.0003
-#> a        0.23967 1.0013
-#> b        0.26633 1.0013
+#> p[10] -0.0093212 1.0002
+#> a        0.22285 1.0017
+#> b         0.2191 1.0035
 #> 
-#> Total time taken: 3.3 seconds
+#> Total time taken: 3.4 seconds
 #> 
 #> 
 #> $status
@@ -266,14 +265,11 @@ historical data obtained from similar previous studies.
 > rates at different sites, even when considering the overall event rate
 > for the study. The corresponding frequentist analysis assumes that all
 > sites share common event rate, thus assuming there is no inter-site
-> variation.
-
-#### Comparison to constant value(s)
-
-The `evaluatePointEstimateQTL` allows the comparison of an arbitrary
-scalar summary statistic (which defaults to the mean) derived from the
-estimate of the posterior distribution, with an arbitrary number of
-lower and upper limits.
+> variation. \#### Comparison to constant value(s) The
+> `evaluatePointEstimateQTL` allows the comparison of an arbitrary
+> scalar summary statistic (which defaults to the mean) derived from the
+> estimate of the posterior distribution, with an arbitrary number of
+> lower and upper limits.
 
 For example, the code below defines a QTL based on the mean of the
 posterior distribution of the probability of an event. Call this
@@ -294,7 +290,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6797793
+#> [1] 0.6817485
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -351,10 +347,10 @@ berrySummary %>%
     upper = c("warn" = 0.7, "action" = 0.9)
   )
 #> $status
-#> [1] "OK"
+#> [1] "warn"
 #> 
 #> $qtl
-#> [1] 0.6968642
+#> [1] 0.7006912
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -388,7 +384,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4507215 
+#> 0.4481621 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -430,7 +426,7 @@ qtlProbInRange
 #> [1] "action"
 #> 
 #> $qtl
-#> [1] 0.4731
+#> [1] 0.46405
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -448,7 +444,7 @@ qtlProbInRange
 ```
 
 Again, the QTL is breached, since the probability that the study-level
-event rate is in the range \[0.5, 0.75\] is only 0.47.
+event rate is in the range \[0.5, 0.75\] is only 0.46.
 
 #### Using an arbitrary criterion
 
@@ -488,7 +484,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6797793
+#> [1] 0.6817485
 #> 
 #> $status
 #> [1] "Breach"
@@ -539,17 +535,17 @@ The `quantiles` element of the return value contains the mappings from
 quantile of the posterior to observed values of the metric. For example,
 the first row of `rvSiteMetrics$quantiles` shows that the lower action
 limit is the 5th centile of the posterior, which corresponds to an event
-probability of 0.372.
+probability of 0.373.
 
 ``` r
 rvSiteMetrics$quantiles
 #> # A tibble: 4 × 4
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
-#> 1 Lower     action     0.05 0.372
-#> 2 Lower     warn       0.2  0.538
-#> 3 Upper     warn       0.8  0.833
-#> 4 Upper     action     0.95 0.927
+#> 1 Lower     action     0.05 0.373
+#> 2 Lower     warn       0.2  0.540
+#> 3 Upper     warn       0.8  0.835
+#> 4 Upper     action     0.95 0.931
 ```
 
 As before, the `data` element of the list contains a copy of the site
@@ -575,10 +571,9 @@ rvSiteMetrics$data
 
 > NB `rvSiteMetrics$data` contains incorrect values in the `Status`
 > column. See [issue
-> \#12](https://github.com/openpharma/rbqmR/issues/12).
-
-The `qtl` element of the return value contains counts of sites by
-threshold name.
+> \#12](https://github.com/openpharma/rbqmR/issues/12). The `qtl`
+> element of the return value contains counts of sites by threshold
+> name.
 
 ``` r
 rvSiteMetrics$qtl
@@ -670,6 +665,48 @@ fitted$tab %>%
 
 <img src="man/figures/README-createQtlPlot-1.png" width="80%" />
 
+## Presenting KRIs
+
+The KRIs associated with a QTL can be presented graphically. `rmqmR`
+includes the `createQtlBubblePlot` function, which presents the KRIs
+(possibly from multiple evaluations of a QTL) in the form of a bubble
+plot overlaid with a box-and-whisker plot. Site-level data may be
+grouped in an arbitrary fashion, or not at all. Optionally, reference
+lines that correspond to QTL thresholds may be added.
+
+``` r
+berrySummary %>% 
+  add_column(Snapshot = "End of study") %>% 
+  add_column(Location = c(rep("EU", 4), rep("US", 5))) %>% 
+  createQtlBubblePlot(
+    x = Snapshot,
+    y = ObservedResponse,
+    size = Subjects,
+    group = Location,
+    boxWidth = 0.1,
+    limits = list(
+               list(
+                 label = "QTL (85%)", 
+                 colour = "red", 
+                 type = "dashed", 
+                 y = 0.85, 
+                 x = 1.25, 
+                 vjust = -1
+               ),
+               list(
+                 label = "Sec Lim (75%)", 
+                 colour = "goldenrod", 
+                 type = "dotted", 
+                 y = 0.75, 
+                 x = 1.25, 
+                 vjust = 1.25
+               )
+             )
+  )
+```
+
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="80%" />
+
 ## Observed - Expected Methodology
 
 We generate some random data similar to that used by Gilbert (Gilbert
@@ -681,7 +718,6 @@ QTL process will assume the event rate is 0.10…
 
 ``` r
 set.seed(011327)
-
 randomData <- tibble(
   Subject = 1:400,
   Event = rbinom(400, 1, 0.13)
@@ -708,7 +744,7 @@ omeTable %>%
   createObservedMinusExpectedPlot()
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="80%" />
 
 We can see that the trial breached a warning limit. When did this first
 happen?
@@ -819,7 +855,7 @@ createObservedOverExpectedTable(
   createObservedOverExpectedPlot()
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-19-1.png" width="80%" />
 
 As the trial is executed, the observed data can be added to the table
 and the plot.
@@ -829,7 +865,6 @@ observedData <- tibble(
   NObserved = c(250, 500, 750, 1000),
   ObservedRate = 100 * c(2, 9, 15, 16) / NObserved
 )
-
 createObservedOverExpectedTable(
   nHistorical = 10000,
   historicalRate = 0.014,
@@ -840,17 +875,14 @@ createObservedOverExpectedTable(
 ) %>% createObservedOverExpectedPlot(observedRate = ObservedRate)
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="80%" />
 
-> TODO Need to check interpretation of parameters
-
-# Beyond TransCelerate
-
-At the time of writing (late 2022) The TransCelerate Quality Tolerance
-Limit Framework (Transcelerate 2020) lists metrics that are exclusively
-binary in nature. There are many other potential metrics that are
-non-binary and which may provide insight into the conduct of the trial.
-For example,
+> TODO Need to check interpretation of parameters \# Beyond
+> TransCelerate At the time of writing (late 2022) The TransCelerate
+> Quality Tolerance Limit Framework (Transcelerate 2020) lists metrics
+> that are exclusively binary in nature. There are many other potential
+> metrics that are non-binary and which may provide insight into the
+> conduct of the trial. For example,
 
 -   The number of episodes of rescue medication (as opposed to the
     percentage or number of trial participants on rescue medication)
@@ -873,7 +905,6 @@ by horses (Bortkiewicz 1898) to illustrate the method.
 
 ``` r
 data("cavalryDeaths")
-
 cavalryDeaths
 #> # A tibble: 280 × 3
 #>     Year Corps   Deaths
@@ -903,7 +934,6 @@ cavalrySummary <- cavalryDeaths %>%
     .groups = "drop"
   ) %>%
   mutate(DeathRate = Deaths / TotalTime)
-
 cavalrySummary
 #> # A tibble: 14 × 4
 #>    Corps    Deaths TotalTime DeathRate
@@ -950,7 +980,59 @@ poissonFit$tab %>%
   labs(x = "Deaths per year")
 ```
 
-<img src="man/figures/README-unnamed-chunk-23-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-24-1.png" width="80%" />
+
+# Envrionment
+
+``` r
+sessionInfo()
+#> R version 4.1.3 (2022-03-10)
+#> Platform: x86_64-pc-linux-gnu (64-bit)
+#> Running under: Ubuntu 20.04.4 LTS
+#> 
+#> Matrix products: default
+#> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+#> LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
+#> 
+#> locale:
+#>  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+#>  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+#>  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+#>  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+#>  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+#> [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+#> 
+#> attached base packages:
+#> [1] stats     graphics  grDevices utils     datasets  methods   base     
+#> 
+#> other attached packages:
+#>  [1] rbqmR_0.0.0.9001 testthat_3.1.4   forcats_0.5.1    stringr_1.4.0   
+#>  [5] dplyr_1.0.8      purrr_0.3.4      readr_2.1.2      tidyr_1.2.0     
+#>  [9] tibble_3.1.6     ggplot2_3.3.5    tidyverse_1.3.1  kableExtra_1.3.4
+#> [13] magrittr_2.0.3  
+#> 
+#> loaded via a namespace (and not attached):
+#>  [1] fs_1.5.2          usethis_2.1.5     lubridate_1.8.0   devtools_2.4.3   
+#>  [5] webshot_0.5.3     httr_1.4.2        rprojroot_2.0.3   tools_4.1.3      
+#>  [9] backports_1.4.1   utf8_1.2.2        R6_2.5.1          DBI_1.1.2        
+#> [13] colorspace_2.0-3  withr_2.5.0       tidyselect_1.1.2  prettyunits_1.1.1
+#> [17] processx_3.5.3    compiler_4.1.3    cli_3.3.0         rvest_1.0.2      
+#> [21] xml2_1.3.3        desc_1.4.1        labeling_0.4.2    scales_1.2.0     
+#> [25] callr_3.7.0       systemfonts_1.0.4 digest_0.6.29     rmarkdown_2.14   
+#> [29] svglite_2.1.0     pkgconfig_2.0.3   htmltools_0.5.2   sessioninfo_1.2.2
+#> [33] dbplyr_2.1.1      fastmap_1.1.0     highr_0.9         rlang_1.0.6      
+#> [37] readxl_1.4.0      rstudioapi_0.13   farver_2.1.0      generics_0.1.2   
+#> [41] jsonlite_1.8.0    munsell_0.5.0     fansi_1.0.3       logger_0.2.2     
+#> [45] lifecycle_1.0.1   stringi_1.7.6     yaml_2.3.5        brio_1.1.3       
+#> [49] pkgbuild_1.3.1    grid_4.1.3        parallel_4.1.3    crayon_1.5.1     
+#> [53] lattice_0.20-45   haven_2.5.0       hms_1.1.1         knitr_1.39       
+#> [57] ps_1.7.0          pillar_1.7.0      pkgload_1.2.4     reprex_2.0.1     
+#> [61] glue_1.6.2        evaluate_0.15     remotes_2.4.2     modelr_0.1.8     
+#> [65] runjags_2.2.1-7   vctrs_0.4.1       tzdb_0.3.0        cellranger_1.1.0 
+#> [69] gtable_0.3.0      assertthat_0.2.1  cachem_1.0.6      xfun_0.30        
+#> [73] broom_0.8.0       coda_0.19-4       rjags_4-13        viridisLite_0.4.0
+#> [77] memoise_2.0.1     toOrdinal_1.3-0.0 ellipsis_0.3.2
+```
 
 # References
 

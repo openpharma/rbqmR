@@ -15,11 +15,9 @@ knitr::opts_chunk$set(
   fig.height = 4,
   fig.width = 6
 )
-
 library(magrittr)
 library(kableExtra)
 library(tidyverse)
-
 devtools::load_all()
 ```
 
@@ -58,7 +56,6 @@ We use example 2.7 of Berry et al [@BERRY], described on pages 52 to 63, modifyi
 
 ```{r sourceData}
 data(berrySummary)
-
 berrySummary %>% kable(digits = c(0, 0, 0, 2))
 ```
 The central tenet of the QTL methodology implemented in `rbqmR` is not that a current trial should behave in a similar fashion to a "similar" historical or control trial, but rather that all sites within the current trial should behave in a similar way.  The justification for this assumption is that the trial's inclusion/exclusion criteria are designed to minimise heterogeneity amongst the study population (save for that induced by differences in treatment in comparative trials).  
@@ -76,7 +73,6 @@ fitted
 
 ### Examples of QTL evaluation rules
 > When using a Bayesian Hierarchical Model, the probabilities associated with credible intervals are generally lower than those associated with similar frequentist models.  This is because BHMs permit  more sources of variation.  Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study.  The corresponding frequentist analysis assumes that all sites share  common event rate, thus assuming there is no inter-site variation.
-
 #### Comparison to constant value(s)
 The `evaluatePointEstimateQTL` allows the comparison of an arbitrary scalar summary statistic (which defaults to the mean) derived from the estimate of the posterior distribution, with an arbitrary number of lower and upper limits.
 
@@ -211,7 +207,6 @@ rvSiteMetrics$data
 ```
 
 > NB `rvSiteMetrics$data` contains incorrect values in the `Status` column.  See [issue #12](https://github.com/openpharma/rbqmR/issues/12).
-
 The `qtl` element of the return value contains counts of sites by threshold name.
 
 ```{r}
@@ -284,6 +279,39 @@ fitted$tab %>%
   )
 ```
 
+## Presenting KRIs
+The KRIs associated with a QTL can be presented graphically.  `rmqmR` includes the `createQtlBubblePlot` function, which presents the KRIs (possibly from multiple evaluations of a QTL) in the form of a bubble plot overlaid with a box-and-whisker plot.  Site-level data may be grouped in an arbitrary fashion, or not at all.  Optionally, reference lines that correspond to QTL thresholds may be added.  
+
+```{r, error=TRUE}
+berrySummary %>%
+  add_column(Snapshot = "End of study") %>%
+  add_column(Location = c(rep("EU", 4), rep("US", 5))) %>%
+  createQtlBubblePlot(
+    x = Snapshot,
+    y = ObservedResponse,
+    size = Subjects,
+    group = Location,
+    boxWidth = 0.1,
+    limits = list(
+      list(
+        label = "QTL (85%)",
+        colour = "red",
+        type = "dashed",
+        y = 0.85,
+        x = 1.25,
+        vjust = -1
+      ),
+      list(
+        label = "Sec Lim (75%)",
+        colour = "goldenrod",
+        type = "dotted",
+        y = 0.75,
+        x = 1.25,
+        vjust = 1.25
+      )
+    )
+  )
+```
 
 ## Observed - Expected Methodology
 We generate some random data similar to that used by Gilbert [@GILBERT], after setting a seed for reproducibility.
@@ -292,7 +320,6 @@ In order to illustrate what happens when a QTL is breached, we set the probabili
 
 ```{r}
 set.seed(011327)
-
 randomData <- tibble(
   Subject = 1:400,
   Event = rbinom(400, 1, 0.13)
@@ -358,7 +385,6 @@ observedData <- tibble(
   NObserved = c(250, 500, 750, 1000),
   ObservedRate = 100 * c(2, 9, 15, 16) / NObserved
 )
-
 createObservedOverExpectedTable(
   nHistorical = 10000,
   historicalRate = 0.014,
@@ -370,7 +396,6 @@ createObservedOverExpectedTable(
 ```
 
 > TODO Need to check interpretation of parameters
-
 # Beyond TransCelerate
 At the time of writing (late 2022) The TransCelerate Quality Tolerance Limit Framework [@Transcelerate2020] lists metrics that are exclusively binary in nature.  There are many other potential metrics that are non-binary and which may provide insight into the conduct of the trial.  For example,
 
@@ -389,14 +414,12 @@ The Bayesian QTL framework implemented in `rbqmR` can easily be extended to incl
 We use data on the numbers of Prussian cavalry officers kicked to death by horses [@Bortkiewicz1898] to illustrate the method.
 ```{r}
 data("cavalryDeaths")
-
 cavalryDeaths
 ```
 
 Regard different cavalry Corps as "sites" and regard the number of years for which data were collected as "exposure".
 
 ```{r}
-
 cavalrySummary <- cavalryDeaths %>%
   group_by(Corps) %>%
   summarise(
@@ -405,7 +428,6 @@ cavalrySummary <- cavalryDeaths %>%
     .groups = "drop"
   ) %>%
   mutate(DeathRate = Deaths / TotalTime)
-
 cavalrySummary
 ```
 
@@ -427,6 +449,11 @@ poissonFit$tab %>%
     siteMetric = DeathRate
   ) +
   labs(x = "Deaths per year")
+```
+
+# Envrionment
+```{r}
+sessionInfo()
 ```
 
 # References
