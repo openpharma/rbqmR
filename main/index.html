@@ -45,12 +45,6 @@
 <li class="nav-item">
   <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://openpharma.github.io/rbqmR/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -245,21 +239,22 @@ ObservedResponse
 <code class="sourceCode R"><span><span class="va">fitted</span> <span class="op">&lt;-</span> <span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/fitBayesBinomialModel.html">fitBayesBinomialModel</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">Subjects</span>, r <span class="op">=</span> <span class="va">Events</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required namespace: rjags</span></span>
+<span><span class="co">#&gt; INFO [2023-01-24 14:10:52] Status of model fitting: OK</span></span>
 <span><span class="va">fitted</span></span>
 <span><span class="co">#&gt; $tab</span></span>
 <span><span class="co">#&gt; # A tibble: 20,000 × 4</span></span>
 <span><span class="co">#&gt;        p     a     b     q</span></span>
 <span><span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;</span></span>
-<span><span class="co">#&gt;  1 0.273 3.27  1.26      2</span></span>
-<span><span class="co">#&gt;  2 0.322 3.02  1.68      4</span></span>
-<span><span class="co">#&gt;  3 0.923 4.58  1.67     95</span></span>
-<span><span class="co">#&gt;  4 0.803 2.56  1.46     74</span></span>
-<span><span class="co">#&gt;  5 0.480 2.91  1.14     13</span></span>
-<span><span class="co">#&gt;  6 0.876 3.06  0.486    88</span></span>
-<span><span class="co">#&gt;  7 0.929 1.67  0.748    95</span></span>
-<span><span class="co">#&gt;  8 0.987 0.944 0.857   100</span></span>
-<span><span class="co">#&gt;  9 0.623 2.52  1.53     35</span></span>
-<span><span class="co">#&gt; 10 0.724 3.06  1.75     56</span></span>
+<span><span class="co">#&gt;  1 0.675  7.23  4.27    46</span></span>
+<span><span class="co">#&gt;  2 0.664  8.94  4.28    44</span></span>
+<span><span class="co">#&gt;  3 0.657  8.47  4.00    42</span></span>
+<span><span class="co">#&gt;  4 0.812  7.57  3.97    76</span></span>
+<span><span class="co">#&gt;  5 0.440  8.13  4.23    10</span></span>
+<span><span class="co">#&gt;  6 0.794  9.00  2.29    72</span></span>
+<span><span class="co">#&gt;  7 0.569  4.49  1.99    25</span></span>
+<span><span class="co">#&gt;  8 0.674  3.14  2.02    46</span></span>
+<span><span class="co">#&gt;  9 0.699  4.84  2.20    51</span></span>
+<span><span class="co">#&gt; 10 0.753  5.45  2.75    64</span></span>
 <span><span class="co">#&gt; # … with 19,990 more rows</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $results</span></span>
@@ -267,16 +262,16 @@ ObservedResponse
 <span><span class="co">#&gt; JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):</span></span>
 <span><span class="co">#&gt;                                                                           </span></span>
 <span><span class="co">#&gt;       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff</span></span>
-<span><span class="co">#&gt; p[10] 0.37204 0.70069 0.99945 0.68175 0.17116   -- 0.0013148     0.8 16947</span></span>
-<span><span class="co">#&gt; a      2.1901  5.9252  9.9896  5.9117  2.2816   --  0.056463     2.5  1633</span></span>
-<span><span class="co">#&gt; b     0.61747  2.6179  5.1603  2.7773  1.2636   --  0.032209     2.5  1539</span></span>
+<span><span class="co">#&gt; p[10] 0.36053 0.69662 0.99416 0.67867 0.17235   -- 0.0013997     0.8 15162</span></span>
+<span><span class="co">#&gt; a       2.159  5.8656  9.9949  5.8588  2.2934   --  0.058108     2.5  1558</span></span>
+<span><span class="co">#&gt; b     0.65933  2.6085  5.2344  2.7541  1.2614   --  0.032876     2.6  1472</span></span>
 <span><span class="co">#&gt;                        </span></span>
-<span><span class="co">#&gt;            AC.10   psrf</span></span>
-<span><span class="co">#&gt; p[10] -0.0093212 1.0002</span></span>
-<span><span class="co">#&gt; a        0.22285 1.0017</span></span>
-<span><span class="co">#&gt; b         0.2191 1.0035</span></span>
+<span><span class="co">#&gt;           AC.10    psrf</span></span>
+<span><span class="co">#&gt; p[10] 0.0069035 0.99996</span></span>
+<span><span class="co">#&gt; a       0.21262  1.0001</span></span>
+<span><span class="co">#&gt; b       0.21729  1.0001</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Total time taken: 3.4 seconds</span></span>
+<span><span class="co">#&gt; Total time taken: 3.3 seconds</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $status</span></span>
@@ -302,7 +297,7 @@ ObservedResponse
 <span><span class="co">#&gt; [1] "OK"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6817485</span></span>
+<span><span class="co">#&gt; [1] 0.6786695</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -339,10 +334,10 @@ ObservedResponse
 <span>    upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.7</span>, <span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; $status</span></span>
-<span><span class="co">#&gt; [1] "warn"</span></span>
+<span><span class="co">#&gt; [1] "OK"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.7006912</span></span>
+<span><span class="co">#&gt; [1] 0.6966203</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -372,7 +367,7 @@ ObservedResponse
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
 <span><span class="co">#&gt;       10% </span></span>
-<span><span class="co">#&gt; 0.4481621 </span></span>
+<span><span class="co">#&gt; 0.4436683 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -407,7 +402,7 @@ ObservedResponse
 <span><span class="co">#&gt; [1] "action"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.46405</span></span>
+<span><span class="co">#&gt; [1] 0.4675</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $data</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
@@ -422,7 +417,7 @@ ObservedResponse
 <span><span class="co">#&gt; 7     7       10      9            0.9   action</span></span>
 <span><span class="co">#&gt; 8     8        9      7            0.778 OK    </span></span>
 <span><span class="co">#&gt; 9     9        6      4            0.667 OK</span></span></code></pre></div>
-<p>Again, the QTL is breached, since the probability that the study-level event rate is in the range [0.5, 0.75] is only 0.46.</p>
+<p>Again, the QTL is breached, since the probability that the study-level event rate is in the range [0.5, 0.75] is only 0.47.</p>
 </div>
 <div class="section level4">
 <h4 id="using-an-arbitrary-criterion">Using an arbitrary criterion<a class="anchor" aria-label="anchor" href="#using-an-arbitrary-criterion"></a>
@@ -456,7 +451,7 @@ ObservedResponse
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; $qtl</span></span>
-<span><span class="co">#&gt; [1] 0.6817485</span></span>
+<span><span class="co">#&gt; [1] 0.6786695</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $status</span></span>
 <span><span class="co">#&gt; [1] "Breach"</span></span>
@@ -490,16 +485,16 @@ ObservedResponse
 <span>    lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.05</span>, <span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>,</span>
 <span>    upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"action"</span> <span class="op">=</span> <span class="fl">0.95</span>, <span class="st">"warn"</span> <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p>The <code>quantiles</code> element of the return value contains the mappings from quantile of the posterior to observed values of the metric. For example, the first row of <code>rvSiteMetrics$quantiles</code> shows that the lower action limit is the 5th centile of the posterior, which corresponds to an event probability of 0.373.</p>
+<p>The <code>quantiles</code> element of the return value contains the mappings from quantile of the posterior to observed values of the metric. For example, the first row of <code>rvSiteMetrics$quantiles</code> shows that the lower action limit is the 5th centile of the posterior, which corresponds to an event probability of 0.366.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">quantiles</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
 <span><span class="co">#&gt;   Threshold Status Quantile     p</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 Lower     action     0.05 0.373</span></span>
-<span><span class="co">#&gt; 2 Lower     warn       0.2  0.540</span></span>
-<span><span class="co">#&gt; 3 Upper     warn       0.8  0.835</span></span>
-<span><span class="co">#&gt; 4 Upper     action     0.95 0.931</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 Lower     action     0.05 0.366</span></span>
+<span><span class="co">#&gt; 2 Lower     warn       0.2  0.535</span></span>
+<span><span class="co">#&gt; 3 Upper     warn       0.8  0.833</span></span>
+<span><span class="co">#&gt; 4 Upper     action     0.95 0.930</span></span></code></pre></div>
 <p>As before, the <code>data</code> element of the list contains a copy of the site metric dataset, augmented by a column (named <code>Status</code> by default) that allocates the observed site-level metrics (KRIs) to a band defined by the thresholds in <code>lower</code> and <code>upper</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rvSiteMetrics</span><span class="op">$</span><span class="va">data</span></span>
@@ -592,9 +587,9 @@ ObservedResponse
 </h2>
 <p>The KRIs associated with a QTL can be presented graphically. <code>rmqmR</code> includes the <code>createQtlBubblePlot</code> function, which presents the KRIs (possibly from multiple evaluations of a QTL) in the form of a bubble plot overlaid with a box-and-whisker plot. Site-level data may be grouped in an arbitrary fashion, or not at all. Optionally, reference lines that correspond to QTL thresholds may be added.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">add_column</span><span class="op">(</span>Snapshot <span class="op">=</span> <span class="st">"End of study"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">add_column</span><span class="op">(</span>Location <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"EU"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"US"</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">berrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">add_column</span><span class="op">(</span>Snapshot <span class="op">=</span> <span class="st">"End of study"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">add_column</span><span class="op">(</span>Location <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"EU"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"US"</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/createQtlBubblePlot.html">createQtlBubblePlot</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="va">Snapshot</span>,</span>
 <span>    y <span class="op">=</span> <span class="va">ObservedResponse</span>,</span>
@@ -602,23 +597,23 @@ ObservedResponse
 <span>    group <span class="op">=</span> <span class="va">Location</span>,</span>
 <span>    boxWidth <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>               <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>                 label <span class="op">=</span> <span class="st">"QTL (85%)"</span>, </span>
-<span>                 colour <span class="op">=</span> <span class="st">"red"</span>, </span>
-<span>                 type <span class="op">=</span> <span class="st">"dashed"</span>, </span>
-<span>                 y <span class="op">=</span> <span class="fl">0.85</span>, </span>
-<span>                 x <span class="op">=</span> <span class="fl">1.25</span>, </span>
-<span>                 vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span></span>
-<span>               <span class="op">)</span>,</span>
-<span>               <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>                 label <span class="op">=</span> <span class="st">"Sec Lim (75%)"</span>, </span>
-<span>                 colour <span class="op">=</span> <span class="st">"goldenrod"</span>, </span>
-<span>                 type <span class="op">=</span> <span class="st">"dotted"</span>, </span>
-<span>                 y <span class="op">=</span> <span class="fl">0.75</span>, </span>
-<span>                 x <span class="op">=</span> <span class="fl">1.25</span>, </span>
-<span>                 vjust <span class="op">=</span> <span class="fl">1.25</span></span>
-<span>               <span class="op">)</span></span>
-<span>             <span class="op">)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>        label <span class="op">=</span> <span class="st">"QTL (85%)"</span>,</span>
+<span>        colour <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>        type <span class="op">=</span> <span class="st">"dashed"</span>,</span>
+<span>        y <span class="op">=</span> <span class="fl">0.85</span>,</span>
+<span>        x <span class="op">=</span> <span class="fl">1.25</span>,</span>
+<span>        vjust <span class="op">=</span> <span class="op">-</span><span class="fl">1</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>        label <span class="op">=</span> <span class="st">"Sec Lim (75%)"</span>,</span>
+<span>        colour <span class="op">=</span> <span class="st">"goldenrod"</span>,</span>
+<span>        type <span class="op">=</span> <span class="st">"dotted"</span>,</span>
+<span>        y <span class="op">=</span> <span class="fl">0.75</span>,</span>
+<span>        x <span class="op">=</span> <span class="fl">1.25</span>,</span>
+<span>        vjust <span class="op">=</span> <span class="fl">1.25</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-14-1.png" width="80%"></p>
 </div>
@@ -823,6 +818,7 @@ WARN
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">poissonFit</span> <span class="op">&lt;-</span> <span class="va">cavalrySummary</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/fitBayesPoissonModel.html">fitBayesPoissonModel</a></span><span class="op">(</span><span class="va">Deaths</span>, <span class="va">TotalTime</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO [2023-01-24 14:11:01] Status of model fitting: OK</span></span>
 <span><span class="va">poissonFit</span><span class="op">$</span><span class="va">tab</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/createQtlPlot.html">createQtlPlot</a></span><span class="op">(</span></span>
 <span>    metric <span class="op">=</span> <span class="va">lambda</span>,</span>
@@ -835,7 +831,7 @@ WARN
 </div>
 </div>
 <div class="section level1">
-<h1 id="envrionment">Envrionment<a class="anchor" aria-label="anchor" href="#envrionment"></a>
+<h1 id="environment">Environment<a class="anchor" aria-label="anchor" href="#environment"></a>
 </h1>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -865,26 +861,34 @@ WARN
 <span><span class="co">#&gt; [13] magrittr_2.0.3  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] fs_1.5.2          usethis_2.1.5     lubridate_1.8.0   devtools_2.4.3   </span></span>
-<span><span class="co">#&gt;  [5] webshot_0.5.3     httr_1.4.2        rprojroot_2.0.3   tools_4.1.3      </span></span>
-<span><span class="co">#&gt;  [9] backports_1.4.1   utf8_1.2.2        R6_2.5.1          DBI_1.1.2        </span></span>
-<span><span class="co">#&gt; [13] colorspace_2.0-3  withr_2.5.0       tidyselect_1.1.2  prettyunits_1.1.1</span></span>
-<span><span class="co">#&gt; [17] processx_3.5.3    compiler_4.1.3    cli_3.3.0         rvest_1.0.2      </span></span>
-<span><span class="co">#&gt; [21] xml2_1.3.3        desc_1.4.1        labeling_0.4.2    scales_1.2.0     </span></span>
-<span><span class="co">#&gt; [25] callr_3.7.0       systemfonts_1.0.4 digest_0.6.29     rmarkdown_2.14   </span></span>
-<span><span class="co">#&gt; [29] svglite_2.1.0     pkgconfig_2.0.3   htmltools_0.5.2   sessioninfo_1.2.2</span></span>
-<span><span class="co">#&gt; [33] dbplyr_2.1.1      fastmap_1.1.0     highr_0.9         rlang_1.0.6      </span></span>
-<span><span class="co">#&gt; [37] readxl_1.4.0      rstudioapi_0.13   farver_2.1.0      generics_0.1.2   </span></span>
-<span><span class="co">#&gt; [41] jsonlite_1.8.0    munsell_0.5.0     fansi_1.0.3       logger_0.2.2     </span></span>
-<span><span class="co">#&gt; [45] lifecycle_1.0.1   stringi_1.7.6     yaml_2.3.5        brio_1.1.3       </span></span>
-<span><span class="co">#&gt; [49] pkgbuild_1.3.1    grid_4.1.3        parallel_4.1.3    crayon_1.5.1     </span></span>
-<span><span class="co">#&gt; [53] lattice_0.20-45   haven_2.5.0       hms_1.1.1         knitr_1.39       </span></span>
-<span><span class="co">#&gt; [57] ps_1.7.0          pillar_1.7.0      pkgload_1.2.4     reprex_2.0.1     </span></span>
-<span><span class="co">#&gt; [61] glue_1.6.2        evaluate_0.15     remotes_2.4.2     modelr_0.1.8     </span></span>
-<span><span class="co">#&gt; [65] runjags_2.2.1-7   vctrs_0.4.1       tzdb_0.3.0        cellranger_1.1.0 </span></span>
-<span><span class="co">#&gt; [69] gtable_0.3.0      assertthat_0.2.1  cachem_1.0.6      xfun_0.30        </span></span>
-<span><span class="co">#&gt; [73] broom_0.8.0       coda_0.19-4       rjags_4-13        viridisLite_0.4.0</span></span>
-<span><span class="co">#&gt; [77] memoise_2.0.1     toOrdinal_1.3-0.0 ellipsis_0.3.2</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] fs_1.5.2             usethis_2.1.5        lubridate_1.8.0     </span></span>
+<span><span class="co">#&gt;  [4] devtools_2.4.3       webshot_0.5.3        httr_1.4.2          </span></span>
+<span><span class="co">#&gt;  [7] rprojroot_2.0.3      tools_4.1.3          backports_1.4.1     </span></span>
+<span><span class="co">#&gt; [10] utf8_1.2.2           R6_2.5.1             DBI_1.1.2           </span></span>
+<span><span class="co">#&gt; [13] colorspace_2.0-3     withr_2.5.0          tidyselect_1.1.2    </span></span>
+<span><span class="co">#&gt; [16] prettyunits_1.1.1    processx_3.5.3       compiler_4.1.3      </span></span>
+<span><span class="co">#&gt; [19] cli_3.3.0            rvest_1.0.2          formatR_1.12        </span></span>
+<span><span class="co">#&gt; [22] xml2_1.3.3           desc_1.4.1           labeling_0.4.2      </span></span>
+<span><span class="co">#&gt; [25] scales_1.2.0         callr_3.7.0          systemfonts_1.0.4   </span></span>
+<span><span class="co">#&gt; [28] digest_0.6.29        rmarkdown_2.14       svglite_2.1.0       </span></span>
+<span><span class="co">#&gt; [31] pkgconfig_2.0.3      htmltools_0.5.2      sessioninfo_1.2.2   </span></span>
+<span><span class="co">#&gt; [34] highr_0.9            dbplyr_2.1.1         fastmap_1.1.0       </span></span>
+<span><span class="co">#&gt; [37] rlang_1.0.6          readxl_1.4.0         rstudioapi_0.13     </span></span>
+<span><span class="co">#&gt; [40] farver_2.1.0         generics_0.1.2       jsonlite_1.8.0      </span></span>
+<span><span class="co">#&gt; [43] futile.logger_1.4.3  munsell_0.5.0        fansi_1.0.3         </span></span>
+<span><span class="co">#&gt; [46] lifecycle_1.0.1      stringi_1.7.6        yaml_2.3.5          </span></span>
+<span><span class="co">#&gt; [49] brio_1.1.3           pkgbuild_1.3.1       grid_4.1.3          </span></span>
+<span><span class="co">#&gt; [52] parallel_4.1.3       crayon_1.5.1         lattice_0.20-45     </span></span>
+<span><span class="co">#&gt; [55] haven_2.5.0          hms_1.1.1            knitr_1.39          </span></span>
+<span><span class="co">#&gt; [58] ps_1.7.0             pillar_1.7.0         pkgload_1.2.4       </span></span>
+<span><span class="co">#&gt; [61] futile.options_1.0.1 reprex_2.0.1         glue_1.6.2          </span></span>
+<span><span class="co">#&gt; [64] evaluate_0.15        lambda.r_1.2.4       remotes_2.4.2       </span></span>
+<span><span class="co">#&gt; [67] modelr_0.1.8         runjags_2.2.1-7      vctrs_0.4.1         </span></span>
+<span><span class="co">#&gt; [70] tzdb_0.3.0           cellranger_1.1.0     gtable_0.3.0        </span></span>
+<span><span class="co">#&gt; [73] assertthat_0.2.1     cachem_1.0.6         xfun_0.30           </span></span>
+<span><span class="co">#&gt; [76] broom_0.8.0          coda_0.19-4          rjags_4-13          </span></span>
+<span><span class="co">#&gt; [79] viridisLite_0.4.0    memoise_2.0.1        toOrdinal_1.3-0.0   </span></span>
+<span><span class="co">#&gt; [82] ellipsis_0.3.2</span></span></code></pre></div>
 </div>
 <div class="section level1">
 <h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
