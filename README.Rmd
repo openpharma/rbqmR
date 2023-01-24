@@ -283,9 +283,9 @@ fitted$tab %>%
 The KRIs associated with a QTL can be presented graphically.  `rmqmR` includes the `createQtlBubblePlot` function, which presents the KRIs (possibly from multiple evaluations of a QTL) in the form of a bubble plot overlaid with a box-and-whisker plot.  Site-level data may be grouped in an arbitrary fashion, or not at all.  Optionally, reference lines that correspond to QTL thresholds may be added.  
 
 ```{r, error=TRUE}
-berrySummary %>% 
-  add_column(Snapshot = "End of study") %>% 
-  add_column(Location = c(rep("EU", 4), rep("US", 5))) %>% 
+berrySummary %>%
+  add_column(Snapshot = "End of study") %>%
+  add_column(Location = c(rep("EU", 4), rep("US", 5))) %>%
   createQtlBubblePlot(
     x = Snapshot,
     y = ObservedResponse,
@@ -293,23 +293,23 @@ berrySummary %>%
     group = Location,
     boxWidth = 0.1,
     limits = list(
-               list(
-                 label = "QTL (85%)", 
-                 colour = "red", 
-                 type = "dashed", 
-                 y = 0.85, 
-                 x = 1.25, 
-                 vjust = -1
-               ),
-               list(
-                 label = "Sec Lim (75%)", 
-                 colour = "goldenrod", 
-                 type = "dotted", 
-                 y = 0.75, 
-                 x = 1.25, 
-                 vjust = 1.25
-               )
-             )
+      list(
+        label = "QTL (85%)",
+        colour = "red",
+        type = "dashed",
+        y = 0.85,
+        x = 1.25,
+        vjust = -1
+      ),
+      list(
+        label = "Sec Lim (75%)",
+        colour = "goldenrod",
+        type = "dotted",
+        y = 0.75,
+        x = 1.25,
+        vjust = 1.25
+      )
+    )
   )
 ```
 
