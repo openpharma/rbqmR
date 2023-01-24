@@ -49,7 +49,7 @@ createQtlBubblePlot(
 
 \item{jitterWidth}{Default: \code{NULL}.  Value of the \code{width} parameter in the call to \code{geom_jitter}.  The default value implies a 40\% horizontal jitter.}
 
-\item{showBox}{Default: \code{TRUE} show an unjittered box-and-whister plot at each value of \code{x}?.}
+\item{showBox}{Default: \code{TRUE} show an unjittered box-and-whisker plot at each value of \code{x}?.}
 
 \item{boxFill}{Default: \code{"steelblue2"}: the colour with which the box-and-whisker plot is filled}
 
@@ -63,10 +63,10 @@ createQtlBubblePlot(
 
 \item{showLegend}{Default: \code{TRUE}  Should the legend defined by \code{group} appear in the plot}
 
-\item{...}{additional parameters passed to ggplot functions and \code{stat}}
+\item{...}{additional parameters passed to \code{ggplot2} functions and \code{stat}}
 }
 \value{
-a ggplot object
+a \code{gg} object
 }
 \description{
 Create a QTL bubble plot
