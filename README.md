@@ -216,18 +216,18 @@ fitted <- berrySummary %>%
 fitted
 #> $tab
 #> # A tibble: 20,000 × 4
-#>         p     a     b     q
-#>     <dbl> <dbl> <dbl> <int>
-#>  1 0.812   2.34  1.16    76
-#>  2 0.738   2.16  1.11    59
-#>  3 0.961   2.75  1.38    98
-#>  4 0.686   3.51  1.69    48
-#>  5 0.832   3.17  1.95    80
-#>  6 0.0696  2.56  2.02     1
-#>  7 0.459   2.54  1.64    11
-#>  8 0.487   1.84  1.30    14
-#>  9 0.513   2.47  1.69    17
-#> 10 0.439   1.90  1.29    10
+#>        p     a     b     q
+#>    <dbl> <dbl> <dbl> <int>
+#>  1 0.273 3.27  1.26      2
+#>  2 0.322 3.02  1.68      4
+#>  3 0.923 4.58  1.67     95
+#>  4 0.803 2.56  1.46     74
+#>  5 0.480 2.91  1.14     13
+#>  6 0.876 3.06  0.486    88
+#>  7 0.929 1.67  0.748    95
+#>  8 0.987 0.944 0.857   100
+#>  9 0.623 2.52  1.53     35
+#> 10 0.724 3.06  1.75     56
 #> # … with 19,990 more rows
 #> 
 #> $results
@@ -235,16 +235,16 @@ fitted
 #> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
 #>                                                                           
 #>       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
-#> p[10] 0.36268 0.69984       1 0.68193 0.17413   -- 0.0013752     0.8 16033
-#> a      2.1117   5.899  9.9986   5.868  2.3225   --   0.06153     2.6  1425
-#> b     0.57859  2.6142  5.2279  2.7626  1.2815   --  0.035952     2.8  1271
-#>                       
-#>           AC.10   psrf
-#> p[10] 0.0050578 1.0004
-#> a       0.27567 1.0014
-#> b       0.27993 1.0014
+#> p[10] 0.37204 0.70069 0.99945 0.68175 0.17116   -- 0.0013148     0.8 16947
+#> a      2.1901  5.9252  9.9896  5.9117  2.2816   --  0.056463     2.5  1633
+#> b     0.61747  2.6179  5.1603  2.7773  1.2636   --  0.032209     2.5  1539
+#>                        
+#>            AC.10   psrf
+#> p[10] -0.0093212 1.0002
+#> a        0.22285 1.0017
+#> b         0.2191 1.0035
 #> 
-#> Total time taken: 3.5 seconds
+#> Total time taken: 3.4 seconds
 #> 
 #> 
 #> $status
@@ -290,7 +290,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.681933
+#> [1] 0.6817485
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -347,10 +347,10 @@ berrySummary %>%
     upper = c("warn" = 0.7, "action" = 0.9)
   )
 #> $status
-#> [1] "OK"
+#> [1] "warn"
 #> 
 #> $qtl
-#> [1] 0.6998401
+#> [1] 0.7006912
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -384,7 +384,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4474807 
+#> 0.4481621 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -484,7 +484,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.681933
+#> [1] 0.6817485
 #> 
 #> $status
 #> [1] "Breach"
@@ -535,17 +535,17 @@ The `quantiles` element of the return value contains the mappings from
 quantile of the posterior to observed values of the metric. For example,
 the first row of `rvSiteMetrics$quantiles` shows that the lower action
 limit is the 5th centile of the posterior, which corresponds to an event
-probability of 0.363.
+probability of 0.373.
 
 ``` r
 rvSiteMetrics$quantiles
 #> # A tibble: 4 × 4
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
-#> 1 Lower     action     0.05 0.363
-#> 2 Lower     warn       0.2  0.541
-#> 3 Upper     warn       0.8  0.836
-#> 4 Upper     action     0.95 0.936
+#> 1 Lower     action     0.05 0.373
+#> 2 Lower     warn       0.2  0.540
+#> 3 Upper     warn       0.8  0.835
+#> 4 Upper     action     0.95 0.931
 ```
 
 As before, the `data` element of the list contains a copy of the site
