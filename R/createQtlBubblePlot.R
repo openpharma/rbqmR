@@ -11,15 +11,15 @@
 #' @param stat Default: `NULL`  The summary function to be used to summarise the data.  Cannot be `NULL` if `summarise` is `TRUE`.  See Usage notes below
 #' @param jitterHeight Default: `0`.  Value of the `height` parameter in the call to `geom_jitter`.  The default value implies no vertical jittering.
 #' @param jitterWidth Default: `NULL`.  Value of the `width` parameter in the call to `geom_jitter`.  The default value implies a 40% horizontal jitter.
-#' @param showBox Default: `TRUE` show an unjittered box-and-whister plot at each value of `x`?.  
+#' @param showBox Default: `TRUE` show an unjittered box-and-whisker plot at each value of `x`?.  
 #' @param boxFill Default: `"steelblue2"`: the colour with which the box-and-whisker plot is filled
 #' @param boxColour Default: `boxFill`: the colour with which the outline of the box-and-whisker plot is drawn
 #' @param boxColor Default: `boxColour`: US-English version of `boxColour`
 #' @param boxAlpha Default: `0.25` The transparency of the box-and-whisker plot.  If `alpha=0`, the box is invisible.  If `alpha=1`, the box is totally opaque.
 #' @param boxWidth Default: `0.5` The width of each box in the box-and-whisker plot, in the same units as those used on the x-axis
 #' @param showLegend Default: `TRUE`  Should the legend defined by `group` appear in the plot
-#' @param ... additional parameters passed to ggplot functions and `stat`
-#' @return a ggplot object
+#' @param ... additional parameters passed to `ggplot2` functions and `stat`
+#' @return a `gg` object
 #'
 #' @section Usage notes:
 #' `limits` should be a list of lists, each element of which defines the label (default `""`), `colour` (default `"black"`), line `type` (default `"solid"`), `y` co-ordinate (default `1`), `x` co-ordinate (default `0`), and vertical offset (`vjust`) (default `-1`) of a reference line.  If any element of the component lists is missing, a warning is issued and a default value supplied.  For example:  `limits=list(list(label="QTL (12%)", colour="red", type="dashed", y=12, x=1.5, vjust=-1),list(label="Sec Lim (8%)", colour="goldenrod", type="dotted", y=58, x=1.25, vjust=-1))`

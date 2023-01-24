@@ -451,7 +451,7 @@ poissonFit$tab %>%
   labs(x = "Deaths per year")
 ```
 
-# Envrionment
+# Environment
 ```{r}
 sessionInfo()
 ```
