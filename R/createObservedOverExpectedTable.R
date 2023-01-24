@@ -1,7 +1,3 @@
-#https://en.wikipedia.org/wiki/Binomial_distribution#Ratio_of_two_binomial_distributions,
-#Referencing Katz D. et al.(1978) Obtaining confidence intervals for the risk ratio
-#in cohort studies. Biometrics 34:469–474
-
 #' Create an Observed Over Expected Grid
 #'  
 #' Using the work of Katz et al (1978) calculate acceptable limits for the

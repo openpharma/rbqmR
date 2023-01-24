@@ -7,3 +7,7 @@
 ^.github$
 ^.*\.bib$
 ^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^.lintr$

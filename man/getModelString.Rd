@@ -42,7 +42,7 @@ obtained from \code{hyperParams}, names of \code{hyperParams} define the placeho
 and the replacements by the corresponding values.
 
 For example, \code{hyperParams} has the value \verb{c("<priorA>"="dunif(0, 10)",}
-\verb{"<priorB>"="dunif(0, 20)")}, then where ever \verb{<priorA> is found in the model string, it is replaced by }dunif(0, 10)\verb{.  Similarly, all occurrences of }<priorB>\verb{will be replaced by}dunif(0, 20)`.
+\verb{"<priorB>"="dunif(0, 20)")}, then where ever \verb{<priorA> is found in the model string, it is replaced by }dunif(0, 10)\verb{.  Similarly, all occurrences of }\if{html}{\out{<priorB>}}\verb{will be replaced by}dunif(0, 20)`.
 
 The default value of \code{hyperParams} provides the default hyperparameter values
 used by \code{rbqmR}'s Bayes model fitting functions.

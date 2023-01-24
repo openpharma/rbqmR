@@ -1,6 +1,6 @@
 Package: rbqmR
 Title: Risk-Based Quality Management in R
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: person(
              given = "John",
              family = "Kirkpatrick",
@@ -15,9 +15,13 @@ Language: en-GB
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Suggests: 
-    testthat (>= 3.0.0)
+    knitr,
+    readxl,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    tidyr
 Config/testthat/edition: 3
 Imports: 
     dplyr,
@@ -34,3 +38,4 @@ Imports:
 Depends: 
     R (>= 2.10)
 LazyData: true
+VignetteBuilder: knitr

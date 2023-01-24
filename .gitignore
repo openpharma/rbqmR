@@ -38,3 +38,7 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
+# Proprietary developer data
+/developerData/private
+docs
+inst/doc
