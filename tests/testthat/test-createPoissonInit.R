@@ -1,4 +1,4 @@
-logger::log_threshold(logger::FATAL)
+futile.logger::flog.threshold(futile.logger::FATAL)
 
 test_that(".createBinomialInit handles illegal input correctly", {
   expect_error(.createPoissonInit(gammaShape=c("shape"=2, "bad"=2)))

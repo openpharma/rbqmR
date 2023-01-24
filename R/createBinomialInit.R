@@ -45,8 +45,8 @@
           ),
     n=1
     ) {
-  logger::log_debug("Entry")
-  logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
 
   rng <- match.arg(rng)
 
@@ -62,11 +62,11 @@
   if (min(gammaB, na.rm=TRUE) <= 0) stop("not all elements of gammaB are greater than 0.")
   
   if (gammaA["shape"] < 1 | gammaA["scale"] < 1) {
-    logger::log_warn("At least one element of gammaA is less than 1.  It is recommended that both elements are greater than 1 so that the hyperprior is not U-shaped.")
+    futile.logger::flog.warn("At least one element of gammaA is less than 1.  It is recommended that both elements are greater than 1 so that the hyperprior is not U-shaped.")
     warning("At least one element of gammaA is less than 1.  It is recommended that both elements are greater than 1 so that the hyperprior is not U-shaped.")
   }
   if (gammaB["shape"] < 1 | gammaB["scale"] < 1) {
-    logger::log_warn("At least one element of gammaB is less than 1.  It is recommended that both elements are greater than 1 so that the hyperprior is not U-shaped.")
+    futile.logger::flog.warn("At least one element of gammaB is less than 1.  It is recommended that both elements are greater than 1 so that the hyperprior is not U-shaped.")
     warning("At least one element of gammaB is less than 1.  It is recommended that both elements are greater than 1 so that the hyperprior is not U-shaped.")
   }
   if (!is.null(seed)) {
@@ -100,6 +100,6 @@
       1/stats::qgamma(quantiles["b"], shape=gammaB["shape"], scale=gammaB["scale"])
     )
   }
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   return(init)
 }

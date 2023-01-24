@@ -36,7 +36,7 @@ test_that("test that getModelString returns correct prior", {
 })
 
 test_that("test that getModelString fails gracefully", {
-  logger::log_threshold(logger::FATAL)
+  futile.logger::flog.threshold(futile.logger::FATAL)
   suppressWarnings({
     expect_warning(rv <- getModelString("binomial", list()))
     expect_equal(

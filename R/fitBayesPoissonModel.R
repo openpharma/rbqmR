@@ -78,8 +78,8 @@ fitBayesPoissonModel <- function(
                           nChains=ifelse(is.null(inits), 2, length(inits)),
                           ...
                         ){
-  logger::log_debug("Entry")
-  logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.null(data)) {
     if (any(is.na(data %>% dplyr::pull({{events}})))) {
@@ -106,7 +106,7 @@ fitBayesPoissonModel <- function(
   
   if(is.null(model)) {
     model <- getModelString("poisson", prior=is.null(data))
-    logger::log_trace(
+    futile.logger::flog.trace(
       paste0(
         "  Model is now:\n", 
         # Needed to allow logger to work: escape curly braces, which are control
@@ -118,7 +118,7 @@ fitBayesPoissonModel <- function(
   
   # Create init lists if required
   if (is.null(inits)) {
-    logger::log_debug("Generating random inits")
+    futile.logger::flog.debug("Generating random inits")
     inits <- lapply(1:nChains, function(x) .createPoissonInit(n=tempData$k))
   }
   
@@ -132,6 +132,7 @@ fitBayesPoissonModel <- function(
   } else {
     toMonitor <- c(paste0("lambda[", tempData$k , "]"), "shape", "scale")
   }
+  futile.logger::flog.debug("Exit")
   tempData %>%
     .autorunJagsAndCaptureOutput(
       model,

@@ -21,7 +21,8 @@ createObservedOverExpectedPlot <- function(
                                     alpha=0.05,
                                     sides=c("two", "lower", "upper")
                                   ) {
-  logger::log_debug("Entry")
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
   if (!(data %>% .columnExists({{ n }}))) {
@@ -57,6 +58,6 @@ createObservedOverExpectedPlot <- function(
                 )
               )
   }
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   return(plot)
 }

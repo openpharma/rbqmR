@@ -35,7 +35,8 @@ evaluateCustomQTL <- function(
                        statusCol=Status,
                        ...
                      ) {
-  logger::log_debug("Entry")
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
   if (!is.data.frame(posterior)) stop("posterior is not a data.frame")
@@ -46,7 +47,7 @@ evaluateCustomQTL <- function(
   if (argsOfF[2] != "posterior") stop("Second argument of f is not named 'posterior'")
   # Execute
   rv <- data %>% f(posterior, ...)
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   rv
 }
 #' Compares a scalar statistic derived from the posterior with one or more fixed values
@@ -101,8 +102,8 @@ evaluatePointEstimateQTL <- function(
                               lower=NULL,
                               upper=NULL
                             ) {
-  logger::log_debug("Entry")
-  logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (is.null(lower) & is.null(upper)) stop("Both lower and upper cannot be NULL")
   if (!is.data.frame(data)) stop("data is not a data.frame")
@@ -153,7 +154,7 @@ evaluatePointEstimateQTL <- function(
             )
     }
   )
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   rv
 }
 
@@ -210,8 +211,8 @@ evaluateProbabilityInRangeQTL <- function(
                                    lower=NULL,
                                    upper=NULL
                                  ) {
-  logger::log_debug("Entry")
-  logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
   data %>% .assertColumnExists({{ observedMetric }})
@@ -252,11 +253,11 @@ evaluateProbabilityInRangeQTL <- function(
         "message"=e$message,
         "qtl"=NA
       )
-      logger::log_error(e$message)
+      futile.logger::flog.error(e$message)
       rv
     }  
   )
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   rv
 }
 
@@ -313,8 +314,8 @@ evaluateSiteMetricQTL <- function(
                            lower=NULL,
                            upper=NULL
                          ) {
-  logger::log_debug("Entry")
-  logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
   data %>% .assertColumnExists({{ observedMetric }})
@@ -375,10 +376,10 @@ evaluateSiteMetricQTL <- function(
       "message"=e$message,
       "qtl"=NA
     )
-    logger::log_error(e$message)
+    futile.logger::flog.error(e$message)
     rv
   }  
   )
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   rv
 }

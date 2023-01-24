@@ -34,7 +34,8 @@ createObservedOverExpectedTable <- function(
                                      alpha=0.05,
                                      sides=c("two", "lower", "upper")
                                    ) {
-  logger::log_debug("Entry")
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.null(observedData)) {
     if (!is.data.frame(observedData)) stop("observedData is not a data.frame")
@@ -101,6 +102,6 @@ createObservedOverExpectedTable <- function(
     #     )
     #   )
   }
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   return(data)
 }

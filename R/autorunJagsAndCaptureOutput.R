@@ -18,8 +18,8 @@
     max.time=600, # 10 minutes,
     ...
 ) {
-  logger::log_debug("Entry")
-  # logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.list(data)) stop("data is not a data.frame")
   if (is.null(inits)) stop("inits cannot be NULL")
@@ -41,13 +41,13 @@
     )
   })
   # Log runjags messages
-  invisible(lapply(runjagsMessages, function (y) logger::log_debug(y)))
+  invisible(lapply(runjagsMessages, function (y) futile.logger::flog.debug(y)))
   rv <- list()
   if (getOption("qtlanalysis.fitReturnFormat", "CURRENT") == "CURRENT") {
     if (inherits(results, "try-error")) {
       rv$status <- "ERROR"
       rv$results <- NULL
-      logger::log_error(paste0(returnClass, " fit has returned a try-error object"), call. = TRUE)
+      futile.logger::flog.error(paste0(returnClass, " fit has returned a try-error object"), call. = TRUE)
     } else {
       tab <- dplyr::bind_rows(
                tibble::as_tibble(results$mcmc[[1]]),
@@ -61,18 +61,18 @@
       rv$results <- results
       if (results$psrf$mpsrf > results$psrf$psrf.target) {
         rv$status <- "WARN"
-        logger::log_warn(paste0("Target PSRF: ", results$psrf$psrf.target))
-        logger::log_warn(paste0("Actual PSRF: ", results$psrf$mpsrf))
-        logger::log_warn("Actual PSRF is potentially unacceptable.")
+        futile.logger::flog.warn(paste0("Target PSRF: ", results$psrf$psrf.target))
+        futile.logger::flog.warn(paste0("Actual PSRF: ", results$psrf$mpsrf))
+        futile.logger::flog.warn("Actual PSRF is potentially unacceptable.")
       } else {
         rv$status <- "OK"
       }
-      logger::log_info(paste0("Status of model fitting: ", rv$status))
+      futile.logger::flog.info(paste0("Status of model fitting: ", rv$status))
     }
-    logger::log_debug("Exit")
+    futile.logger::flog.debug("Exit")
     return(rv)
   } else {
-    logger::log_debug("Exit")
+    futile.logger::flog.debug("Exit")
     return(results)
   }
 }

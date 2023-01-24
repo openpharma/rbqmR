@@ -74,8 +74,8 @@
 #' it is first sorted according to `descending` and then names from `names` are
 #' assigned in order.
 .ensureLimitsAreNamed <- function(x, decreasing=FALSE, nameStrings=NULL) {
-  logger::log_debug("Entry")
-  logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.null(x)) {
     if (!is.logical(decreasing)) stop("decreasing must be a logical")
@@ -85,11 +85,11 @@
   }
   # Execute
   if (is.null(x)) {
-    logger::log_debug("Exit [NULL]")
+    futile.logger::flog.debug("Exit [NULL]")
     return(NULL)
   }
   if (!is.null(names(x))) {
-    logger::log_debug("Exit [named]")
+    futile.logger::flog.debug("Exit [named]")
     return(x)
   }
   x <- sort(x, decreasing = decreasing)
@@ -103,13 +103,13 @@
     }
   }
   names(x) <- nameStrings[1: length(x)]
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   x
 }
 
 .addStatusToObservedData <- function(data, statusCol, observedMetric, lower, upper) {
-  logger::log_debug("Entry")
-  logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
   data %>% .assertColumnExists({{ observedMetric }})
@@ -141,6 +141,6 @@
           )
       }
   }
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   return(rv)
 }
