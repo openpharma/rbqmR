@@ -60,8 +60,8 @@ createObservedMinusExpectedTable <- function(
                            warningQuantiles=c("lower"=0.01, "upper"=0.99),
                            permittedRates=c("lower"=0.05, "upper"=0.15)
                          ) {
-  logger::log_debug("Entry")
-  logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
   data %>% .assertColumnExists({{ timeVar }})
@@ -110,6 +110,6 @@ createObservedMinusExpectedTable <- function(
         )
     }
   }
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   return(rv)
 }

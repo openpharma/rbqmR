@@ -39,7 +39,7 @@ test_that("createQtlBubblePlot fails elegantly with bad inputs", {
     d %>% createQtlBubblePlot(x=X, y=Y, size=Size, group=Group, limits="notAList"), 
     "limits is not a list"
   )
-  logger::log_threshold(logger::FATAL)
+  futile.logger::flog.threshold(futile.logger::FATAL)
   expect_error(
     d %>% createQtlBubblePlot(x=X, y=Y, size=Size, group=Group, limits=list(list(), "notAList")), 
     "Element 2 of limits is not a list"

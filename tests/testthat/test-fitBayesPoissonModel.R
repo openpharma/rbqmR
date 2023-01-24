@@ -1,4 +1,4 @@
-logger::log_threshold(logger::FATAL)
+futile.logger::flog.threshold(futile.logger::FATAL)
 
 test_that("Issue #3 has been resolved", {
   rv <- fitBayesPoissonModel(data=NULL)

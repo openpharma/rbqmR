@@ -54,7 +54,7 @@ getModelString <- function(
                                ),
                     prior=FALSE
                   ) {
-  logger::log_debug("Entry")
+  futile.logger::flog.debug("Entry")
   label <- match.arg(label)
   s <- ""
   s <- switch(label,
@@ -133,7 +133,7 @@ getModelString <- function(
   if (is.list(hyperParams)) {
     if (!(label %in% names(hyperParams))) {
        msg <- paste0("hyperParameter list does not contain an entry named `", label, "`.  No replacement of placeholders will occur.")
-      logger::log_warn(msg)
+      futile.logger::flog.warn(msg)
       warning(msg)
     }
     hyperParams <- hyperParams[[label]]
@@ -147,7 +147,7 @@ getModelString <- function(
   } else {
     s <- s %>% stringr::str_replace_all("<[\\/]*notprior>", "")
   }
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   return (s)
 }
 

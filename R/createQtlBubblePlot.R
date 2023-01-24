@@ -45,8 +45,8 @@ createQtlBubblePlot <- function(d,
                                 boxWidth = 0.5,
                                 showLegend = TRUE,
                                 ...) {
-  logger::log_debug("Entry")
-  logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (is.null(d)) stop("data cannot be NULL")
   d %>% .assertColumnExists({{ x }})
@@ -67,7 +67,7 @@ createQtlBubblePlot <- function(d,
       if (!is.list(lim)) stop(paste0("Element ", i, " of limits is not a list"))
       for (j in names(limitDefaults)) {
         if (!(j %in% names(lim))) {
-          logger::log_warn(paste0("'", j, "' is not an element of limits[[", i, "]]. Adding default value ", limitDefaults[[j]], "..."))
+          futile.logger::flog.warn(paste0("'", j, "' is not an element of limits[[", i, "]]. Adding default value ", limitDefaults[[j]], "..."))
           limits[[i]][[j]] <- limitDefaults[[j]]
         }
       }
@@ -125,6 +125,6 @@ createQtlBubblePlot <- function(d,
   if (!showLegend) {
     p <- p + ggplot2::guides(fill = "none")
   }
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   p
 }

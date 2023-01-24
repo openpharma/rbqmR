@@ -76,8 +76,8 @@ fitBayesBinomialModel <- function(
                            nChains=ifelse(is.null(inits), 2, length(inits)),
                            ...
                          ) {
-  logger::log_debug("Entry")
-  logger::log_trace(deparse(match.call()))
+  futile.logger::flog.debug("Entry")
+  futile.logger::flog.trace(deparse(match.call()))
   #Validate
   if (!is.null(data)) {
     n_ <- data %>% dplyr::pull({{ n }})
@@ -132,7 +132,7 @@ fitBayesBinomialModel <- function(
   # JAGS description of the model to be fitted.
   if (is.null(model)) {
     model <- getModelString("binomial", prior=is.null(data))
-    logger::log_trace(
+    futile.logger::flog.trace(
       paste0(
         "  Model is now:\n", 
         # Needed to allow logger to work: escape curly braces, which are control
@@ -143,7 +143,7 @@ fitBayesBinomialModel <- function(
   }
   # Create init lists if required
   if (is.null(inits)) {
-    logger::log_debug("Generating random inits")
+    futile.logger::flog.debug("Generating random inits")
     inits <- lapply(1:nChains, function(x) .createBinomialInit(n=tempData$k))
   }
   if (is.null(data)) {
@@ -159,6 +159,6 @@ fitBayesBinomialModel <- function(
             inits,
             ...
         )
-  logger::log_debug("Exit")
+  futile.logger::flog.debug("Exit")
   return(rv)
 }

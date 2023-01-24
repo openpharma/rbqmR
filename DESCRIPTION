@@ -25,9 +25,9 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     dplyr,
+    futile.logger,
     ggplot2,
     lifecycle,
-    logger,
     magrittr,
     rlang,
     runjags,

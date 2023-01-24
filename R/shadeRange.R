@@ -71,7 +71,7 @@ shadeRange <- function(
                     inherit.aes = FALSE
                   )
       } else {
-        logger::log_warn(
+        futile.logger::flog.warn(
            paste0(
              "The MCMC density has no fitted points between ", range$lower,
                 " and ", range$upper,
