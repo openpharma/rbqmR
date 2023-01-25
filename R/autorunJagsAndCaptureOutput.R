@@ -47,7 +47,7 @@
     if (inherits(results, "try-error")) {
       rv$status <- "ERROR"
       rv$results <- NULL
-      futile.logger::flog.error(paste0(returnClass, " fit has returned a try-error object"), call. = TRUE)
+      futile.logger::flog.error(paste0(returnClass, " fit has returned a try-error object"))
     } else {
       tab <- dplyr::bind_rows(
                tibble::as_tibble(results$mcmc[[1]]),

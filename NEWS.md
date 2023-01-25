@@ -9,3 +9,4 @@
 # Pending next version
 
 * Replace `logger` with `futile.logger`.
+* Improve test coverage.

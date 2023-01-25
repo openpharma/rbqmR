@@ -43,6 +43,7 @@ evaluateCustomQTL <- function(
   if (is.null(f)) stop("f cannot be NULL")
   if (!is.function(f)) stop("f is not a function")
   argsOfF <- names(formals(f))
+  if (length(argsOfF) < 2) stop("f does not have at least two arguments")
   if (argsOfF[1] != "data") stop("First argument of f is not named 'data'")
   if (argsOfF[2] != "posterior") stop("Second argument of f is not named 'posterior'")
   # Execute
@@ -105,13 +106,14 @@ evaluatePointEstimateQTL <- function(
   futile.logger::flog.debug("Entry")
   futile.logger::flog.trace(deparse(match.call()))
   # Validate
-  if (is.null(lower) & is.null(upper)) stop("Both lower and upper cannot be NULL")
   if (!is.data.frame(data)) stop("data is not a data.frame")
-  data %>% .assertColumnExists({{ observedMetric }})
-  data %>% .assertColumnDoesNotExist({{ statusCol }})
-  posterior %>% .assertColumnExists({{ metric }})
+  if (!is.data.frame(posterior)) stop("posterior is not a data.frame")
+  .assertColumnExists(data, {{ observedMetric }})
+  .assertColumnDoesNotExist(data, {{ statusCol }})
+  .assertColumnExists(posterior, {{ metric }})
   if (is.null(stat)) stop("stat cannot be NULL")
   if (!is.function(stat)) stop("stat is not a function")
+  if (is.null(lower) & is.null(upper)) stop("Both lower and upper cannot be NULL")
   # Prepare
   upper <- upper %>% .ensureLimitsAreNamed(decreasing = TRUE)
   lower <- lower %>% .ensureLimitsAreNamed()
@@ -121,6 +123,11 @@ evaluatePointEstimateQTL <- function(
     rv$qtl <- posterior %>% 
                 dplyr::summarise(qtl=stat({{ metric }})) %>% 
                 dplyr::pull(qtl)
+    if(is.na(rv$qtl)) {
+      futile.logger::flog.warn("Derived QTL is NA")
+      rv$status <- "Undefined"
+      return(rv)
+    }
     if (length(lower) > 0) {
       for (i in length(lower):1) {
         x <- names(lower)[i]
@@ -215,6 +222,7 @@ evaluateProbabilityInRangeQTL <- function(
   futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
+  if (!is.data.frame(posterior)) stop("posterior is not a data.frame")
   data %>% .assertColumnExists({{ observedMetric }})
   data %>% .assertColumnDoesNotExist({{ statusCol }})
   posterior %>% .assertColumnExists({{ metric }})
@@ -318,6 +326,7 @@ evaluateSiteMetricQTL <- function(
   futile.logger::flog.trace(deparse(match.call()))
   # Validate
   if (!is.data.frame(data)) stop("data is not a data.frame")
+  if (!is.data.frame(posterior)) stop("posterior is not a data.frame")
   data %>% .assertColumnExists({{ observedMetric }})
   data %>% .assertColumnDoesNotExist({{ statusCol }})
   posterior %>% .assertColumnExists({{ metric }})

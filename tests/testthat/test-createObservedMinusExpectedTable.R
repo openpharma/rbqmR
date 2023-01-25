@@ -6,17 +6,18 @@ test_that("createObservedMinusExpectedTable fails gracefully with bad inputs", {
 })
 
 test_that("createObservedMinusExpectedTable returns an object of the correct type", {
-  rv <- tibble::tibble(
+  d <- tibble::tibble(
     Subject=1:400,
     Event=rbinom(400, 1, 0.13)
-  ) %>% 
-  createObservedMinusExpectedTable(
-    timeVar = Subject,
-    eventVar = Event,
-    eventArray = 1,
-    expectedRate = 0.1,
-    maxTrialSize=400
   ) 
+  rv <- d %>% 
+          createObservedMinusExpectedTable(
+            timeVar = Subject,
+            eventVar = Event,
+            eventArray = 1,
+            expectedRate = 0.1,
+            maxTrialSize=400
+          ) 
   expect_equal(class(rv), c("tbl_df", "tbl", "data.frame"))
   expect_true(
     length(
@@ -36,6 +37,19 @@ test_that("createObservedMinusExpectedTable returns an object of the correct typ
   expect_equal(length(rv$Subject), length(unique(rv$Subject)))
   expect_equal(length(rv$SubjectIndex), length(unique(rv$SubjectIndex)))
   expect_equal(unique(rv$Event), c(0, 1))
+  
   # Monotonicity
   expect_true(all(rv$CumulativeEvents == cummax(rv$CumulativeEvents)))
+  
+  # Testing conversion of eventArray to vector
+  rv <- d %>% 
+          createObservedMinusExpectedTable(
+            timeVar = Subject,
+            eventVar = Event,
+            eventArray = matrix(1:4, nrow=2),
+            expectedRate = 0.1,
+            maxTrialSize=400
+          ) 
+  expect_true(all(rv$CumulativeEvents == cummax(rv$CumulativeEvents)))
+  
 })

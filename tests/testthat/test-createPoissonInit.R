@@ -62,3 +62,14 @@ test_that(".createPoissonInit returns a list with correctly named elements", {
   expect_true(setequal(names(.createPoissonInit()), c("lambda", "shape", "scale", ".RNG.name", ".RNG.seed")))
 })
 
+test_that(".createPoissonInit handles quantiles correctly", {
+  # Manual quantiles
+  q <- c("shape"=0.05, "scale"=0.95)
+  rv <- .createPoissonInit(quantiles=q)
+  expect_equal(rv$shape, qgamma(q["shape"], shape=1, scale=10))
+  expect_equal(rv$scale, qgamma(q["scale"], shape=1, scale=10))
+  # Check that 1000 calls provide 1000 different values
+  set.seed(1)
+  expect_equal(length(unique(sapply(1:1000, function(x) .createPoissonInit()$shape))), 1000)
+  expect_equal(length(unique(sapply(1:1000, function(x) .createPoissonInit()$scale))), 1000)
+})
