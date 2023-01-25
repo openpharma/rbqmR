@@ -28,7 +28,7 @@
       paste0(
         rlang::as_label(rlang::enquo(col)),
         " is not a column in ",
-        rlang::as_label(rlang::enquo(data))
+        substitute(data)
       )
     )
   }
@@ -48,7 +48,7 @@
       paste0(
         rlang::as_label(rlang::enquo(col)),
         " already exists in ",
-        rlang::as_label(rlang::enquo(data))
+        substitute(data)
       )
     )
   }

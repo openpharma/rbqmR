@@ -1,16 +1,17 @@
 testBadValuesToCommonParams <- function(f) {
-  expect_error(f(NULL))
-  expect_error(f(1:3))
-  expect_error(f(tibble::tibble(), NULL))
-  expect_error(f(tibble::tibble(), 1:3))
-  expect_error(f(tibble::tibble(), tibble::tibble(), NULL))
-  expect_error(f(tibble::tibble(), tibble::tibble(), function(){}))
-  expect_error(f(tibble::tibble(), tibble::tibble(), function(a, posterior){}))
-  expect_error(f(tibble::tibble(), tibble::tibble(), function(data, b){}))
+  expect_error(f(NULL), "data is not a data.frame")
+  expect_error(f(1:3), "data is not a data.frame")
+  expect_error(f(tibble::tibble(), NULL), "posterior is not a data.frame")
+  expect_error(f(tibble::tibble(), 1:3), "posterior is not a data.frame")
 }
 
 test_that("evaluateCustomQTL fails gracefully with bad input", {
   testBadValuesToCommonParams(evaluateCustomQTL)
+  expect_error(evaluateCustomQTL(tibble::tibble(), tibble::tibble(), NULL), "f cannot be NULL")
+  expect_error(evaluateCustomQTL(tibble::tibble(), tibble::tibble(), "notAFunction"), "f is not a function")
+  expect_error(evaluateCustomQTL(tibble::tibble(), tibble::tibble(), function() {}), "f does not have at least two arguments")
+  expect_error(evaluateCustomQTL(tibble::tibble(), tibble::tibble(), function(a, posterior) {}), "First argument of f is not named 'data'")
+  expect_error(evaluateCustomQTL(tibble::tibble(), tibble::tibble(), function(data, b) {}), "Second argument of f is not named 'posterior'")
 })
 
 test_that("evaluateCustomQTL works", {
@@ -22,12 +23,13 @@ test_that("evaluateCustomQTL works", {
 
 test_that("evaluatePointEstimateQTL fails gracefully with bad input", {
   testBadValuesToCommonParams(evaluatePointEstimateQTL)
-  expect_error(evaluatePointEstimateQTL(tibble::tibble(), tibble::tibble(good=1), bad))
+  expect_error(evaluatePointEstimateQTL(tibble::tibble(), tibble::tibble(good=1), observedMetric=bad), "bad is not a column in data")
   # statusCol must not already exist
-  expect_error(evaluatePointEstimateQTL(tibble::tibble(), tibble::tibble(good1=1, good2=2), good1, statusCol=good2))
-  expect_error(evaluatePointEstimateQTL(tibble::tibble(), tibble::tibble(good=1), good, badFunc))
-  expect_error(evaluatePointEstimateQTL(tibble::tibble(), tibble::tibble(good=1), good, median))
-  expect_error(evaluatePointEstimateQTL(tibble::tibble(), tibble::tibble(good=1), good, median, NULL, NULL))
+  expect_error(evaluatePointEstimateQTL(tibble::tibble(good1=1), tibble::tibble(), observedMetric=good1, metric=bad), "bad is not a column in posterior")
+  expect_error(evaluatePointEstimateQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), observedMetric=good1, metric=good2, stat=badFunc), "object 'badFunc' not found")
+  expect_error(evaluatePointEstimateQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), observedMetric=good1, metric=good2, stat="notAFunction"), "stat is not a function")
+  expect_error(evaluatePointEstimateQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), observedMetric=good1, metric=good2, stat=NULL), "stat cannot be NULL")
+  expect_error(evaluatePointEstimateQTL(tibble::tibble(good1=1), tibble::tibble(good2=1), observedMetric=good1, metric=good2, stat=median), "Both lower and upper cannot be NULL")
 })
 
 test_that("evaluatePointEstimateQTL works with various limit specifications", {

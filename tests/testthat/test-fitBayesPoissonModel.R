@@ -21,13 +21,9 @@ test_that("Issue #4 has been resolved", {
 })
 
 test_that("fitBayesPoissonModel fails gracefully with bad inputs", {
-  expect_error(tibble(n=c(1, NA), r=c(0, 0)) %>% fitBayesPoissonModel(n, r))
-  expect_error(tibble(n=c(1, 1), r=c(0, NA)) %>% fitBayesPoissonModel(n, r))
-  expect_error(tibble(n=c(1, 0), r=c(0, 0)) %>% fitBayesPoissonModel(n, r))
-  expect_error(tibble(n=c(1, 1), r=c(0, -1)) %>% fitBayesPoissonModel(n, r))
-  expect_error(tibble(n=c(1, 1.5), r=c(0, 0)) %>% fitBayesPoissonModel(n, r))
-  expect_error(tibble(n=c(1, 1.5), r=c(0, 0.5)) %>% fitBayesPoissonModel(n, r))
-  expect_error(tibble(n=c(1, 1), r=c(0, 2)) %>% fitBayesPoissonModel(n, r))
+  expect_error(tibble::tibble(events=c(1, NA), exposure=c(0, 0)) %>% fitBayesPoissonModel(events, exposure), "Some entries in events are NA")
+  expect_error(tibble::tibble(events=c(1, 1), exposure=c(0, NA)) %>% fitBayesPoissonModel(events, exposure), "Some entries in exposure are NA")
+  expect_error(tibble::tibble(events=c(1, 1), exposure=c(0, -1)) %>% fitBayesPoissonModel(events, exposure), "Not all entries in exposure are non-negative")
 })
 
 test_that("fitBayesPoissonModel produces feasible results", {

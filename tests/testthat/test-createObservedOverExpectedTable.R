@@ -35,4 +35,45 @@ test_that("createObservedOverExpectedTable returns an object of the correct type
   # Monotonicity
   expect_true(all(rv$Lower == cummax(rv$Lower)))
   expect_true(all(rv$Upper == cummin(rv$Upper)))
+  
+  rv <- createObservedOverExpectedTable(
+    tibble::tibble(NObserved=seq(50, 400, 50)),
+    observedRate=NObserved,
+    nHistorical=10000,
+    historicalRate=0.014,
+    expectedRate=0.014,
+    nObservedRange=seq(50, 1500, 25),
+    sides="upper"
+  )
+  expect_equal(class(rv), c("tbl_df", "tbl", "data.frame"))
+  expect_true(
+    length(
+      setdiff(
+        names(rv),
+        c("NObserved", "NHistorical", "ExpectedRate", "HistoricalRate", "Alpha", 
+          "Sides", "Ratio", "Upper")
+      )
+    ) == 0
+  )  
+  
+  rv <- createObservedOverExpectedTable(
+    tibble::tibble(NObserved=seq(50, 400, 50)),
+    observedRate=NObserved,
+    nHistorical=10000,
+    historicalRate=0.014,
+    expectedRate=0.014,
+    nObservedRange=seq(50, 1500, 25),
+    sides="lower"
+  )
+  expect_equal(class(rv), c("tbl_df", "tbl", "data.frame"))
+  expect_true(
+    length(
+      setdiff(
+        names(rv),
+        c("NObserved", "NHistorical", "ExpectedRate", "HistoricalRate", "Alpha", 
+          "Sides", "Ratio", "Lower")
+      )
+    ) == 0
+  )
+  
 })

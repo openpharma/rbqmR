@@ -70,37 +70,9 @@ createObservedOverExpectedTable <- function(
   }
   if (sides == "lower") {
     data <- data %>% dplyr::select(-Upper)
-    # if (!is.null(observedData)) {
-    #   data <- data %>%
-    #     dplyr::mutate(
-    #       Status=dplyr::case_when(
-    #         # is.na({{ n }}) ~ NA,
-    #         {{ observedRate }} < Lower ~ "BREACH",
-    #         TRUE ~ "OK"
-    #       )
-    #     )
-    # }
   }
   if (sides == "upper") {
     data <- data %>% dplyr::select(-Lower)
-    # data <- data %>%
-    #   dplyr::mutate(
-    #     Status=dplyr::case_when(
-    #       # is.na({{ n }}) ~ NA,
-    #       {{ observedRate }} > Upper ~ "BREECH",
-    #       TRUE ~ "OK"
-    #     )
-    #   )
-  }
-  if ( sides == "two") {
-    # data <- data %>%
-    #   dplyr::mutate(
-    #     Status=dplyr::case_when(
-    #       # is.na({{ n }}) ~ NA,
-    #       {{ observedRate }} < Lower || {{ observedRate }} > Upper ~ "BREECH",
-    #       TRUE ~ "OK"
-    #     )
-    #   )
   }
   futile.logger::flog.debug("Exit")
   return(data)
