@@ -67,6 +67,7 @@ test_that("creatQtlBubblePlot output contains correct elements", {
   d <- berrySummary %>% 
          tibble::add_column(Snapshot="End of Study") %>% 
          tibble::add_column(Region=c(rep("EU", 4), rep("US", 5)))
+  # No limit lines
   p <- d %>% 
          createQtlBubblePlot(
            x = Snapshot,
@@ -87,6 +88,36 @@ test_that("creatQtlBubblePlot output contains correct elements", {
   # plot_env
   # labels
   expect_equal(p$labels, list("x"="Snapshot", "y"= "ObservedResponse", "colour"="Region", "size"="Subjects", "group"="Snapshot"))
+  # guides
+  expect_equal(names(p$guides), "size")
+  expect_equal(p$guides$size, "none")
+  
+  # With limit lines
+  referenceLines <- list(
+    list(label = "QTL (12%)",  colour = "red", type = "dashed", y = 0.12,  x = 1.4, vjust = -1),
+    list(label = "Sec Lim (8%)",  colour = "goldenrod",  type = "dotted", y = 0.08, x = 1.25, vjust = 1.25)
+  )
+  p <- d %>% 
+    createQtlBubblePlot(
+      x = Snapshot,
+      y = ObservedResponse,
+      group = Region,
+      size = Subjects,
+      limits=referenceLines
+    )
+  # data
+  expect_equal(p$data, d)
+  # layers
+  # scales
+  # mapping
+  # theme
+  expect_equal(p$theme, list())
+  # coordinates
+  # facet
+  expect_equal(class(p$facet), c("FacetNull", "Facet", "ggproto", "gg"))
+  # plot_env
+  # labels
+  expect_equal(p$labels, list("x"="Snapshot", "y"= "ObservedResponse", "colour"="Region", "size"="Subjects", "group"="Snapshot", "yintercept"="yintercept"))
   # guides
   expect_equal(names(p$guides), "size")
   expect_equal(p$guides$size, "none")
