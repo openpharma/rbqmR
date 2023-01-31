@@ -17,7 +17,7 @@ test_that("createQtlPlot creates a valid ggplot object", {
       Q95=quantile(p, probs=0.95, names=FALSE)
     )
   
-  rv <- fitted %>% 
+  p <- fitted %>% 
     createQtlPlot(
       siteData=berrySummary,
       siteMetric=ObservedResponse,
@@ -33,5 +33,28 @@ test_that("createQtlPlot creates a valid ggplot object", {
       ),
       targetRange=list("lower"=0.6, "upper"=0.75),
     )
-  expect_equal(class(rv), c("gg", "ggplot"))
+  expect_equal(class(p), c("gg", "ggplot"))
+  
+  # data
+  expect_equal(p$data, fitted)
+  # layers
+  # scales
+  # mapping
+  # theme
+  # Unsatisfactory
+  expect_equal(class(p$theme), c("theme", "gg"))
+  # coordinates
+  # facet
+  expect_equal(class(p$facet), c("FacetNull", "Facet", "ggproto", "gg"))
+  # plot_env
+  # labels
+  fill <- "fill"
+  attributes(fill) <- list("fallback"= TRUE)
+  weight <- "weight"
+  attributes(weight) <- list("fallback"= TRUE)
+  expect_equal(p$labels, list("x"="Event rate", "y"="y", "xintercept"="observedMetric",
+                              "ymin"="ymin", "ymax"="Subjects/divisor", 
+                              "fill"=fill, "weight"=weight))
+  # guides
+  expect_equal(names(p$guides), NULL)
 })
