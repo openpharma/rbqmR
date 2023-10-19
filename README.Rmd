@@ -73,6 +73,7 @@ fitted
 
 ### Examples of QTL evaluation rules
 > When using a Bayesian Hierarchical Model, the probabilities associated with credible intervals are generally lower than those associated with similar frequentist models.  This is because BHMs permit  more sources of variation.  Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study.  The corresponding frequentist analysis assumes that all sites share  common event rate, thus assuming there is no inter-site variation.
+
 #### Comparison to constant value(s)
 The `evaluatePointEstimateQTL` allows the comparison of an arbitrary scalar summary statistic (which defaults to the mean) derived from the estimate of the posterior distribution, with an arbitrary number of lower and upper limits.
 
@@ -156,7 +157,7 @@ Again, the QTL is breached, since the probability that the study-level event rat
 * `data`: a tibble containing site-level observed metrics
 * `posterior`: a tibble containing the posterior distribution of the metric, usually obtained from a fit Bayes model function.
 * `f`: a function whose first two parameters are `data` and `posterior`, in that ordered and with those names
-* `statusCol=Status`:
+* `statusCol`: the column in `data` that defines the status of the site.  Here, `Status`.  Uses tidy evaluation.
 * `...`: additional parameters passed to `f`.
 
 Essentially, all that `evaluateCustomQTL` does is to perform some basic checks on its parameter values and then return the value returned by `data %>% f(posterior, ...)`.  So, for example, a simplified version of `evaluatePointEstimateQTL` that compares $\hat{p}$ to 0.6 might be
@@ -219,7 +220,7 @@ Finally, the `status` of the returned QTL is `"OK"` by default.
 rvSiteMetrics$status
 ```
 
-However, `evaluateSiteMetricQTL` can be passed a function that can apply an arbitrary rule to determine whether or not a breach has occurred.  The function's only argument is the `qtl` element of `evaluateSiteMetricQTL`'s return value.  For example, given that we have nine sites in our fictitious example and we have calculated a 90% posterior credible interval, it's reasonable to expect one site to lie outside this range.  So we might say that a QTL breach has occurred if two or more sites lie outside the credible interval:
+However, `evaluateSiteMetricQTL` can be passed a function that can apply an arbitrary rule to determine whether or not a breach has occurred.  In the example below, the function's only argument is the `qtl` element of `evaluateSiteMetricQTL`'s return value.  For example, given that we have nine sites in our fictitious example and we have calculated a 90% posterior credible interval, it's reasonable to expect one site to lie outside this range.  So we might say that a QTL breach has occurred if two or more sites lie outside the credible interval:
 
 ```{r}
 (berrySummary %>%
