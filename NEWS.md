@@ -1,3 +1,7 @@
+# rbqmR 0.0.0.9002
+
+* Corrected typos in `README.md`.
+
 # rbqmR 0.0.0.9001
 
 * Added a `createQtlBubblePlot`.
