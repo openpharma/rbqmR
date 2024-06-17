@@ -8,7 +8,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rbqmR)](https://CRAN.R-project.org/package=rbqmR)
 <a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public." /></a>
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/apache-2-0)
 [![R-CMD-check](https://github.com/openpharma/rbqmR/workflows/R-CMD-check/badge.svg)](https://github.com/openpharma/rbqmR/actions)
 [![Test
 Coverage](https://raw.githubusercontent.com/openpharma/rbqmR/_xml_coverage_reports/data/main/badge.svg)](https://github.com/openpharma/rbqmR/blob/_xml_coverage_reports/data/main/coverage.xml)<!-- badges: end -->
@@ -20,10 +20,10 @@ tools for the implementation of risk-based quality management.
 
 Tools currently exist for
 
--   Dynamic Quality Tolerance Limits (QTLs) using Bayesian Hierarchical
-    Models (ongoing)
--   Observed-Minus-Expected methodology
--   Observed/Expected methodology (ongoing)
+- Dynamic Quality Tolerance Limits (QTLs) using Bayesian Hierarchical
+  Models (ongoing)
+- Observed-Minus-Expected methodology
+- Observed/Expected methodology (ongoing)
 
 This package is a work-in-progress. It’s primary focus is dynamic QTLs.
 Other methodologies are included for completeness.
@@ -213,39 +213,39 @@ We fit the Bayesian Hierarchical Model described by Berry et al …
 fitted <- berrySummary %>%
   fitBayesBinomialModel(n = Subjects, r = Events)
 #> Loading required namespace: rjags
-#> INFO [2023-01-24 14:10:52] Status of model fitting: OK
+#> INFO [2024-06-17 07:55:30] Status of model fitting: OK
 fitted
 #> $tab
 #> # A tibble: 20,000 × 4
 #>        p     a     b     q
 #>    <dbl> <dbl> <dbl> <int>
-#>  1 0.675  7.23  4.27    46
-#>  2 0.664  8.94  4.28    44
-#>  3 0.657  8.47  4.00    42
-#>  4 0.812  7.57  3.97    76
-#>  5 0.440  8.13  4.23    10
-#>  6 0.794  9.00  2.29    72
-#>  7 0.569  4.49  1.99    25
-#>  8 0.674  3.14  2.02    46
-#>  9 0.699  4.84  2.20    51
-#> 10 0.753  5.45  2.75    64
-#> # … with 19,990 more rows
+#>  1 0.814  6.46  2.41    76
+#>  2 0.854  7.28  2.79    84
+#>  3 0.753  6.34  3.09    62
+#>  4 0.691  8.96  3.68    49
+#>  5 0.690  9.58  3.74    48
+#>  6 0.706  8.13  2.52    52
+#>  7 0.583  8.45  3.63    27
+#>  8 0.624  6.44  3.67    34
+#>  9 0.664  3.95  3.65    43
+#> 10 0.608  6.91  3.48    31
+#> # ℹ 19,990 more rows
 #> 
 #> $results
 #> 
 #> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
-#>                                                                           
-#>       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
-#> p[10] 0.36053 0.69662 0.99416 0.67867 0.17235   -- 0.0013997     0.8 15162
-#> a       2.159  5.8656  9.9949  5.8588  2.2934   --  0.058108     2.5  1558
-#> b     0.65933  2.6085  5.2344  2.7541  1.2614   --  0.032876     2.6  1472
-#>                        
-#>           AC.10    psrf
-#> p[10] 0.0069035 0.99996
-#> a       0.21262  1.0001
-#> b       0.21729  1.0001
+#>                                                                          
+#>       Lower95 Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
+#> p[10] 0.36562 0.6991 0.99996 0.68282 0.17257   -- 0.0013713     0.8 15837
+#> a      2.2683 5.9563  9.9997  5.9373  2.2751   --  0.056178     2.5  1640
+#> b     0.62627 2.6183  5.1708  2.7753  1.2508   --  0.031487     2.5  1578
+#>                       
+#>           AC.10   psrf
+#> p[10] 0.0094542      1
+#> a       0.21013 1.0011
+#> b       0.22843 1.0003
 #> 
-#> Total time taken: 3.3 seconds
+#> Total time taken: 3.9 seconds
 #> 
 #> 
 #> $status
@@ -266,17 +266,19 @@ historical data obtained from similar previous studies.
 > rates at different sites, even when considering the overall event rate
 > for the study. The corresponding frequentist analysis assumes that all
 > sites share common event rate, thus assuming there is no inter-site
-> variation. \#### Comparison to constant value(s) The
-> `evaluatePointEstimateQTL` allows the comparison of an arbitrary
-> scalar summary statistic (which defaults to the mean) derived from the
-> estimate of the posterior distribution, with an arbitrary number of
-> lower and upper limits.
+> variation.
+
+#### Comparison to constant value(s)
+
+The `evaluatePointEstimateQTL` allows the comparison of an arbitrary
+scalar summary statistic (which defaults to the mean) derived from the
+estimate of the posterior distribution, with an arbitrary number of
+lower and upper limits.
 
 For example, the code below defines a QTL based on the mean of the
 posterior distribution of the probability of an event. Call this
-probability
-![\\hat{p}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Chat%7Bp%7D "\hat{p}").
-The warning limits are 0.5 and 0.8. The action limits are 0.4 and 0.9.
+probability $\hat{p}$. The warning limits are 0.5 and 0.8. The action
+limits are 0.4 and 0.9.
 
 ``` r
 berrySummary %>%
@@ -291,7 +293,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6786695
+#> [1] 0.6828212
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -351,7 +353,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6966203
+#> [1] 0.6991032
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -368,8 +370,7 @@ berrySummary %>%
 #> 9     9        6      4            0.667 OK
 ```
 
-and 10th centile of the posterior distribution of
-![\\hat{p}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Chat%7Bp%7D "\hat{p}").
+and 10th centile of the posterior distribution of $\hat{p}$.
 
 ``` r
 berrySummary %>%
@@ -385,7 +386,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4436683 
+#> 0.4495861 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -427,7 +428,7 @@ qtlProbInRange
 #> [1] "action"
 #> 
 #> $qtl
-#> [1] 0.4675
+#> [1] 0.46465
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -445,7 +446,7 @@ qtlProbInRange
 ```
 
 Again, the QTL is breached, since the probability that the study-level
-event rate is in the range \[0.5, 0.75\] is only 0.47.
+event rate is in the range \[0.5, 0.75\] is only 0.46.
 
 #### Using an arbitrary criterion
 
@@ -455,20 +456,19 @@ event rate is in the range \[0.5, 0.75\] is only 0.47.
 user-defined QTL rule. `evaluateCustomQTL` takes the following
 parameters:
 
--   `data`: a tibble containing site-level observed metrics
--   `posterior`: a tibble containing the posterior distribution of the
-    metric, usually obtained from a fit Bayes model function.
--   `f`: a function whose first two parameters are `data` and
-    `posterior`, in that ordered and with those names
--   `statusCol=Status`:
--   `...`: additional parameters passed to `f`.
+- `data`: a tibble containing site-level observed metrics
+- `posterior`: a tibble containing the posterior distribution of the
+  metric, usually obtained from a fit Bayes model function.
+- `f`: a function whose first two parameters are `data` and `posterior`,
+  in that ordered and with those names
+- `statusCol`: the column in `data` that defines the status of the site.
+  Here, `Status`. Uses tidy evaluation.
+- `...`: additional parameters passed to `f`.
 
 Essentially, all that `evaluateCustomQTL` does is to perform some basic
 checks on its parameter values and then return the value returned by
 `data %>% f(posterior, ...)`. So, for example, a simplified version of
-`evaluatePointEstimateQTL` that compares
-![\\hat{p}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Chat%7Bp%7D "\hat{p}")
-to 0.6 might be
+`evaluatePointEstimateQTL` that compares $\hat{p}$ to 0.6 might be
 
 ``` r
 berrySummary %>%
@@ -485,7 +485,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6786695
+#> [1] 0.6828212
 #> 
 #> $status
 #> [1] "Breach"
@@ -544,9 +544,9 @@ rvSiteMetrics$quantiles
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
 #> 1 Lower     action     0.05 0.366
-#> 2 Lower     warn       0.2  0.535
-#> 3 Upper     warn       0.8  0.833
-#> 4 Upper     action     0.95 0.930
+#> 2 Lower     warn       0.2  0.543
+#> 3 Upper     warn       0.8  0.838
+#> 4 Upper     action     0.95 0.933
 ```
 
 As before, the `data` element of the list contains a copy of the site
@@ -581,8 +581,8 @@ rvSiteMetrics$qtl
 #> # A tibble: 3 × 2
 #>   Status     N
 #>   <chr>  <int>
-#> 1 action     1
-#> 2 OK         4
+#> 1 OK         4
+#> 2 action     1
 #> 3 warn       4
 ```
 
@@ -594,8 +594,8 @@ rvSiteMetrics$status
 ```
 
 However, `evaluateSiteMetricQTL` can be passed a function that can apply
-an arbitrary rule to determine whether or not a breach has occurred. The
-function’s only argument is the `qtl` element of
+an arbitrary rule to determine whether or not a breach has occurred. In
+the example below, the function’s only argument is the `qtl` element of
 `evaluateSiteMetricQTL`’s return value. For example, given that we have
 nine sites in our fictitious example and we have calculated a 90%
 posterior credible interval, it’s reasonable to expect one site to lie
@@ -704,14 +704,19 @@ berrySummary %>%
       )
     )
   )
+#> Warning: The following aesthetics were dropped during statistical transformation: size
+#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
+#>   the data.
+#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+#>   variable into a factor?
 ```
 
 <img src="man/figures/README-unnamed-chunk-14-1.png" width="80%" />
 
 ## Observed - Expected Methodology
 
-We generate some random data similar to that used by Gilbert (Gilbert
-2020), after setting a seed for reproducibility.
+We generate some random data similar to that used by (Gilbert 2020),
+after setting a seed for reproducibility.
 
 In order to illustrate what happens when a QTL is breached, we set the
 probability that a participant reports an event to 0.13, even though the
@@ -878,23 +883,26 @@ createObservedOverExpectedTable(
 
 <img src="man/figures/README-unnamed-chunk-20-1.png" width="80%" />
 
-> TODO Need to check interpretation of parameters \# Beyond
-> TransCelerate At the time of writing (late 2022) The TransCelerate
-> Quality Tolerance Limit Framework (Transcelerate 2020) lists metrics
-> that are exclusively binary in nature. There are many other potential
-> metrics that are non-binary and which may provide insight into the
-> conduct of the trial. For example,
+> TODO Need to check interpretation of parameters
 
--   The number of episodes of rescue medication (as opposed to the
-    percentage or number of trial participants on rescue medication)
--   Time to withdrawal of consent (as opposed to the percentage or
-    number of trial participants with withdrawal of informed consent)
+# Beyond TransCelerate
+
+At the time of writing (late 2022) The TransCelerate Quality Tolerance
+Limit Framework (Transcelerate 2020) lists metrics that are exclusively
+binary in nature. There are many other potential metrics that are
+non-binary and which may provide insight into the conduct of the trial.
+For example,
+
+- The number of episodes of rescue medication (as opposed to the
+  percentage or number of trial participants on rescue medication)
+- Time to withdrawal of consent (as opposed to the percentage or number
+  of trial participants with withdrawal of informed consent)
 
 As well as other metrics that can’t easily be dichotomised
 
--   Drug plasma levels
--   Number of (S)AEs reported per time unit of drug exposure
--   Time to respond to data queries
+- Drug plasma levels
+- Number of (S)AEs reported per time unit of drug exposure
+- Time to respond to data queries
 
 The Bayesian QTL framework implemented in `rbqmR` can easily be extended
 to include these other data types.
@@ -920,7 +928,7 @@ cavalryDeaths
 #>  8  1875 Corps 7      1
 #>  9  1875 Corps 8      1
 #> 10  1875 Corps 9      0
-#> # … with 270 more rows
+#> # ℹ 270 more rows
 ```
 
 Regard different cavalry Corps as “sites” and regard the number of years
@@ -963,15 +971,24 @@ by total exposure at the site.
 getModelString("poisson")
 ```
 
-\[1\] “model {for (i in 1:k) {events\[i\] \~ dpois(mu\[i\])mu\[i\] \<-
-lambda\[i\]\*exposure\[i\]lambda\[i\] \~ dgamma(shape, 1/scale)}scale \~
-dgamma(1, 1)shape \~ dgamma(1, 1)}” Fitting the model is
-straightforward.
+    #> model {
+    #>    for (i in 1:k) {
+    #>      
+    #>      events[i] ~ dpois(mu[i])
+    #>      mu[i] <- lambda[i]*exposure[i]
+    #>      
+    #>      lambda[i] ~ dgamma(shape, 1/scale)
+    #>    }
+    #>    scale ~ dgamma(1, 1)
+    #>    shape ~ dgamma(1, 1)
+    #>  }
+
+Fitting the model is straightforward.
 
 ``` r
 poissonFit <- cavalrySummary %>%
   fitBayesPoissonModel(Deaths, TotalTime)
-#> INFO [2023-01-24 14:11:01] Status of model fitting: OK
+#> INFO [2024-06-17 07:55:41] Status of model fitting: OK
 poissonFit$tab %>%
   createQtlPlot(
     metric = lambda,
@@ -982,19 +999,19 @@ poissonFit$tab %>%
   labs(x = "Deaths per year")
 ```
 
-<img src="man/figures/README-unnamed-chunk-24-1.png" width="80%" />
+<img src="man/figures/README-unnamed-chunk-25-1.png" width="80%" />
 
 # Environment
 
 ``` r
 sessionInfo()
-#> R version 4.1.3 (2022-03-10)
+#> R version 4.3.1 (2023-06-16)
 #> Platform: x86_64-pc-linux-gnu (64-bit)
-#> Running under: Ubuntu 20.04.4 LTS
+#> Running under: Ubuntu 22.04.3 LTS
 #> 
 #> Matrix products: default
-#> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
-#> LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
+#> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+#> LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so;  LAPACK version 3.10.0
 #> 
 #> locale:
 #>  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -1004,44 +1021,47 @@ sessionInfo()
 #>  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 #> [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 #> 
+#> time zone: Etc/UTC
+#> tzcode source: system (glibc)
+#> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] rbqmR_0.0.0.9001 testthat_3.1.4   forcats_0.5.1    stringr_1.4.0   
-#>  [5] dplyr_1.0.8      purrr_0.3.4      readr_2.1.2      tidyr_1.2.0     
-#>  [9] tibble_3.1.6     ggplot2_3.3.5    tidyverse_1.3.1  kableExtra_1.3.4
-#> [13] magrittr_2.0.3  
+#>  [1] rbqmR_0.0.0.9002 testthat_3.2.0   lubridate_1.9.3  forcats_1.0.0   
+#>  [5] stringr_1.5.0    dplyr_1.1.3      purrr_1.0.2      readr_2.1.4     
+#>  [9] tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.3    tidyverse_2.0.0 
+#> [13] kableExtra_1.3.4 magrittr_2.0.3  
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] fs_1.5.2             usethis_2.1.5        lubridate_1.8.0     
-#>  [4] devtools_2.4.3       webshot_0.5.3        httr_1.4.2          
-#>  [7] rprojroot_2.0.3      tools_4.1.3          backports_1.4.1     
-#> [10] utf8_1.2.2           R6_2.5.1             DBI_1.1.2           
-#> [13] colorspace_2.0-3     withr_2.5.0          tidyselect_1.1.2    
-#> [16] prettyunits_1.1.1    processx_3.5.3       compiler_4.1.3      
-#> [19] cli_3.3.0            rvest_1.0.2          formatR_1.12        
-#> [22] xml2_1.3.3           desc_1.4.1           labeling_0.4.2      
-#> [25] scales_1.2.0         callr_3.7.0          systemfonts_1.0.4   
-#> [28] digest_0.6.29        rmarkdown_2.14       svglite_2.1.0       
-#> [31] pkgconfig_2.0.3      htmltools_0.5.2      sessioninfo_1.2.2   
-#> [34] highr_0.9            dbplyr_2.1.1         fastmap_1.1.0       
-#> [37] rlang_1.0.6          readxl_1.4.0         rstudioapi_0.13     
-#> [40] farver_2.1.0         generics_0.1.2       jsonlite_1.8.0      
-#> [43] futile.logger_1.4.3  munsell_0.5.0        fansi_1.0.3         
-#> [46] lifecycle_1.0.1      stringi_1.7.6        yaml_2.3.5          
-#> [49] brio_1.1.3           pkgbuild_1.3.1       grid_4.1.3          
-#> [52] parallel_4.1.3       crayon_1.5.1         lattice_0.20-45     
-#> [55] haven_2.5.0          hms_1.1.1            knitr_1.39          
-#> [58] ps_1.7.0             pillar_1.7.0         pkgload_1.2.4       
-#> [61] futile.options_1.0.1 reprex_2.0.1         glue_1.6.2          
-#> [64] evaluate_0.15        lambda.r_1.2.4       remotes_2.4.2       
-#> [67] modelr_0.1.8         runjags_2.2.1-7      vctrs_0.4.1         
-#> [70] tzdb_0.3.0           cellranger_1.1.0     gtable_0.3.0        
-#> [73] assertthat_0.2.1     cachem_1.0.6         xfun_0.30           
-#> [76] broom_0.8.0          coda_0.19-4          rjags_4-13          
-#> [79] viridisLite_0.4.0    memoise_2.0.1        toOrdinal_1.3-0.0   
-#> [82] ellipsis_0.3.2
+#>  [1] tidyselect_1.2.0     viridisLite_0.4.2    farver_2.1.1        
+#>  [4] rjags_4-14           fastmap_1.1.1        promises_1.2.1      
+#>  [7] digest_0.6.33        timechange_0.2.0     mime_0.12           
+#> [10] lifecycle_1.0.3      ellipsis_0.3.2       processx_3.8.2      
+#> [13] compiler_4.3.1       rlang_1.1.1          tools_4.3.1         
+#> [16] utf8_1.2.3           yaml_2.3.7           knitr_1.44          
+#> [19] lambda.r_1.2.4       labeling_0.4.3       prettyunits_1.2.0   
+#> [22] htmlwidgets_1.6.2    pkgbuild_1.4.2       xml2_1.3.5          
+#> [25] pkgload_1.3.3        miniUI_0.1.1.1       withr_2.5.1         
+#> [28] desc_1.4.2           grid_4.3.1           fansi_1.0.5         
+#> [31] urlchecker_1.0.1     profvis_0.3.8        toOrdinal_1.3-0.0   
+#> [34] xtable_1.8-4         colorspace_2.1-0     scales_1.2.1        
+#> [37] cli_3.6.1            rmarkdown_2.25       crayon_1.5.2        
+#> [40] generics_0.1.3       remotes_2.4.2.1      rstudioapi_0.15.0   
+#> [43] httr_1.4.7           tzdb_0.4.0           sessioninfo_1.2.2   
+#> [46] cachem_1.0.8         rvest_1.0.3          parallel_4.3.1      
+#> [49] formatR_1.14         vctrs_0.6.3          devtools_2.4.5      
+#> [52] webshot_0.5.5        callr_3.7.3          hms_1.1.3           
+#> [55] systemfonts_1.0.5    glue_1.6.2           ps_1.7.5            
+#> [58] stringi_1.7.12       gtable_0.3.4         futile.logger_1.4.3 
+#> [61] later_1.3.1          munsell_0.5.0        pillar_1.9.0        
+#> [64] brio_1.1.3           htmltools_0.5.6.1    R6_2.5.1            
+#> [67] rprojroot_2.0.3      evaluate_0.22        shiny_1.7.5         
+#> [70] lattice_0.21-9       highr_0.10           futile.options_1.0.1
+#> [73] memoise_2.0.1        httpuv_1.6.11        Rcpp_1.0.11         
+#> [76] svglite_2.1.1        coda_0.19-4          xfun_0.40           
+#> [79] fs_1.6.3             usethis_2.2.2        runjags_2.2.2-1.1   
+#> [82] pkgconfig_2.0.3
 ```
 
 # References

@@ -26,7 +26,7 @@ devtools::load_all()
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/rbqmR)](https://CRAN.R-project.org/package=rbqmR)
 <a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public." /></a>
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/apache-2-0)
 [![R-CMD-check](https://github.com/openpharma/rbqmR/workflows/R-CMD-check/badge.svg)](https://github.com/openpharma/rbqmR/actions)
 [![Test Coverage](https://raw.githubusercontent.com/openpharma/rbqmR/_xml_coverage_reports/data/main/badge.svg)](https://github.com/openpharma/rbqmR/blob/_xml_coverage_reports/data/main/coverage.xml)<!-- badges: end -->
 
@@ -72,8 +72,11 @@ fitted
 ... and use the quantiles of the posterior distribution of the probability of an event to define the QTLs for this metric.  This can be done in isolation (when the trial acts as its own control) or with reference to historical data obtained from similar previous studies.
 
 ### Examples of QTL evaluation rules
+
 > When using a Bayesian Hierarchical Model, the probabilities associated with credible intervals are generally lower than those associated with similar frequentist models.  This is because BHMs permit  more sources of variation.  Here, the BHM permits variation between the response rates at different sites, even when considering the overall event rate for the study.  The corresponding frequentist analysis assumes that all sites share  common event rate, thus assuming there is no inter-site variation.
+
 #### Comparison to constant value(s)
+
 The `evaluatePointEstimateQTL` allows the comparison of an arbitrary scalar summary statistic (which defaults to the mean) derived from the estimate of the posterior distribution, with an arbitrary number of lower and upper limits.
 
 For example, the code below defines a QTL based on the mean of the posterior distribution of the probability of an event.  Call this probability $\hat{p}$.  The warning limits are 0.5 and 0.8.  The action limits are 0.4 and 0.9.
@@ -156,7 +159,7 @@ Again, the QTL is breached, since the probability that the study-level event rat
 * `data`: a tibble containing site-level observed metrics
 * `posterior`: a tibble containing the posterior distribution of the metric, usually obtained from a fit Bayes model function.
 * `f`: a function whose first two parameters are `data` and `posterior`, in that ordered and with those names
-* `statusCol=Status`:
+* `statusCol`: the column in `data` that defines the status of the site.  Here, `Status`.  Uses tidy evaluation.
 * `...`: additional parameters passed to `f`.
 
 Essentially, all that `evaluateCustomQTL` does is to perform some basic checks on its parameter values and then return the value returned by `data %>% f(posterior, ...)`.  So, for example, a simplified version of `evaluatePointEstimateQTL` that compares $\hat{p}$ to 0.6 might be
@@ -219,7 +222,7 @@ Finally, the `status` of the returned QTL is `"OK"` by default.
 rvSiteMetrics$status
 ```
 
-However, `evaluateSiteMetricQTL` can be passed a function that can apply an arbitrary rule to determine whether or not a breach has occurred.  The function's only argument is the `qtl` element of `evaluateSiteMetricQTL`'s return value.  For example, given that we have nine sites in our fictitious example and we have calculated a 90% posterior credible interval, it's reasonable to expect one site to lie outside this range.  So we might say that a QTL breach has occurred if two or more sites lie outside the credible interval:
+However, `evaluateSiteMetricQTL` can be passed a function that can apply an arbitrary rule to determine whether or not a breach has occurred.  In the example below, the function's only argument is the `qtl` element of `evaluateSiteMetricQTL`'s return value.  For example, given that we have nine sites in our fictitious example and we have calculated a 90% posterior credible interval, it's reasonable to expect one site to lie outside this range.  So we might say that a QTL breach has occurred if two or more sites lie outside the credible interval:
 
 ```{r}
 (berrySummary %>%
@@ -280,6 +283,7 @@ fitted$tab %>%
 ```
 
 ## Presenting KRIs
+
 The KRIs associated with a QTL can be presented graphically.  `rmqmR` includes the `createQtlBubblePlot` function, which presents the KRIs (possibly from multiple evaluations of a QTL) in the form of a bubble plot overlaid with a box-and-whisker plot.  Site-level data may be grouped in an arbitrary fashion, or not at all.  Optionally, reference lines that correspond to QTL thresholds may be added.  
 
 ```{r, error=TRUE}
@@ -314,7 +318,8 @@ berrySummary %>%
 ```
 
 ## Observed - Expected Methodology
-We generate some random data similar to that used by Gilbert [@GILBERT], after setting a seed for reproducibility.
+
+We generate some random data similar to that used by [@GILBERT], after setting a seed for reproducibility.
 
 In order to illustrate what happens when a QTL is breached, we set the probability that a participant reports an event to 0.13, even though the QTL process will assume the event rate is 0.10...
 
@@ -396,7 +401,9 @@ createObservedOverExpectedTable(
 ```
 
 > TODO Need to check interpretation of parameters
+
 # Beyond TransCelerate
+
 At the time of writing (late 2022) The TransCelerate Quality Tolerance Limit Framework [@Transcelerate2020] lists metrics that are exclusively binary in nature.  There are many other potential metrics that are non-binary and which may provide insight into the conduct of the trial.  For example,
 
 * The number of episodes of rescue medication (as opposed to the percentage or number of trial participants on rescue medication)
@@ -411,6 +418,7 @@ As well as other metrics that can't easily be dichotomised
 The Bayesian QTL framework implemented in `rbqmR` can easily be extended to include these other data types.
 
 ## Events per unit time
+
 We use data on the numbers of Prussian cavalry officers kicked to death by horses [@Bortkiewicz1898] to illustrate the method.
 ```{r}
 data("cavalryDeaths")
@@ -433,9 +441,15 @@ cavalrySummary
 
 Although not necessary here, because data for all Corps was recorded for the same amount of time, the Poisson model used by `rbqmR` adjusts risk by total exposure at the site.
 
-```{r, results="asis"}
+```{r, eval = FALSE}
 getModelString("poisson")
 ```
+
+```{r, echo = FALSE}
+# cat(stringr::str_replace_all(getModelString("poisson"), "\\n", "<br>"))
+cat(getModelString("poisson"))
+```
+
 Fitting the model is straightforward.
 
 ```{r}
@@ -452,6 +466,7 @@ poissonFit$tab %>%
 ```
 
 # Environment
+
 ```{r}
 sessionInfo()
 ```
