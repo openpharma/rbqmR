@@ -446,8 +446,9 @@ getModelString("poisson")
 ```
 
 ```{r, echo = FALSE}
-# cat(stringr::str_replace_all(getModelString("poisson"), "\\n", "<br>"))
+# nolint start
 cat(getModelString("poisson"))
+#nolint end
 ```
 
 Fitting the model is straightforward.

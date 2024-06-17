@@ -213,39 +213,39 @@ We fit the Bayesian Hierarchical Model described by Berry et al …
 fitted <- berrySummary %>%
   fitBayesBinomialModel(n = Subjects, r = Events)
 #> Loading required namespace: rjags
-#> INFO [2024-06-17 07:55:30] Status of model fitting: OK
+#> INFO [2024-06-17 08:53:09] Status of model fitting: OK
 fitted
 #> $tab
-#> # A tibble: 20,000 × 4
+#> # A tibble: 20,836 × 4
 #>        p     a     b     q
 #>    <dbl> <dbl> <dbl> <int>
-#>  1 0.814  6.46  2.41    76
-#>  2 0.854  7.28  2.79    84
-#>  3 0.753  6.34  3.09    62
-#>  4 0.691  8.96  3.68    49
-#>  5 0.690  9.58  3.74    48
-#>  6 0.706  8.13  2.52    52
-#>  7 0.583  8.45  3.63    27
-#>  8 0.624  6.44  3.67    34
-#>  9 0.664  3.95  3.65    43
-#> 10 0.608  6.91  3.48    31
-#> # ℹ 19,990 more rows
+#>  1 0.575  3.82  1.66    26
+#>  2 0.605  3.15  1.59    31
+#>  3 0.833  4.62  1.62    80
+#>  4 0.426  1.89  1.58     9
+#>  5 0.978  2.20  1.14    99
+#>  6 0.954  3.85  1.17    98
+#>  7 0.940  2.96  1.13    96
+#>  8 0.943  3.61  1.59    97
+#>  9 0.858  4.52  1.45    85
+#> 10 0.901  4.98  1.26    92
+#> # ℹ 20,826 more rows
 #> 
 #> $results
 #> 
-#> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
-#>                                                                          
-#>       Lower95 Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
-#> p[10] 0.36562 0.6991 0.99996 0.68282 0.17257   -- 0.0013713     0.8 15837
-#> a      2.2683 5.9563  9.9997  5.9373  2.2751   --  0.056178     2.5  1640
-#> b     0.62627 2.6183  5.1708  2.7753  1.2508   --  0.031487     2.5  1578
+#> JAGS model summary statistics from 20836 samples (chains = 2; adapt+burnin = 5000):
+#>                                                                           
+#>       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
+#> p[10] 0.36856 0.69773       1 0.68025 0.17209   -- 0.0013352     0.8 16613
+#> a      2.2047  5.8995  9.9991   5.924  2.2988   --  0.061009     2.7  1420
+#> b       0.571  2.6364  5.1576  2.7799   1.275   --  0.032924     2.6  1500
 #>                       
 #>           AC.10   psrf
-#> p[10] 0.0094542      1
-#> a       0.21013 1.0011
-#> b       0.22843 1.0003
+#> p[10] 0.0033229 1.0001
+#> a       0.25214 1.0006
+#> b       0.25214 1.0006
 #> 
-#> Total time taken: 3.9 seconds
+#> Total time taken: 4.4 seconds
 #> 
 #> 
 #> $status
@@ -293,7 +293,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6828212
+#> [1] 0.6801711
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -353,7 +353,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6991032
+#> [1] 0.697669
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -386,7 +386,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4495861 
+#> 0.4487256 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -428,7 +428,7 @@ qtlProbInRange
 #> [1] "action"
 #> 
 #> $qtl
-#> [1] 0.46465
+#> [1] 0.4666923
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -446,7 +446,7 @@ qtlProbInRange
 ```
 
 Again, the QTL is breached, since the probability that the study-level
-event rate is in the range \[0.5, 0.75\] is only 0.46.
+event rate is in the range \[0.5, 0.75\] is only 0.47.
 
 #### Using an arbitrary criterion
 
@@ -485,7 +485,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6828212
+#> [1] 0.6801711
 #> 
 #> $status
 #> [1] "Breach"
@@ -536,17 +536,17 @@ The `quantiles` element of the return value contains the mappings from
 quantile of the posterior to observed values of the metric. For example,
 the first row of `rvSiteMetrics$quantiles` shows that the lower action
 limit is the 5th centile of the posterior, which corresponds to an event
-probability of 0.366.
+probability of 0.369.
 
 ``` r
 rvSiteMetrics$quantiles
 #> # A tibble: 4 × 4
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
-#> 1 Lower     action     0.05 0.366
-#> 2 Lower     warn       0.2  0.543
-#> 3 Upper     warn       0.8  0.838
-#> 4 Upper     action     0.95 0.933
+#> 1 Lower     action     0.05 0.369
+#> 2 Lower     warn       0.2  0.537
+#> 3 Upper     warn       0.8  0.835
+#> 4 Upper     action     0.95 0.930
 ```
 
 As before, the `data` element of the list contains a copy of the site
@@ -988,7 +988,7 @@ Fitting the model is straightforward.
 ``` r
 poissonFit <- cavalrySummary %>%
   fitBayesPoissonModel(Deaths, TotalTime)
-#> INFO [2024-06-17 07:55:41] Status of model fitting: OK
+#> INFO [2024-06-17 08:53:20] Status of model fitting: OK
 poissonFit$tab %>%
   createQtlPlot(
     metric = lambda,
@@ -1092,7 +1092,6 @@ Pharmaceutical Company.” *PharmaSUG*.
 
 Katz D, Azen SP, Baptista J. 1978. “Obtaining Confidence Intervals for
 the Risk Ratio in Cohort Studies.” *Biometrics* 34 (3): 469–74.
-https://doi.org/<https://doi.org/10.2307/2530610>.
 
 </div>
 
