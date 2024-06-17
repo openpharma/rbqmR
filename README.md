@@ -213,37 +213,37 @@ We fit the Bayesian Hierarchical Model described by Berry et al …
 fitted <- berrySummary %>%
   fitBayesBinomialModel(n = Subjects, r = Events)
 #> Loading required namespace: rjags
-#> INFO [2024-06-14 06:39:27] Status of model fitting: OK
+#> INFO [2024-06-17 07:55:30] Status of model fitting: OK
 fitted
 #> $tab
 #> # A tibble: 20,000 × 4
 #>        p     a     b     q
 #>    <dbl> <dbl> <dbl> <int>
-#>  1 0.925  4.01  1.45    95
-#>  2 0.812  3.87  1.47    75
-#>  3 0.848  3.75  2.81    83
-#>  4 0.601  5.41  3.09    31
-#>  5 0.457  6.93  2.32    11
-#>  6 0.517  7.42  3.53    18
-#>  7 0.666  8.52  3.45    43
-#>  8 0.565  8.86  3.36    25
-#>  9 0.837  8.51  2.20    81
-#> 10 0.650  4.17  2.67    40
+#>  1 0.814  6.46  2.41    76
+#>  2 0.854  7.28  2.79    84
+#>  3 0.753  6.34  3.09    62
+#>  4 0.691  8.96  3.68    49
+#>  5 0.690  9.58  3.74    48
+#>  6 0.706  8.13  2.52    52
+#>  7 0.583  8.45  3.63    27
+#>  8 0.624  6.44  3.67    34
+#>  9 0.664  3.95  3.65    43
+#> 10 0.608  6.91  3.48    31
 #> # ℹ 19,990 more rows
 #> 
 #> $results
 #> 
 #> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
 #>                                                                          
-#>       Lower95  Median Upper95    Mean     SD Mode     MCerr MC%ofSD SSeff
-#> p[10] 0.37138 0.69905   0.999 0.68206 0.1723   -- 0.0013275     0.8 16845
-#> a      2.2354  5.8891  9.9845  5.9047 2.2792   --  0.055052     2.4  1714
-#> b      0.6419  2.6299  5.1874  2.7811 1.2619   --  0.031599     2.5  1595
+#>       Lower95 Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
+#> p[10] 0.36562 0.6991 0.99996 0.68282 0.17257   -- 0.0013713     0.8 15837
+#> a      2.2683 5.9563  9.9997  5.9373  2.2751   --  0.056178     2.5  1640
+#> b     0.62627 2.6183  5.1708  2.7753  1.2508   --  0.031487     2.5  1578
 #>                       
 #>           AC.10   psrf
-#> p[10] 0.0032465 1.0001
-#> a       0.19347 1.0001
-#> b       0.21223 1.0001
+#> p[10] 0.0094542      1
+#> a       0.21013 1.0011
+#> b       0.22843 1.0003
 #> 
 #> Total time taken: 3.9 seconds
 #> 
@@ -293,7 +293,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6820645
+#> [1] 0.6828212
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -353,7 +353,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6990512
+#> [1] 0.6991032
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -386,7 +386,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4505905 
+#> 0.4495861 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -428,7 +428,7 @@ qtlProbInRange
 #> [1] "action"
 #> 
 #> $qtl
-#> [1] 0.4636
+#> [1] 0.46465
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -485,7 +485,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6820645
+#> [1] 0.6828212
 #> 
 #> $status
 #> [1] "Breach"
@@ -536,17 +536,17 @@ The `quantiles` element of the return value contains the mappings from
 quantile of the posterior to observed values of the metric. For example,
 the first row of `rvSiteMetrics$quantiles` shows that the lower action
 limit is the 5th centile of the posterior, which corresponds to an event
-probability of 0.372.
+probability of 0.366.
 
 ``` r
 rvSiteMetrics$quantiles
 #> # A tibble: 4 × 4
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
-#> 1 Lower     action     0.05 0.372
-#> 2 Lower     warn       0.2  0.538
-#> 3 Upper     warn       0.8  0.837
-#> 4 Upper     action     0.95 0.932
+#> 1 Lower     action     0.05 0.366
+#> 2 Lower     warn       0.2  0.543
+#> 3 Upper     warn       0.8  0.838
+#> 4 Upper     action     0.95 0.933
 ```
 
 As before, the `data` element of the list contains a copy of the site
@@ -988,7 +988,7 @@ Fitting the model is straightforward.
 ``` r
 poissonFit <- cavalrySummary %>%
   fitBayesPoissonModel(Deaths, TotalTime)
-#> INFO [2024-06-14 06:39:38] Status of model fitting: OK
+#> INFO [2024-06-17 07:55:41] Status of model fitting: OK
 poissonFit$tab %>%
   createQtlPlot(
     metric = lambda,
