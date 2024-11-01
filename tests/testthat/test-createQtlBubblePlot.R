@@ -89,8 +89,7 @@ test_that("creatQtlBubblePlot output contains correct elements", {
   # labels
   expect_equal(p$labels, list("x" = "Snapshot", "y" = "ObservedResponse", "colour" = "Region", "size" = "Subjects", "group" = "Snapshot"))
   # guides
-  expect_equal(names(p$guides), "size")
-  expect_equal(p$guides$size, "none")
+  expect_equal(names(p$guides), c("guides", "super"))
 
   # With limit lines
   referenceLines <- list(
@@ -119,6 +118,5 @@ test_that("creatQtlBubblePlot output contains correct elements", {
   # labels
   expect_equal(p$labels, list("x" = "Snapshot", "y" = "ObservedResponse", "colour" = "Region", "size" = "Subjects", "group" = "Snapshot", "yintercept" = "yintercept"))
   # guides
-  expect_equal(names(p$guides), "size")
-  expect_equal(p$guides$size, "none")
+  expect_equal(names(p$guides), c("guides", "super"))
 })

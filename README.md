@@ -52,152 +52,17 @@ data(berrySummary)
 berrySummary %>% kable(digits = c(0, 0, 0, 2))
 ```
 
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-Site
-</th>
-<th style="text-align:right;">
-Subjects
-</th>
-<th style="text-align:right;">
-Events
-</th>
-<th style="text-align:right;">
-ObservedResponse
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-1.00
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-0.40
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-0.69
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-19
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-0.53
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-0.36
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-46
-</td>
-<td style="text-align:right;">
-36
-</td>
-<td style="text-align:right;">
-0.78
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-0.90
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-0.78
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-0.67
-</td>
-</tr>
-</tbody>
-</table>
+| Site | Subjects | Events | ObservedResponse |
+|-----:|---------:|-------:|-----------------:|
+|    1 |       20 |     20 |             1.00 |
+|    2 |       10 |      4 |             0.40 |
+|    3 |       16 |     11 |             0.69 |
+|    4 |       19 |     10 |             0.53 |
+|    5 |       14 |      5 |             0.36 |
+|    6 |       46 |     36 |             0.78 |
+|    7 |       10 |      9 |             0.90 |
+|    8 |        9 |      7 |             0.78 |
+|    9 |        6 |      4 |             0.67 |
 
 The central tenet of the QTL methodology implemented in `rbqmR` is not
 that a current trial should behave in a similar fashion to a “similar”
@@ -213,39 +78,39 @@ We fit the Bayesian Hierarchical Model described by Berry et al …
 fitted <- berrySummary %>%
   fitBayesBinomialModel(n = Subjects, r = Events)
 #> Loading required namespace: rjags
-#> INFO [2024-06-17 08:53:09] Status of model fitting: OK
+#> INFO [2024-11-01 08:32:36] Status of model fitting: OK
 fitted
 #> $tab
-#> # A tibble: 20,836 × 4
+#> # A tibble: 20,000 × 4
 #>        p     a     b     q
 #>    <dbl> <dbl> <dbl> <int>
-#>  1 0.575  3.82  1.66    26
-#>  2 0.605  3.15  1.59    31
-#>  3 0.833  4.62  1.62    80
-#>  4 0.426  1.89  1.58     9
-#>  5 0.978  2.20  1.14    99
-#>  6 0.954  3.85  1.17    98
-#>  7 0.940  2.96  1.13    96
-#>  8 0.943  3.61  1.59    97
-#>  9 0.858  4.52  1.45    85
-#> 10 0.901  4.98  1.26    92
-#> # ℹ 20,826 more rows
+#>  1 0.736  8.24  3.40    60
+#>  2 0.720  8.29  3.57    56
+#>  3 0.634  9.30  3.74    37
+#>  4 0.842  9.26  1.98    82
+#>  5 0.683  6.62  2.47    48
+#>  6 0.903  9.82  2.55    92
+#>  7 0.472  6.20  2.30    13
+#>  8 0.416  4.00  2.20     8
+#>  9 0.737  3.96  2.25    60
+#> 10 0.510  6.45  2.60    17
+#> # ℹ 19,990 more rows
 #> 
 #> $results
 #> 
-#> JAGS model summary statistics from 20836 samples (chains = 2; adapt+burnin = 5000):
+#> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
 #>                                                                           
 #>       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
-#> p[10] 0.36856 0.69773       1 0.68025 0.17209   -- 0.0013352     0.8 16613
-#> a      2.2047  5.8995  9.9991   5.924  2.2988   --  0.061009     2.7  1420
-#> b       0.571  2.6364  5.1576  2.7799   1.275   --  0.032924     2.6  1500
+#> p[10]  0.3664 0.69644       1 0.67959 0.17283   -- 0.0013595     0.8 16161
+#> a       2.135   5.877  9.9968  5.8762  2.3375   --  0.059716     2.6  1532
+#> b     0.63992  2.6179  5.1916   2.766  1.2587   --  0.032481     2.6  1502
 #>                       
 #>           AC.10   psrf
-#> p[10] 0.0033229 1.0001
-#> a       0.25214 1.0006
-#> b       0.25214 1.0006
+#> p[10] -0.007371 1.0003
+#> a       0.22146 1.0009
+#> b       0.22299 1.0006
 #> 
-#> Total time taken: 4.4 seconds
+#> Total time taken: 1.6 seconds
 #> 
 #> 
 #> $status
@@ -293,7 +158,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6801711
+#> [1] 0.6795914
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -353,7 +218,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.697669
+#> [1] 0.6964419
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -386,7 +251,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4487256 
+#> 0.4450024 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -428,7 +293,7 @@ qtlProbInRange
 #> [1] "action"
 #> 
 #> $qtl
-#> [1] 0.4666923
+#> [1] 0.4675
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -485,7 +350,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6801711
+#> [1] 0.6795914
 #> 
 #> $status
 #> [1] "Breach"
@@ -536,17 +401,17 @@ The `quantiles` element of the return value contains the mappings from
 quantile of the posterior to observed values of the metric. For example,
 the first row of `rvSiteMetrics$quantiles` shows that the lower action
 limit is the 5th centile of the posterior, which corresponds to an event
-probability of 0.369.
+probability of 0.366.
 
 ``` r
 rvSiteMetrics$quantiles
 #> # A tibble: 4 × 4
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
-#> 1 Lower     action     0.05 0.369
-#> 2 Lower     warn       0.2  0.537
-#> 3 Upper     warn       0.8  0.835
-#> 4 Upper     action     0.95 0.930
+#> 1 Lower     action     0.05 0.366
+#> 2 Lower     warn       0.2  0.536
+#> 3 Upper     warn       0.8  0.836
+#> 4 Upper     action     0.95 0.931
 ```
 
 As before, the `data` element of the list contains a copy of the site
@@ -704,7 +569,7 @@ berrySummary %>%
       )
     )
   )
-#> Warning: The following aesthetics were dropped during statistical transformation: size
+#> Warning: The following aesthetics were dropped during statistical transformation: size.
 #> ℹ This can happen when ggplot fails to infer the correct grouping structure in
 #>   the data.
 #> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
@@ -988,7 +853,7 @@ Fitting the model is straightforward.
 ``` r
 poissonFit <- cavalrySummary %>%
   fitBayesPoissonModel(Deaths, TotalTime)
-#> INFO [2024-06-17 08:53:20] Status of model fitting: OK
+#> INFO [2024-11-01 08:32:40] Status of model fitting: OK
 poissonFit$tab %>%
   createQtlPlot(
     metric = lambda,
@@ -1005,9 +870,9 @@ poissonFit$tab %>%
 
 ``` r
 sessionInfo()
-#> R version 4.3.1 (2023-06-16)
-#> Platform: x86_64-pc-linux-gnu (64-bit)
-#> Running under: Ubuntu 22.04.3 LTS
+#> R version 4.4.1 (2024-06-14)
+#> Platform: x86_64-pc-linux-gnu
+#> Running under: Ubuntu 22.04.5 LTS
 #> 
 #> Matrix products: default
 #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -1028,45 +893,43 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] rbqmR_0.0.0.9002 testthat_3.2.0   lubridate_1.9.3  forcats_1.0.0   
-#>  [5] stringr_1.5.0    dplyr_1.1.3      purrr_1.0.2      readr_2.1.4     
-#>  [9] tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.3    tidyverse_2.0.0 
-#> [13] kableExtra_1.3.4 magrittr_2.0.3  
+#>  [1] rbqmR_0.0.0.9002 testthat_3.2.1.1 lubridate_1.9.3  forcats_1.0.0   
+#>  [5] stringr_1.5.1    dplyr_1.1.4      purrr_1.0.2      readr_2.1.5     
+#>  [9] tidyr_1.3.1      tibble_3.2.1     ggplot2_3.5.1    tidyverse_2.0.0 
+#> [13] kableExtra_1.4.0 magrittr_2.0.3  
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] tidyselect_1.2.0     viridisLite_0.4.2    farver_2.1.1        
-#>  [4] rjags_4-14           fastmap_1.1.1        promises_1.2.1      
-#>  [7] digest_0.6.33        timechange_0.2.0     mime_0.12           
-#> [10] lifecycle_1.0.3      ellipsis_0.3.2       processx_3.8.2      
-#> [13] compiler_4.3.1       rlang_1.1.1          tools_4.3.1         
-#> [16] utf8_1.2.3           yaml_2.3.7           knitr_1.44          
-#> [19] lambda.r_1.2.4       labeling_0.4.3       prettyunits_1.2.0   
-#> [22] htmlwidgets_1.6.2    pkgbuild_1.4.2       xml2_1.3.5          
-#> [25] pkgload_1.3.3        miniUI_0.1.1.1       withr_2.5.1         
-#> [28] desc_1.4.2           grid_4.3.1           fansi_1.0.5         
-#> [31] urlchecker_1.0.1     profvis_0.3.8        toOrdinal_1.3-0.0   
-#> [34] xtable_1.8-4         colorspace_2.1-0     scales_1.2.1        
-#> [37] cli_3.6.1            rmarkdown_2.25       crayon_1.5.2        
-#> [40] generics_0.1.3       remotes_2.4.2.1      rstudioapi_0.15.0   
-#> [43] httr_1.4.7           tzdb_0.4.0           sessioninfo_1.2.2   
-#> [46] cachem_1.0.8         rvest_1.0.3          parallel_4.3.1      
-#> [49] formatR_1.14         vctrs_0.6.3          devtools_2.4.5      
-#> [52] webshot_0.5.5        callr_3.7.3          hms_1.1.3           
-#> [55] systemfonts_1.0.5    glue_1.6.2           ps_1.7.5            
-#> [58] stringi_1.7.12       gtable_0.3.4         futile.logger_1.4.3 
-#> [61] later_1.3.1          munsell_0.5.0        pillar_1.9.0        
-#> [64] brio_1.1.3           htmltools_0.5.6.1    R6_2.5.1            
-#> [67] rprojroot_2.0.3      evaluate_0.22        shiny_1.7.5         
-#> [70] lattice_0.21-9       highr_0.10           futile.options_1.0.1
-#> [73] memoise_2.0.1        httpuv_1.6.11        Rcpp_1.0.11         
-#> [76] svglite_2.1.1        coda_0.19-4          xfun_0.40           
-#> [79] fs_1.6.3             usethis_2.2.2        runjags_2.2.2-1.1   
-#> [82] pkgconfig_2.0.3
+#>  [1] toOrdinal_1.3-0.0    gtable_0.3.5         xfun_0.48           
+#>  [4] htmlwidgets_1.6.4    devtools_2.4.5       remotes_2.5.0       
+#>  [7] lattice_0.22-6       tzdb_0.4.0           vctrs_0.6.5         
+#> [10] tools_4.4.1          generics_0.1.3       parallel_4.4.1      
+#> [13] fansi_1.0.6          highr_0.11           pkgconfig_2.0.3     
+#> [16] desc_1.4.3           lifecycle_1.0.4      farver_2.1.2        
+#> [19] compiler_4.4.1       brio_1.1.5           munsell_0.5.1       
+#> [22] runjags_2.2.2-4      httpuv_1.6.15        htmltools_0.5.8.1   
+#> [25] usethis_3.0.0        yaml_2.3.10          crayon_1.5.3        
+#> [28] pillar_1.9.0         later_1.3.2          urlchecker_1.0.1    
+#> [31] ellipsis_0.3.2       cachem_1.1.0         sessioninfo_1.2.2   
+#> [34] mime_0.12            tidyselect_1.2.1     digest_0.6.37       
+#> [37] stringi_1.8.4        labeling_0.4.3       rprojroot_2.0.4     
+#> [40] fastmap_1.2.0        grid_4.4.1           colorspace_2.1-1    
+#> [43] cli_3.6.3            pkgbuild_1.4.4       utf8_1.2.4          
+#> [46] withr_3.0.1          scales_1.3.0         promises_1.3.0      
+#> [49] timechange_0.3.0     lambda.r_1.2.4       rmarkdown_2.28      
+#> [52] futile.logger_1.4.3  rjags_4-16           hms_1.1.3           
+#> [55] coda_0.19-4.1        memoise_2.0.1        shiny_1.9.1         
+#> [58] evaluate_1.0.1       knitr_1.48           miniUI_0.1.1.1      
+#> [61] viridisLite_0.4.2    futile.options_1.0.1 profvis_0.4.0       
+#> [64] rlang_1.1.4          Rcpp_1.0.13          xtable_1.8-4        
+#> [67] glue_1.8.0           formatR_1.14         xml2_1.3.6          
+#> [70] pkgload_1.4.0        svglite_2.1.3        rstudioapi_0.16.0   
+#> [73] R6_2.5.1             systemfonts_1.1.0    fs_1.6.4
 ```
 
 # References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-BERRY" class="csl-entry">
 
