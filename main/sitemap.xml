@@ -1,105 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/404.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/index.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/applyQtl.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/berrySubject.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/berrySummary.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/cavalryDeaths.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/createObservedMinusExpectedPlot.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/createObservedMinusExpectedTable.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/createObservedOverExpectedPlot.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/createObservedOverExpectedTable.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/createQtlBubblePlot.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/createQtlPlot.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/dot-assertColumnDoesNotExist.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/dot-assertColumnExists.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/dot-autorunJagsAndCaptureOutput.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/dot-columnExists.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/dot-createBinomialInit.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/dot-createPoissonInit.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/dot-ensureLimitsAreNamed.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/evaluateCustomQTL.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/evaluatePointEstimateQTL.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/evaluateProbabilityInRangeQTL.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/evaluateSiteMetricQTL.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/fitBayesBinomialModel.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/fitBayesPoissonModel.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/getModelString.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/shadeRange.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/siteRates.html</loc>
-  </url>
-  <url>
-    <loc>https://openpharma.github.io/rbqmR/reference/vaLung.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://openpharma.github.io/rbqmR/404.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/LICENSE-text.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/LICENSE.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/authors.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/index.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/news/index.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/applyQtl.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/berrySubject.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/berrySummary.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/cavalryDeaths.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/createObservedMinusExpectedPlot.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/createObservedMinusExpectedTable.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/createObservedOverExpectedPlot.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/createObservedOverExpectedTable.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/createQtlBubblePlot.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/createQtlPlot.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/dot-assertColumnDoesNotExist.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/dot-assertColumnExists.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/dot-autorunJagsAndCaptureOutput.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/dot-columnExists.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/dot-createBinomialInit.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/dot-createPoissonInit.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/dot-ensureLimitsAreNamed.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/evaluateCustomQTL.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/evaluatePointEstimateQTL.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/evaluateProbabilityInRangeQTL.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/evaluateSiteMetricQTL.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/fitBayesBinomialModel.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/fitBayesPoissonModel.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/getModelString.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/index.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/pipe.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/shadeRange.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/siteRates.html</loc></url>
+<url><loc>https://openpharma.github.io/rbqmR/reference/vaLung.html</loc></url>
 </urlset>
+
