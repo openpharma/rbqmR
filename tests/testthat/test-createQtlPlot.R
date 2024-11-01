@@ -58,5 +58,5 @@ test_that("createQtlPlot creates a valid ggplot object", {
     "fill" = fill, "weight" = weight
   ))
   # guides
-  expect_equal(names(p$guides), NULL)
+  expect_equal(names(p$guides), c("guides", "super"))
 })

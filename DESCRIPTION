@@ -15,7 +15,7 @@ Language: en-GB
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Suggests: 
     knitr,
     readxl,
@@ -27,7 +27,6 @@ Imports:
     dplyr,
     futile.logger,
     ggplot2,
-    lifecycle,
     magrittr,
     rlang,
     runjags,
@@ -38,4 +37,3 @@ Imports:
 Depends: 
     R (>= 2.10)
 LazyData: true
-VignetteBuilder: knitr

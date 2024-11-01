@@ -52,152 +52,17 @@ data(berrySummary)
 berrySummary %>% kable(digits = c(0, 0, 0, 2))
 ```
 
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-Site
-</th>
-<th style="text-align:right;">
-Subjects
-</th>
-<th style="text-align:right;">
-Events
-</th>
-<th style="text-align:right;">
-ObservedResponse
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-1.00
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-0.40
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-0.69
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-19
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-0.53
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-0.36
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-46
-</td>
-<td style="text-align:right;">
-36
-</td>
-<td style="text-align:right;">
-0.78
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-0.90
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-0.78
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-0.67
-</td>
-</tr>
-</tbody>
-</table>
+| Site | Subjects | Events | ObservedResponse |
+|-----:|---------:|-------:|-----------------:|
+|    1 |       20 |     20 |             1.00 |
+|    2 |       10 |      4 |             0.40 |
+|    3 |       16 |     11 |             0.69 |
+|    4 |       19 |     10 |             0.53 |
+|    5 |       14 |      5 |             0.36 |
+|    6 |       46 |     36 |             0.78 |
+|    7 |       10 |      9 |             0.90 |
+|    8 |        9 |      7 |             0.78 |
+|    9 |        6 |      4 |             0.67 |
 
 The central tenet of the QTL methodology implemented in `rbqmR` is not
 that a current trial should behave in a similar fashion to a “similar”
@@ -213,39 +78,39 @@ We fit the Bayesian Hierarchical Model described by Berry et al …
 fitted <- berrySummary %>%
   fitBayesBinomialModel(n = Subjects, r = Events)
 #> Loading required namespace: rjags
-#> INFO [2024-06-17 07:55:30] Status of model fitting: OK
+#> INFO [2024-11-01 09:17:12] Status of model fitting: OK
 fitted
 #> $tab
-#> # A tibble: 20,000 × 4
+#> # A tibble: 20,232 × 4
 #>        p     a     b     q
 #>    <dbl> <dbl> <dbl> <int>
-#>  1 0.814  6.46  2.41    76
-#>  2 0.854  7.28  2.79    84
-#>  3 0.753  6.34  3.09    62
-#>  4 0.691  8.96  3.68    49
-#>  5 0.690  9.58  3.74    48
-#>  6 0.706  8.13  2.52    52
-#>  7 0.583  8.45  3.63    27
-#>  8 0.624  6.44  3.67    34
-#>  9 0.664  3.95  3.65    43
-#> 10 0.608  6.91  3.48    31
-#> # ℹ 19,990 more rows
+#>  1 0.491  9.73  2.87    15
+#>  2 0.693  8.69  2.84    49
+#>  3 0.508  5.32  2.22    16
+#>  4 0.795  4.87  2.32    72
+#>  5 0.923  3.27  2.23    94
+#>  6 0.464  3.99  2.18    12
+#>  7 0.613  3.06  2.48    33
+#>  8 0.551  3.53  2.20    22
+#>  9 0.635  4.92  2.42    37
+#> 10 0.612  5.61  3.99    33
+#> # ℹ 20,222 more rows
 #> 
 #> $results
 #> 
-#> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
-#>                                                                          
-#>       Lower95 Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
-#> p[10] 0.36562 0.6991 0.99996 0.68282 0.17257   -- 0.0013713     0.8 15837
-#> a      2.2683 5.9563  9.9997  5.9373  2.2751   --  0.056178     2.5  1640
-#> b     0.62627 2.6183  5.1708  2.7753  1.2508   --  0.031487     2.5  1578
-#>                       
-#>           AC.10   psrf
-#> p[10] 0.0094542      1
-#> a       0.21013 1.0011
-#> b       0.22843 1.0003
+#> JAGS model summary statistics from 20232 samples (chains = 2; adapt+burnin = 5000):
+#>                                                                           
+#>       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
+#> p[10] 0.36447 0.69819 0.99969 0.68033 0.17298   -- 0.0013558     0.8 16279
+#> a      2.1999  5.8971  9.9992  5.8967  2.2932   --  0.060553     2.6  1434
+#> b     0.57511   2.629  5.1368  2.7718  1.2458   --   0.03174     2.5  1541
+#>                     
+#>         AC.10   psrf
+#> p[10] -0.0109 1.0001
+#> a      0.2438 1.0016
+#> b     0.23706 1.0018
 #> 
-#> Total time taken: 3.9 seconds
+#> Total time taken: 1.9 seconds
 #> 
 #> 
 #> $status
@@ -293,7 +158,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6828212
+#> [1] 0.6803784
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -353,7 +218,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6991032
+#> [1] 0.6982975
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -386,7 +251,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4495861 
+#> 0.4469523 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -428,7 +293,7 @@ qtlProbInRange
 #> [1] "action"
 #> 
 #> $qtl
-#> [1] 0.46465
+#> [1] 0.4652531
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -446,7 +311,7 @@ qtlProbInRange
 ```
 
 Again, the QTL is breached, since the probability that the study-level
-event rate is in the range \[0.5, 0.75\] is only 0.46.
+event rate is in the range \[0.5, 0.75\] is only 0.47.
 
 #### Using an arbitrary criterion
 
@@ -485,7 +350,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6828212
+#> [1] 0.6803784
 #> 
 #> $status
 #> [1] "Breach"
@@ -536,17 +401,17 @@ The `quantiles` element of the return value contains the mappings from
 quantile of the posterior to observed values of the metric. For example,
 the first row of `rvSiteMetrics$quantiles` shows that the lower action
 limit is the 5th centile of the posterior, which corresponds to an event
-probability of 0.366.
+probability of 0.365.
 
 ``` r
 rvSiteMetrics$quantiles
 #> # A tibble: 4 × 4
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
-#> 1 Lower     action     0.05 0.366
-#> 2 Lower     warn       0.2  0.543
-#> 3 Upper     warn       0.8  0.838
-#> 4 Upper     action     0.95 0.933
+#> 1 Lower     action     0.05 0.365
+#> 2 Lower     warn       0.2  0.538
+#> 3 Upper     warn       0.8  0.834
+#> 4 Upper     action     0.95 0.932
 ```
 
 As before, the `data` element of the list contains a copy of the site
@@ -704,7 +569,7 @@ berrySummary %>%
       )
     )
   )
-#> Warning: The following aesthetics were dropped during statistical transformation: size
+#> Warning: The following aesthetics were dropped during statistical transformation: size.
 #> ℹ This can happen when ggplot fails to infer the correct grouping structure in
 #>   the data.
 #> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
@@ -988,7 +853,7 @@ Fitting the model is straightforward.
 ``` r
 poissonFit <- cavalrySummary %>%
   fitBayesPoissonModel(Deaths, TotalTime)
-#> INFO [2024-06-17 07:55:41] Status of model fitting: OK
+#> INFO [2024-11-01 09:17:16] Status of model fitting: OK
 poissonFit$tab %>%
   createQtlPlot(
     metric = lambda,
@@ -1005,9 +870,9 @@ poissonFit$tab %>%
 
 ``` r
 sessionInfo()
-#> R version 4.3.1 (2023-06-16)
-#> Platform: x86_64-pc-linux-gnu (64-bit)
-#> Running under: Ubuntu 22.04.3 LTS
+#> R version 4.4.1 (2024-06-14)
+#> Platform: x86_64-pc-linux-gnu
+#> Running under: Ubuntu 22.04.5 LTS
 #> 
 #> Matrix products: default
 #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -1028,45 +893,43 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] rbqmR_0.0.0.9002 testthat_3.2.0   lubridate_1.9.3  forcats_1.0.0   
-#>  [5] stringr_1.5.0    dplyr_1.1.3      purrr_1.0.2      readr_2.1.4     
-#>  [9] tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.3    tidyverse_2.0.0 
-#> [13] kableExtra_1.3.4 magrittr_2.0.3  
+#>  [1] rbqmR_0.0.0.9002 testthat_3.2.1.1 lubridate_1.9.3  forcats_1.0.0   
+#>  [5] stringr_1.5.1    dplyr_1.1.4      purrr_1.0.2      readr_2.1.5     
+#>  [9] tidyr_1.3.1      tibble_3.2.1     ggplot2_3.5.1    tidyverse_2.0.0 
+#> [13] kableExtra_1.4.0 magrittr_2.0.3  
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] tidyselect_1.2.0     viridisLite_0.4.2    farver_2.1.1        
-#>  [4] rjags_4-14           fastmap_1.1.1        promises_1.2.1      
-#>  [7] digest_0.6.33        timechange_0.2.0     mime_0.12           
-#> [10] lifecycle_1.0.3      ellipsis_0.3.2       processx_3.8.2      
-#> [13] compiler_4.3.1       rlang_1.1.1          tools_4.3.1         
-#> [16] utf8_1.2.3           yaml_2.3.7           knitr_1.44          
-#> [19] lambda.r_1.2.4       labeling_0.4.3       prettyunits_1.2.0   
-#> [22] htmlwidgets_1.6.2    pkgbuild_1.4.2       xml2_1.3.5          
-#> [25] pkgload_1.3.3        miniUI_0.1.1.1       withr_2.5.1         
-#> [28] desc_1.4.2           grid_4.3.1           fansi_1.0.5         
-#> [31] urlchecker_1.0.1     profvis_0.3.8        toOrdinal_1.3-0.0   
-#> [34] xtable_1.8-4         colorspace_2.1-0     scales_1.2.1        
-#> [37] cli_3.6.1            rmarkdown_2.25       crayon_1.5.2        
-#> [40] generics_0.1.3       remotes_2.4.2.1      rstudioapi_0.15.0   
-#> [43] httr_1.4.7           tzdb_0.4.0           sessioninfo_1.2.2   
-#> [46] cachem_1.0.8         rvest_1.0.3          parallel_4.3.1      
-#> [49] formatR_1.14         vctrs_0.6.3          devtools_2.4.5      
-#> [52] webshot_0.5.5        callr_3.7.3          hms_1.1.3           
-#> [55] systemfonts_1.0.5    glue_1.6.2           ps_1.7.5            
-#> [58] stringi_1.7.12       gtable_0.3.4         futile.logger_1.4.3 
-#> [61] later_1.3.1          munsell_0.5.0        pillar_1.9.0        
-#> [64] brio_1.1.3           htmltools_0.5.6.1    R6_2.5.1            
-#> [67] rprojroot_2.0.3      evaluate_0.22        shiny_1.7.5         
-#> [70] lattice_0.21-9       highr_0.10           futile.options_1.0.1
-#> [73] memoise_2.0.1        httpuv_1.6.11        Rcpp_1.0.11         
-#> [76] svglite_2.1.1        coda_0.19-4          xfun_0.40           
-#> [79] fs_1.6.3             usethis_2.2.2        runjags_2.2.2-1.1   
-#> [82] pkgconfig_2.0.3
+#>  [1] toOrdinal_1.3-0.0    gtable_0.3.5         xfun_0.48           
+#>  [4] htmlwidgets_1.6.4    devtools_2.4.5       remotes_2.5.0       
+#>  [7] lattice_0.22-6       tzdb_0.4.0           vctrs_0.6.5         
+#> [10] tools_4.4.1          generics_0.1.3       parallel_4.4.1      
+#> [13] fansi_1.0.6          highr_0.11           pkgconfig_2.0.3     
+#> [16] desc_1.4.3           lifecycle_1.0.4      farver_2.1.2        
+#> [19] compiler_4.4.1       brio_1.1.5           munsell_0.5.1       
+#> [22] runjags_2.2.2-4      httpuv_1.6.15        htmltools_0.5.8.1   
+#> [25] usethis_3.0.0        yaml_2.3.10          crayon_1.5.3        
+#> [28] pillar_1.9.0         later_1.3.2          urlchecker_1.0.1    
+#> [31] ellipsis_0.3.2       cachem_1.1.0         sessioninfo_1.2.2   
+#> [34] mime_0.12            tidyselect_1.2.1     digest_0.6.37       
+#> [37] stringi_1.8.4        labeling_0.4.3       rprojroot_2.0.4     
+#> [40] fastmap_1.2.0        grid_4.4.1           colorspace_2.1-1    
+#> [43] cli_3.6.3            pkgbuild_1.4.4       utf8_1.2.4          
+#> [46] withr_3.0.1          scales_1.3.0         promises_1.3.0      
+#> [49] timechange_0.3.0     lambda.r_1.2.4       rmarkdown_2.28      
+#> [52] futile.logger_1.4.3  rjags_4-16           hms_1.1.3           
+#> [55] coda_0.19-4.1        memoise_2.0.1        shiny_1.9.1         
+#> [58] evaluate_1.0.1       knitr_1.48           miniUI_0.1.1.1      
+#> [61] viridisLite_0.4.2    futile.options_1.0.1 profvis_0.4.0       
+#> [64] rlang_1.1.4          Rcpp_1.0.13          xtable_1.8-4        
+#> [67] glue_1.8.0           formatR_1.14         xml2_1.3.6          
+#> [70] pkgload_1.4.0        svglite_2.1.3        rstudioapi_0.16.0   
+#> [73] R6_2.5.1             systemfonts_1.1.0    fs_1.6.4
 ```
 
 # References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-BERRY" class="csl-entry">
 
@@ -1092,7 +955,6 @@ Pharmaceutical Company.” *PharmaSUG*.
 
 Katz D, Azen SP, Baptista J. 1978. “Obtaining Confidence Intervals for
 the Risk Ratio in Cohort Studies.” *Biometrics* 34 (3): 469–74.
-https://doi.org/<https://doi.org/10.2307/2530610>.
 
 </div>
 
