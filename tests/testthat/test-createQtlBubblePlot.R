@@ -119,5 +119,4 @@ test_that("creatQtlBubblePlot output contains correct elements", {
   expect_equal(p$labels, list("x" = "Snapshot", "y" = "ObservedResponse", "colour" = "Region", "size" = "Subjects", "group" = "Snapshot", "yintercept" = "yintercept"))
   # guides
   expect_equal(names(p$guides), c("guides", "super"))
-
 })
