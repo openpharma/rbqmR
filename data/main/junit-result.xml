@@ -1,330 +1,303 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="applyQtl" timestamp="2024-06-17T09:14:17Z" hostname="698c1bd0d97c" tests="7" skipped="0" failures="0" errors="0" time="0.099">
-    <testcase time="0.015" classname="applyQtl" name="applyQtl_fails_gracefull_with_bad_inputs"/>
+  <testsuite name="applyQtl" timestamp="2024-11-01T09:30:56Z" hostname="93e7c79c7407" tests="7" skipped="0" failures="0" errors="0" time="0.101">
+    <testcase time="0.0149999999999999" classname="applyQtl" name="applyQtl_fails_gracefull_with_bad_inputs"/>
     <testcase time="0.019" classname="applyQtl" name="applyQtl_fails_gracefull_with_bad_inputs"/>
-    <testcase time="0.014" classname="applyQtl" name="applyQtl_fails_gracefull_with_bad_inputs"/>
-    <testcase time="0.011" classname="applyQtl" name="applyQtl_fails_gracefull_with_bad_inputs"/>
-    <testcase time="0.022" classname="applyQtl" name="applyQtl_works"/>
+    <testcase time="0.013" classname="applyQtl" name="applyQtl_fails_gracefull_with_bad_inputs"/>
+    <testcase time="0.01" classname="applyQtl" name="applyQtl_fails_gracefull_with_bad_inputs"/>
+    <testcase time="0.021" classname="applyQtl" name="applyQtl_works"/>
     <testcase time="0.00700000000000001" classname="applyQtl" name="applyQtl_works"/>
-    <testcase time="0.011" classname="applyQtl" name="applyQtl_works"/>
+    <testcase time="0.016" classname="applyQtl" name="applyQtl_works"/>
   </testsuite>
-  <testsuite name="autorunJagsAndCaptureOutput" timestamp="2024-06-17T09:14:17Z" hostname="698c1bd0d97c" tests="4" skipped="0" failures="0" errors="0" time="0.102">
-    <testcase time="0.0379999999999999" classname="autorunJagsAndCaptureOutput" name=".autorunJagsAndCaptureOutput_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.011" classname="autorunJagsAndCaptureOutput" name=".autorunJagsAndCaptureOutput_fails_gracefully_with_bad_inputs"/>
+  <testsuite name="autorunJagsAndCaptureOutput" timestamp="2024-11-01T09:30:57Z" hostname="93e7c79c7407" tests="4" skipped="0" failures="0" errors="0" time="0.098">
+    <testcase time="0.037" classname="autorunJagsAndCaptureOutput" name=".autorunJagsAndCaptureOutput_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.0099999999999999" classname="autorunJagsAndCaptureOutput" name=".autorunJagsAndCaptureOutput_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.00600000000000001" classname="autorunJagsAndCaptureOutput" name=".autorunJagsAndCaptureOutput_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.047" classname="autorunJagsAndCaptureOutput" name=".autorunJagsAndCaptureOutput_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.045" classname="autorunJagsAndCaptureOutput" name=".autorunJagsAndCaptureOutput_fails_gracefully_with_bad_inputs"/>
   </testsuite>
-  <testsuite name="createBinomialInit" timestamp="2024-06-17T09:14:17Z" hostname="698c1bd0d97c" tests="30" skipped="0" failures="0" errors="0" time="8.782">
+  <testsuite name="createBinomialInit" timestamp="2024-11-01T09:30:57Z" hostname="93e7c79c7407" tests="30" skipped="0" failures="0" errors="0" time="8.532">
     <testcase time="0.027" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00599999999999989" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.005" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00900000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00800000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00700000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.005" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.005" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00900000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.0069999999999999" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00700000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.005" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00600000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.011" classname="createBinomialInit" name=".createBinomialInit_returns_correct_RNG"/>
-    <testcase time="0.005" classname="createBinomialInit" name=".createBinomialInit_returns_correct_RNG"/>
+    <testcase time="0.004" classname="createBinomialInit" name=".createBinomialInit_returns_correct_RNG"/>
     <testcase time="0.005" classname="createBinomialInit" name=".createBinomialInit_returns_correct_RNG"/>
     <testcase time="0.005" classname="createBinomialInit" name=".createBinomialInit_returns_correct_RNG"/>
     <testcase time="0.004" classname="createBinomialInit" name=".createBinomialInit_returns_correct_RNG"/>
     <testcase time="0.00800000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_seed_correctly"/>
-    <testcase time="2.181" classname="createBinomialInit" name=".createBinomialInit_handles_seed_correctly"/>
-    <testcase time="2.123" classname="createBinomialInit" name=".createBinomialInit_returns_random_initial_values_for_p"/>
-    <testcase time="0.00200000000000067" classname="createBinomialInit" name=".createBinomialInit_returns_random_initial_values_for_p"/>
-    <testcase time="0.00199999999999978" classname="createBinomialInit" name=".createBinomialInit_returns_random_initial_values_for_p"/>
-    <testcase time="0.0130000000000008" classname="createBinomialInit" name=".createBinomialInit_handles_quantiles_correctly"/>
-    <testcase time="0.00299999999999923" classname="createBinomialInit" name=".createBinomialInit_handles_quantiles_correctly"/>
-    <testcase time="2.173" classname="createBinomialInit" name=".createBinomialInit_handles_quantiles_correctly"/>
-    <testcase time="2.125" classname="createBinomialInit" name=".createBinomialInit_handles_quantiles_correctly"/>
+    <testcase time="2.102" classname="createBinomialInit" name=".createBinomialInit_handles_seed_correctly"/>
+    <testcase time="2.056" classname="createBinomialInit" name=".createBinomialInit_returns_random_initial_values_for_p"/>
+    <testcase time="0.00300000000000011" classname="createBinomialInit" name=".createBinomialInit_returns_random_initial_values_for_p"/>
+    <testcase time="0.00599999999999934" classname="createBinomialInit" name=".createBinomialInit_returns_random_initial_values_for_p"/>
+    <testcase time="0.00800000000000001" classname="createBinomialInit" name=".createBinomialInit_handles_quantiles_correctly"/>
+    <testcase time="0.00300000000000011" classname="createBinomialInit" name=".createBinomialInit_handles_quantiles_correctly"/>
+    <testcase time="2.135" classname="createBinomialInit" name=".createBinomialInit_handles_quantiles_correctly"/>
+    <testcase time="2.06" classname="createBinomialInit" name=".createBinomialInit_handles_quantiles_correctly"/>
     <testcase time="0.0080000000000009" classname="createBinomialInit" name=".createBinomialInits_returns_a_list_with_correctly_named_elements"/>
   </testsuite>
-  <testsuite name="createObservedMinusExpectedPlot" timestamp="2024-06-17T09:14:26Z" hostname="698c1bd0d97c" tests="4" skipped="0" failures="0" errors="0" time="0.158">
-    <testcase time="0.0120000000000005" classname="createObservedMinusExpectedPlot" name="createObservedMinusExpectedPlot_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.00499999999999901" classname="createObservedMinusExpectedPlot" name="createObservedMinusExpectedPlot_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.0080000000000009" classname="createObservedMinusExpectedPlot" name="createObservedMinusExpectedPlot_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.132999999999999" classname="createObservedMinusExpectedPlot" name="createObservedMinusExpectedPlot_returns_an_object_of_the_correct_type"/>
+  <testsuite name="createObservedMinusExpectedPlot" timestamp="2024-11-01T09:31:05Z" hostname="93e7c79c7407" tests="4" skipped="0" failures="0" errors="0" time="0.152">
+    <testcase time="0.0109999999999992" classname="createObservedMinusExpectedPlot" name="createObservedMinusExpectedPlot_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.00500000000000078" classname="createObservedMinusExpectedPlot" name="createObservedMinusExpectedPlot_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.00699999999999967" classname="createObservedMinusExpectedPlot" name="createObservedMinusExpectedPlot_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.129" classname="createObservedMinusExpectedPlot" name="createObservedMinusExpectedPlot_returns_an_object_of_the_correct_type"/>
   </testsuite>
-  <testsuite name="createObservedMinusExpectedTable" timestamp="2024-06-17T09:14:26Z" hostname="698c1bd0d97c" tests="15" skipped="0" failures="0" errors="0" time="0.1">
+  <testsuite name="createObservedMinusExpectedTable" timestamp="2024-11-01T09:31:05Z" hostname="93e7c79c7407" tests="15" skipped="0" failures="0" errors="0" time="0.095">
     <testcase time="0.016" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.00600000000000023" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.00600000000000023" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.00600000000000023" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.020999999999999" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.0199999999999996" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00199999999999889" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00300000000000011" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00200000000000067" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00399999999999956" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00300000000000011" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00300000000000011" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00200000000000067" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00300000000000011" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00300000000000011" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00300000000000011" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00300000000000011" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00300000000000011" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00300000000000011" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00199999999999889" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.0200000000000014" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00499999999999901" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.0140000000000011" classname="createObservedMinusExpectedTable" name="createObservedMinusExpectedTable_returns_an_object_of_the_correct_type"/>
   </testsuite>
-  <testsuite name="createObservedOverExpectedPlot" timestamp="2024-06-17T09:14:26Z" hostname="698c1bd0d97c" tests="4" skipped="0" failures="0" errors="0" time="0.056">
-    <testcase time="0.0119999999999987" classname="createObservedOverExpectedPlot" name="createObservedOverExpectedPlot_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.00400000000000134" classname="createObservedOverExpectedPlot" name="createObservedOverExpectedPlot_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.00699999999999967" classname="createObservedOverExpectedPlot" name="createObservedOverExpectedPlot_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.0329999999999995" classname="createObservedOverExpectedPlot" name="createObservedOverExpectedPlot_returns_an_object_of_the_correct_type"/>
+  <testsuite name="createObservedOverExpectedPlot" timestamp="2024-11-01T09:31:05Z" hostname="93e7c79c7407" tests="4" skipped="0" failures="0" errors="0" time="0.053">
+    <testcase time="0.0109999999999992" classname="createObservedOverExpectedPlot" name="createObservedOverExpectedPlot_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.00399999999999956" classname="createObservedOverExpectedPlot" name="createObservedOverExpectedPlot_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.00999999999999979" classname="createObservedOverExpectedPlot" name="createObservedOverExpectedPlot_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.0280000000000005" classname="createObservedOverExpectedPlot" name="createObservedOverExpectedPlot_returns_an_object_of_the_correct_type"/>
   </testsuite>
-  <testsuite name="createObservedOverExpectedTable" timestamp="2024-06-17T09:14:26Z" hostname="698c1bd0d97c" tests="20" skipped="0" failures="0" errors="0" time="0.107">
+  <testsuite name="createObservedOverExpectedTable" timestamp="2024-11-01T09:31:06Z" hostname="93e7c79c7407" tests="20" skipped="0" failures="0" errors="0" time="0.102">
     <testcase time="0.0150000000000006" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.00699999999999967" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.00600000000000023" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.0139999999999993" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00300000000000011" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00200000000000067" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00599999999999845" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00200000000000067" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00300000000000011" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00600000000000023" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00200000000000067" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00300000000000011" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00300000000000011" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00199999999999889" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00300000000000011" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00300000000000011" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00200000000000067" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00300000000000011" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.00199999999999889" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00300000000000011" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00200000000000067" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
     <testcase time="0.016" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00300000000000011" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.0119999999999987" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
-    <testcase time="0.00300000000000011" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00200000000000067" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.011000000000001" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
+    <testcase time="0.00199999999999889" classname="createObservedOverExpectedTable" name="createObservedOverExpectedTable_returns_an_object_of_the_correct_type"/>
   </testsuite>
-  <testsuite name="createPoissonInit" timestamp="2024-06-17T09:14:27Z" hostname="698c1bd0d97c" tests="32" skipped="0" failures="0" errors="0" time="12.976">
-    <testcase time="0.016" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00600000000000023" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00600000000000023" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+  <testsuite name="createPoissonInit" timestamp="2024-11-01T09:31:06Z" hostname="93e7c79c7407" tests="32" skipped="0" failures="0" errors="0" time="12.699">
+    <testcase time="0.0170000000000012" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00599999999999845" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00500000000000078" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00600000000000023" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.0239999999999991" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00600000000000023" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00600000000000023" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00799999999999912" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.0120000000000005" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00600000000000023" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00600000000000023" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00699999999999967" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.0240000000000009" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00499999999999901" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00600000000000023" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00500000000000078" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
+    <testcase time="0.00799999999999912" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
     <testcase time="0.00600000000000023" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00600000000000023" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00999999999999979" classname="createPoissonInit" name=".createBinomialInit_handles_illegal_input_correctly"/>
-    <testcase time="0.00799999999999912" classname="createPoissonInit" name=".createPoissonInit_returns_correct_RNG"/>
-    <testcase time="0.00500000000000078" classname="createPoissonInit" name=".createPoissonInit_returns_correct_RNG"/>
-    <testcase time="0.00500000000000078" classname="createPoissonInit" name=".createPoissonInit_returns_correct_RNG"/>
+    <testcase time="0.0080000000000009" classname="createPoissonInit" name=".createPoissonInit_returns_correct_RNG"/>
     <testcase time="0.00499999999999901" classname="createPoissonInit" name=".createPoissonInit_returns_correct_RNG"/>
+    <testcase time="0.00500000000000078" classname="createPoissonInit" name=".createPoissonInit_returns_correct_RNG"/>
     <testcase time="0.00399999999999956" classname="createPoissonInit" name=".createPoissonInit_returns_correct_RNG"/>
-    <testcase time="0.0129999999999999" classname="createPoissonInit" name=".createPoissonInit_handles_seed_correctly"/>
-    <testcase time="2.271" classname="createPoissonInit" name=".createPoissonInit_handles_seed_correctly"/>
-    <testcase time="2.045" classname="createPoissonInit" name=".createPoissonInit_returns_random_initial_values_for_lambda"/>
-    <testcase time="0.0080000000000009" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
-    <testcase time="0.00300000000000011" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
-    <testcase time="2.091" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
-    <testcase time="2.119" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
-    <testcase time="0.00799999999999912" classname="createPoissonInit" name=".createPoissonInit_returns_a_list_with_correctly_named_elements"/>
+    <testcase time="0.0080000000000009" classname="createPoissonInit" name=".createPoissonInit_returns_correct_RNG"/>
+    <testcase time="0.00799999999999912" classname="createPoissonInit" name=".createPoissonInit_handles_seed_correctly"/>
+    <testcase time="2.192" classname="createPoissonInit" name=".createPoissonInit_handles_seed_correctly"/>
+    <testcase time="1.998" classname="createPoissonInit" name=".createPoissonInit_returns_random_initial_values_for_lambda"/>
     <testcase time="0.00799999999999912" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
     <testcase time="0.00300000000000011" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
-    <testcase time="2.123" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
-    <testcase time="2.127" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
+    <testcase time="2.062" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
+    <testcase time="2.09" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
+    <testcase time="0.00799999999999912" classname="createPoissonInit" name=".createPoissonInit_returns_a_list_with_correctly_named_elements"/>
+    <testcase time="0.00800000000000267" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
+    <testcase time="0.00300000000000011" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
+    <testcase time="2.084" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
+    <testcase time="2.084" classname="createPoissonInit" name=".createPoissonInit_handles_quantiles_correctly"/>
   </testsuite>
-  <testsuite name="createQtlBubblePlot" timestamp="2024-06-17T09:14:39Z" hostname="698c1bd0d97c" tests="24" skipped="0" failures="4" errors="0" time="0.347">
-    <testcase time="0.0130000000000017" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
-    <testcase time="0.0129999999999981" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
+  <testsuite name="createQtlBubblePlot" timestamp="2024-11-01T09:31:18Z" hostname="93e7c79c7407" tests="22" skipped="0" failures="0" errors="0" time="0.181">
+    <testcase time="0.0159999999999982" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
+    <testcase time="0.00800000000000267" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
     <testcase time="0.00600000000000023" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
+    <testcase time="0.00499999999999901" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
     <testcase time="0.00600000000000023" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
-    <testcase time="0.00700000000000145" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
-    <testcase time="0.00899999999999679" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
+    <testcase time="0.00999999999999801" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
     <testcase time="0.00600000000000023" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
+    <testcase time="0.00500000000000256" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
     <testcase time="0.00600000000000023" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
-    <testcase time="0.00600000000000023" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
-    <testcase time="0.00600000000000023" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
-    <testcase time="0.0109999999999992" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
-    <testcase time="0.0440000000000005" classname="createQtlBubblePlot" name="createQtlBubblePlot_produces_a_ggplot_object"/>
-    <testcase time="0.0190000000000019" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
+    <testcase time="0.00599999999999667" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
+    <testcase time="0.0110000000000028" classname="createQtlBubblePlot" name="createQtlBubblePlot_fails_elegantly_with_bad_inputs"/>
+    <testcase time="0.0410000000000004" classname="createQtlBubblePlot" name="createQtlBubblePlot_produces_a_ggplot_object"/>
+    <testcase time="0.0189999999999984" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
+    <testcase time="0.00199999999999889" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
     <testcase time="0.00300000000000011" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
     <testcase time="0.00300000000000011" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
     <testcase time="0.00300000000000011" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
-    <testcase time="0.0829999999999984" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements">
-      <failure type="failure" message="names(p$guides) (`actual`) not equal to &quot;size&quot; (`expected`). ('test-createQtlBubblePlot.R:92:3')">names(p$guides) (`actual`) not equal to "size" (`expected`).
-
-`actual`:   "guides" "super"
-`expected`: "size"          </failure>
-    </testcase>
-    <testcase time="0.0259999999999998" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements">
-      <failure type="failure" message="p$guides$size (`actual`) not equal to &quot;none&quot; (`expected`). ('test-createQtlBubblePlot.R:93:3')">p$guides$size (`actual`) not equal to "none" (`expected`).
-
-`actual` is NULL
-`expected` is a character vector ('none')</failure>
-    </testcase>
-    <testcase time="0.0410000000000004" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
+    <testcase time="0.0139999999999993" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
+    <testcase time="0.00300000000000011" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
+    <testcase time="0.00200000000000244" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
     <testcase time="0.00300000000000011" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
     <testcase time="0.00300000000000011" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
-    <testcase time="0.00300000000000011" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements"/>
-    <testcase time="0.0129999999999981" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements">
-      <failure type="failure" message="names(p$guides) (`actual`) not equal to &quot;size&quot; (`expected`). ('test-createQtlBubblePlot.R:122:3')">names(p$guides) (`actual`) not equal to "size" (`expected`).
-
-`actual`:   "guides" "super"
-`expected`: "size"          </failure>
-    </testcase>
-    <testcase time="0.0140000000000029" classname="createQtlBubblePlot" name="creatQtlBubblePlot_output_contains_correct_elements">
-      <failure type="failure" message="p$guides$size (`actual`) not equal to &quot;none&quot; (`expected`). ('test-createQtlBubblePlot.R:123:3')">p$guides$size (`actual`) not equal to "none" (`expected`).
-
-`actual` is NULL
-`expected` is a character vector ('none')</failure>
-    </testcase>
   </testsuite>
-  <testsuite name="createQtlPlot" timestamp="2024-06-17T09:14:40Z" hostname="698c1bd0d97c" tests="11" skipped="0" failures="1" errors="0" time="3.549">
-    <testcase time="0.0179999999999971" classname="createQtlPlot" name="createQtlPlot_fails_gracefully_with_bad_input"/>
+  <testsuite name="createQtlPlot" timestamp="2024-11-01T09:31:18Z" hostname="93e7c79c7407" tests="11" skipped="0" failures="0" errors="0" time="3.373">
+    <testcase time="0.00999999999999801" classname="createQtlPlot" name="createQtlPlot_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00499999999999901" classname="createQtlPlot" name="createQtlPlot_fails_gracefully_with_bad_input"/>
     <testcase time="0.00500000000000256" classname="createQtlPlot" name="createQtlPlot_fails_gracefully_with_bad_input"/>
     <testcase time="0.00499999999999901" classname="createQtlPlot" name="createQtlPlot_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0100000000000016" classname="createQtlPlot" name="createQtlPlot_fails_gracefully_with_bad_input"/>
-    <testcase time="0.00399999999999778" classname="createQtlPlot" name="createQtlPlot_fails_gracefully_with_bad_input"/>
-    <testcase time="3.491" classname="createQtlPlot" name="createQtlPlot_creates_a_valid_ggplot_object"/>
+    <testcase time="0.00400000000000134" classname="createQtlPlot" name="createQtlPlot_fails_gracefully_with_bad_input"/>
+    <testcase time="3.331" classname="createQtlPlot" name="createQtlPlot_creates_a_valid_ggplot_object"/>
+    <testcase time="0.00300000000000011" classname="createQtlPlot" name="createQtlPlot_creates_a_valid_ggplot_object"/>
+    <testcase time="0.00300000000000011" classname="createQtlPlot" name="createQtlPlot_creates_a_valid_ggplot_object"/>
     <testcase time="0.00199999999999889" classname="createQtlPlot" name="createQtlPlot_creates_a_valid_ggplot_object"/>
     <testcase time="0.00300000000000011" classname="createQtlPlot" name="createQtlPlot_creates_a_valid_ggplot_object"/>
-    <testcase time="0.00200000000000244" classname="createQtlPlot" name="createQtlPlot_creates_a_valid_ggplot_object"/>
-    <testcase time="0.00300000000000011" classname="createQtlPlot" name="createQtlPlot_creates_a_valid_ggplot_object"/>
-    <testcase time="0.00600000000000023" classname="createQtlPlot" name="createQtlPlot_creates_a_valid_ggplot_object">
-      <failure type="failure" message="names(p$guides) (`actual`) not equal to NULL (`expected`). ('test-createQtlPlot.R:61:3')">names(p$guides) (`actual`) not equal to NULL (`expected`).
-
-`actual` is a character vector ('guides', 'super')
-`expected` is NULL</failure>
-    </testcase>
+    <testcase time="0.00199999999999889" classname="createQtlPlot" name="createQtlPlot_creates_a_valid_ggplot_object"/>
   </testsuite>
-  <testsuite name="fitBayesBinomialModel" timestamp="2024-06-17T09:14:43Z" hostname="698c1bd0d97c" tests="12" skipped="0" failures="0" errors="0" time="3.431">
-    <testcase time="0.418999999999997" classname="fitBayesBinomialModel" name="Issue_3_has_been_resolved"/>
-    <testcase time="0.991" classname="fitBayesBinomialModel" name="Issue_4_has_been_resolved"/>
-    <testcase time="0.0120000000000005" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.00700000000000145" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.00700000000000145" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.0069999999999979" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
+  <testsuite name="fitBayesBinomialModel" timestamp="2024-11-01T09:31:22Z" hostname="93e7c79c7407" tests="12" skipped="0" failures="0" errors="0" time="3.64">
+    <testcase time="0.476000000000003" classname="fitBayesBinomialModel" name="Issue_3_has_been_resolved"/>
+    <testcase time="1.11" classname="fitBayesBinomialModel" name="Issue_4_has_been_resolved"/>
+    <testcase time="0.00999999999999801" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.00700000000000145" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.00600000000000023" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.0069999999999979" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.00700000000000145" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
-    <testcase time="1.957" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_reproduces_results_from_Berry_et_al"/>
+    <testcase time="0.00700000000000145" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.0069999999999979" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.00600000000000023" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_fails_gracefully_with_bad_inputs"/>
+    <testcase time="1.993" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_reproduces_results_from_Berry_et_al"/>
     <testcase time="0.00399999999999778" classname="fitBayesBinomialModel" name="fitBayesBinomialModel_reproduces_results_from_Berry_et_al"/>
   </testsuite>
-  <testsuite name="fitBayesPoissonModel" timestamp="2024-06-17T09:14:47Z" hostname="698c1bd0d97c" tests="6" skipped="0" failures="0" errors="0" time="2.513">
-    <testcase time="0.510999999999999" classname="fitBayesPoissonModel" name="Issue_3_has_been_resolved"/>
-    <testcase time="1.014" classname="fitBayesPoissonModel" name="Issue_4_has_been_resolved"/>
-    <testcase time="0.0109999999999992" classname="fitBayesPoissonModel" name="fitBayesPoissonModel_fails_gracefully_with_bad_inputs"/>
+  <testsuite name="fitBayesPoissonModel" timestamp="2024-11-01T09:31:26Z" hostname="93e7c79c7407" tests="6" skipped="0" failures="0" errors="0" time="2.257">
+    <testcase time="0.48" classname="fitBayesPoissonModel" name="Issue_3_has_been_resolved"/>
+    <testcase time="0.943999999999999" classname="fitBayesPoissonModel" name="Issue_4_has_been_resolved"/>
+    <testcase time="0.0100000000000016" classname="fitBayesPoissonModel" name="fitBayesPoissonModel_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.00700000000000145" classname="fitBayesPoissonModel" name="fitBayesPoissonModel_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.0069999999999979" classname="fitBayesPoissonModel" name="fitBayesPoissonModel_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.00800000000000267" classname="fitBayesPoissonModel" name="fitBayesPoissonModel_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.961999999999996" classname="fitBayesPoissonModel" name="fitBayesPoissonModel_produces_feasible_results"/>
+    <testcase time="0.809000000000001" classname="fitBayesPoissonModel" name="fitBayesPoissonModel_produces_feasible_results"/>
   </testsuite>
-  <testsuite name="getModelString" timestamp="2024-06-17T09:14:49Z" hostname="698c1bd0d97c" tests="10" skipped="0" failures="0" errors="0" time="0.064">
-    <testcase time="0.0110000000000028" classname="getModelString" name="test_that_getModelString_works_with_default_hyperParameters"/>
-    <testcase time="0.00399999999999778" classname="getModelString" name="test_that_getModelString_works_with_default_hyperParameters"/>
-    <testcase time="0.00500000000000256" classname="getModelString" name="test_that_getModelString_works_with_default_hyperParameters"/>
-    <testcase time="0.00399999999999778" classname="getModelString" name="test_that_getModelString_works_with_default_hyperParameters"/>
-    <testcase time="0.00500000000000256" classname="getModelString" name="test_that_getModelString_works_with_default_hyperParameters"/>
-    <testcase time="0.00800000000000267" classname="getModelString" name="test_that_getModelString_works_with_hyperParameters_as_vector"/>
-    <testcase time="0.0069999999999979" classname="getModelString" name="test_that_getModelString_returns_correct_prior"/>
-    <testcase time="0.0109999999999957" classname="getModelString" name="test_that_getModelString_fails_gracefully"/>
+  <testsuite name="getModelString" timestamp="2024-11-01T09:31:28Z" hostname="93e7c79c7407" tests="10" skipped="0" failures="0" errors="0" time="0.062">
+    <testcase time="0.00999999999999801" classname="getModelString" name="test_that_getModelString_works_with_default_hyperParameters"/>
+    <testcase time="0.00400000000000134" classname="getModelString" name="test_that_getModelString_works_with_default_hyperParameters"/>
+    <testcase time="0.00499999999999901" classname="getModelString" name="test_that_getModelString_works_with_default_hyperParameters"/>
+    <testcase time="0.00400000000000134" classname="getModelString" name="test_that_getModelString_works_with_default_hyperParameters"/>
+    <testcase time="0.00499999999999901" classname="getModelString" name="test_that_getModelString_works_with_default_hyperParameters"/>
+    <testcase time="0.00700000000000145" classname="getModelString" name="test_that_getModelString_works_with_hyperParameters_as_vector"/>
+    <testcase time="0.00799999999999912" classname="getModelString" name="test_that_getModelString_returns_correct_prior"/>
+    <testcase time="0.0100000000000016" classname="getModelString" name="test_that_getModelString_fails_gracefully"/>
     <testcase time="0.00300000000000011" classname="getModelString" name="test_that_getModelString_fails_gracefully"/>
-    <testcase time="0.00600000000000023" classname="getModelString" name="test_that_getModelString_fails_gracefully"/>
+    <testcase time="0.00599999999999667" classname="getModelString" name="test_that_getModelString_fails_gracefully"/>
   </testsuite>
-  <testsuite name="helpers" timestamp="2024-06-17T09:14:49Z" hostname="698c1bd0d97c" tests="20" skipped="0" failures="0" errors="0" time="0.12">
-    <testcase time="0.0100000000000051" classname="helpers" name=".columnExists_fails_gracefully"/>
-    <testcase time="0.00499999999999545" classname="helpers" name=".columnExists_fails_gracefully"/>
-    <testcase time="0.00600000000000023" classname="helpers" name=".columnExists_works"/>
+  <testsuite name="helpers" timestamp="2024-11-01T09:31:28Z" hostname="93e7c79c7407" tests="20" skipped="0" failures="0" errors="0" time="0.116">
+    <testcase time="0.0130000000000017" classname="helpers" name=".columnExists_fails_gracefully"/>
+    <testcase time="0.00499999999999901" classname="helpers" name=".columnExists_fails_gracefully"/>
+    <testcase time="0.00500000000000256" classname="helpers" name=".columnExists_works"/>
     <testcase time="0.00300000000000011" classname="helpers" name=".columnExists_works"/>
-    <testcase time="0.00400000000000489" classname="helpers" name=".assertColumnExists_works"/>
-    <testcase time="0.00499999999999545" classname="helpers" name=".assertColumnExists_works"/>
-    <testcase time="0.00500000000000256" classname="helpers" name=".assertColumnDoesNotExist_works"/>
-    <testcase time="0.00499999999999545" classname="helpers" name=".assertColumnDoesNotExist_works"/>
-    <testcase time="0.0100000000000051" classname="helpers" name=".ensureLimitsAreNamed_fails_gracefully_with_bad_inputs"/>
-    <testcase time="0.00799999999999557" classname="helpers" name=".ensureLimitsAreNamed_works"/>
+    <testcase time="0.00399999999999778" classname="helpers" name=".assertColumnExists_works"/>
+    <testcase time="0.00400000000000134" classname="helpers" name=".assertColumnExists_works"/>
+    <testcase time="0.00499999999999901" classname="helpers" name=".assertColumnDoesNotExist_works"/>
+    <testcase time="0.00400000000000134" classname="helpers" name=".assertColumnDoesNotExist_works"/>
+    <testcase time="0.00900000000000034" classname="helpers" name=".ensureLimitsAreNamed_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.0069999999999979" classname="helpers" name=".ensureLimitsAreNamed_works"/>
+    <testcase time="0.00499999999999901" classname="helpers" name=".ensureLimitsAreNamed_works"/>
     <testcase time="0.00500000000000256" classname="helpers" name=".ensureLimitsAreNamed_works"/>
+    <testcase time="0.00399999999999778" classname="helpers" name=".ensureLimitsAreNamed_works"/>
     <testcase time="0.00500000000000256" classname="helpers" name=".ensureLimitsAreNamed_works"/>
-    <testcase time="0.00499999999999545" classname="helpers" name=".ensureLimitsAreNamed_works"/>
-    <testcase time="0.00500000000000256" classname="helpers" name=".ensureLimitsAreNamed_works"/>
-    <testcase time="0.00900000000000034" classname="helpers" name=".ensureLimitsAreNamed_works"/>
-    <testcase time="0.00500000000000256" classname="helpers" name=".ensureLimitsAreNamed_works"/>
+    <testcase time="0.00499999999999901" classname="helpers" name=".ensureLimitsAreNamed_works"/>
+    <testcase time="0.00400000000000134" classname="helpers" name=".ensureLimitsAreNamed_works"/>
     <testcase time="0.00499999999999545" classname="helpers" name=".ensureLimitsAreNamed_works"/>
     <testcase time="0.00400000000000489" classname="helpers" name=".ensureLimitsAreNamed_works"/>
-    <testcase time="0.00999999999999801" classname="helpers" name=".addStatusToObservedData_fails_gracefully_with_bad_inputs"/>
+    <testcase time="0.0139999999999958" classname="helpers" name=".addStatusToObservedData_fails_gracefully_with_bad_inputs"/>
     <testcase time="0.00600000000000023" classname="helpers" name=".addStatusToObservedData_fails_gracefully_with_bad_inputs"/>
   </testsuite>
-  <testsuite name="jags-installation" timestamp="2024-06-17T09:14:50Z" hostname="698c1bd0d97c" tests="2" skipped="0" failures="0" errors="0" time="0.013">
-    <testcase time="0.00799999999999557" classname="jags_installation" name="runjags_is_installed"/>
-    <testcase time="0.00500000000000256" classname="jags_installation" name="runjags_is_installed"/>
+  <testsuite name="jags-installation" timestamp="2024-11-01T09:31:28Z" hostname="93e7c79c7407" tests="2" skipped="0" failures="0" errors="0" time="0.012">
+    <testcase time="0.007000000000005" classname="jags_installation" name="runjags_is_installed"/>
+    <testcase time="0.00499999999999545" classname="jags_installation" name="runjags_is_installed"/>
   </testsuite>
-  <testsuite name="qtl-evaluation-methods" timestamp="2024-06-17T09:14:50Z" hostname="698c1bd0d97c" tests="60" skipped="0" failures="0" errors="0" time="2.293">
-    <testcase time="0.017000000000003" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
+  <testsuite name="qtl-evaluation-methods" timestamp="2024-11-01T09:31:28Z" hostname="93e7c79c7407" tests="60" skipped="0" failures="0" errors="0" time="2.241">
+    <testcase time="0.0159999999999982" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00500000000000256" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.00900000000000034" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.00999999999999801" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0110000000000028" classname="qtl_evaluation_methods" name="evaluateCustomQTL_works"/>
-    <testcase time="0.00999999999999801" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateCustomQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.0120000000000005" classname="qtl_evaluation_methods" name="evaluateCustomQTL_works"/>
+    <testcase time="0.00900000000000034" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0110000000000028" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00499999999999545" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.007000000000005" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0230000000000032" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.0260000000000034" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
+    <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
+    <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
+    <testcase time="0.0180000000000007" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
+    <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
+    <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
+    <testcase time="0.0179999999999936" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
+    <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
+    <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
+    <testcase time="0.017000000000003" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
     <testcase time="0.00200000000000244" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
     <testcase time="0.00399999999999778" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
-    <testcase time="0.0189999999999984" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
-    <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
-    <testcase time="0.00400000000000489" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
-    <testcase time="0.0189999999999984" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
-    <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
-    <testcase time="0.00399999999999778" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
-    <testcase time="0.0230000000000032" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
-    <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
-    <testcase time="0.00399999999999778" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_various_limit_specifications"/>
-    <testcase time="0.0210000000000008" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_arbitrary_summary_functions"/>
-    <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_arbitrary_summary_functions"/>
-    <testcase time="0.00399999999999778" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_arbitrary_summary_functions"/>
-    <testcase time="0.00999999999999801" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.0240000000000009" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_arbitrary_summary_functions"/>
+    <testcase time="0.00199999999999534" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_arbitrary_summary_functions"/>
+    <testcase time="0.00400000000000489" classname="qtl_evaluation_methods" name="evaluatePointEstimateQTL_works_with_arbitrary_summary_functions"/>
+    <testcase time="0.00900000000000034" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00499999999999545" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.007000000000005" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.007000000000005" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.007000000000005" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0279999999999987" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_works"/>
+    <testcase time="0.0110000000000028" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.0229999999999961" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_works"/>
     <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_works"/>
     <testcase time="0.00300000000000011" classname="qtl_evaluation_methods" name="evaluateProbabilityInRangeQTL_works"/>
     <testcase time="0.00900000000000034" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
     <testcase time="0.007000000000005" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="0.0069999999999979" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
-    <testcase time="1.814" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_works"/>
+    <testcase time="0.0109999999999957" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.007000000000005" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="0.00600000000000023" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_fails_gracefully_with_bad_input"/>
+    <testcase time="1.79199999999999" classname="qtl_evaluation_methods" name="evaluateSiteMetricQTL_works"/>
   </testsuite>
-  <testsuite name="shadeRange" timestamp="2024-06-17T09:14:52Z" hostname="698c1bd0d97c" tests="7" skipped="0" failures="0" errors="0" time="0.115">
-    <testcase time="0.0110000000000028" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
-    <testcase time="0.00800000000000267" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
-    <testcase time="0.00499999999999545" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
-    <testcase time="0.0260000000000034" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
-    <testcase time="0.0210000000000008" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
-    <testcase time="0.0219999999999985" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
-    <testcase time="0.0219999999999985" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
+  <testsuite name="shadeRange" timestamp="2024-11-01T09:31:30Z" hostname="93e7c79c7407" tests="7" skipped="0" failures="0" errors="0" time="0.103">
+    <testcase time="0.0100000000000051" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
+    <testcase time="0.0069999999999979" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
+    <testcase time="0.00399999999999778" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
+    <testcase time="0.0240000000000009" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
+    <testcase time="0.0189999999999984" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
+    <testcase time="0.0200000000000031" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
+    <testcase time="0.0189999999999984" classname="shadeRange" name="shadeRange_fails_gracefully_when_given_bad_inputs"/>
   </testsuite>
 </testsuites>
