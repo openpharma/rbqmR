@@ -448,7 +448,7 @@ getModelString("poisson")
 ```{r, echo = FALSE}
 # nolint start
 cat(getModelString("poisson"))
-#nolint end
+#nolint end 
 ```
 
 Fitting the model is straightforward.

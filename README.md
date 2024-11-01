@@ -78,39 +78,39 @@ We fit the Bayesian Hierarchical Model described by Berry et al …
 fitted <- berrySummary %>%
   fitBayesBinomialModel(n = Subjects, r = Events)
 #> Loading required namespace: rjags
-#> INFO [2024-11-01 08:32:36] Status of model fitting: OK
+#> INFO [2024-11-01 09:17:12] Status of model fitting: OK
 fitted
 #> $tab
-#> # A tibble: 20,000 × 4
+#> # A tibble: 20,232 × 4
 #>        p     a     b     q
 #>    <dbl> <dbl> <dbl> <int>
-#>  1 0.736  8.24  3.40    60
-#>  2 0.720  8.29  3.57    56
-#>  3 0.634  9.30  3.74    37
-#>  4 0.842  9.26  1.98    82
-#>  5 0.683  6.62  2.47    48
-#>  6 0.903  9.82  2.55    92
-#>  7 0.472  6.20  2.30    13
-#>  8 0.416  4.00  2.20     8
-#>  9 0.737  3.96  2.25    60
-#> 10 0.510  6.45  2.60    17
-#> # ℹ 19,990 more rows
+#>  1 0.491  9.73  2.87    15
+#>  2 0.693  8.69  2.84    49
+#>  3 0.508  5.32  2.22    16
+#>  4 0.795  4.87  2.32    72
+#>  5 0.923  3.27  2.23    94
+#>  6 0.464  3.99  2.18    12
+#>  7 0.613  3.06  2.48    33
+#>  8 0.551  3.53  2.20    22
+#>  9 0.635  4.92  2.42    37
+#> 10 0.612  5.61  3.99    33
+#> # ℹ 20,222 more rows
 #> 
 #> $results
 #> 
-#> JAGS model summary statistics from 20000 samples (chains = 2; adapt+burnin = 5000):
+#> JAGS model summary statistics from 20232 samples (chains = 2; adapt+burnin = 5000):
 #>                                                                           
 #>       Lower95  Median Upper95    Mean      SD Mode     MCerr MC%ofSD SSeff
-#> p[10]  0.3664 0.69644       1 0.67959 0.17283   -- 0.0013595     0.8 16161
-#> a       2.135   5.877  9.9968  5.8762  2.3375   --  0.059716     2.6  1532
-#> b     0.63992  2.6179  5.1916   2.766  1.2587   --  0.032481     2.6  1502
-#>                       
-#>           AC.10   psrf
-#> p[10] -0.007371 1.0003
-#> a       0.22146 1.0009
-#> b       0.22299 1.0006
+#> p[10] 0.36447 0.69819 0.99969 0.68033 0.17298   -- 0.0013558     0.8 16279
+#> a      2.1999  5.8971  9.9992  5.8967  2.2932   --  0.060553     2.6  1434
+#> b     0.57511   2.629  5.1368  2.7718  1.2458   --   0.03174     2.5  1541
+#>                     
+#>         AC.10   psrf
+#> p[10] -0.0109 1.0001
+#> a      0.2438 1.0016
+#> b     0.23706 1.0018
 #> 
-#> Total time taken: 1.6 seconds
+#> Total time taken: 1.9 seconds
 #> 
 #> 
 #> $status
@@ -158,7 +158,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6795914
+#> [1] 0.6803784
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -218,7 +218,7 @@ berrySummary %>%
 #> [1] "OK"
 #> 
 #> $qtl
-#> [1] 0.6964419
+#> [1] 0.6982975
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -251,7 +251,7 @@ berrySummary %>%
 #> 
 #> $qtl
 #>       10% 
-#> 0.4450024 
+#> 0.4469523 
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -293,7 +293,7 @@ qtlProbInRange
 #> [1] "action"
 #> 
 #> $qtl
-#> [1] 0.4675
+#> [1] 0.4652531
 #> 
 #> $data
 #> # A tibble: 9 × 5
@@ -350,7 +350,7 @@ berrySummary %>%
     }
   )
 #> $qtl
-#> [1] 0.6795914
+#> [1] 0.6803784
 #> 
 #> $status
 #> [1] "Breach"
@@ -401,17 +401,17 @@ The `quantiles` element of the return value contains the mappings from
 quantile of the posterior to observed values of the metric. For example,
 the first row of `rvSiteMetrics$quantiles` shows that the lower action
 limit is the 5th centile of the posterior, which corresponds to an event
-probability of 0.366.
+probability of 0.365.
 
 ``` r
 rvSiteMetrics$quantiles
 #> # A tibble: 4 × 4
 #>   Threshold Status Quantile     p
 #>   <chr>     <chr>     <dbl> <dbl>
-#> 1 Lower     action     0.05 0.366
-#> 2 Lower     warn       0.2  0.536
-#> 3 Upper     warn       0.8  0.836
-#> 4 Upper     action     0.95 0.931
+#> 1 Lower     action     0.05 0.365
+#> 2 Lower     warn       0.2  0.538
+#> 3 Upper     warn       0.8  0.834
+#> 4 Upper     action     0.95 0.932
 ```
 
 As before, the `data` element of the list contains a copy of the site
@@ -853,7 +853,7 @@ Fitting the model is straightforward.
 ``` r
 poissonFit <- cavalrySummary %>%
   fitBayesPoissonModel(Deaths, TotalTime)
-#> INFO [2024-11-01 08:32:40] Status of model fitting: OK
+#> INFO [2024-11-01 09:17:16] Status of model fitting: OK
 poissonFit$tab %>%
   createQtlPlot(
     metric = lambda,
